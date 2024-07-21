@@ -14,7 +14,7 @@
     "start": "next start",
     "build-and-start": "npm-run-all build start",
     "dev": "next -p 3005",
-    "lint": "tsc --noEmit && next lint --fix . && stylelint --fix **/*.css",
+    "lint": "tsc --noEmit && next lint --fix .",
     "prettify": "npx prettier --write --loglevel silent ."
   },
   "dependencies": {
