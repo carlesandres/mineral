@@ -1,0 +1,11 @@
+{
+  "env": {
+    "node": true
+  },
+  "rules": {
+    "import/no-extraneous-dependencies": ["off"],
+    "import/no-commonjs": ["off"],
+    "import/no-nodejs-modules": ["off"]
+  }
+}
+

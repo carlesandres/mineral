@@ -1,0 +1,25 @@
+{
+  "automock": true,
+  "unmockedModulePathPatterns": [
+    "react",
+    "react-dom",
+    "react-addons-test-utils",
+    "fbjs",
+    "cheerio",
+    "htmlparser2",
+    "underscore",
+    "lodash",
+    "domhandler",
+    "object.assign",
+    "define-properties",
+    "function-bind",
+    "object-keys",
+    "store"
+  ],
+  "moduleNameMapper": {
+    "components/(.*)": "<rootDir>/src/components/$1",
+    "stores/(.*)": "<rootDir>/src/stores/$1",
+    "reducers/(.*)": "<rootDir>/src/reducers/$1",
+    "utils/(.*)": "<rootDir>/src/utils/$1"
+  }
+}

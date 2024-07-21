@@ -1,0 +1,15 @@
+{
+  "env": {
+    "jest/globals": true
+  },
+  "plugins": ["jest"],
+  "rules": {
+    "import/no-extraneous-dependencies": ["off"]
+  },
+  "globals": {
+    "page": true,
+    "browser": true,
+    "context": true,
+    "jestPuppeteer": true
+  }
+}
