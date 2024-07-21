@@ -1,12 +1,12 @@
-import { ChangeEvent, useCallback, useState } from 'react';
-import { exportAll } from 'utils/fileUtils';
-import { Note } from 'types/Note';
-import { useList } from 'hooks/useList';
-import ConfirmDialog from 'components/ConfirmDialog';
-import TextInput from 'components/TextInput';
-import Checkbox from 'components/Checkbox';
-import useUIZStore from 'utils/useUIZStore';
-import SuccessToast from 'components/SuccessToast';
+import { ChangeEvent, useCallback, useState } from "react";
+import { exportAll } from "utils/fileUtils";
+import { Note } from "types/Note";
+import { useList } from "hooks/useList";
+import ConfirmDialog from "components/ConfirmDialog";
+import TextInput from "components/TextInput";
+import Checkbox from "components/Checkbox";
+import useUIZStore from "utils/useUIZStore";
+import SuccessToast from "components/SuccessToast";
 
 const inputStyle = `border-b bg-transparent flex-1
 p-2 hover:border-gray-500 form-control cursor-pointer text-base
@@ -14,7 +14,7 @@ dark:text-gray-300 print:border-none print:text-black`;
 
 const BackupModal = () => {
   const { list } = useList();
-  const [fileName, setFileName] = useState('');
+  const [fileName, setFileName] = useState("");
   const [addDateToFilename, setAddDateToFilename] = useState(true);
   const { toast, backupModalVisible, hideBackupModal } = useUIZStore();
 
@@ -38,7 +38,7 @@ const BackupModal = () => {
     exportAll(notesToBackup, fileName, addDateToFilename);
     hideBackupModal();
     toast(<SuccessToast>Backup downloaded</SuccessToast>);
-  }, [list, exportAll, fileName, addDateToFilename, hideBackupModal, toast]);
+  }, [list, fileName, addDateToFilename, hideBackupModal, toast]);
 
   return (
     <ConfirmDialog
