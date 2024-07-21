@@ -1,0 +1,64 @@
+@layer main {
+  /* stylelint-disable */
+  :root {
+    --viewer-bg-color: theme(colors.gray.100);
+    --viewer-pre-bg-color: theme(colors.gray.200);
+    --theme-color-h: 50;
+    --theme-color-s: 20%;
+    --theme-color-l: 57%;
+    --viewer-code-bg-color: rgb(255 255 255);
+  }
+
+  .earth {
+    --theme-color-h: 120;
+    --viewer-bg-color: hsl(var(--theme-color-h), 5%, 95%);
+  }
+
+  .wind {
+    --theme-color-h: 0;
+    --viewer-table-heading-bg-color: theme(colors.blue.100);
+    --viewer-titles-color: hsl(var(--theme-color-h), 60%, 40%);
+  }
+
+  .fire {
+    --theme-color-h: 55;
+    --viewer-titles-color: hsl(var(--theme-color-h), 70%, 30%)
+  }
+
+  .dark .notearea {
+    /* stylelint-disable */
+    --theme-color: theme(colors.gray.300);
+    --viewer-bg-color: var(--ultra-dark-grey);
+    /* stylelint-enable */
+  }
+
+  .dark .earth {
+    --theme-color-h: 120;
+    --viewer-titles-color: hsl(var(--theme-color-h), 70%, 80%)
+  }
+
+  .dark .fire {
+    /* stylelint-disable */
+    --viewer-titles-color: theme(colors.red.300);
+    --viewer-pre-bg-color: theme(colors.red.900 / 25%);
+    /* stylelint-enable */
+  }
+
+  .dark .wind {
+    /* stylelint-disable */
+    --viewer-titles-color: theme(colors.blue.200);
+    --viewer-link-color: theme(colors.blue.500);
+    --viewer-pre-bg-color: theme(colors.gray.800);
+    /* stylelint-enable */
+  }
+
+  .dark {
+    /* stylelint-disable */
+    --viewer-pre-bg-color: theme(colors.gray.800);
+    /* stylelint-enable */
+    --viewer-bg-color: transparent;
+  }
+
+}
+
+/* ------------------------------------------------------------------------ */

@@ -1,0 +1,59 @@
+{
+  "name": "mineral-app",
+  "productName": "Mineral App",
+  "version": "0.0.0",
+  "description": "Offline Markdown Notebook",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "dist-test": "electron-builder --dir",
+    "dist": "electron-builder",
+    "lint": "echo \"No linting configured\""
+  },
+  "keywords": [],
+  "author": {
+    "name": "Carles Andres",
+    "email": "carles@16protons.com"
+  },
+  "license": "UNLICENSED",
+  "config": {
+    "forge": {
+      "packagerConfig": {},
+      "makers": [
+        {
+          "name": "@electron-forge/maker-zip",
+          "platforms": [
+            "darwin"
+          ]
+        }
+      ]
+    }
+  },
+  "dependencies": {
+    "electron-settings": "4.0.2",
+    "electron-squirrel-startup": "^1.0.0",
+    "minimist": "^1.2.8"
+  },
+  "devDependencies": {
+    "electron": "24.1.1",
+    "electron-builder": "^23.0.3"
+  },
+  "build": {
+    "productName": "Mineral",
+    "appId": "com.mnral.app",
+    "copyright": "Copyright © year - Carles Andrés",
+    "mac": {
+      "category": "productivity"
+    },
+    "directories": {
+      "output": "out"
+    }
+  },
+  "fileAssociations": [
+    {
+      "ext": "md",
+      "name": "Markdown File",
+      "role": "Editor"
+    }
+  ]
+}

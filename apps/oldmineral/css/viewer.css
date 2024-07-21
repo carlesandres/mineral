@@ -1,0 +1,164 @@
+@layer main {
+  .viewerarea {
+    flex: 2;
+    background: var(--viewer-bg-color);
+
+    @apply relative overflow-hidden font-sans;
+  }
+
+  .viewerarea .prose,
+  .viewerarea .prose strong {
+    color: var(--theme-color) !important;
+  }
+
+  .viewerarea blockquote {
+    @apply m-4 rounded border-l-8 border-l-gray-700
+      bg-black bg-opacity-10 p-4 font-semibold
+      text-gray-700 dark:bg-white/5 dark:text-gray-200;
+
+    border-color: var(--viewer-titles-color);
+  }
+
+  .viewerarea a {
+    color: var(--viewer-link-color) !important;
+  }
+
+  .viewerarea input[type='checkbox'] {
+    margin: 0;
+  }
+
+  .viewerarea table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  .viewerarea td,
+  .viewerarea th {
+    border: 1px solid var(--dark-grey);
+    padding: 5px;
+  }
+
+  .viewerarea th {
+    background: var(--ultra-light-grey);
+  }
+
+  .viewerarea td {
+    background: rgb(255 255 255);
+  }
+
+  .viewerarea tr:nth-child(odd) td {
+    background: rgb(255 255 255 / 10%);
+  }
+
+  .dark .viewerarea tr td {
+    background: rgb(0 0 0 / 80%);
+  }
+
+  .dark .viewerarea th {
+    background: rgb(0 0 0 / 80%);
+    color: inherit;
+  }
+
+  .dark .viewerarea tr:nth-child(odd) td {
+    /* stylelint-disable */
+    background: theme(colors.gray.700 / 50%);
+    /* stylelint-enable */
+  }
+
+  /* Make lines in code snippets never be broking automatically and wrapped */
+  .viewerarea .prose pre,
+  .slide-viewer.prose pre {
+    background: var(--viewer-pre-bg-color);
+    box-sizing: content-box;
+    position: relative;
+    color: inherit;
+
+    /* @apply font-mono; */
+  }
+
+  .viewerarea pre::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 2rem;
+    background-image: linear-gradient(
+      to right,
+      transparent,
+      var(--viewer-pre-bg-color)
+    );
+  }
+
+  .viewerarea code {
+    color: #454545;
+    background: var(--viewer-pre-bg-color);
+    padding: 0 0.2em;
+  }
+
+  .viewerarea pre code {
+    padding: 20px;
+    display: block;
+    box-sizing: content-box;
+    background: transparent;
+    word-wrap: normal;
+    white-space: pre;
+    overflow: auto;
+  }
+
+  .unwrapped .viewerarea pre code {
+    white-space: pre;
+    overflow-x: scroll;
+  }
+
+  .viewerarea hr {
+    box-sizing: border-box;
+    margin: 20px 10px;
+    border-style: none;
+    border-color: #aaa;
+    border-bottom: 1px solid var(--medium-grey);
+  }
+
+  .viewerarea.wide {
+    max-width: initial;
+  }
+
+  .viewerarea.wide pre code {
+    word-wrap: initial;
+    white-space: initial;
+    overflow-x: initial;
+  }
+
+  .viewerarea img {
+    max-width: 100%;
+  }
+
+  .expand {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 5px;
+    z-index: 1000;
+  }
+
+  .expand:hover {
+    background: rgb(0 0 0 / 10%);
+    cursor: pointer;
+  }
+
+  .viewer-content {
+    padding: 2em;
+    height: 100%;
+  }
+
+  .scrollable {
+    flex: 1;
+    overflow: auto;
+    width: 100%;
+    border: none;
+  }
+
+  .viewerarea .prose h1:not(:first-child) {
+    margin-top: 4rem;
+  }
+}

@@ -1,0 +1,44 @@
+.slide-viewer {
+  display: flex;
+  flex: 1;
+  overflow-y: scroll;
+  font-size: 20px;
+  flex-direction: column;
+}
+
+.slide-viewer.viewerarea pre {
+  overflow: visible;
+}
+
+.slide {
+  width: 100%;
+  margin: 0 auto;
+  padding: 3em 4em;
+  display: block;
+  flex-direction: column;
+  max-width: 1200px;
+}
+
+.slide-title {
+  display: flex;
+  padding: 0.5em 1em;
+  background: rgb(0 0 0 / 10%);
+}
+
+.slide-visual-progress {
+  /* border-radius: inherit; */
+  background: var(--light-green);
+  transition: width 0.1s;
+}
+
+.slider progress {
+  display: inline-block;
+  background: blue;
+  color: white;
+  border-radius: 3px;
+}
+
+.slider-tip {
+  color: lightgrey;
+  padding: 5px;
+}
