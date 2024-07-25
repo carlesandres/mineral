@@ -46,8 +46,8 @@ const Homepage = () => (
         </section>
 
         <section className="mb-8 sm:mb-16 p-4 text-center text-sm !leading-10 sm:text-base">
-          <h2 className="mb-6 text-2xl font-bold ">{`Current interests`}</h2>
-            {`Software development, essentialism, deliberate practice, productivity`}
+          <h2 className="mb-6 text-2xl font-bold ">{`Interests`}</h2>
+            {`Essentialism, deliberate practice, productivity`}
         </section>
 
         <section className="mb-8 sm:mb-16 p-4 text-center text-sm !leading-10 sm:text-base">
