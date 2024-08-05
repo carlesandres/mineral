@@ -29,3 +29,20 @@ I am using Next.js middleware to redirect unauthenticated users to the login pag
 I will add more details to this in a future update.
 
 In the meantime, feel free to reach out on X if you wanna know more.
+
+
+## Techniques I am using
+
+I am using Next.js app router with as much server-rendering as I can get away with. 
+
+However, my approach is to make the initial response (the document) cacheable and, for that, I avoid rendering user-specific content synchronously on the server.
+
+I do render on the server some user-specific content that is asynchronous and which is guarded by a Suspense boundary.
+
+I also use zustand for state management. I have a global store that I hydrate on the client and which takes care of the user's bookmarks and the save-for-later marks.
+
+There are a couple of layouts in the app. One for the overall layout which includes the landing page and another, nested inside the first one, which is used only for the app itself.
+
+Sessions are managed by Supabase. I've changed the approach a hundred times so, by the time you read this, it may have changed again.
+
+I am using Next.js opengraph capabilities to provide one static image for any page on the site. The "example details pages" have their own opengraph image which is generated dynamically.
