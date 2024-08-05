@@ -11,8 +11,8 @@ const Homepage = () => (
   <div>
     <main className="sm:mt-8">
       <div className="central-col mx-auto w-full max-w-4xl text-center leading-7 sm:text-left">
-        <section className="mb-8 sm:mb-16 text-center flex flex-col sm:gap-2">
-          <div className="py-16 ">
+        <section className="mb-8 flex flex-col text-center sm:mb-16 sm:gap-2">
+          <div className="py-16">
             <ProfileImage className="mx-auto" />
           </div>
           <div className="mx-auto text-3xl font-bold sm:text-4xl">
@@ -21,15 +21,33 @@ const Homepage = () => (
           <p>Web Engineer</p>
         </section>
 
-        <section className="mb-8 sm:mb-16 p-8 sm:p-0 text-center text-base sm:text-lg">
-          <h2 className="mb-6 text-2xl font-bold ">{`Things I'm building`}</h2>
-          <div className="flex flex-col gap-4 sm:flex-row sm:gap-8">
+        <section className="mb-8 p-4 text-center text-sm !leading-10 sm:mb-16 sm:text-base">
+          <h2 className="mb-6 text-2xl font-bold">
+            Check my{' '}
+            <Link
+              href="/non-blog"
+              className="text-blue-500 underline hover:text-blue-600"
+            >
+              non-blog
+            </Link>
+          </h2>
+        </section>
+
+        <section className="mb-8 p-8 text-center text-base sm:mb-16 sm:p-0 sm:text-lg">
+          <h2 className="mb-6 text-2xl font-bold">{`Currently building:`}</h2>
+          <div className="flex flex-col justify-center gap-4 sm:flex-row sm:gap-8">
             <AppBanner
               href="https://gitexamples.com"
               title="Git Examples"
               description="Git learning platform"
               image={gitExImage}
             />
+          </div>
+        </section>
+
+        <section className="mb-8 p-8 text-center text-base sm:mb-16 sm:p-0 sm:text-lg">
+          <h2 className="mb-6 text-2xl font-bold">{`I have also started:`}</h2>
+          <div className="flex flex-col gap-4 sm:flex-row sm:justify-center sm:gap-8">
             <AppBanner
               href="https://mnral.com"
               title="Mineral"
@@ -45,20 +63,8 @@ const Homepage = () => (
           </div>
         </section>
 
-        <section className="mb-8 sm:mb-16 p-4 text-center text-sm !leading-10 sm:text-base">
-          <h2 className="mb-6 text-2xl font-bold ">{`Interests`}</h2>
-            {`Essentialism, deliberate practice, productivity`}
-        </section>
-
-        <section className="mb-8 sm:mb-16 p-4 text-center text-sm !leading-10 sm:text-base">
-          <h2 className="mb-6 text-2xl font-bold ">{`Read me`}</h2>
-          <Link href="/non-blog"
-            className="text-blue-500 hover:underline"
-          >Incipient Non-blog</Link>
-        </section>
-
         <section className="mx-auto my-auto pb-36 text-center sm:mt-6">
-          <h2 className="mb-6 text-2xl font-bold ">{`Talk to me`}</h2>
+          <h2 className="mb-6 text-2xl font-bold">{`You can find me on:`}</h2>
           <div className="inline-flex w-48 justify-between gap-4 sm:gap-8">
             <IconLink href="http://twitter.com/carlesandres">
               <FaTwitter />

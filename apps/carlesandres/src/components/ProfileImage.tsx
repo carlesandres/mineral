@@ -8,16 +8,17 @@ export interface ProfileImageProps {
 }
 
 const ProfileImage = (props: ProfileImageProps) => {
-  const { size = 128, className } = props;
+  const { className } = props;
 
   return (
-    <Image
-      className={cn('rounded-full', className)}
-      src={profileImage}
-      alt="Carles Andrés profile picture"
-      width={size}
-      height={size}
-    />
+    <div
+      className={cn(
+        `relative h-16 w-16 overflow-hidden rounded-full sm:h-32 sm:w-32`,
+        className,
+      )}
+    >
+      <Image src={profileImage} alt="Carles Andrés profile picture" fill />
+    </div>
   );
 };
 

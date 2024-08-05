@@ -13,12 +13,11 @@ const AppBanner = (props: AppBannerProps) => {
   return (
     <Link
       href={href}
-      className="flex flex-col font-mono items-center flex-1 rounded-lg border border-blue-400 bg-blue-50/50 
-      transition-colors hover:border-zinc-600 hover:bg-zinc-50 p-6 space-y-3"
+      className="flex max-w-56 flex-1 flex-col items-center space-y-3 rounded-lg border border-blue-400 bg-blue-50/50 p-6 font-mono transition-colors hover:border-zinc-600 hover:bg-zinc-50"
     >
       <Image src={image} alt={title} width={75} height={75} />
       <div className="font-bold">{title}</div>
-      <div className=" text-sm text-balance">{description}</div>
+      <div className="text-balance text-sm">{description}</div>
     </Link>
   );
 };
