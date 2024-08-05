@@ -3,7 +3,6 @@ import { cn } from '../utils/utils';
 import profileImage from '../../public/profile.png';
 
 export interface ProfileImageProps {
-  size?: number;
   className?: string;
 }
 
