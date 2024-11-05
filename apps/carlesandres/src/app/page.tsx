@@ -1,82 +1,97 @@
 import IconLink from '@/components/IconLink';
 import { FaGithub, FaTwitter, FaLinkedin } from 'react-icons/fa';
 import ProfileImage from '@/components/ProfileImage';
-import AppBanner from '@/components/AppBanner';
-import gitExImage from '../../public/gitexamples.png';
-import mineralImage from '../../public/mineral.png';
-import cookieWorkshopImage from '../../public/cookie-workshop.png';
 import Link from 'next/link';
 
 const Homepage = () => (
   <div>
     <main className="sm:mt-8">
-      <div className="central-col mx-auto w-full max-w-4xl text-center leading-7 sm:text-left">
+      <div className="central-col mx-auto w-full max-w-lg text-center leading-7 sm:text-left">
         <section className="mb-8 flex flex-col text-center sm:mb-16 sm:gap-2">
           <ProfileImage className="mx-auto my-8" />
-          <div className="mx-auto text-3xl font-bold sm:text-4xl">
+          <h1 className="mx-auto text-xl font-bold sm:text-2xl">
             Carles Andrés
-          </div>
-          <p>Web Engineer</p>
+          </h1>
         </section>
 
-        <section className="mb-8 p-8 text-center text-base sm:mb-16 sm:p-0 sm:text-lg">
-          <h2 className="mb-6 text-2xl font-bold">{`Currently building:`}</h2>
-          <div className="mx-auto text-center">
-            <AppBanner
+        <section className="my-4">
+          <p>{`I'm a software engineer based in London.`}</p>
+        </section>
+
+        <section className="my-4">
+          <p>
+            {`I'm currently building: `}
+            <Link
               href="https://gitexamples.com"
-              title="Git Examples"
-              description="Git learning platform"
-              image={gitExImage}
-              className="mx-auto"
-            />
-          </div>
+              className="text-blue-500 underline hover:text-blue-600"
+            >
+              Git Examples
+            </Link>
+          </p>
+          <p>
+            {`It's a collection of Git commands to help you be more productive with Git.`}
+          </p>
         </section>
 
-        <section className="mb-8 p-4 text-center text-sm !leading-10 sm:mb-16 sm:text-base">
-          <h2 className="mb-6 text-2xl font-bold">
-            Check my{' '}
+        <section className="my-4">
+          <p>
+            {`I've started a "non-blog" `}
             <Link
               href="/non-blog"
               className="text-blue-500 underline hover:text-blue-600"
             >
-              non-blog
+              here
             </Link>
-          </h2>
+            {` but I'm still figuring what to post.`}
+          </p>
         </section>
 
-        <section className="mb-8 p-8 text-center text-base sm:mb-16 sm:p-0 sm:text-lg">
-          <h2 className="mb-6 text-2xl font-bold">{`Other projects I've started:`}</h2>
-          <div className="flex flex-col gap-4 sm:flex-row sm:justify-center sm:gap-8">
-            <AppBanner
-              href="https://mnral.com"
-              title="Mineral"
-              description="Minimalistic note-taking app"
-              image={mineralImage}
-              className="mx-auto sm:m-0"
-            />
-            <AppBanner
-              href="https://chromewebstore.google.com/detail/cookie-workshop/dlbalngihldhiaallkdaaaonlnljkaao"
-              title="Cookie Workshop"
-              description="Chrome extension to manage cookies"
-              image={cookieWorkshopImage}
-              className="mx-auto sm:m-0"
-            />
-          </div>
+        <section className="my-4">
+          <p>{`Other projects I've started are:`}</p>
+          <ul className="ml-4">
+            <li>
+              <Link
+                href="https://mnral.com"
+                className="text-blue-500 underline hover:text-blue-600"
+              >
+                Mineral
+              </Link>
+              {`: Minimalistic note-taking app`}
+            </li>
+            <li>
+              <Link
+                href="https://chromewebstore.google.com/detail/cookie-workshop/dlbalngihldhiaallkdaaaonlnljkaao"
+                className="text-blue-500 underline hover:text-blue-600"
+              >
+                Cookie Workshop
+              </Link>
+              {`: Chrome extension for managing cookies`}
+            </li>
+          </ul>
         </section>
 
-        <section className="mx-auto my-auto pb-36 text-center sm:mt-6">
-          <h2 className="mb-6 text-2xl font-bold">{`Find me on:`}</h2>
-          <div className="inline-flex w-48 justify-between gap-4 sm:gap-8">
-            <IconLink href="http://twitter.com/carlesandres">
-              <FaTwitter />
-            </IconLink>
-            <IconLink href="http://github.com/carlesandres">
-              <FaGithub />
-            </IconLink>
-            <IconLink href="http://linkedin.com/in/carlesandres">
-              <FaLinkedin />
-            </IconLink>
-          </div>
+        <section className="my-4">
+          <p>{`You can find me on:`}</p>
+          <ul className="ml-4">
+            <li>
+              <IconLink href="http://twitter.com/carlesandres">
+                <FaTwitter />
+                <span>Twitter</span>
+              </IconLink>
+            </li>
+            <li>
+              <IconLink href="http://github.com/carlesandres">
+                <FaGithub />
+                <span>Github</span>
+              </IconLink>
+            </li>
+            <li>
+              <IconLink href="http://linkedin.com/in/carlesandres">
+                <FaLinkedin />
+                <span>LinkedIn</span>
+              </IconLink>
+            </li>
+          </ul>
         </section>
       </div>
     </main>
