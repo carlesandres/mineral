@@ -3,9 +3,9 @@ import { createRouteHandlerSupabaseClient } from 'utils/create-router-handler-su
 
 export async function GET(
   _request: Request,
-  context: { params: { id: string } },
+  { params }: { params: Promise<{ id: string }> },
 ) {
-  const sheetId = context.params.id;
+  const sheetId = (await params).id;
 
   if (!sheetId) {
     return new Response(null, { status: 400 });

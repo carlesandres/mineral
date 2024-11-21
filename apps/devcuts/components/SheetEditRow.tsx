@@ -65,7 +65,7 @@ const SheetEditRow = (props: SheetEditRowProps) => {
         throw new Error('Something went wrong.');
       }
       form.reset();
-      inputRef.current?.focus();
+      // inputRef.current?.focus();
       toast.success('Sheet updated.');
       onDone();
     },

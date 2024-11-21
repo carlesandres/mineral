@@ -2,7 +2,7 @@ import { generateKeyBetween } from 'fractional-indexing';
 import { createServerSupabaseClient } from 'utils/create-server-supabase-client';
 
 export const getNextCheatPos = async (sectionId: string, isFirst = true) => {
-  const supabase = createServerSupabaseClient();
+  const supabase = await createServerSupabaseClient();
   const { data } = await supabase.auth.getUser();
 
   if (!data.user?.id) {

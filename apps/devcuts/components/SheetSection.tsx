@@ -15,7 +15,7 @@ interface SheetSectionProps extends Section {
 const SheetSection = async (props: SheetSectionProps) => {
   const { canEdit, numCols, showDone, ...section } = props;
   const { id: sectionId } = props;
-  const supabase = createServerSupabaseClient();
+  const supabase = await createServerSupabaseClient();
 
   const { data: allCheats, error } = await supabase
     .from('cheats')

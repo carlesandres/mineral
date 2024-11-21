@@ -3,20 +3,16 @@ import React, { Suspense } from 'react';
 import fetchSupabase from 'utils/fetch-from-supabase';
 import type { Sheet } from 'types/Sheet';
 import type { Cheat } from 'types/Cheat';
-import MarkdowContent from 'components/MarkdownContent';
-import { cn } from 'utils';
 import TabsFromQueryParams from 'components/TabsFromQueryParams';
 import CheatsheetClient from 'components/CheatsheetClient';
 import ListCheatsheet from 'components/ListCheatsheet';
 
 interface PublicSheetPageProps {
-  params: {
-    slug: string;
-  };
+  params: Promise<{ slug: string }>;
 }
 
 const PublicSheetPage = async (props: PublicSheetPageProps) => {
-  const { slug } = props.params;
+  const { slug } = await props.params;
 
   const [sheet] = (await fetchSupabase(
     `sheets?select=*&slug=eq.${slug}`,

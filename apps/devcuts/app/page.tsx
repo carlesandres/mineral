@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 };
 
 export default async function Home() {
-  const supabase = createServerSupabaseClient();
+  const supabase = await createServerSupabaseClient();
   const { data: { user } = {} } = await supabase.auth.getUser();
   const userId = user?.id;
   const nextSheetPos = await getNextSheetPos(false);
