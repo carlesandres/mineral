@@ -7,7 +7,7 @@ interface NewSheetFormProps {
 
 export async function NewSheetForm(props: NewSheetFormProps) {
   const { nextSheetPos } = props;
-  const supabase = createServerSupabaseClient();
+  const supabase = await createServerSupabaseClient();
   const { data: { user } = {} } = await supabase.auth.getUser();
   const userId = user?.id;
   if (!userId) {

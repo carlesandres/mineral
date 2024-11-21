@@ -24,7 +24,7 @@ export default async function CheatsPage({
   const { id: sheetId } = params;
   const { hidedone } = searchParams;
   const showDone = hidedone !== 'true' && hidedone !== undefined;
-  const supabase = createServerSupabaseClient();
+  const supabase = await createServerSupabaseClient();
 
   const { data: sheet, error } = await supabase
     .from('sheets')
