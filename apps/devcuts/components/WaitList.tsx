@@ -10,7 +10,7 @@ const WaitList = () => {
 
     // TO-DO: Add email validation
     const email = formData.get('email') as string;
-    const supabase = createServerSupabaseClient();
+    const supabase = await createServerSupabaseClient();
     const { error } = await supabase.from('waitlist').insert({ email });
     if (error) {
       console.error('error inserting email', error);

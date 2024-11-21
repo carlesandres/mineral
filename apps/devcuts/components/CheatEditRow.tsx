@@ -28,7 +28,7 @@ interface CheatEditRowProps {
 }
 
 const CheatEditRow = (props: CheatEditRowProps) => {
-  const { numCols, cheat, onDone } = props;
+  const { cheat, onDone } = props;
   const { id: cheatId } = cheat;
   const inputRef = useRef<HTMLInputElement>(null);
   const form = useForm<z.infer<typeof FormSchema>>({
@@ -48,7 +48,7 @@ const CheatEditRow = (props: CheatEditRowProps) => {
         throw new Error('Something went wrong.');
       }
       form.reset();
-      inputRef.current?.focus();
+      // inputRef.current?.focus();
       toast.success('cheat updated');
       onDone();
     },

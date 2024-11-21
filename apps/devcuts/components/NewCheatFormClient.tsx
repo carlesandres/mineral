@@ -72,7 +72,7 @@ export default function NewCheatFormClient(props: NewCheatFormProps) {
       }
       toast.success('Cheat added.');
       form.reset();
-      inputRef.current?.focus();
+      // inputRef.current?.focus();
     },
     [form, sectionId, nextCheatPos],
   );

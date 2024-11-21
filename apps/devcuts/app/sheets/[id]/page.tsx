@@ -9,20 +9,20 @@ import SheetPageCommands from 'components/SheetPageCommands';
 import AddSectionButton from 'components/AddSectionButton';
 
 export interface CheatsPageProps {
-  params: {
+  params: Promise<{
     id: string;
-  };
-  searchParams: {
+  }>;
+  searchParams: Promise<{
     hidedone: string;
-  };
+  }>;
 }
 
 export default async function CheatsPage({
   params,
   searchParams,
 }: CheatsPageProps) {
-  const { id: sheetId } = params;
-  const { hidedone } = searchParams;
+  const { id: sheetId } = await params;
+  const { hidedone } = await searchParams;
   const showDone = hidedone !== 'true' && hidedone !== undefined;
   const supabase = await createServerSupabaseClient();
 
