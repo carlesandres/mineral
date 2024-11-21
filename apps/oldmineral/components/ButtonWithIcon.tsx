@@ -1,5 +1,5 @@
-import { forwardRef, Ref, HTMLAttributes } from 'react';
-import Icon from './Icon';
+import { forwardRef, Ref, HTMLAttributes } from "react";
+import Icon from "./Icon";
 
 export interface ButtonWithIconProps extends HTMLAttributes<HTMLButtonElement> {
   icon: string;
@@ -9,15 +9,13 @@ export interface ButtonWithIconProps extends HTMLAttributes<HTMLButtonElement> {
 
 const ButtonWithIcon = forwardRef(
   (props: ButtonWithIconProps, ref: Ref<HTMLButtonElement>) => {
-    const { icon, text, disabled, className = '', ...otherProps } = props;
+    const { icon, text, disabled, className = "", ...otherProps } = props;
 
     const displayedIcon = icon ? (
       <span className={`icon fill-current text-sm`}>
         <Icon icon={icon} />
       </span>
     ) : null;
-
-    const renderedText = <div className="label">{text}</div> || null;
 
     const completeClassName = `
     w-full flex flex-1
@@ -39,10 +37,10 @@ const ButtonWithIcon = forwardRef(
         {...otherProps}
       >
         {displayedIcon}
-        {renderedText}
+        <div className="label">{text}</div>
       </button>
     );
-  }
+  },
 );
 
 export default ButtonWithIcon;

@@ -1,4 +1,4 @@
-import { forwardRef, Ref, HTMLAttributes, ReactNode } from 'react';
+import { forwardRef, Ref, HTMLAttributes, ReactNode } from "react";
 
 export interface Button2Props extends HTMLAttributes<HTMLButtonElement> {
   icon: ReactNode;
@@ -8,9 +8,7 @@ export interface Button2Props extends HTMLAttributes<HTMLButtonElement> {
 
 const Button2 = forwardRef(
   (props: Button2Props, ref: Ref<HTMLButtonElement>) => {
-    const { icon, text, disabled, className = '', ...otherProps } = props;
-
-    const renderedText = <div className="label">{text}</div> || null;
+    const { icon, text, disabled, className = "", ...otherProps } = props;
 
     const completeClassName = `
     w-full flex flex-1
@@ -33,10 +31,10 @@ const Button2 = forwardRef(
         {...otherProps}
       >
         {icon}
-        {renderedText}
+        <div className="label">{text}</div>
       </button>
     );
-  }
+  },
 );
 
 export default Button2;
