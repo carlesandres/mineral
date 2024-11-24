@@ -1,12 +1,12 @@
-import { useRef, useState, useCallback, useEffect } from 'react';
-import Panes from 'components/Panes';
-import EditorToolbar from 'components/EditorToolbar';
-import EditorFooter from 'components/EditorFooter';
-import HelpModal from 'components/HelpModal';
-import ColorSelector from 'components/ColorSelector';
-import { useList } from 'hooks/useList';
-import { Note } from 'types/Note';
-import NoteMenu from './NoteMenu';
+import { useRef, useState, useCallback, useEffect } from "react";
+import Panes from "components/Panes";
+import EditorToolbar from "components/EditorToolbar";
+import EditorFooter from "components/EditorFooter";
+import HelpModal from "components/HelpModal";
+import ColorSelector from "components/ColorSelector";
+import { useList } from "hooks/useList";
+import { Note } from "types/Note";
+import NoteMenu from "./NoteMenu";
 
 interface Props {
   note: Note;
@@ -28,34 +28,34 @@ const NoteArea = (props: Props) => {
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Enter' && e.ctrlKey) {
+      if (e.key === "Enter" && e.ctrlKey) {
         onRotatePanels();
         return;
       }
-      if (e.key === 't' && e.ctrlKey) {
+      if (e.key === "t" && e.ctrlKey) {
         const { text } = note;
         const newText =
           text +
-          'aaa | bbb | ccc\n--|---|---\n1 | 2 | 3\n4 | 5 | 6\n7 | 8 | 9\n';
+          "aaa | bbb | ccc\n--|---|---\n1 | 2 | 3\n4 | 5 | 6\n7 | 8 | 9\n";
         dispatchList({
-          type: 'merge',
+          type: "merge",
           id: noteId,
           partial: { text: newText },
         });
         return;
       }
     };
-    document.addEventListener('keydown', handleKeyDown);
+    document.addEventListener("keydown", handleKeyDown);
 
     return () => {
-      document.removeEventListener('keydown', handleKeyDown);
+      document.removeEventListener("keydown", handleKeyDown);
     };
   }, [onRotatePanels, note, noteId, dispatchList]);
 
   const changeColor = useCallback(
     (color: string) => {
       dispatchList({
-        type: 'merge',
+        type: "merge",
         id: noteId,
         partial: { color },
       });
@@ -67,7 +67,7 @@ const NoteArea = (props: Props) => {
   const toggleFooter = useCallback(() => {
     const { showFooter, id } = note;
     dispatchList({
-      type: 'merge',
+      type: "merge",
       id,
       partial: { showFooter: !showFooter },
     });
@@ -87,10 +87,10 @@ const NoteArea = (props: Props) => {
     Number(Boolean(tocReallyShown)) * 37;
 
   const wideClass = wide
-    ? 'wide w-full rounded-none m-0'
-    : 'dark:md:border max-w-full normal-mode sm:border';
+    ? "wide w-full rounded-none m-0"
+    : "dark:md:border max-w-full normal-mode sm:border";
 
-  const containerWideClass = wide ? '' : 'sm:px-8 sm:py-16 lg:py-32';
+  const containerWideClass = wide ? "" : "sm:px-8 sm:py-16 lg:py-32";
 
   // @media (max-width: 800px) {
   //   .notearea {
@@ -113,7 +113,7 @@ const NoteArea = (props: Props) => {
         selectedColor={note?.color}
       />
       <HelpModal />
-      <div className={`flex w-full ${containerWideClass}`}>
+      <div className={`relative flex w-full ${containerWideClass}`}>
         <div
           ref={editorarea}
           className={`
@@ -140,7 +140,7 @@ const NoteArea = (props: Props) => {
             onClickColorBall={showColorModal}
             onToggle={toggleFooter}
           />
-        <NoteMenu noteId={note.id} />
+          <NoteMenu noteId={note.id} />
         </div>
       </div>
     </>

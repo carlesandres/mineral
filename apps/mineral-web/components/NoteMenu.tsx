@@ -1,11 +1,11 @@
-import { useCallback, useState } from 'react';
-import { Menu, Transition } from '@headlessui/react';
-import { useList } from 'hooks/useList';
-import { FiMenu } from 'react-icons/fi';
-import { Note, Panels, PanelsPartial } from 'types/Note';
-import ConfirmExportModal from 'components/ConfirmExportModal';
-import useDeleteNote from 'hooks/useDeleteNote';
-import useUIZStore from 'utils/useUIZStore';
+import { useCallback, useState } from "react";
+import { Menu, Transition } from "@headlessui/react";
+import { useList } from "hooks/useList";
+import { FiMenu } from "react-icons/fi";
+import { Note, Panels, PanelsPartial } from "types/Note";
+import ConfirmExportModal from "components/ConfirmExportModal";
+import useDeleteNote from "hooks/useDeleteNote";
+import useUIZStore from "utils/useUIZStore";
 import {
   HiOutlineArrowsPointingIn,
   HiOutlineArrowsPointingOut,
@@ -15,10 +15,10 @@ import {
   HiOutlinePrinter,
   HiOutlineSwatch,
   HiOutlineViewColumns,
-} from 'react-icons/hi2';
-import { FaMarkdown } from 'react-icons/fa';
-import MenuButton2 from 'components/MenuButton2';
-import RoundBigButton from './RoundBigButton';
+} from "react-icons/hi2";
+import { FaMarkdown } from "react-icons/fa";
+import MenuButton2 from "components/MenuButton2";
+import RoundBigButton from "./RoundBigButton";
 
 interface Props {
   noteId: string;
@@ -59,7 +59,7 @@ const NoteMenu = (props: Props) => {
 
     const panels = { ...note.panels, ...nextPanels };
     dispatchList({
-      type: 'merge',
+      type: "merge",
       id: noteId,
       partial: { panels },
     });
@@ -68,21 +68,21 @@ const NoteMenu = (props: Props) => {
   const updatePanels = useCallback(
     (panels: Partial<Panels>) =>
       dispatchList({
-        type: 'merge-panels',
+        type: "merge-panels",
         id: noteId,
         panels,
       }),
-    [noteId, dispatchList]
+    [noteId, dispatchList],
   );
 
   const updateWidth = useCallback(
     (wide: boolean) =>
       dispatchList({
-        type: 'merge',
+        type: "merge",
         id: noteId,
         partial: { wide },
       }),
-    [noteId, dispatchList]
+    [noteId, dispatchList],
   );
 
   const toggleToc = () => updatePanels({ toc: !tocVisible });
@@ -90,13 +90,13 @@ const NoteMenu = (props: Props) => {
 
   const rotateTheme = useCallback(() => {
     dispatchList({
-      type: 'next-style',
+      type: "next-style",
       id: noteId,
     });
   }, [noteId, dispatchList]);
 
-  const fullWidthText = wide ? 'Compress' : 'Expand';
-  const toggleTocText = tocVisible ? 'Hide' : 'Show';
+  const fullWidthText = wide ? "Compress" : "Expand";
+  const toggleTocText = tocVisible ? "Hide" : "Show";
 
   if (!note) {
     return null;
@@ -104,7 +104,7 @@ const NoteMenu = (props: Props) => {
 
   return (
     <>
-      <Menu as="div" className="no-print fixed inline-flex right-2 top-2">
+      <Menu as="div" className="no-print absolute inline-flex right-2 top-2">
         <Menu.Button as="div" className="menu-btn">
           <RoundBigButton>
             <FiMenu className="text-sm " />

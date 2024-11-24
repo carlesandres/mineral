@@ -1,13 +1,13 @@
-import React, { Ref, MouseEvent, useState, useEffect } from 'react';
-import { marked } from 'marked';
-import { viewerRenderer } from 'components/markedRenderers';
-import hilite from 'utils/custom-hilite.js';
-import { HLJSApi } from 'highlight.js';
-import PanelLabel from 'components/PanelLabel';
-import { FaMarkdown } from 'react-icons/fa';
-import useSettingsStore from 'utils/useSettingsStore';
-import { sanitize } from 'dompurify';
-import CloseButton from './CloseButton';
+import React, { Ref, MouseEvent, useState, useEffect } from "react";
+import { marked } from "marked";
+import { viewerRenderer } from "components/markedRenderers";
+import hilite from "utils/custom-hilite.js";
+import { HLJSApi } from "highlight.js";
+import PanelLabel from "components/PanelLabel";
+import { FaMarkdown } from "react-icons/fa";
+import useSettingsStore from "utils/useSettingsStore";
+import DOMPurify from "dompurify";
+import CloseButton from "./CloseButton";
 
 interface Props {
   text: string;
@@ -19,17 +19,27 @@ interface Props {
 }
 
 const Viewer = React.forwardRef((props: Props, ref: Ref<HTMLDivElement>) => {
-  const { show, isEditorOpen, onClose } = props;
-  const [mdContent, setMdcontent] = useState('');
+  const { show, isEditorOpen, onClose, text } = props;
+  const [mdContent, setMdcontent] = useState("");
   // TO-DO: Find out how to deal with dompurify types
   const [highlight, setHighlight] = useState<HLJSApi | null>(null);
   const { gfm } = useSettingsStore();
+  const [markdown, setMarkdown] = useState("");
+
+  useEffect(() => {
+    const parseMD = async () => {
+      const markdown = await marked.parse(text);
+      setMarkdown(markdown);
+    };
+
+    parseMD();
+  }, [text]);
 
   useEffect(() => {
     const initPurify = async () => {
       // TO-DO: This and hihjlight.js should be preloaded on other pages
       // so as to speed up loading the first note
-      const hljs = await import('highlight.js');
+      const hljs = await import("highlight.js");
       setHighlight(hljs.default);
     };
 
@@ -45,9 +55,7 @@ const Viewer = React.forwardRef((props: Props, ref: Ref<HTMLDivElement>) => {
 
   useEffect(() => {
     if (props.show) {
-      const viewerContent = sanitize(marked.parse(props.text), {
-        ALLOWED_ATTR: ['target', 'href', 'id', 'name', 'type'],
-      });
+      const viewerContent = DOMPurify.sanitize(markdown);
       setMdcontent(viewerContent);
     }
   }, [props.text, props.show]);
@@ -82,16 +90,16 @@ const Viewer = React.forwardRef((props: Props, ref: Ref<HTMLDivElement>) => {
         onDoubleClick={props.onDoubleClick}
         dangerouslySetInnerHTML={{ __html: mdContent }}
       />
-        {isEditorOpen && (
-          <CloseButton
-            onClick={onClose}
-            className="mr-1 text-gray-400 dark:text-gray-500 "
-          />
-        )}
+      {isEditorOpen && (
+        <CloseButton
+          onClick={onClose}
+          className="mr-1 text-gray-400 dark:text-gray-500 "
+        />
+      )}
     </div>
   );
 });
 
-Viewer.displayName = 'Viewer';
+Viewer.displayName = "Viewer";
 
 export default Viewer;
