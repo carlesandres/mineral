@@ -1,8 +1,7 @@
 {
-  "name": "oldmineral",
-  "version": "0.6.0",
+  "name": "mineral-web",
+  "version": "0.0.0",
   "homepage": "https://www.mnral.com",
-  "repository": "github:carlesandres/mineral",
   "license": "UNLICENSED",
   "scripts": {
     "test:unit": "jest --no-cache --config jest.unit.config.json",
