@@ -1,46 +1,59 @@
-import { ReactNode, useEffect, useState } from 'react';
-import Head from 'next/head';
-import 'css/main.css';
-import Toast from 'components/Toast';
-import { ShortcutsProvider } from 'hooks/useShortcuts';
-import { ListProvider } from 'hooks/useList';
-import DBUpdater from 'components/DBUpdater';
-import { appName } from 'components/constants';
-import { loadFromStorage } from 'utils/useSettingsStore';
+import { ReactNode, useEffect, useState } from "react";
+import Head from "next/head";
+import "css/main.css";
+import Toast from "components/Toast";
+import { ShortcutsProvider } from "hooks/useShortcuts";
+import { ListProvider } from "hooks/useList";
+import DBUpdater from "components/DBUpdater";
+import { appName } from "components/constants";
+import { loadFromStorage } from "utils/useSettingsStore";
 // import { loadRecommendations } from 'utils/useSettingsStore';
-import PleaseWait from 'components/PleaseWait';
-import { messageReceive } from 'utils/fileUtils';
-import useSettingsStore from 'utils/useSettingsStore';
-import BackupModal from 'components/BackupModal';
-import FileImporter from 'components/FileImporter';
+import PleaseWait from "components/PleaseWait";
+import { messageReceive } from "utils/fileUtils";
+import useSettingsStore from "utils/useSettingsStore";
+import BackupModal from "components/BackupModal";
+import FileImporter from "components/FileImporter";
 import {
   Inter,
   Fira_Code,
   Montserrat,
   Open_Sans,
   Lora,
-} from 'next/font/google';
+} from "next/font/google";
+import posthog from "posthog-js";
+import { PostHogProvider } from "posthog-js/react";
 
-const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
+if (typeof window !== "undefined") {
+  posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY, {
+    api_host:
+      process.env.NEXT_PUBLIC_POSTHOG_HOST || "https://eu.i.posthog.com",
+    person_profiles: "identified_only", // or 'always' to create profiles for anonymous users as well
+    loaded: (posthog) => {
+      if (process.env.NODE_ENV === "development") posthog.debug(); // debug mode in development
+    },
+  });
+}
+
+const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 
 const monofont = Fira_Code({
-  subsets: ['latin'],
-  variable: '--font-my-mono',
+  subsets: ["latin"],
+  variable: "--font-my-mono",
 });
 
 const montserrat = Montserrat({
-  subsets: ['latin'],
-  variable: '--font-sans-2',
+  subsets: ["latin"],
+  variable: "--font-sans-2",
 });
 
 const opensans = Open_Sans({
-  subsets: ['latin'],
-  variable: '--font-sans-3',
+  subsets: ["latin"],
+  variable: "--font-sans-3",
 });
 
 const sofiasans = Lora({
-  subsets: ['latin'],
-  variable: '--font-sans-4',
+  subsets: ["latin"],
+  variable: "--font-sans-4",
 });
 
 function MyApp({ Component, pageProps }) {
@@ -56,9 +69,9 @@ function MyApp({ Component, pageProps }) {
 
   useEffect(() => {
     if (darkMode) {
-      document.body.classList.add('dark');
+      document.body.classList.add("dark");
     } else {
-      document.body.classList.remove('dark');
+      document.body.classList.remove("dark");
     }
   }, [darkMode]);
 
@@ -74,14 +87,14 @@ function MyApp({ Component, pageProps }) {
       if (!message) {
         return;
       }
-      if (message.command === 'settingChange') {
+      if (message.command === "settingChange") {
         loadFromStorage();
       }
     };
     if (!loading) {
-      window.addEventListener('storage', setSettingChangeFromOtherTab);
+      window.addEventListener("storage", setSettingChangeFromOtherTab);
       return () => {
-        window.removeEventListener('storage', setSettingChangeFromOtherTab);
+        window.removeEventListener("storage", setSettingChangeFromOtherTab);
       };
     }
   }, [loading]);
@@ -128,20 +141,22 @@ function MyApp({ Component, pageProps }) {
           font-family: ${inter.style.fontFamily};
         }
       `}</style>
-      <ListProvider>
-        <ShortcutsProvider>
-          <Toast />
-          <DBUpdater />
-          <div
-            className={`${monofont.className} ${montserrat.variable}
+      <PostHogProvider client={posthog}>
+        <ListProvider>
+          <ShortcutsProvider>
+            <Toast />
+            <DBUpdater />
+            <div
+              className={`${monofont.className} ${montserrat.variable}
               ${sofiasans.variable} ${opensans.variable}`}
-          >
-            {renderedComp}
-          </div>
-        </ShortcutsProvider>
-        <BackupModal />
-        <FileImporter />
-      </ListProvider>
+            >
+              {renderedComp}
+            </div>
+          </ShortcutsProvider>
+          <BackupModal />
+          <FileImporter />
+        </ListProvider>
+      </PostHogProvider>
     </>
   );
 }
