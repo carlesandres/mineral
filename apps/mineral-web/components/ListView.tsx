@@ -1,35 +1,35 @@
+"use client";
+
 import React, {
   useState,
   useEffect,
   useRef,
   useCallback,
   ChangeEvent,
-} from 'react';
-import ListHeader from 'components/filelist/ListHeader';
-import ListMenu from 'components/ListMenu';
-import ListElements from 'components/ListElements';
-import listShortcuts from 'components/listShortcuts';
-import { useShortcuts } from 'hooks/useShortcuts';
-import { useList } from 'hooks/useList';
-import EmptyList from 'components/EmptyList';
-import DragAndDrop from 'components/DragAndDrop';
-import useCreateFile from 'hooks/useCreateFile';
-import { readLocalFile } from 'components/FileImporter';
-import useUIZStore from 'utils/useUIZStore';
-import { useRouter } from 'next/router';
-import { useQueryParam } from 'hooks/useQueryP';
-import SuccessToast from 'components/SuccessToast';
-import Button from 'components/Button';
-import { HiOutlinePlus } from 'react-icons/hi';
+} from "react";
+import ListHeader from "components/filelist/ListHeader";
+import ListMenu from "components/ListMenu";
+import ListElements from "components/ListElements";
+import listShortcuts from "components/listShortcuts";
+import { useShortcuts } from "hooks/useShortcuts";
+import { useList } from "hooks/useList";
+import EmptyList from "components/EmptyList";
+import DragAndDrop from "components/DragAndDrop";
+import useCreateFile from "hooks/useCreateFile";
+import { readLocalFile } from "components/FileImporter";
+import useUIZStore from "utils/useUIZStore";
+import { useRouter } from "next/router";
+import { useQueryParam } from "hooks/useQueryP";
+import SuccessToast from "components/SuccessToast";
 
 const ListView = () => {
-  const header = useRef<HTMLInputElement>();
+  const header = useRef<HTMLInputElement>(null);
   const { toast } = useUIZStore();
   const { dispatch: dispatchShortcuts } = useShortcuts();
   const { list } = useList();
   const router = useRouter();
-  const [searchTerm, setSearchterm] = useState('');
-  const { param: initialSearchTerm } = useQueryParam('search');
+  const [searchTerm, setSearchterm] = useState("");
+  const { param: initialSearchTerm } = useQueryParam("search");
 
   useEffect(() => {
     if (initialSearchTerm) {
@@ -43,7 +43,7 @@ const ListView = () => {
     const keyActionMap = {};
 
     dispatchShortcuts({
-      type: 'set',
+      type: "set",
       keyActionMap,
       shortcutDescription: listShortcuts,
     });
@@ -58,10 +58,10 @@ const ListView = () => {
         : {};
       router.replace({ pathname: router.pathname, query });
     },
-    [router]
+    [router],
   );
 
-  const onClear = () => setSearchterm('');
+  const onClear = () => setSearchterm("");
 
   const handleDrop = useCallback(
     async (files: FileList) => {
@@ -74,7 +74,7 @@ const ListView = () => {
       await createFile({ title: firstFile.name, text });
       toast(<SuccessToast>File imported</SuccessToast>);
     },
-    [createFile]
+    [createFile],
   );
 
   if (!list.initialized || !router.isReady) {
