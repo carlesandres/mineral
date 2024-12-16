@@ -3,8 +3,8 @@ import ShortcutsModal from "@/components/ShortcutsModal";
 import { GeistSans } from "geist/font/sans";
 import { GeistMono } from "geist/font/mono";
 import "styles/main.css";
-import { ListProvider } from "hooks/useList";
 import ClientLayout from "components/ClientLayout";
+import { Suspense } from "react";
 
 async function MyApp({ children }: { children: React.ReactNode }) {
   // const {
@@ -34,7 +34,9 @@ async function MyApp({ children }: { children: React.ReactNode }) {
       </head>
       <body>
         <div className={`page-content min-h-screen`}>
-          <ShortcutsModal />
+          <Suspense>
+            <ShortcutsModal />
+          </Suspense>
           <ClientLayout>{children}</ClientLayout>
         </div>
       </body>

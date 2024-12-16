@@ -1,10 +1,12 @@
-import { useList } from 'hooks/useList';
-import Button from 'components/Button';
-import { goToNewFile, goToList } from 'utils/navigationHelpers';
-import { HiOutlinePlus, HiOutlineClipboard } from 'react-icons/hi';
+"use client";
+
+import { useList } from "hooks/useList";
+import { HiOutlinePlus, HiOutlineClipboard } from "react-icons/hi";
+import Link from "next/link";
+import { Button } from "components/ui/button";
 
 const style =
-  'mx-auto flex items-center justify-center space-x-2 sm:!px-6 sm:!py-4 sm:text-lg';
+  "mx-auto flex items-center justify-center space-x-2 sm:!px-6 sm:!py-4 sm:text-lg";
 
 const LandingCTA = () => {
   const { list } = useList();
@@ -15,17 +17,21 @@ const LandingCTA = () => {
 
   if (list.notes.length > 0) {
     return (
-      <Button className={style} onClick={() => goToList()}>
-        <HiOutlineClipboard className="-mt-0.5 text-xl" />
-        <span>Go to your dashboard</span>
+      <Button asChild variant="secondary" size="lg">
+        <Link className={style} href="/notes">
+          <HiOutlineClipboard className="text-xl" />
+          <span>Go to your dashboard</span>
+        </Link>
       </Button>
     );
   }
 
   return (
-    <Button className={style} onClick={goToNewFile}>
-      <HiOutlinePlus />
-      <span>Create a note</span>
+    <Button asChild>
+      <Link className={style} href="/new">
+        <HiOutlinePlus />
+        <span>Create a note</span>
+      </Link>
     </Button>
   );
 };

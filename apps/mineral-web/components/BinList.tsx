@@ -1,27 +1,18 @@
-import React, {
-  useEffect,
-  useState,
-  useRef,
-  useCallback,
-  ChangeEvent,
-} from 'react';
-import ListHeader from 'components/filelist/ListHeader';
-import BinView from 'components/BinView';
-import listShortcuts from 'components/listShortcuts';
-import { useShortcuts } from 'hooks/useShortcuts';
-import { useList } from 'hooks/useList';
-import EmptyList from 'components/EmptyList';
-import { useQueryParam } from 'hooks/useQueryP';
-import { useRouter } from 'next/router';
-import BinMenu from './BinMenu';
+"use client";
+
+import React, { useEffect, useState, useCallback, ChangeEvent } from "react";
+import ListHeader from "components/filelist/ListHeader";
+import BinView from "components/BinView";
+import { useList } from "hooks/useList";
+import EmptyList from "components/EmptyList";
+import { useRouter, useSearchParams } from "next/navigation";
+import BinMenu from "./BinMenu";
 
 const BinList = () => {
-  const header = useRef<HTMLInputElement>();
-  const { dispatch: dispatchShortcuts } = useShortcuts();
   const { list } = useList();
-  const [searchTerm, setSearchterm] = useState('');
   const router = useRouter();
-  const { param: initialSearchTerm } = useQueryParam('search');
+  const initialSearchTerm = useSearchParams()?.get("search");
+  const [searchTerm, setSearchterm] = useState("");
   const { notes } = list;
 
   useEffect(() => {
@@ -30,31 +21,31 @@ const BinList = () => {
     }
   }, [initialSearchTerm]);
 
-  useEffect(() => {
-    const keyActionMap = {};
-
-    dispatchShortcuts({
-      type: 'set',
-      keyActionMap,
-      shortcutDescription: listShortcuts,
-    });
-  }, [dispatchShortcuts]);
+  // useEffect(() => {
+  //   const keyActionMap = {};
+  //
+  //   dispatchShortcuts({
+  //     type: "set",
+  //     keyActionMap,
+  //     shortcutDescription: listShortcuts,
+  //   });
+  // }, [dispatchShortcuts]);
 
   const onSearch = useCallback(
     (event: ChangeEvent<HTMLInputElement>) => {
       const newSearchTerm = event.target.value;
       setSearchterm(newSearchTerm);
-      const query = newSearchTerm.trim()
-        ? { search: newSearchTerm.trim() }
-        : {};
-      router.replace({ pathname: router.pathname, query });
+      // TO-DO: Use pathname instead of window.location.href
+      const url = new URL(window.location.href);
+      url.searchParams.set("search", newSearchTerm.trim());
+      router.replace(url.href);
     },
-    [router]
+    [router],
   );
 
-  const onClear = () => setSearchterm('');
+  const onClear = () => setSearchterm("");
 
-  if (!list.initialized || !router.isReady) {
+  if (!list.initialized) {
     return null;
   }
 
@@ -70,7 +61,6 @@ const BinList = () => {
       >
         <div className="mb-12 flex items-center gap-4">
           <ListHeader
-            ref={header}
             searchTerm={searchTerm}
             onChange={onSearch}
             onClear={onClear}

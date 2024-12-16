@@ -1,26 +1,19 @@
-import { Menu, Transition } from '@headlessui/react';
-import { FiMenu } from 'react-icons/fi';
-import MenuButton2 from 'components/MenuButton2';
-import {
-  HiOutlineTerminal,
-  HiOutlinePlus,
-  HiOutlineClipboard,
-} from 'react-icons/hi';
-import { useShortcuts } from 'hooks/useShortcuts';
-import { goToList, goToNewFile } from 'utils/navigationHelpers';
-import RoundBigButton from './RoundBigButton';
-import { useMemo } from 'react';
-import { getShownFiles } from 'utils/fileUtils';
-import EmptyBinButton from './EmptyBinButton';
-import { useList } from 'hooks/useList';
+import { Menu, Transition } from "@headlessui/react";
+import { FiMenu } from "react-icons/fi";
+import MenuButton2 from "components/MenuButton2";
+import { HiOutlinePlus, HiOutlineClipboard } from "react-icons/hi";
+import { goToList, goToNewFile } from "utils/navigationHelpers";
+import RoundBigButton from "./RoundBigButton";
+import { useMemo } from "react";
+import { getShownFiles } from "utils/fileUtils";
+import EmptyBinButton from "./EmptyBinButton";
+import { useList } from "hooks/useList";
 
 const BinMenu = () => {
-  const { showShortcuts } = useShortcuts();
   const { list } = useList();
   const binnedNotes = useMemo(() => {
-    return getShownFiles(list.notes, 'BIN', '');
+    return getShownFiles(list.notes, "BIN", "");
   }, [list.notes]);
-
 
   return (
     <Menu as="div" className="no-print fixed right-2 top-2">
@@ -49,11 +42,6 @@ const BinMenu = () => {
             onClick={goToNewFile}
             icon={<HiOutlinePlus />}
             text="New note"
-          />
-          <MenuButton2
-            onClick={showShortcuts}
-            text="Keyboard shortcuts"
-            icon={<HiOutlineTerminal />}
           />
           <MenuButton2
             icon={<HiOutlineClipboard />}

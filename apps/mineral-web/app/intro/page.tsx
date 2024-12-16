@@ -1,9 +1,7 @@
-import { ReactNode } from 'react';
-import PageLayout from 'components/PageLayout';
-import FeatureCard from 'components/FeatureCard';
-import FeatureSectionTitle from 'components/FeatureSectionTitle';
-import HeroSection from 'components/HeroSection';
-import { HiOutlineArrowDown } from 'react-icons/hi';
+import FeatureCard from "components/FeatureCard";
+import FeatureSectionTitle from "components/FeatureSectionTitle";
+import HeroSection from "components/HeroSection";
+import { HiOutlineArrowDown } from "react-icons/hi";
 
 const IntroPage = () => {
   return (
@@ -21,10 +19,10 @@ const IntroPage = () => {
             {`We've designed a minimalistic UI to help you focus on your writing.`}
           </FeatureCard>
           <FeatureCard title="Local storage">
-            {`Your notes stay on your computer and you choose when to share them.`}{' '}
+            {`Your notes stay on your computer and you choose when to share them.`}{" "}
           </FeatureCard>
           <FeatureCard title="Auto-saving">
-            {`Your changes are automatically saved so that you don't have to remember doing it. `}{' '}
+            {`Your changes are automatically saved so that you don't have to remember doing it. `}{" "}
           </FeatureCard>
           <FeatureCard title="Import text">
             {`Import any text file from the side panel or by simply dragging it into the notes list. `}
@@ -84,14 +82,6 @@ const IntroPage = () => {
         </ul>
       </div>
     </div>
-  );
-};
-
-IntroPage.getLayout = (page: ReactNode) => {
-  return (
-    <PageLayout title="Features" menu={null}>
-      {page}
-    </PageLayout>
   );
 };
 

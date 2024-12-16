@@ -1,13 +1,14 @@
-import React, { useMemo } from 'react';
-import { useRouter } from 'next/router';
-import { fileUrl } from 'utils/paths.js';
-import PageLayout from 'components/PageLayout';
-import { useEffect } from 'react';
-import useSettingsStore from 'utils/useSettingsStore';
-import { newFile } from 'utils/fileUtils';
-import { useList } from 'hooks/useList';
+"use client";
 
-const NewFile = () => {
+import React, { useMemo } from "react";
+import { useRouter } from "next/navigation";
+import { fileUrl } from "utils/paths.js";
+import { useEffect } from "react";
+import useSettingsStore from "utils/useSettingsStore";
+import { newFile } from "utils/fileUtils";
+import { useList } from "hooks/useList";
+
+const NewNotePageClient = () => {
   const router = useRouter();
   const { startWithPreview, footerHiddenByDefault } = useSettingsStore();
   const { list, dispatchList } = useList();
@@ -22,7 +23,7 @@ const NewFile = () => {
     const create = () => {
       const note = newFile({ panels, showFooter: !footerHiddenByDefault });
       dispatchList({
-        type: 'append',
+        type: "append",
         note,
       });
       router.replace(fileUrl(note.id));
@@ -33,7 +34,7 @@ const NewFile = () => {
     }
   }, [router, list?.initialized, dispatchList, panels, footerHiddenByDefault]);
 
-  return <PageLayout isFixedHeight />;
+  return <div>Creating new file...</div>;
 };
 
-export default NewFile;
+export default NewNotePageClient;

@@ -26,31 +26,31 @@ const NoteArea = (props: Props) => {
   const showColorModal = () => setDisplaycolormodal(true);
   const hideColorModal = () => setDisplaycolormodal(false);
 
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Enter" && e.ctrlKey) {
-        onRotatePanels();
-        return;
-      }
-      if (e.key === "t" && e.ctrlKey) {
-        const { text } = note;
-        const newText =
-          text +
-          "aaa | bbb | ccc\n--|---|---\n1 | 2 | 3\n4 | 5 | 6\n7 | 8 | 9\n";
-        dispatchList({
-          type: "merge",
-          id: noteId,
-          partial: { text: newText },
-        });
-        return;
-      }
-    };
-    document.addEventListener("keydown", handleKeyDown);
-
-    return () => {
-      document.removeEventListener("keydown", handleKeyDown);
-    };
-  }, [onRotatePanels, note, noteId, dispatchList]);
+  // useEffect(() => {
+  //   const handleKeyDown = (e: KeyboardEvent) => {
+  //     if (e.key === "Enter" && e.ctrlKey) {
+  //       onRotatePanels();
+  //       return;
+  //     }
+  //     if (e.key === "t" && e.ctrlKey) {
+  //       const { text } = note;
+  //       const newText =
+  //         text +
+  //         "aaa | bbb | ccc\n--|---|---\n1 | 2 | 3\n4 | 5 | 6\n7 | 8 | 9\n";
+  //       dispatchList({
+  //         type: "merge",
+  //         id: noteId,
+  //         partial: { text: newText },
+  //       });
+  //       return;
+  //     }
+  //   };
+  //   document.addEventListener("keydown", handleKeyDown);
+  //
+  //   return () => {
+  //     document.removeEventListener("keydown", handleKeyDown);
+  //   };
+  // }, [onRotatePanels, note, noteId, dispatchList]);
 
   const changeColor = useCallback(
     (color: string) => {
