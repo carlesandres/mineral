@@ -1,15 +1,17 @@
+'use client';
+
 import React, { useState } from 'react';
 import { getShownFiles } from 'utils/fileUtils.js';
-import Router from 'next/router';
 import PleaseWait from 'components/PleaseWait';
 import { useEffect } from 'react';
 import { useList } from 'hooks/useList';
-import PageLayout from 'components/PageLayout';
 import { sortBy } from 'lodash';
+import { useRouter } from 'next/navigation';
 
-const LastNote = () => {
+const LastPageClient = () => {
   const { list } = useList();
   const [error, setError] = useState('');
+  const router = useRouter();
 
   useEffect(() => {
     const { initialized, notes } = list;
@@ -23,7 +25,7 @@ const LastNote = () => {
 
       const lastNoteId = sortedNotes[0].id;
       const href = `/note?id=${lastNoteId}`;
-      Router.push(href);
+      router.push(href);
     }
   }, [list]);
 
@@ -34,8 +36,4 @@ const LastNote = () => {
   return <PleaseWait message="Opening last note..." />;
 };
 
-LastNote.getLayout = (page) => {
-  return <PageLayout>{page}</PageLayout>;
-};
-
-export default LastNote;
+export default LastPageClient;

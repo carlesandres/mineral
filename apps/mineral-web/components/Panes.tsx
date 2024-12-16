@@ -1,5 +1,3 @@
-/* eslint react/no-danger: 0 */
-
 import React, { useCallback, MouseEvent, UIEvent } from 'react';
 import TOC from 'components/TOC';
 import Viewer from 'components/Viewer';
@@ -18,7 +16,7 @@ const onScroll = (event, slave) => {
     const slaveOffsetHeight = slave.scrollHeight;
     const scrollPercent = scrollTop / (clientHeight - scrollHeight);
     const slaveScroll = Math.round(
-      scrollPercent * (slaveHeight - slaveOffsetHeight)
+      scrollPercent * (slaveHeight - slaveOffsetHeight),
     );
     slave.scrollTop = slaveScroll;
   }
@@ -42,26 +40,26 @@ const Panes = (props: Props) => {
         id: noteId,
         panels,
       }),
-    [noteId, dispatchList]
+    [noteId, dispatchList],
   );
 
   const switchToWriteOnly = useCallback(
     () => updatePanels({ editor: true, viewer: false }),
-    [updatePanels]
+    [updatePanels],
   );
 
   const switchToReadOnly = useCallback(
     () => updatePanels({ editor: false, viewer: true }),
-    [updatePanels]
+    [updatePanels],
   );
   const switchToTwoPanes = useCallback(
     () => updatePanels({ editor: true, viewer: true }),
-    [updatePanels]
+    [updatePanels],
   );
 
   const closeTOC = useCallback(
     () => updatePanels({ toc: false }),
-    [updatePanels]
+    [updatePanels],
   );
 
   const toggleViewer = useCallback(() => {
@@ -132,14 +130,7 @@ const Panes = (props: Props) => {
 
   return (
     <div className={'panes'}>
-      <div
-        className="editor-wrap align-stretch absolute inset-0
-        mx-auto
-        flex w-full flex-col divide-y
-        divide-[var(--border-soft-color)]
-        print:divide-none sm:flex-row
-        sm:divide-x sm:divide-y-0"
-      >
+      <div className="editor-wrap align-stretch absolute inset-0 mx-auto flex w-full flex-col divide-y divide-[var(--border-soft-color)] sm:flex-row sm:divide-x sm:divide-y-0 print:divide-none">
         <TOC
           onClose={closeTOC}
           show={reallyShowToc}

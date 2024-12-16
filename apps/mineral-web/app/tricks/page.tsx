@@ -1,5 +1,3 @@
-import { ReactNode } from 'react';
-import PageLayout from 'components/PageLayout';
 import FeatureSectionTitle from 'components/FeatureSectionTitle';
 
 const FeaturesPage = () => {
@@ -35,14 +33,6 @@ const FeaturesPage = () => {
         </p>
       </div>
     </div>
-  );
-};
-
-FeaturesPage.getLayout = (page: ReactNode) => {
-  return (
-    <PageLayout isFixedHeight pageClass="h-screen" title="Features" allowScroll>
-      {page}
-    </PageLayout>
   );
 };
 

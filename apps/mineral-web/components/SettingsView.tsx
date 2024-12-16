@@ -1,10 +1,8 @@
+'use client';
+
 import useSettingsStore, { setSetting } from 'utils/useSettingsStore';
-import { useShortcuts } from 'hooks/useShortcuts';
-import { useEffect } from 'react';
 import HorzRadioGroup from 'components/HorzRadioGroup';
-// import { FiMoon, FiSun } from 'react-icons/fi';
 import SettingsCheckbox from 'components/SettingsCheckbox';
-// import BatchFileTools from 'components/BatchFileTools';
 import Label from 'components/Label';
 import { HiOutlineCog } from 'react-icons/hi';
 
@@ -17,7 +15,6 @@ const lineHeights = new Map([
 ]);
 
 const SettingsPage = () => {
-  const { dispatch: dispatchShortcuts } = useShortcuts();
   const settings = useSettingsStore();
 
   // const _findDuplicates = () => {
@@ -27,16 +24,6 @@ const SettingsPage = () => {
 
   // const keyActionMap = { l: goToList };
   // this.props.addShortcuts(keyActionMap, settingsShortcuts);
-
-  useEffect(() => {
-    const keyActionMap = {};
-
-    dispatchShortcuts({
-      type: 'set',
-      keyActionMap,
-      shortcutDescription: [],
-    });
-  }, [dispatchShortcuts]);
 
   const onChangeLinespacing = (value: any) =>
     setSetting('lineHeightRem', value);

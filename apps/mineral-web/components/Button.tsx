@@ -1,6 +1,5 @@
-import { useState, HTMLAttributes } from 'react';
+import { HTMLAttributes } from 'react';
 import Link from 'next/link';
-import Tooltip from 'components/Tooltip';
 
 export interface ButtonProps extends HTMLAttributes<HTMLButtonElement> {
   variant?: 'normal' | 'small' | 'xs';
@@ -10,7 +9,6 @@ export interface ButtonProps extends HTMLAttributes<HTMLButtonElement> {
 
 const Button = (props: ButtonProps) => {
   const {
-    tooltip,
     children,
     href,
     onClick,
@@ -18,8 +16,6 @@ const Button = (props: ButtonProps) => {
     variant = 'normal',
     ...restProps
   } = props;
-
-  const [showTooltip, setShowTooltip] = useState(false);
 
   const variantClassMap = {
     small: 'text-sm px-2 py-1',
@@ -40,45 +36,17 @@ const Button = (props: ButtonProps) => {
       ${additionalClass} ${className}
       `;
 
-  const handlePointerEnter = () => {
-    if (tooltip) {
-      setShowTooltip(true);
-    }
-  };
-
-  const tooltipEl = (
-    <Tooltip
-      show={showTooltip}
-      text={tooltip}
-      disabled={false}
-      className="top-full -right-full  z-10"
-    />
-  );
-
   if (href) {
     return (
-      <Link
-        href={href}
-        className={commonClasses}
-        onPointerEnter={handlePointerEnter}
-        onPointerLeave={() => setShowTooltip(false)}
-      >
+      <Link href={href} className={commonClasses}>
         {children}
-        {tooltipEl}
       </Link>
     );
   }
 
   return (
-    <button
-      className={commonClasses}
-      {...restProps}
-      onClick={onClick}
-      onPointerEnter={handlePointerEnter}
-      onPointerLeave={() => setShowTooltip(false)}
-    >
+    <button className={commonClasses} {...restProps} onClick={onClick}>
       {children}
-      {tooltipEl}
     </button>
   );
 };

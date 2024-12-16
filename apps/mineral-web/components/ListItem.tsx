@@ -1,7 +1,5 @@
 import FloatingActions from "components/FloatingActions";
 import { HiReply, HiOutlineTrash } from "react-icons/hi";
-import { useState } from "react";
-import Tooltip from "components/Tooltip";
 import useDeleteNote from "hooks/useDeleteNote";
 import { Note } from "types/Note";
 import ListItemDate from "components/ListItemDate";
@@ -16,7 +14,6 @@ interface Props {
 const ListItem = (props: Props) => {
   const { note } = props;
   const { id: noteId, deletedAt, title, text } = note;
-  const [showTooltip, setShowTooltip] = useState(false);
   const binNote = useDeleteNote(noteId, deletedAt);
 
   const untitledClass = title ? "" : "text-gray-400 dark:text-gray-500";
@@ -42,8 +39,6 @@ const ListItem = (props: Props) => {
       dark:hover:bg-gray-700 disabled:dark:text-gray-500
       disabled:dark:hover:bg-gray-800
       `}
-      onPointerEnter={() => setShowTooltip(true)}
-      onPointerLeave={() => setShowTooltip(false)}
     >
       <div className="relative flex w-full items-center justify-start">
         <ColorBall color={note.color} small className="mr-2" />
@@ -67,12 +62,6 @@ const ListItem = (props: Props) => {
           onClick={binNote}
         />
       </FloatingActions>
-      <Tooltip
-        show={showTooltip}
-        text={text}
-        disabled={props.disabled}
-        className="top-12 right-48 z-20 ml-48 "
-      />
     </Link>
   );
 };
