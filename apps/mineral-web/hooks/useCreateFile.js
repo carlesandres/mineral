@@ -1,8 +1,8 @@
-import { useRouter } from 'next/router';
-import useSettingsStore from 'utils/useSettingsStore';
-import { useList } from 'hooks/useList';
-import { createNewFile } from 'utils/fileUtils';
-import { fileUrl } from 'utils/paths.js';
+import { useRouter } from "next/navigation";
+import useSettingsStore from "utils/useSettingsStore";
+import { useList } from "hooks/useList";
+import { createNewFile } from "utils/fileUtils";
+import { fileUrl } from "utils/paths.js";
 
 const useCreateFile = () => {
   const router = useRouter();
@@ -16,7 +16,7 @@ const useCreateFile = () => {
   const createFile = async (noteProps) => {
     const note = await createNewFile({ ...noteProps, panels });
     dispatchList({
-      type: 'append',
+      type: "append",
       note: note,
     });
     router.push(fileUrl(note.id));

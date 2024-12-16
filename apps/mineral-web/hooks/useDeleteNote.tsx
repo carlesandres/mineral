@@ -1,12 +1,12 @@
-import { useCallback } from 'react';
-import { useList } from 'hooks/useList';
-import useUIZStore from 'utils/useUIZStore';
-import { Note } from 'types/Note';
-import { goToList, goToNote } from 'utils/navigationHelpers';
-import SuccessToast from 'components/SuccessToast';
+import { useCallback } from "react";
+import { useList } from "hooks/useList";
+import useUIZStore from "utils/useUIZStore";
+import { Note } from "types/Note";
+import { goToList, goToNote } from "utils/navigationHelpers";
+import SuccessToast from "components/SuccessToast";
 
 type NotePartial = Partial<Note>;
-type NoteDeletedAt = number | undefined;
+type NoteDeletedAt = number | undefined | null;
 
 const useDeleteNote = (noteId: string, deletedAt: NoteDeletedAt) => {
   const { dispatchList } = useList();
@@ -24,10 +24,10 @@ const useDeleteNote = (noteId: string, deletedAt: NoteDeletedAt) => {
       partial.updatedAt = new Date().getTime();
     }
 
-    const message = deletedAt ? 'Unbinned!' : 'Deleted!';
+    const message = deletedAt ? "Unbinned!" : "Deleted!";
 
     dispatchList({
-      type: 'merge',
+      type: "merge",
       id: noteId,
       partial,
     });

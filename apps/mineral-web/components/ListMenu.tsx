@@ -1,21 +1,18 @@
-import { Menu, Transition } from '@headlessui/react';
-import { FiMenu } from 'react-icons/fi';
-import Button from 'components/Button';
-import MenuButton2 from 'components/MenuButton2';
+import { Menu, Transition } from "@headlessui/react";
+import { FiMenu } from "react-icons/fi";
+import MenuButton2 from "components/MenuButton2";
 import {
   HiOutlineUpload,
   HiOutlineTerminal,
   HiOutlineDownload,
   HiOutlineTrash,
   HiOutlinePlus,
-} from 'react-icons/hi';
-import { useShortcuts } from 'hooks/useShortcuts';
-import useUIZStore from 'utils/useUIZStore';
-import { goToBin, goToNewFile } from 'utils/navigationHelpers';
-import RoundBigButton from './RoundBigButton';
+} from "react-icons/hi";
+import useUIZStore from "utils/useUIZStore";
+import { goToBin, goToNewFile } from "utils/navigationHelpers";
+import RoundBigButton from "./RoundBigButton";
 
 const ListMenu = () => {
-  const { showShortcuts } = useShortcuts();
   const { showBackupModal, showFileImport } = useUIZStore();
 
   return (
@@ -50,11 +47,6 @@ const ListMenu = () => {
             onClick={showBackupModal}
             icon={<HiOutlineDownload />}
             text="Backup"
-          />
-          <MenuButton2
-            onClick={showShortcuts}
-            text="Keyboard shortcuts"
-            icon={<HiOutlineTerminal />}
           />
           <MenuButton2
             onClick={showFileImport}

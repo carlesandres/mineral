@@ -1,12 +1,12 @@
-import FloatingActions from 'components/FloatingActions';
-import { HiReply, HiOutlineTrash } from 'react-icons/hi';
-import { useRef, useCallback, useState } from 'react';
-import { goToNote } from 'utils/navigationHelpers';
-import Tooltip from 'components/Tooltip';
-import useDeleteNote from 'hooks/useDeleteNote';
-import { Note } from 'types/Note';
-import ListItemDate from 'components/ListItemDate';
-import ColorBall from 'components/ColorBall';
+import FloatingActions from "components/FloatingActions";
+import { HiReply, HiOutlineTrash } from "react-icons/hi";
+import { useState } from "react";
+import Tooltip from "components/Tooltip";
+import useDeleteNote from "hooks/useDeleteNote";
+import { Note } from "types/Note";
+import ListItemDate from "components/ListItemDate";
+import ColorBall from "components/ColorBall";
+import Link from "next/link";
 
 interface Props {
   note: Note;
@@ -16,24 +16,18 @@ interface Props {
 const ListItem = (props: Props) => {
   const { note } = props;
   const { id: noteId, deletedAt, title, text } = note;
-  const elem = useRef();
   const [showTooltip, setShowTooltip] = useState(false);
   const binNote = useDeleteNote(noteId, deletedAt);
 
-  const untitledClass = title ? '' : 'text-gray-400 dark:text-gray-500';
+  const untitledClass = title ? "" : "text-gray-400 dark:text-gray-500";
 
-  const isDeleted = !!note.deletedAt;
-  const unDelete = () => {};
-  const openNote = useCallback(() => goToNote(noteId), [noteId]);
-
-  const action = isDeleted ? unDelete : openNote;
+  // TO-DO: Fix action on undelete
 
   const ActionIcon = deletedAt ? HiReply : HiOutlineTrash;
 
   return (
-    <button
-      onClick={action}
-      ref={elem}
+    <Link
+      href={`/note?id=${noteId}`}
       disabled={props.disabled}
       className={`list-group-item group group relative
       w-full
@@ -58,7 +52,7 @@ const ListItem = (props: Props) => {
           truncate whitespace-nowrap text-left font-mono
           ${untitledClass}`}
         >
-          {title || '(untitled)'}
+          {title || "(untitled)"}
         </div>
         <ListItemDate date={note.updatedAt} />
       </div>
@@ -79,7 +73,7 @@ const ListItem = (props: Props) => {
         disabled={props.disabled}
         className="top-12 right-48 z-20 ml-48 "
       />
-    </button>
+    </Link>
   );
 };
 

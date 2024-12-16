@@ -10,26 +10,23 @@ import React, {
 import ListHeader from "components/filelist/ListHeader";
 import ListMenu from "components/ListMenu";
 import ListElements from "components/ListElements";
-import listShortcuts from "components/listShortcuts";
-import { useShortcuts } from "hooks/useShortcuts";
 import { useList } from "hooks/useList";
 import EmptyList from "components/EmptyList";
 import DragAndDrop from "components/DragAndDrop";
 import useCreateFile from "hooks/useCreateFile";
 import { readLocalFile } from "components/FileImporter";
 import useUIZStore from "utils/useUIZStore";
-import { useRouter } from "next/router";
-import { useQueryParam } from "hooks/useQueryP";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import SuccessToast from "components/SuccessToast";
 
 const ListView = () => {
   const header = useRef<HTMLInputElement>(null);
   const { toast } = useUIZStore();
-  const { dispatch: dispatchShortcuts } = useShortcuts();
   const { list } = useList();
   const router = useRouter();
+  const initialSearchTerm = useSearchParams()?.get("search");
   const [searchTerm, setSearchterm] = useState("");
-  const { param: initialSearchTerm } = useQueryParam("search");
+  // const pathname = usePathname();
 
   useEffect(() => {
     if (initialSearchTerm) {
@@ -39,24 +36,14 @@ const ListView = () => {
 
   const createFile = useCreateFile();
 
-  useEffect(() => {
-    const keyActionMap = {};
-
-    dispatchShortcuts({
-      type: "set",
-      keyActionMap,
-      shortcutDescription: listShortcuts,
-    });
-  }, [dispatchShortcuts]);
-
   const onSearch = useCallback(
     (event: ChangeEvent<HTMLInputElement>) => {
       const newSearchTerm = event.target.value;
       setSearchterm(newSearchTerm);
-      const query = newSearchTerm.trim()
-        ? { search: newSearchTerm.trim() }
-        : {};
-      router.replace({ pathname: router.pathname, query });
+      // TO-DO: Use pathname instead of window.location.href
+      const url = new URL(window.location.href);
+      url.searchParams.set("search", newSearchTerm.trim());
+      router.replace(url.href);
     },
     [router],
   );
@@ -77,7 +64,7 @@ const ListView = () => {
     [createFile],
   );
 
-  if (!list.initialized || !router.isReady) {
+  if (!list.initialized) {
     return null;
   }
 

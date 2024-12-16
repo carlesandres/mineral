@@ -1,7 +1,10 @@
 // import MainMenu from "components/MainMenu";
-import ShortcutsModal from "components/ShortcutsModal";
+import ShortcutsModal from "@/components/ShortcutsModal";
 import { GeistSans } from "geist/font/sans";
 import { GeistMono } from "geist/font/mono";
+import "styles/main.css";
+import { ListProvider } from "hooks/useList";
+import ClientLayout from "components/ClientLayout";
 
 async function MyApp({ children }: { children: React.ReactNode }) {
   // const {
@@ -32,7 +35,7 @@ async function MyApp({ children }: { children: React.ReactNode }) {
       <body>
         <div className={`page-content min-h-screen`}>
           <ShortcutsModal />
-          {children}
+          <ClientLayout>{children}</ClientLayout>
         </div>
       </body>
     </html>
