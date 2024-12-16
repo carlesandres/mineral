@@ -1,7 +1,7 @@
 import { useCallback } from 'react';
 import ListItem from 'components/ListItem';
 import { useState, useEffect } from 'react';
-import { getShownFiles } from 'utils/fileUtils.js';
+import { getShownFiles } from 'utils/fileUtils';
 import { throttle, sortBy } from 'lodash';
 import { Note } from 'types/Note';
 import Label from 'components/Label';
@@ -56,11 +56,7 @@ const ListElements = (props: ListElementProps) => {
         <Label>Title</Label>
         <Label>Last updated</Label>
       </div>
-      <div
-        className="file-list m text- flex flex-1
-        flex-shrink-0 flex-col gap-2
-        "
-      >
+      <div className="file-list m text- flex flex-1 flex-shrink-0 flex-col gap-2">
         {listItems}
       </div>
     </div>

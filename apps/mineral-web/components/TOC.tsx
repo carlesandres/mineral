@@ -24,7 +24,7 @@ const TOC = (props: TOCProps) => {
   return (
     <div
       className="toc no-print relative flex flex-1 
-      flex-col 
+      flex-col w-full h-full bg-yellow-100
         overflow-hidden bg-[var(--viewer-bg-color)]"
       onDoubleClick={onDoubleClick}
     >

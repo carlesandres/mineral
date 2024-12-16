@@ -1,12 +1,12 @@
-import { useRef, useState, useCallback, useEffect } from "react";
-import Panes from "components/Panes";
-import EditorToolbar from "components/EditorToolbar";
-import EditorFooter from "components/EditorFooter";
-import HelpModal from "components/HelpModal";
-import ColorSelector from "components/ColorSelector";
-import { useList } from "hooks/useList";
-import { Note } from "types/Note";
-import NoteMenu from "./NoteMenu";
+import { useRef, useState, useCallback } from 'react';
+import Panes from 'components/Panes';
+import EditorToolbar from 'components/EditorToolbar';
+import EditorFooter from 'components/EditorFooter';
+import HelpModal from 'components/HelpModal';
+import ColorSelector from 'components/ColorSelector';
+import { useList } from 'hooks/useList';
+import { Note } from 'types/Note';
+import NoteMenu from './NoteMenu';
 
 interface Props {
   note: Note;
@@ -19,7 +19,7 @@ const NoteArea = (props: Props) => {
   const [displayColorModal, setDisplaycolormodal] = useState(false);
   const { dispatchList } = useList();
   const editorarea = useRef();
-  const { note, onRotatePanels } = props;
+  const { note } = props;
   const noteId = note?.id;
   const editorRef = useRef<HTMLTextAreaElement>();
 
@@ -55,7 +55,7 @@ const NoteArea = (props: Props) => {
   const changeColor = useCallback(
     (color: string) => {
       dispatchList({
-        type: "merge",
+        type: 'merge',
         id: noteId,
         partial: { color },
       });
@@ -67,7 +67,7 @@ const NoteArea = (props: Props) => {
   const toggleFooter = useCallback(() => {
     const { showFooter, id } = note;
     dispatchList({
-      type: "merge",
+      type: 'merge',
       id,
       partial: { showFooter: !showFooter },
     });
@@ -87,10 +87,10 @@ const NoteArea = (props: Props) => {
     Number(Boolean(tocReallyShown)) * 37;
 
   const wideClass = wide
-    ? "wide w-full rounded-none m-0"
-    : "dark:md:border max-w-full normal-mode sm:border";
+    ? 'wide w-full rounded-none m-0'
+    : 'dark:md:border max-w-full sm:border';
 
-  const containerWideClass = wide ? "" : "sm:px-8 sm:py-16 lg:py-32";
+  const containerWideClass = wide ? '' : 'sm:px-8 sm:py-16 lg:py-32';
 
   // @media (max-width: 800px) {
   //   .notearea {
@@ -104,6 +104,13 @@ const NoteArea = (props: Props) => {
   //     display: none;
   //   }
   // }
+
+  // <style jsx>{`
+  //   .normal-mode {
+  //     width: ${desiredWidth}ch;
+  //   }
+  // `}</style>
+
   return (
     <>
       <ColorSelector
@@ -116,19 +123,9 @@ const NoteArea = (props: Props) => {
       <div className={`relative flex w-full ${containerWideClass}`}>
         <div
           ref={editorarea}
-          className={`
-            notearea relative mx-auto flex flex-col
-            overflow-hidden rounded
-            border-gray-400
-            transition-[width] duration-300 dark:border-gray-500
-            print:border-none
-            ${wideClass} ${style}`}
+          className={`notearea relative mx-auto flex w-full flex-col overflow-hidden rounded border-gray-400 transition-[width] duration-300 dark:border-gray-500 print:border-none ${wideClass} ${style}`}
+          style={{ width: `${desiredWidth}ch` }}
         >
-          <style jsx>{`
-            .normal-mode {
-              width: ${desiredWidth}ch;
-            }
-          `}</style>
           <EditorToolbar
             note={note}
             onChange={props.onChangeTitle}

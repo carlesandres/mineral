@@ -64,25 +64,6 @@
     display: none !important;
   }
 
-  .page-content,
-  .main-area,
-  .editor-area,
-  .editor-wrap,
-  .viewerarea {
-    background: none;
-    height: initial !important;
-    overflow: visible !important;
-    position: initial !important;
-  }
-
-  .editorarea {
-    display: none !important;
-  }
-
-  .viewerarea pre::after {
-    display: none;
-  }
-
   .expand,
   .toggle-full-width {
     display: none !important;
@@ -98,8 +79,7 @@
     box-shadow: none !important;
   }
 
-  .editor-wrap,
-  .viewerarea {
+  .editor-wrap {
     margin-top: 0;
     color: inherit !important;
     display: block;

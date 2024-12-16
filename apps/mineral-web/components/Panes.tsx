@@ -129,34 +129,29 @@ const Panes = (props: Props) => {
   const reallyShowToc = toc && viewer;
 
   return (
-    <div className={'panes'}>
-      <div className="editor-wrap align-stretch absolute inset-0 mx-auto flex w-full flex-col divide-y divide-[var(--border-soft-color)] sm:flex-row sm:divide-x sm:divide-y-0 print:divide-none">
-        <TOC
-          onClose={closeTOC}
-          show={reallyShowToc}
-          text={text}
-          onDoubleClick={handleViewerDoubleClick}
-        />
-
-        <Editor
-          {...props}
-          ref={editorRef}
-          onScrollEditor={onScrollEditor}
-          onDoubleClick={handleDoubleClickEditor}
-          onClose={switchToReadOnly}
-        />
-        <ErrorBoundary>
-          <Viewer
-            ref={viewerRef}
-            show={viewer}
-            isEditorOpen={editor}
-            text={text}
-            onScrollViewer={onScrollViewer}
-            onDoubleClick={handleViewerDoubleClick}
-            onClose={switchToWriteOnly}
-          />
-        </ErrorBoundary>
-      </div>
+    <div className="editor-wrap align-stretch flex flex-1 flex-col divide-y divide-[var(--border-soft-color)] sm:flex-row sm:divide-x sm:divide-y-0 print:divide-none">
+      <TOC
+        onClose={closeTOC}
+        show={reallyShowToc}
+        text={text}
+        onDoubleClick={handleViewerDoubleClick}
+      />
+      <Editor
+        {...props}
+        ref={editorRef}
+        onScrollEditor={onScrollEditor}
+        onDoubleClick={handleDoubleClickEditor}
+        onClose={switchToReadOnly}
+      />
+      <Viewer
+        ref={viewerRef}
+        show={viewer}
+        isEditorOpen={editor}
+        text={text}
+        onScrollViewer={onScrollViewer}
+        onDoubleClick={handleViewerDoubleClick}
+        onClose={switchToWriteOnly}
+      />
     </div>
   );
 };

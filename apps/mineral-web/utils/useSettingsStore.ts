@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 import localforage from 'localforage';
-import { messageBroadcast } from 'utils/fileUtils.js';
+import { messageBroadcast } from 'utils/fileUtils';
 
 const SETTINGS_KEY = 'USER_SETTINGS';
 const loadSettings = () => localforage.getItem(SETTINGS_KEY);

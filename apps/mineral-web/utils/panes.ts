@@ -1,4 +1,4 @@
-import { DEFAULT_FILE_PANELS } from 'components/AppConstants.js';
+import { DEFAULT_FILE_PANELS } from 'components/AppConstants';
 
 export const getVisiblePanels = (file = {}) => {
   const { panels = DEFAULT_FILE_PANELS } = file;

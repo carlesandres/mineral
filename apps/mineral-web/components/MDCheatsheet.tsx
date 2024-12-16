@@ -1,4 +1,4 @@
-import mdExamples from 'utils/markdown-example-text.js';
+import mdExamples from 'utils/markdown-example-text';
 import MDExample from 'components/MDExample';
 
 const MDSection = ({ examples = [], sectionTitle = '' }) => {

@@ -2,7 +2,7 @@ import { useState, useEffect, useCallback } from 'react';
 import ListItem from 'components/ListItem';
 import { Note } from 'types/Note';
 import throttle from 'lodash/throttle';
-import { getShownFiles } from 'utils/fileUtils.js';
+import { getShownFiles } from 'utils/fileUtils';
 import { sortBy } from 'lodash';
 import Label from 'components/Label';
 
@@ -52,11 +52,7 @@ const BinView = (props: BiewViewProps) => {
         <Label>Title</Label>
         <Label>Deleted</Label>
       </div>
-      <div
-        className="file-list mb-32 flex flex-1 flex-shrink-0 flex-col gap-2
-        pb-4 text-sm
-        "
-      >
+      <div className="file-list mb-32 flex flex-1 flex-shrink-0 flex-col gap-2 pb-4 text-sm">
         {content}
       </div>
     </>

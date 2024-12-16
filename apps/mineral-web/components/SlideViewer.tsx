@@ -1,6 +1,6 @@
 import React from 'react';
 import { marked } from 'marked';
-import hilite from 'utils/custom-hilite.js';
+import hilite from 'utils/custom-hilite';
 import { useEffect } from 'react';
 
 interface Props {

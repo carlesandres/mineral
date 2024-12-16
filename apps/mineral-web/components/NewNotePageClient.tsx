@@ -1,12 +1,12 @@
-"use client";
+'use client';
 
-import React, { useMemo } from "react";
-import { useRouter } from "next/navigation";
-import { fileUrl } from "utils/paths.js";
-import { useEffect } from "react";
-import useSettingsStore from "utils/useSettingsStore";
-import { newFile } from "utils/fileUtils";
-import { useList } from "hooks/useList";
+import React, { useMemo } from 'react';
+import { useRouter } from 'next/navigation';
+import { fileUrl } from 'utils/paths';
+import { useEffect } from 'react';
+import useSettingsStore from 'utils/useSettingsStore';
+import { newFile } from 'utils/fileUtils';
+import { useList } from 'hooks/useList';
 
 const NewNotePageClient = () => {
   const router = useRouter();
@@ -23,7 +23,7 @@ const NewNotePageClient = () => {
     const create = () => {
       const note = newFile({ panels, showFooter: !footerHiddenByDefault });
       dispatchList({
-        type: "append",
+        type: 'append',
         note,
       });
       router.replace(fileUrl(note.id));

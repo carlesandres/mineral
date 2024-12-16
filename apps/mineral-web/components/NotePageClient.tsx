@@ -1,24 +1,24 @@
-"use client";
+'use client';
 
-import { useEffect, useCallback, useState } from "react";
-import NoteContainer from "components/NoteContainer";
-import { messageBroadcast, messageReceive } from "utils/fileUtils.js";
-import FileInUse from "components/FileInUse";
-import { useList } from "hooks/useList";
-import { useSearchParams } from "next/navigation";
-import { Note } from "types/Note";
-import { notFound } from "next/navigation";
+import { useEffect, useCallback, useState } from 'react';
+import NoteContainer from 'components/NoteContainer';
+import { messageBroadcast, messageReceive } from 'utils/fileUtils';
+import FileInUse from 'components/FileInUse';
+import { useList } from 'hooks/useList';
+import { useSearchParams } from 'next/navigation';
+import { Note } from 'types/Note';
+import { notFound } from 'next/navigation';
 
 const NotePageClient = () => {
   const { list, dispatchList } = useList();
   const [fileOpenSomewhereElse, setFileopensomewhereelse] = useState(false);
   const searchParams = useSearchParams();
-  const noteId = searchParams?.get("id");
+  const noteId = searchParams?.get('id');
   const allNotes = list?.notes;
 
   const note =
     allNotes && noteId && allNotes.find((note: Note) => note.id === noteId);
-  const title = note?.title || "(Untitled note)";
+  const title = note?.title || '(Untitled note)';
 
   const reportFileAlreadyOpen = useCallback(
     (ev2) => {
@@ -27,9 +27,9 @@ const NotePageClient = () => {
         return;
       }
 
-      const windowInBg = document.visibilityState === "hidden";
+      const windowInBg = document.visibilityState === 'hidden';
       if (
-        message.command === "fileOpen" &&
+        message.command === 'fileOpen' &&
         message.id === noteId &&
         windowInBg
       ) {
@@ -43,20 +43,20 @@ const NotePageClient = () => {
     // Broadcast to other tabs that this file is open
     if (noteId) {
       messageBroadcast({
-        command: "fileOpen",
+        command: 'fileOpen',
         id: noteId,
       });
     }
-    window.addEventListener("storage", reportFileAlreadyOpen);
+    window.addEventListener('storage', reportFileAlreadyOpen);
     return () => {
-      window.removeEventListener("storage", reportFileAlreadyOpen);
+      window.removeEventListener('storage', reportFileAlreadyOpen);
     };
   }, [noteId, reportFileAlreadyOpen]);
 
   useEffect(() => {
     if (list.initialized) {
       dispatchList({
-        type: "merge",
+        type: 'merge',
         id: noteId,
         partial: {
           updatedAt: new Date().getTime(),
@@ -82,7 +82,7 @@ const NotePageClient = () => {
   }
 
   return (
-    <div className="flex relative h-screen bg-green-100">
+    <div className="relative flex h-screen">
       <NoteContainer note={note} />
     </div>
   );

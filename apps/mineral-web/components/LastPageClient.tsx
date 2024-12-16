@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { getShownFiles } from 'utils/fileUtils.js';
+import { getShownFiles } from 'utils/fileUtils';
 import PleaseWait from 'components/PleaseWait';
 import { useEffect } from 'react';
 import { useList } from 'hooks/useList';
