@@ -75,12 +75,12 @@ const Viewer = React.forwardRef((props: Props, ref: Ref<HTMLDivElement>) => {
 
   // TO-DO: Padding should be based on CSS variable
   return (
-    <div className={`viewerarea flex-2 h-full w-full`}>
+    <div className={`viewerarea flex-2 relative h-full w-full`}>
       <PanelLabel>
         <FaMarkdown />
       </PanelLabel>
       <div
-        className={`viewer scrollable is-markdown prose w-full p-4 prose-headings:text-[var(--viewer-titles-color)] prose-code:before:content-none prose-code:after:content-none prose-pre:bg-[var(--viewer-code-bg-color)]`}
+        className={`viewer scrollable is-markdown prose h-full w-full bg-blue-100 p-4 prose-headings:text-[var(--viewer-titles-color)] prose-code:before:content-none prose-code:after:content-none prose-pre:bg-[var(--viewer-code-bg-color)]`}
         ref={ref}
         {...onScrollObj}
         onDoubleClick={props.onDoubleClick}
