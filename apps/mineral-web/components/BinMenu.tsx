@@ -7,10 +7,10 @@ import { useMemo } from 'react';
 import { getShownFiles } from 'utils/fileUtils';
 import EmptyBinButton from './EmptyBinButton';
 import { useRoutingHelpers } from 'hooks/use-routing-helpers';
-import useNotesStore from 'hooks/useNotesStore';
+import { getNotes } from 'hooks/useNotesStore';
 
 const BinMenu = () => {
-  const { notes } = useNotesStore((state) => state);
+  const notes = getNotes();
   const binnedNotes = useMemo(() => {
     return getShownFiles(notes, 'BIN', '');
   }, [notes]);

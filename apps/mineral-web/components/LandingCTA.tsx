@@ -3,13 +3,14 @@
 import { HiOutlinePlus, HiOutlineClipboard } from 'react-icons/hi';
 import Link from 'next/link';
 import { Button } from 'components/ui/button';
-import useNotesStore from 'hooks/useNotesStore';
+import useNotesStore, { getNotes } from 'hooks/useNotesStore';
 
 const style =
   'mx-auto flex items-center justify-center space-x-2 sm:!px-6 sm:!py-4 sm:text-lg';
 
 const LandingCTA = () => {
-  const { notes, initialized } = useNotesStore((state) => state);
+  const { initialized } = useNotesStore((state) => state);
+  const notes = getNotes();
 
   if (!initialized) {
     return null;

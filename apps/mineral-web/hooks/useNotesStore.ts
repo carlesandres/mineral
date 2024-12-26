@@ -6,20 +6,18 @@ import { saveFile } from '../utils/fileUtils';
 
 interface StoreState {
   initialized: boolean;
-  notes: Note[];
+  notes: Record<string, Note>;
 }
 
 const useNotesStore = create<StoreState>(() => ({
   initialized: false,
-  notes: [],
+  notes: {},
 }));
 
 export const loadNotes = () => {
-  const notes = localStorage.getItem('notes');
-  if (notes) {
-    setNotes(JSON.parse(notes));
-    setInitialized(true);
-  }
+  const notes = localStorage.getItem('notes') || '[]';
+  setNotes(JSON.parse(notes));
+  setInitialized(true);
 };
 
 const setInitialized = (initialized: boolean) =>
@@ -67,7 +65,7 @@ export const deleteNote = (noteId: string) =>
     return newState;
   });
 
-export const getNotes = () => useNotesStore.getState().notes;
+export const getNotes = () => Object.values(useNotesStore.getState().notes);
 
 export const getNoteById = (noteId: string) =>
   useNotesStore.getState().notes[noteId];

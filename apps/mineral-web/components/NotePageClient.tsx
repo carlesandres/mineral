@@ -7,10 +7,11 @@ import FileInUse from 'components/FileInUse';
 import { useSearchParams } from 'next/navigation';
 import { Note } from 'types/Note';
 import { notFound } from 'next/navigation';
-import useNotesStore from 'hooks/useNotesStore';
+import useNotesStore, { getNotes } from 'hooks/useNotesStore';
 
 const NotePageClient = () => {
-  const { notes: allNotes, initialized } = useNotesStore((state) => state);
+  const { initialized } = useNotesStore((state) => state);
+  const allNotes = getNotes();
   const [fileOpenSomewhereElse, setFileopensomewhereelse] = useState(false);
   const searchParams = useSearchParams();
   const noteId = searchParams?.get('id');

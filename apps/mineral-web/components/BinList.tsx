@@ -5,11 +5,12 @@ import EmptyList from 'components/EmptyList';
 import ListHeader from 'components/filelist/ListHeader';
 import { useRouter, useSearchParams } from 'next/navigation';
 import React, { ChangeEvent, useCallback, useEffect, useState } from 'react';
-import useNotesStore from 'hooks/useNotesStore';
+import useNotesStore, { getNotes } from 'hooks/useNotesStore';
 import BinMenu from './BinMenu';
 
 const BinList = () => {
-  const { notes, initialized } = useNotesStore((state) => state);
+  const { initialized } = useNotesStore((state) => state);
+  const notes = getNotes();
   const router = useRouter();
   const initialSearchTerm = useSearchParams()?.get('search');
   const [searchTerm, setSearchterm] = useState('');

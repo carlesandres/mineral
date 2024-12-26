@@ -12,16 +12,16 @@ import ListMenu from 'components/ListMenu';
 import ListElements from 'components/ListElements';
 import EmptyList from 'components/EmptyList';
 import DragAndDrop from 'components/DragAndDrop';
-import useCreateFile from 'hooks/useCreateFile';
+// import useCreateFile from 'hooks/useCreateFile';
 import { useRouter, useSearchParams } from 'next/navigation';
-import SuccessToast from 'components/SuccessToast';
-import useNotesStore from 'hooks/useNotesStore';
+import useNotesStore, { getNotes } from 'hooks/useNotesStore';
 import { useToast } from 'hooks/use-toast';
 
 const ListView = () => {
   const header = useRef<HTMLInputElement>(null);
   const { toast } = useToast();
-  const { notes, initialized } = useNotesStore((state) => state);
+  const { initialized } = useNotesStore((state) => state);
+  const notes = getNotes();
   const router = useRouter();
   const initialSearchTerm = useSearchParams()?.get('search');
   const [searchTerm, setSearchterm] = useState('');
@@ -32,8 +32,6 @@ const ListView = () => {
       setSearchterm(initialSearchTerm);
     }
   }, [initialSearchTerm]);
-
-  const createFile = useCreateFile();
 
   const onSearch = useCallback(
     (event: ChangeEvent<HTMLInputElement>) => {

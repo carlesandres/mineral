@@ -17,7 +17,7 @@ import {
 import { FaMarkdown } from 'react-icons/fa';
 import MenuButton2 from 'components/MenuButton2';
 import RoundBigButton from './RoundBigButton';
-import useNotesStore, { updateNote } from 'hooks/useNotesStore';
+import { getNotes, updateNote } from 'hooks/useNotesStore';
 
 interface Props {
   noteId: string;
@@ -25,7 +25,7 @@ interface Props {
 
 const NoteMenu = (props: Props) => {
   const { noteId } = props;
-  const { notes } = useNotesStore((state) => state);
+  const notes = getNotes();
   const note = notes.find((n: Note) => n.id === noteId);
 
   const { wide } = note || {};

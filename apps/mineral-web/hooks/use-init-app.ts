@@ -1,4 +1,4 @@
-import { useEffect } from 'node_modules/@types/react';
+import { useEffect } from 'react';
 import useNotesStore, { loadNotes } from './useNotesStore';
 
 export const useInit = () => {
