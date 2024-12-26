@@ -16,14 +16,12 @@ const NotePageClient = () => {
   const searchParams = useSearchParams();
   const noteId = searchParams?.get('id');
 
-  const note =
-    allNotes && noteId && allNotes.find((note: Note) => note.id === noteId);
-
-  if (!note) {
+  if (!noteId) {
+    console.log('--------------------------------------------------- 1');
     notFound();
   }
 
-  const title = note?.title || '(Untitled note)';
+  const note = allNotes && allNotes.find((note: Note) => note.id === noteId);
 
   const reportFileAlreadyOpen = useCallback(
     (ev2: StorageEvent) => {
@@ -71,6 +69,7 @@ const NotePageClient = () => {
   //   }
   // }, [noteId, dispatchList, list.initialized]);
 
+  const title = note?.title || '(Untitled note)';
   useEffect(() => {
     document.title = title;
   }, [title]);
@@ -78,6 +77,9 @@ const NotePageClient = () => {
   if (!initialized) {
     return null;
   }
+
+  console.log('initialized', initialized);
+  console.log('allNotes', allNotes);
 
   if (!note) {
     notFound();

@@ -2,8 +2,6 @@ import localforage from 'localforage';
 import colors from 'components/colors';
 import { getNextViewStyle } from 'utils/oneFileUtils';
 import { DEFAULT_FILE_PANELS, viewStyles } from 'components/AppConstants';
-import { marked } from 'marked';
-import { format } from 'date-fns';
 import { v4 as uuidv4, validate as uuidValidate } from 'uuid';
 import { Note } from 'types/Note';
 import log from './log';
@@ -11,8 +9,8 @@ import log from './log';
 import { z } from 'zod';
 
 const noteSchema = z.object({
-  id: z.string(),
-  title: z.string().uuid(),
+  id: z.string().uuid(),
+  title: z.string(),
   wide: z.boolean(),
   text: z.string(),
   createdAt: z.number(),
@@ -25,7 +23,7 @@ const noteSchema = z.object({
     editor: z.boolean(),
     toc: z.boolean(),
   }),
-  showFooter: z.boolean(),
+  showFooter: z.boolean()
 });
 
 function isNote(data: unknown): data is Note {
@@ -93,7 +91,6 @@ export const newFile = (file: Partial<Note> = {}): Note => {
 };
 
 export const saveFile = (file: Note, ignoreUpdate = false) => {
-  // console.log('saving file', file.id);
   file.updatedAt = (ignoreUpdate && file.updatedAt) || new Date().getTime();
   file.panels = file.panels || DEFAULT_FILE_PANELS;
   return localforage.setItem(file.id, file);

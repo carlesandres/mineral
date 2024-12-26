@@ -1,8 +1,7 @@
 import { create } from 'zustand';
-import { v4 as uuidv4 } from 'uuid';
 import { produce } from 'immer';
 import { Note } from 'types/Note';
-import { saveFile } from '../utils/fileUtils';
+import { getFullList, saveFile } from '../utils/fileUtils';
 
 interface StoreState {
   initialized: boolean;
@@ -14,9 +13,10 @@ const useNotesStore = create<StoreState>(() => ({
   notes: {},
 }));
 
-export const loadNotes = () => {
-  const notes = localStorage.getItem('notes') || '[]';
-  setNotes(JSON.parse(notes));
+export const loadNotes = async () => {
+  const notes = await getFullList();
+  console.log('notes', notes);
+  setNotes(notes);
   setInitialized(true);
 };
 
