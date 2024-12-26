@@ -5,7 +5,7 @@ import EditorStatistics from 'components/EditorStatistics';
 import ColorBall from 'components/ColorBall';
 import { BsFillBarChartFill } from 'react-icons/bs';
 import { Note } from 'types/Note';
-import { motion } from 'framer-motion';
+import { motion } from 'motion/react';
 
 interface Props extends Note {
   onClickColorBall: () => void;
@@ -21,6 +21,7 @@ const EditorFooter = (props: Props) => {
     panels,
     text,
     style = '',
+    color = '#111111',
   } = props;
 
   const viewerVisible = panels?.viewer ?? false;
@@ -28,9 +29,7 @@ const EditorFooter = (props: Props) => {
 
   const expandButton = showFooter ? null : (
     <button
-      className="no-print chart absolute bottom-0 right-0 cursor-pointer
-          p-2 text-gray-800 hover:text-blue-500 dark:text-gray-200
-          dark:hover:text-blue-300"
+      className="no-print chart absolute bottom-0 right-0 cursor-pointer p-2 text-gray-800 hover:text-blue-500 dark:text-gray-200 dark:hover:text-blue-300"
       onClick={onToggle}
     >
       <BsFillBarChartFill />
@@ -46,20 +45,10 @@ const EditorFooter = (props: Props) => {
         transition={{ duration: 0.15 }}
       >
         <div
-          className={`editor-footer monospace no-print relative
-            flex items-center
-            justify-between overflow-hidden border-t
-            border-[var(--border-soft-color)]
-            bg-[var(--solid-bg-color)] py-3
-            px-4 pr-12 text-sm
-            text-gray-500 transition-all dark:text-gray-800`}
+          className={`editor-footer monospace no-print relative flex items-center justify-between overflow-hidden border-t border-[var(--border-soft-color)] bg-[var(--solid-bg-color)] px-4 py-3 pr-12 text-sm text-gray-500 transition-all dark:text-gray-800`}
         >
           <div className="flex items-center justify-start gap-4">
-            <ColorBall
-              color={props.color}
-              onClick={props.onClickColorBall}
-              small
-            />
+            <ColorBall color={color} onClick={props.onClickColorBall} small />
             <EditorStatistics
               show={editorVisible}
               text={text}

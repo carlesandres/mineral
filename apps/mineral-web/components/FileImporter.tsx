@@ -10,7 +10,7 @@ export const readLocalFile = (file: File) => {
     const fileReader = new window.FileReader();
 
     fileReader.onload = (event) => {
-      const fileContents = event.target.result;
+      const fileContents = event.target?.result;
       resolve(fileContents);
     };
 

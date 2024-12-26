@@ -5,6 +5,8 @@ import { DEFAULT_FILE_PANELS, viewStyles } from 'components/AppConstants';
 import { marked } from 'marked';
 import format from 'date-fns/format';
 import { v4 as uuidv4, validate as uuidValidate } from 'uuid';
+import { Note } from 'types/Note';
+import log from './log';
 
 const STORAGE_MESSAGES_KEY = 'MNRAL_MSG';
 
@@ -17,11 +19,11 @@ export const getFullList = async () => {
         return null;
       }
 
-      const obj = {
+      const obj= {
         ...val,
         internalId: key,
       };
-      return obj;
+      return obj as Note;
     })
   );
 
@@ -30,12 +32,13 @@ export const getFullList = async () => {
   return nonEmptyList;
 };
 
-export const newFile = (file = {}) => {
+export const newFile = (file:Partial<Note> = {}):Note => {
   const {
     title = '',
     text = '',
+    wide = false,
     deletedAt = null,
-    updatedAt,
+    updatedAt = null,
     color = colors[0],
     style = viewStyles[0],
     createdAt = new Date().getTime(),
@@ -44,7 +47,7 @@ export const newFile = (file = {}) => {
       editor: true,
       toc: false,
     },
-    showFooter,
+    showFooter = true,
   } = file;
 
   // TO-DO: Mention that imported files will lose its original id
@@ -53,6 +56,7 @@ export const newFile = (file = {}) => {
   return {
     id,
     title,
+    wide,
     text,
     createdAt,
     deletedAt,
@@ -189,21 +193,12 @@ export const wipeOutDeleted = (files) => {
   }
 };
 
-export const filterByType = (files, type) => {
-  let filter;
-
+export const filterByType = (files: Note[], type: BoxType) => {
   if (type === 'INBOX') {
-    filter = (file) => !file.deletedAt;
-  } else if (type === 'BIN') {
-    filter = (file) => !!file.deletedAt;
-  }
+    return files.filter((file) => !file.deletedAt);
+  } 
 
-  if (!filter) {
-    return files;
-  }
-
-  const filtered = files.filter(filter);
-  return filtered;
+  return files.filter((file) => file.deletedAt);
 };
 
 const escapeRegExp = (string) =>
@@ -254,7 +249,9 @@ export const findLuckyFileInInbox = (files, searchTerm) => {
   return file.id;
 };
 
-export const getShownFiles = (files, type, searchTerm) => {
+export type BoxType = 'INBOX' | 'BIN';
+
+export const getShownFiles = (files: Note[], type: BoxType, searchTerm:string) => {
   const filtered = filterByType(files, type);
 
   if (!searchTerm || !searchTerm.trim()) {
@@ -262,7 +259,7 @@ export const getShownFiles = (files, type, searchTerm) => {
   }
 
   const searchedFiles = filteredFiles(filtered, searchTerm);
-  return searchedFiles;
+  return searchedFiles as Note[];
 };
 
 export const importFile = (importObject) => {

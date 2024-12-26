@@ -34,7 +34,8 @@ const Editor = React.forwardRef(
     }, [props.text]);
 
     useEffect(() => {
-      const titleIsFocused = document.activeElement.className.includes('title');
+      const titleIsFocused =
+        document.activeElement?.className.includes('title');
       if (showEditor && ref.current && !titleIsFocused) {
         // TO-DO: Put the cursor at the end of the text, when this
         // becomes contenteditable.

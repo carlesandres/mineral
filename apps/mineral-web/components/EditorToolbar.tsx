@@ -13,7 +13,7 @@ const EditorToolbar = (props: Props) => {
   const { note, editorRef } = props;
   const { wide } = note;
   const [title, setTitle] = useState(props.note?.title || '');
-  const titleRef = useRef<HTMLInputElement>();
+  const titleRef = useRef<HTMLInputElement | null>(null);
 
   const editorOpen = note.panels.editor;
   const handleKeyDown = useCallback(
@@ -25,7 +25,7 @@ const EditorToolbar = (props: Props) => {
         }
       }
     },
-    [editorRef, editorOpen]
+    [editorRef, editorOpen],
   );
 
   const onChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -43,11 +43,7 @@ const EditorToolbar = (props: Props) => {
 
   return (
     <div
-      className={`editor-toolbar no-print flex items-center justify-between
-      border-b
-      border-[var(--border-soft-color)]
-      bg-[var(--solid-bg-color)]
-      print:border-none `}
+      className={`editor-toolbar no-print flex items-center justify-between border-b border-[var(--border-soft-color)] bg-[var(--solid-bg-color)] print:border-none`}
     >
       <Inputbox
         type="text"

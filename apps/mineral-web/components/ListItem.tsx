@@ -8,12 +8,11 @@ import Link from "next/link";
 
 interface Props {
   note: Note;
-  disabled?: boolean;
 }
 
 const ListItem = (props: Props) => {
   const { note } = props;
-  const { id: noteId, deletedAt, title, text } = note;
+  const { id: noteId, deletedAt, title } = note;
   const binNote = useDeleteNote(noteId, deletedAt);
 
   const untitledClass = title ? "" : "text-gray-400 dark:text-gray-500";
@@ -25,7 +24,6 @@ const ListItem = (props: Props) => {
   return (
     <Link
       href={`/note?id=${noteId}`}
-      disabled={props.disabled}
       className={`list-group-item group group relative
       w-full
       justify-between rounded

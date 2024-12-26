@@ -18,10 +18,10 @@ interface Props {
 const NoteArea = (props: Props) => {
   const [displayColorModal, setDisplaycolormodal] = useState(false);
   const { dispatchList } = useList();
-  const editorarea = useRef();
+  const editorarea = useRef<HTMLDivElement | null>(null);
   const { note } = props;
   const noteId = note?.id;
-  const editorRef = useRef<HTMLTextAreaElement>();
+  const editorRef = useRef<HTMLTextAreaElement | null>(null);
 
   const showColorModal = () => setDisplaycolormodal(true);
   const hideColorModal = () => setDisplaycolormodal(false);

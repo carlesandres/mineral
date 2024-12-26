@@ -1,8 +1,7 @@
-import { useCallback } from 'react';
 import ListItem from 'components/ListItem';
 import { useState, useEffect } from 'react';
 import { getShownFiles } from 'utils/fileUtils';
-import { throttle, sortBy } from 'lodash';
+import { sortBy } from 'lodash';
 import { Note } from 'types/Note';
 import Label from 'components/Label';
 
@@ -13,16 +12,15 @@ interface ListElementProps {
 
 const ListElements = (props: ListElementProps) => {
   const [initialised, setInitialised] = useState(false);
-  const [shownFiles, setFilestoshow] = useState([]);
+  const [shownFiles, setFilestoshow] = useState<Note[]>([]);
   const [subset, setSubset] = useState(true);
   const { notes, searchTerm } = props;
-  const throttledSetFiles = useCallback(throttle(setFilestoshow, 200), []);
 
   useEffect(() => {
     const shownFiles = getShownFiles(notes, 'INBOX', searchTerm);
-    throttledSetFiles([...shownFiles]);
+    setFilestoshow([...shownFiles]);
     setInitialised(true);
-  }, [notes, searchTerm, throttledSetFiles]);
+  }, [notes, searchTerm]);
 
   // Only show a subset of all files on first render to speed rendering up
   useEffect(() => setSubset(false), []);

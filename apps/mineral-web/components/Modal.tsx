@@ -1,7 +1,7 @@
 import { forwardRef, ReactNode, Ref, MouseEventHandler } from 'react';
 import { Dialog } from '@headlessui/react';
 import CloseButton from 'components/CloseButton';
-import { motion } from 'framer-motion';
+import { motion } from 'motion/react';
 
 export interface ModalProps {
   isOpen: boolean;

@@ -1,4 +1,15 @@
-const mdExamples = [
+export type MdExample = {
+  text: string;
+  description?: string;
+  collapsed?: boolean;
+};
+
+export type MdSection = {
+  sectionTitle: string;
+  examples: MdExample[];
+};
+
+const mdExamples: MdSection[] = [
   {
     sectionTitle: 'Bold and italic',
     examples: [

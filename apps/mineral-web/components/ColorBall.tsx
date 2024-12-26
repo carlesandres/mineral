@@ -1,7 +1,7 @@
 import { useCallback } from 'react';
 
 export interface ColorBallProps {
-  color: string;
+  color?: string;
   selected?: boolean;
   onClick?: (args0: string) => void;
   small?: boolean;
@@ -9,7 +9,7 @@ export interface ColorBallProps {
 }
 
 const ColorBall = (props: ColorBallProps) => {
-  const { color, onClick, selected, small, className = '' } = props;
+  const { color = '#111111', onClick, selected, small, className = '' } = props;
   const sanitizedColor = color.replace('#', '');
   const selectedClass = selected ? 'ring ring-gray-500' : '';
 
@@ -23,9 +23,7 @@ const ColorBall = (props: ColorBallProps) => {
 
   const ball = (
     <div
-      className={`shrink-0 rounded-full
-        transition hover:opacity-80
-        color-${sanitizedColor} ${selectedClass} ${sizeClass} ${className}`}
+      className={`shrink-0 rounded-full transition hover:opacity-80 color-${sanitizedColor} ${selectedClass} ${sizeClass} ${className}`}
       onClick={clickHandler}
       style={{ backgroundColor: color }}
     />

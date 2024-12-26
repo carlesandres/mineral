@@ -1,7 +1,15 @@
 import mdExamples from 'utils/markdown-example-text';
+import type { MdExample } from 'utils/markdown-example-text';
 import MDExample from 'components/MDExample';
 
-const MDSection = ({ examples = [], sectionTitle = '' }) => {
+interface MDSectionProps {
+  examples: MdExample[];
+  sectionTitle: string;
+}
+
+const MDSection = (props: MDSectionProps) => {
+  const { examples, sectionTitle = '' } = props;
+
   const renderedExamples = examples.map((el, index2) => (
     <MDExample {...el} key={index2} />
   ));
