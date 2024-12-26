@@ -1,12 +1,10 @@
 import { ChangeEvent, useCallback, useState } from 'react';
-import { exportAll } from 'utils/fileUtils';
-import { Note } from 'types/Note';
 import ConfirmDialog from 'components/ConfirmDialog';
 import TextInput from 'components/TextInput';
 import Checkbox from 'components/Checkbox';
 import useUIZStore from 'hooks/useUIZStore';
-import SuccessToast from 'components/SuccessToast';
 import useNotesStore from 'hooks/useNotesStore';
+import { useToast } from 'hooks/use-toast';
 
 const inputStyle = `border-b bg-transparent flex-1
 p-2 hover:border-gray-500 form-control cursor-pointer text-base
@@ -16,7 +14,8 @@ const BackupModal = () => {
   const { notes } = useNotesStore((state) => state);
   const [fileName, setFileName] = useState('');
   const [addDateToFilename, setAddDateToFilename] = useState(true);
-  const { toast, backupModalVisible, hideBackupModal } = useUIZStore();
+  const { backupModalVisible, hideBackupModal } = useUIZStore();
+  const { toast } = useToast();
 
   const changeFileName = useCallback(
     (event: ChangeEvent<HTMLInputElement>) => setFileName(event.target.value),
@@ -34,11 +33,14 @@ const BackupModal = () => {
 
     // TO-DO: Show some visual indication that we are collecting
     // the notes to backup
-    const notesToBackup = notes.filter((n: Note) => !n.deletedAt);
-    exportAll(notesToBackup, fileName, addDateToFilename);
+    // const notesToBackup = notes.filter((n: Note) => !n.deletedAt);
+    // exportAll(notesToBackup, fileName, addDateToFilename);
     hideBackupModal();
-    toast(<SuccessToast>Backup downloaded</SuccessToast>);
-  }, [notes, fileName, addDateToFilename, hideBackupModal, toast]);
+    toast({
+      description: 'Backup still not available',
+      variant: 'destructive',
+    });
+  }, [notes, toast, hideBackupModal]);
 
   return (
     <ConfirmDialog

@@ -13,15 +13,14 @@ import ListElements from 'components/ListElements';
 import EmptyList from 'components/EmptyList';
 import DragAndDrop from 'components/DragAndDrop';
 import useCreateFile from 'hooks/useCreateFile';
-import { readLocalFile } from 'components/FileImporter';
-import useUIZStore from 'hooks/useUIZStore';
 import { useRouter, useSearchParams } from 'next/navigation';
 import SuccessToast from 'components/SuccessToast';
 import useNotesStore from 'hooks/useNotesStore';
+import { useToast } from 'hooks/use-toast';
 
 const ListView = () => {
   const header = useRef<HTMLInputElement>(null);
-  const { toast } = useUIZStore();
+  const { toast } = useToast();
   const { notes, initialized } = useNotesStore((state) => state);
   const router = useRouter();
   const initialSearchTerm = useSearchParams()?.get('search');
@@ -57,11 +56,14 @@ const ListView = () => {
       if (!firstFile.name) {
         return;
       }
-      const text = await readLocalFile(firstFile);
-      await createFile({ title: firstFile.name, text });
-      toast(<SuccessToast>File imported</SuccessToast>);
+      // const text = await readLocalFile(firstFile);
+      // await createFile({ title: firstFile.name, text });
+      toast({
+        description: 'Importing is not yet supported',
+        variant: 'destructive',
+      });
     },
-    [createFile],
+    [toast],
   );
 
   if (!initialized) {

@@ -92,29 +92,6 @@ export const newFile = (file: Partial<Note> = {}): Note => {
   };
 };
 
-export const readLocalFile = async (...rest) => {
-  const file = await localforage.getItem(...rest);
-  if (!file) {
-    return null;
-  }
-
-  if (!isNote(file)) {
-    log.warn('Invalid note found', file);
-    return null;
-  }
-
-  // TO-DO: This should be moved to a "validation" method
-  if (Array.isArray(file.panels)) {
-    file.panels = {
-      viewer: true,
-      editor: true,
-      toc: false,
-    };
-  }
-
-  return file;
-};
-
 export const saveFile = (file: Note, ignoreUpdate = false) => {
   // console.log('saving file', file.id);
   file.updatedAt = (ignoreUpdate && file.updatedAt) || new Date().getTime();
@@ -146,52 +123,56 @@ export const downloadFile = (title = 'download.txt', content: Note['text']) => {
   return true;
 };
 
-export const exportAll = (files, fileName, includeDate = true) => {
-  const strFiles = stringifyFiles(files);
-  const { exportableFiles, failedFiles } = strFiles;
+// export const exportAll = (
+//   files: Note[],
+//   fileName: string,
+//   includeDate = true,
+// ) => {
+//   const strFiles = stringifyFiles(files);
+//   const { exportableFiles, failedFiles } = strFiles;
+//
+//   const MAX_FILE_SIZE = 2000000;
+//   const arrayOfExports = [];
+//   let currentSize = 0;
+//   let currentExport = [];
+//
+//   exportableFiles.forEach((file) => {
+//     currentSize += file.length;
+//     if (currentSize > MAX_FILE_SIZE) {
+//       arrayOfExports.push(currentExport);
+//       currentExport = [];
+//       currentSize = 0;
+//     }
+//     currentExport.push(file);
+//   });
+//   arrayOfExports.push(currentExport);
+//
+//   const date = includeDate ? `-${format(new Date(), 'P')}` : '';
+//   const finalFilename = fileName || 'mineral-backup';
+//
+//   arrayOfExports.forEach((exportableArray, index) => {
+//     try {
+//       const exportableString = '[' + exportableArray.join(',') + ']';
+//       const shownIndex = index ? `-${index + 1}` : '';
+//       downloadFile(
+//         `${finalFilename}${date}${shownIndex}.json`,
+//         exportableString,
+//       );
+//       return 'success';
+//     } catch (error) {
+//       log.warn(error);
+//       return 'fail';
+//     }
+//   });
+//   return failedFiles;
+// };
+//
+// export const exportOneFile = (file, title) => {
+//   return downloadFile(title, file.text);
+// };
 
-  const MAX_FILE_SIZE = 2000000;
-  const arrayOfExports = [];
-  let currentSize = 0;
-  let currentExport = [];
-
-  exportableFiles.forEach((file) => {
-    currentSize += file.length;
-    if (currentSize > MAX_FILE_SIZE) {
-      arrayOfExports.push(currentExport);
-      currentExport = [];
-      currentSize = 0;
-    }
-    currentExport.push(file);
-  });
-  arrayOfExports.push(currentExport);
-
-  const date = includeDate ? `-${format(new Date(), 'P')}` : '';
-  const finalFilename = fileName || 'mineral-backup';
-
-  arrayOfExports.forEach((exportableArray, index) => {
-    try {
-      const exportableString = '[' + exportableArray.join(',') + ']';
-      const shownIndex = index ? `-${index + 1}` : '';
-      downloadFile(
-        `${finalFilename}${date}${shownIndex}.json`,
-        exportableString,
-      );
-      return 'success';
-    } catch (error) {
-      log.warn(error);
-      return 'fail';
-    }
-  });
-  return failedFiles;
-};
-
-export const exportOneFile = (file, title) => {
-  return downloadFile(title, file.text);
-};
-
-const stringifyFiles = (files) => {
-  const failedFiles = [];
+const stringifyFiles = (files: Note[]) => {
+  const failedFiles = [] as Note['id'][];
   const stringifiedFiles = files.map((f) => {
     try {
       const str = JSON.stringify(f);
@@ -211,9 +192,9 @@ const stringifyFiles = (files) => {
   };
 };
 
-const wipeOutFile = (fileId) => localforage.removeItem(fileId);
+const wipeOutFile = (fileId: Note['id']) => localforage.removeItem(fileId);
 
-export const wipeOutDeleted = (files) => {
+export const wipeOutDeleted = (files: Note[]) => {
   try {
     const filePromises = files.map((file) => wipeOutFile(file.id));
     const wholePromise = Promise.all(filePromises);
@@ -231,21 +212,26 @@ export const filterByType = (files: Note[], type: BoxType) => {
   return files.filter((file) => file.deletedAt);
 };
 
-const escapeRegExp = (string) =>
-  string.replace(/[.*+\-?^${}()|[\]\\]/g, '\\$&'); // $& means the whole matched string
+const escapeRegExp = (re: string) =>
+  re.replace(/[.*+\-?^${}()|[\]\\]/g, '\\$&'); // $& means the whole matched string
 
-export const filteredFiles = (files, searchTerm = '') => {
+export const filteredFiles = (files: Note[], searchTerm = '') => {
   const trimmedSearchTerm = searchTerm.trim();
   if (!trimmedSearchTerm) {
     return files;
   }
 
-  const realSearchTerm = escapeRegExp(trimmedSearchTerm.match('#?(.*)')[1]);
+  const matches = trimmedSearchTerm.match('#?(.*)');
+  if (!matches) {
+    return [];
+  }
+  const realSearchTerm = escapeRegExp(matches[1]);
   const searchContents = trimmedSearchTerm.startsWith('#');
 
   const regexp = new RegExp(realSearchTerm, 'gi');
-  const filterTitle = (f) => f.title && f.title.toLowerCase().match(regexp);
-  const filterAll = (f) =>
+  const filterTitle = (f: Note) =>
+    f.title && f.title.toLowerCase().match(regexp);
+  const filterAll = (f: Note) =>
     f.title.toLowerCase().match(regexp) || f.text.match(regexp);
   const filter = searchContents ? filterAll : filterTitle;
   return files.filter(filter);
@@ -253,10 +239,10 @@ export const filteredFiles = (files, searchTerm = '') => {
 
 // TODO: This is so similar to filteredFiles that
 // extracting the commonality is a must
-export const findLuckyFile = (files, searchTerm = '') => {
+export const findLuckyFile = (files: Note[], searchTerm = '') => {
   const trimmedSearchTerm = searchTerm.trim();
   if (!trimmedSearchTerm) {
-    return files;
+    return files[0];
   }
 
   const regexp = new RegExp(trimmedSearchTerm, 'gi');
@@ -265,7 +251,7 @@ export const findLuckyFile = (files, searchTerm = '') => {
   return foundFile;
 };
 
-export const findLuckyFileInInbox = (files, searchTerm) => {
+export const findLuckyFileInInbox = (files: Note[], searchTerm: string) => {
   const inboxFiles = filterByType(files, 'INBOX');
   if (!inboxFiles.length) {
     return;
@@ -418,21 +404,4 @@ export const isMDTitle = (title) => {
   }
 
   return ['md', 'markdown'].includes(langArray[2]);
-};
-
-// New way
-export const changeCurrentNote = (dispatch, note) => {
-  dispatch({ type: 'read', file: note });
-};
-
-// New way
-export const readFile = async (dispatch, fileId) => {
-  console.log('reading file from db');
-  dispatch({ type: 'clear-file' });
-  const file = await readLocalFile(fileId);
-  if (file) {
-    dispatch({ type: 'read', file });
-  } else {
-    dispatch({ type: 'error-reading' });
-  }
 };

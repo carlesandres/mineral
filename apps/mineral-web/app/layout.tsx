@@ -1,10 +1,11 @@
 // import MainMenu from "components/MainMenu";
-import ShortcutsModal from "@/components/ShortcutsModal";
-import { GeistSans } from "geist/font/sans";
-import { GeistMono } from "geist/font/mono";
-import "styles/main.css";
-import ClientLayout from "components/ClientLayout";
-import { Suspense } from "react";
+import ShortcutsModal from '@/components/ShortcutsModal';
+import { GeistSans } from 'geist/font/sans';
+import { GeistMono } from 'geist/font/mono';
+import 'styles/main.css';
+import ClientLayout from 'components/ClientLayout';
+import { Suspense } from 'react';
+import { Toaster } from '@/components/ui/toaster';
 
 async function MyApp({ children }: { children: React.ReactNode }) {
   // const {
@@ -38,6 +39,7 @@ async function MyApp({ children }: { children: React.ReactNode }) {
             <ShortcutsModal />
           </Suspense>
           <ClientLayout>{children}</ClientLayout>
+          <Toaster />
         </div>
       </body>
     </html>
