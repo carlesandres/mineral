@@ -1,5 +1,5 @@
 // import MainMenu from "components/MainMenu";
-import ShortcutsModal from '@/components/ShortcutsModal';
+import CommandPalette from 'components/CommandPalette';
 import { GeistSans } from 'geist/font/sans';
 import { GeistMono } from 'geist/font/mono';
 import 'styles/main.css';
@@ -36,7 +36,7 @@ async function MyApp({ children }: { children: React.ReactNode }) {
       <body>
         <div className={`page-content min-h-screen`}>
           <Suspense>
-            <ShortcutsModal />
+            <CommandPalette />
           </Suspense>
           <ClientLayout>{children}</ClientLayout>
           <Toaster />
