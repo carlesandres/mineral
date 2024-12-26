@@ -4,17 +4,17 @@ import React, { useState } from 'react';
 import { getShownFiles } from 'utils/fileUtils';
 import PleaseWait from 'components/PleaseWait';
 import { useEffect } from 'react';
-import { useList } from 'hooks/useList';
 import { sortBy } from 'lodash';
 import { useRouter } from 'next/navigation';
+import useNotesStore, { getNotes } from 'utils/useNotesStore';
 
 const LastPageClient = () => {
-  const { list } = useList();
+  const notes = getNotes();
+  const initialized = useNotesStore((state) => state.initialized);
   const [error, setError] = useState('');
   const router = useRouter();
 
   useEffect(() => {
-    const { initialized, notes } = list;
     if (initialized) {
       const activeNotes = getShownFiles(notes, 'INBOX', '');
       const sortedNotes = sortBy(activeNotes, 'updatedAt').reverse();
@@ -27,7 +27,7 @@ const LastPageClient = () => {
       const href = `/note?id=${lastNoteId}`;
       router.push(href);
     }
-  }, [list]);
+  }, [notes, initialized, router]);
 
   if (error) {
     return <p>{error}</p>;

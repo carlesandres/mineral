@@ -1,23 +1,24 @@
-import { Menu, Transition } from "@headlessui/react";
-import { FiMenu } from "react-icons/fi";
-import MenuButton2 from "components/MenuButton2";
-import { HiOutlinePlus, HiOutlineClipboard } from "react-icons/hi";
-import { goToList, goToNewFile } from "utils/navigationHelpers";
-import RoundBigButton from "./RoundBigButton";
-import { useMemo } from "react";
-import { getShownFiles } from "utils/fileUtils";
-import EmptyBinButton from "./EmptyBinButton";
-import { useList } from "hooks/useList";
+import { Menu, Transition } from '@headlessui/react';
+import { FiMenu } from 'react-icons/fi';
+import MenuButton2 from 'components/MenuButton2';
+import { HiOutlinePlus, HiOutlineClipboard } from 'react-icons/hi';
+import RoundBigButton from './RoundBigButton';
+import { useMemo } from 'react';
+import { getShownFiles } from 'utils/fileUtils';
+import EmptyBinButton from './EmptyBinButton';
+import { useList } from 'hooks/useList';
+import { useRoutingHelpers } from 'utils/use-routing-helpers';
 
 const BinMenu = () => {
   const { list } = useList();
   const binnedNotes = useMemo(() => {
-    return getShownFiles(list.notes, "BIN", "");
+    return getShownFiles(list.notes, 'BIN', '');
   }, [list.notes]);
+  const { goToNewFile, goToList } = useRoutingHelpers();
 
   return (
     <Menu as="div" className="no-print fixed right-2 top-2">
-      <Menu.Button as="div" className="menu-btn ">
+      <Menu.Button as="div" className="menu-btn">
         <RoundBigButton>
           <FiMenu />
         </RoundBigButton>
@@ -31,13 +32,7 @@ const BinMenu = () => {
         leaveFrom="transform scale-100 opacity-100"
         leaveTo="transform scale-95 opacity-0"
       >
-        <Menu.Items
-          className="mt-1 flex w-max flex-col
-              rounded border
-              border-[var(--border-color)]
-              bg-[var(--solid-bg-color)]
-              py-4 px-3"
-        >
+        <Menu.Items className="mt-1 flex w-max flex-col rounded border border-[var(--border-color)] bg-[var(--solid-bg-color)] px-3 py-4">
           <MenuButton2
             onClick={goToNewFile}
             icon={<HiOutlinePlus />}

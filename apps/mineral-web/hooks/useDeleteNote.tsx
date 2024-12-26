@@ -1,13 +1,14 @@
 import { useCallback } from 'react';
 import useUIZStore from 'utils/useUIZStore';
-import { goToList, goToNote } from 'utils/navigationHelpers';
 import SuccessToast from 'components/SuccessToast';
 import { binNote, unbinNote } from 'utils/useNotesStore';
+import { useRoutingHelpers } from 'utils/use-routing-helpers';
 
 type NoteDeletedAt = number | undefined | null;
 
 const useDeleteNote = (noteId: string, deletedAt: NoteDeletedAt) => {
   const { toast } = useUIZStore();
+  const { goToList, goToNote } = useRoutingHelpers();
 
   const deleteFn = useCallback(() => {
     const message = deletedAt ? 'Unbinned!' : 'Deleted!';
@@ -23,7 +24,7 @@ const useDeleteNote = (noteId: string, deletedAt: NoteDeletedAt) => {
     } else {
       goToList();
     }
-  }, [deletedAt, noteId, toast]);
+  }, [deletedAt, noteId, toast, goToList, goToNote]);
 
   return deleteFn;
 };

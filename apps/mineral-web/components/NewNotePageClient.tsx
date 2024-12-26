@@ -15,8 +15,8 @@ const NewNotePageClient = () => {
 
   const panels = useMemo(() => {
     return startWithPreview
-      ? { viewer: true, editor: true }
-      : { viewer: false, editor: true };
+      ? { viewer: true, editor: true, toc: false }
+      : { viewer: false, editor: true, toc: false };
   }, [startWithPreview]);
 
   useEffect(() => {

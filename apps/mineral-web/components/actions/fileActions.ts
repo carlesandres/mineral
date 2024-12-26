@@ -209,22 +209,3 @@ export const nextStyle = () => {
 
   return wrappedAction;
 };
-
-export const confirmDeleteCurrentFile = () => (dispatch) => {
-  const onConfirm = () => {
-    dispatch(deleteCurrentFile());
-  };
-  const onCancel = () => {
-    dispatch(dismissConfirmationModal());
-  };
-
-  dispatch({
-    type: CONFIRM_DELETE_CURRENT_FILE,
-    onConfirm,
-    onCancel,
-  });
-};
-
-export const onBlurEditArea = () => {
-  log.log('onBlurEditArea');
-};

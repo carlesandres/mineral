@@ -3,10 +3,34 @@ import colors from 'components/colors';
 import { getNextViewStyle } from 'utils/oneFileUtils';
 import { DEFAULT_FILE_PANELS, viewStyles } from 'components/AppConstants';
 import { marked } from 'marked';
-import format from 'date-fns/format';
+import { format } from 'date-fns';
 import { v4 as uuidv4, validate as uuidValidate } from 'uuid';
 import { Note } from 'types/Note';
 import log from './log';
+
+import { z } from 'zod';
+
+const noteSchema = z.object({
+  id: z.string(),
+  title: z.string().uuid(),
+  wide: z.boolean(),
+  text: z.string(),
+  createdAt: z.number(),
+  deletedAt: z.number().nullable(),
+  updatedAt: z.number().nullable(),
+  color: z.string(),
+  style: z.string(),
+  panels: z.object({
+    viewer: z.boolean(),
+    editor: z.boolean(),
+    toc: z.boolean(),
+  }),
+  showFooter: z.boolean(),
+});
+
+function isNote(data: unknown): data is Note {
+  return noteSchema.safeParse(data).success;
+}
 
 const STORAGE_MESSAGES_KEY = 'MNRAL_MSG';
 
@@ -19,20 +43,20 @@ export const getFullList = async () => {
         return null;
       }
 
-      const obj= {
-        ...val,
-        internalId: key,
-      };
-      return obj as Note;
-    })
+      if (!isNote(val)) {
+        log.warn('Invalid note found', key, val);
+        return null;
+      }
+      return val;
+    }),
   );
 
   const unsortedList = await Promise.all(promises);
-  const nonEmptyList = unsortedList.filter((x) => x);
+  const nonEmptyList = unsortedList.filter((x) => Boolean(x)) as Note[];
   return nonEmptyList;
 };
 
-export const newFile = (file:Partial<Note> = {}):Note => {
+export const newFile = (file: Partial<Note> = {}): Note => {
   const {
     title = '',
     text = '',
@@ -68,11 +92,17 @@ export const newFile = (file:Partial<Note> = {}):Note => {
   };
 };
 
-export const addFile = (fileDefaults) => saveFile(newFile(fileDefaults), true);
+export const addFile = (fileDefaults: Partial<Note>) =>
+  saveFile(newFile(fileDefaults), true);
 
 export const readLocalFile = async (...rest) => {
   const file = await localforage.getItem(...rest);
   if (!file) {
+    return null;
+  }
+
+  if (!isNote(file)) {
+    log.warn('Invalid note found', file);
     return null;
   }
 
@@ -88,20 +118,23 @@ export const readLocalFile = async (...rest) => {
   return file;
 };
 
-export const saveFile = (file, ignoreUpdate = false) => {
+export const saveFile = (file: Note, ignoreUpdate = false) => {
   // console.log('saving file', file.id);
   file.updatedAt = (ignoreUpdate && file.updatedAt) || new Date().getTime();
   file.panels = file.panels || DEFAULT_FILE_PANELS;
   return localforage.setItem(file.id, file);
 };
 
-export const restoreFile = (fileId) =>
-  localforage.getItem(fileId).then((file) => {
+export const restoreFile = async (fileId: Note['id']) => {
+  const file = await localforage.getItem(fileId);
+  if (isNote(file)) {
     file.deletedAt = null;
     return saveFile(file);
-  });
+  }
+  return Promise.reject('Invalid note');
+};
 
-export const downloadFile = (title = 'download.txt', content) => {
+export const downloadFile = (title = 'download.txt', content: Note['text']) => {
   const link = document.createElement('a');
   const blob = new window.Blob([content], { type: 'text/plain' });
   const url = window.URL.createObjectURL(blob);
@@ -145,7 +178,7 @@ export const exportAll = (files, fileName, includeDate = true) => {
       const shownIndex = index ? `-${index + 1}` : '';
       downloadFile(
         `${finalFilename}${date}${shownIndex}.json`,
-        exportableString
+        exportableString,
       );
       return 'success';
     } catch (error) {
@@ -196,7 +229,7 @@ export const wipeOutDeleted = (files) => {
 export const filterByType = (files: Note[], type: BoxType) => {
   if (type === 'INBOX') {
     return files.filter((file) => !file.deletedAt);
-  } 
+  }
 
   return files.filter((file) => file.deletedAt);
 };
@@ -251,7 +284,11 @@ export const findLuckyFileInInbox = (files, searchTerm) => {
 
 export type BoxType = 'INBOX' | 'BIN';
 
-export const getShownFiles = (files: Note[], type: BoxType, searchTerm:string) => {
+export const getShownFiles = (
+  files: Note[],
+  type: BoxType,
+  searchTerm: string,
+) => {
   const filtered = filterByType(files, type);
 
   if (!searchTerm || !searchTerm.trim()) {
@@ -262,95 +299,95 @@ export const getShownFiles = (files: Note[], type: BoxType, searchTerm:string) =
   return searchedFiles as Note[];
 };
 
-export const importFile = (importObject) => {
-  const { title, contents, type } = importObject;
+// export const importFile = (importObject) => {
+//   const { title, contents, type } = importObject;
+//
+//   if (type.match('json')) {
+//     const promise = new Promise((_resolve, reject) => {
+//       try {
+//         const files = JSON.parse(contents);
+//         const filePromises = files.map((file) => addFile(file));
+//         const wholePromise = Promise.all(filePromises);
+//         return wholePromise;
+//       } catch (error) {
+//         reject(error);
+//       }
+//     });
+//     return promise;
+//   }
+//
+//   // If it's a 'simple' text file
+//   return addFile({
+//     type,
+//     title,
+//     text: contents,
+//   });
+// };
 
-  if (type.match('json')) {
-    const promise = new Promise((_resolve, reject) => {
-      try {
-        const files = JSON.parse(contents);
-        const filePromises = files.map((file) => addFile(file));
-        const wholePromise = Promise.all(filePromises);
-        return wholePromise;
-      } catch (error) {
-        reject(error);
-      }
-    });
-    return promise;
-  }
-
-  // If it's a 'simple' text file
-  return addFile({
-    type,
-    title,
-    text: contents,
-  });
-};
-
-export const fileNextStyle = (file) => {
+export const fileNextStyle = (file: Note) => {
   const newStyle = getNextViewStyle(file);
   const newFile = Object.assign({}, file, { style: newStyle });
   return newFile;
 };
 
-export const getSlidesFromText = (text) => {
-  const tokens = marked.lexer(text);
-  const slides = [];
+// export const getSlidesFromText = (text:string) => {
+//   const tokens = marked.lexer(text);
+//   const slides = [];
+//
+//   let accumulatedTokens = [];
+//   tokens.forEach((currentToken) => {
+//     const isH1 = currentToken.type === 'heading' && currentToken.depth === 1;
+//     const isFirstSlide = !slides.length && !accumulatedTokens.length;
+//     const isBreak = currentToken.type === 'hr';
+//
+//     if (isBreak || (isH1 && !isFirstSlide)) {
+//       accumulatedTokens.links = {};
+//       slides.push(marked.parser(accumulatedTokens));
+//       if (isH1) {
+//         accumulatedTokens = [currentToken];
+//         return;
+//       }
+//       accumulatedTokens = [];
+//       return;
+//     }
+//     accumulatedTokens.push(currentToken);
+//   });
+//
+//   // For the remaining tokens after the last "break" token
+//   if (accumulatedTokens.length) {
+//     accumulatedTokens.links = {};
+//     slides.push(marked.parser(accumulatedTokens));
+//   }
+//
+//   return slides;
+// };
 
-  let accumulatedTokens = [];
-  tokens.forEach((currentToken) => {
-    const isH1 = currentToken.type === 'heading' && currentToken.depth === 1;
-    const isFirstSlide = !slides.length && !accumulatedTokens.length;
-    const isBreak = currentToken.type === 'hr';
-
-    if (isBreak || (isH1 && !isFirstSlide)) {
-      accumulatedTokens.links = {};
-      slides.push(marked.parser(accumulatedTokens));
-      if (isH1) {
-        accumulatedTokens = [currentToken];
-        return;
-      }
-      accumulatedTokens = [];
-      return;
-    }
-    accumulatedTokens.push(currentToken);
-  });
-
-  // For the remaining tokens after the last "break" token
-  if (accumulatedTokens.length) {
-    accumulatedTokens.links = {};
-    slides.push(marked.parser(accumulatedTokens));
-  }
-
-  return slides;
-};
-
-export const filesAreIdentical = (
-  file1,
-  file2,
-  propsToCompare = ['title', 'text']
-) => {
-  const comparer = (areSameSoFar, nextProp) => {
-    if (!areSameSoFar) {
-      return false;
-    }
-
-    return file1[nextProp] === file2[nextProp];
-  };
-
-  const areIdentical = propsToCompare.reduce(comparer, true);
-  return areIdentical;
-};
-
-export const goFindDuplicates = (fileList) => {
-  console.log('finding duplicates');
-  // const duplicates = [];
-
-  // fileList.forEach( (file, index) => {
-  //   for (let i = index + 1; i <= fileList.length; i++) {
-  //   }
-  // });
-};
+// export const filesAreIdentical = (
+//   file1,
+//   file2,
+//   propsToCompare = ['title', 'text']
+// ) => {
+//   const comparer = (areSameSoFar, nextProp) => {
+//     if (!areSameSoFar) {
+//       return false;
+//     }
+//
+//     return file1[nextProp] === file2[nextProp];
+//   };
+//
+//   const areIdentical = propsToCompare.reduce(comparer, true);
+//   return areIdentical;
+// };
+//
+// export const goFindDuplicates = (fileList) => {
+//   console.log('finding duplicates');
+//   // const duplicates = [];
+//
+//   // fileList.forEach( (file, index) => {
+//   //   for (let i = index + 1; i <= fileList.length; i++) {
+//   //   }
+//   // });
+// };
 
 export const isFileAlreadyLoaded = (props) => {
   const { currentFile } = props;
@@ -359,7 +396,7 @@ export const isFileAlreadyLoaded = (props) => {
   return currentFileId && currentFileId === requestedFileId;
 };
 
-export const messageBroadcast = (message) => {
+export const messageBroadcast = (message: Record<string, any>) => {
   localStorage.setItem(STORAGE_MESSAGES_KEY, JSON.stringify(message));
   localStorage.removeItem(STORAGE_MESSAGES_KEY);
 };

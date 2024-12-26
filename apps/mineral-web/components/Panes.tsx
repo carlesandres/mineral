@@ -2,7 +2,6 @@ import React, { useCallback, MouseEvent, UIEvent } from 'react';
 import TOC from 'components/TOC';
 import Viewer from 'components/Viewer';
 import Editor from 'components/Editor';
-import ErrorBoundary from 'components/ErrorBoundary';
 import { useEffect, useRef } from 'react';
 import { useList } from 'hooks/useList';
 import { PanelsPartial, Panels, Note } from 'types/Note';
@@ -23,11 +22,11 @@ const onScroll = (event, slave) => {
 };
 
 interface Props extends Note {
-  editorRef: React.RefObject<HTMLTextAreaElement>;
+  editorRef: React.RefObject<HTMLTextAreaElement | null>;
 }
 
 const Panes = (props: Props) => {
-  const viewerRef = useRef();
+  const viewerRef = useRef<HTMLDivElement | null>(null);
   const { text, panels = {}, editorRef } = props;
   const { viewer = false, editor = false, toc = false } = panels as Panels;
   const { dispatchList } = useList();
@@ -72,8 +71,8 @@ const Panes = (props: Props) => {
 
   useEffect(() => {
     const scrollToTop = () => {
-      const editor = editorRef.current;
-      if (editor instanceof HTMLTextAreaElement) {
+      const editor = editorRef?.current;
+      if (editor) {
         editor.scrollTop = 0;
       }
     };

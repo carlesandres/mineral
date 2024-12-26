@@ -1,10 +1,10 @@
-import React, { Ref, forwardRef, MouseEventHandler } from 'react';
+import React, { Ref, forwardRef } from 'react';
 import Modal from 'components/Modal';
 import ConfirmButtons from 'components/ConfirmButtons';
 
 interface ConfirmDialogProps {
-  onConfirm: MouseEventHandler<HTMLButtonElement>;
-  onCancel: MouseEventHandler<HTMLButtonElement>;
+  onConfirm: () => void;
+  onCancel: () => void;
   title: string;
   show: boolean;
   children?: React.ReactNode;
@@ -25,7 +25,9 @@ const ConfirmDialog = forwardRef(
         <ConfirmButtons {...props} />
       </Modal>
     );
-  }
+  },
 );
+
+ConfirmDialog.displayName = 'ConfirmDialog';
 
 export default ConfirmDialog;

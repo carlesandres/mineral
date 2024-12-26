@@ -3,13 +3,13 @@ import { useState, useRef } from 'react';
 import { Note } from 'types/Note';
 import Inputbox from 'components/Inputbox';
 
-interface Props {
+interface EditorToolbarProps {
   note: Note;
   onChange: (title: string) => void;
-  editorRef: React.RefObject<HTMLTextAreaElement>;
+  editorRef: React.RefObject<HTMLTextAreaElement | null>;
 }
 
-const EditorToolbar = (props: Props) => {
+const EditorToolbar = (props: EditorToolbarProps) => {
   const { note, editorRef } = props;
   const { wide } = note;
   const [title, setTitle] = useState(props.note?.title || '');

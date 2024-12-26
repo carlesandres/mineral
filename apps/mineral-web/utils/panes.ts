@@ -1,6 +1,7 @@
 import { DEFAULT_FILE_PANELS } from 'components/AppConstants';
+import { Note } from 'types/Note';
 
-export const getVisiblePanels = (file = {}) => {
+export const getVisiblePanels = (file: Partial<Note> = {}) => {
   const { panels = DEFAULT_FILE_PANELS } = file;
   const showViewer = panels.viewer;
   const showEditor = panels.editor;

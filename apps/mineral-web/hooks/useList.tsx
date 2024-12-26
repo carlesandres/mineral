@@ -2,7 +2,7 @@ import { createContext, useReducer, useContext, useEffect } from 'react';
 import { getFullList, saveFile } from 'utils/fileUtils';
 import listReducer from 'utils/listReducer';
 
-const ListContext = createContext({});
+const ListContext = createContext();
 
 const defaultState = {
   initialized: false,
