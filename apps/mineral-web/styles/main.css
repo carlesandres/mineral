@@ -5,14 +5,14 @@
 @tailwind utilities;
 
 /* stylelint-disable no-invalid-position-at-import-rule */
-/* @import url('_variables.css'); */
-/* @import url('themes.css'); */
-/* @import url('editor.css'); */
+@import url('_variables.css');
+@import url('themes.css');
+@import url('editor.css');
 
-/* @import "slides.css"; */
-/* @import url('toc.css'); */
-/* @import url('print.css'); */
-/* @import url('scrollbar.css'); */
+@import "slides.css";
+@import url('toc.css');
+@import url('print.css');
+@import url('scrollbar.css');
 
 html,
 body {

@@ -57,7 +57,7 @@ const Viewer = React.forwardRef((props: Props, ref: Ref<HTMLDivElement>) => {
       const viewerContent = DOMPurify.sanitize(markdown);
       setMdcontent(viewerContent);
     }
-  }, [props.text, props.show]);
+  }, [props.text, props.show, markdown]);
 
   useEffect(() => {
     if (highlight && show) {
@@ -73,13 +73,14 @@ const Viewer = React.forwardRef((props: Props, ref: Ref<HTMLDivElement>) => {
     ? { onScroll: props.onScrollViewer }
     : null;
 
+  // TO-DO: Padding should be based on CSS variable
   return (
-    <div className={`viewerarea flex-2 h-full w-full bg-red-100`}>
+    <div className={`viewerarea flex-2 h-full w-full`}>
       <PanelLabel>
         <FaMarkdown />
       </PanelLabel>
       <div
-        className={`viewer scrollable is-markdown prose w-full bg-yellow-100 prose-headings:text-[var(--viewer-titles-color)] prose-code:before:content-none prose-code:after:content-none prose-pre:bg-[var(--viewer-code-bg-color)]`}
+        className={`viewer scrollable is-markdown prose w-full p-4 prose-headings:text-[var(--viewer-titles-color)] prose-code:before:content-none prose-code:after:content-none prose-pre:bg-[var(--viewer-code-bg-color)]`}
         ref={ref}
         {...onScrollObj}
         onDoubleClick={props.onDoubleClick}
@@ -94,5 +95,7 @@ const Viewer = React.forwardRef((props: Props, ref: Ref<HTMLDivElement>) => {
     </div>
   );
 });
+
+Viewer.displayName = 'Viewer';
 
 export default Viewer;

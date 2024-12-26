@@ -1,7 +1,7 @@
 import React, { ChangeEvent, useCallback, KeyboardEvent } from 'react';
 import { useState, useRef } from 'react';
 import { Note } from 'types/Note';
-import Inputbox from 'components/Inputbox';
+import { Input } from './ui/input';
 
 interface EditorToolbarProps {
   note: Note;
@@ -45,7 +45,7 @@ const EditorToolbar = (props: EditorToolbarProps) => {
     <div
       className={`editor-toolbar no-print flex items-center justify-between border-b border-[var(--border-soft-color)] bg-[var(--solid-bg-color)] print:border-none`}
     >
-      <Inputbox
+      <Input
         type="text"
         ref={titleRef}
         autoFocus={!title}
@@ -53,7 +53,7 @@ const EditorToolbar = (props: EditorToolbarProps) => {
         placeholder="(Untitled)"
         onChange={onChange}
         onKeyDown={handleKeyDown}
-        className={`title mx-10 overflow-hidden text-ellipsis whitespace-nowrap ${wideClass}`}
+        className={`title mx-10 overflow-hidden text-ellipsis whitespace-nowrap border-none shadow-none ${wideClass}`}
       />
     </div>
   );

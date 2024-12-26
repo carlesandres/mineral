@@ -66,7 +66,7 @@ const Editor = React.forwardRef(
     return (
       <div
         id="editorarea"
-        className="editorarea flex-2 relative h-full w-full overflow-hidden bg-blue-100 font-mono"
+        className="editorarea flex-2 relative h-full w-full overflow-hidden font-mono"
       >
         <PanelLabel>
           <HiOutlinePencil />
@@ -81,7 +81,7 @@ const Editor = React.forwardRef(
           }
         `}</style>
         <textarea
-          className={`editor-content scrollable no-print resize-none rounded-none border-none bg-[color:var(--editor-bg-color)] p-[var(--editor-padding)] text-[color:var(--editor-text-color)] outline-none ${dimOnBlurClass}`}
+          className={`editor-content scrollable h-full no-print resize-none rounded-none border-none bg-[color:var(--editor-bg-color)] p-[var(--editor-padding)] text-[color:var(--editor-text-color)] outline-none ${dimOnBlurClass}`}
           ref={ref}
           onDoubleClick={props.onDoubleClick}
           onChange={onChange}

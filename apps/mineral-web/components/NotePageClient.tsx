@@ -17,7 +17,6 @@ const NotePageClient = () => {
   const noteId = searchParams?.get('id');
 
   if (!noteId) {
-    console.log('--------------------------------------------------- 1');
     notFound();
   }
 
@@ -77,9 +76,6 @@ const NotePageClient = () => {
   if (!initialized) {
     return null;
   }
-
-  console.log('initialized', initialized);
-  console.log('allNotes', allNotes);
 
   if (!note) {
     notFound();
