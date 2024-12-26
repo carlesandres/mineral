@@ -1,21 +1,21 @@
-"use client";
+'use client';
 
-import { useList } from "hooks/useList";
-import { HiOutlinePlus, HiOutlineClipboard } from "react-icons/hi";
-import Link from "next/link";
-import { Button } from "components/ui/button";
+import { HiOutlinePlus, HiOutlineClipboard } from 'react-icons/hi';
+import Link from 'next/link';
+import { Button } from 'components/ui/button';
+import useNotesStore from 'utils/useNotesStore';
 
 const style =
-  "mx-auto flex items-center justify-center space-x-2 sm:!px-6 sm:!py-4 sm:text-lg";
+  'mx-auto flex items-center justify-center space-x-2 sm:!px-6 sm:!py-4 sm:text-lg';
 
 const LandingCTA = () => {
-  const { list } = useList();
+  const { notes, initialized } = useNotesStore((state) => state);
 
-  if (!list.initialized) {
+  if (!initialized) {
     return null;
   }
 
-  if (list.notes.length > 0) {
+  if (notes.length > 0) {
     return (
       <Button asChild variant="secondary" size="lg">
         <Link className={style} href="/notes">

@@ -1,11 +1,11 @@
-import { useCallback, useState } from "react";
-import { Menu, Transition } from "@headlessui/react";
-import { useList } from "hooks/useList";
-import { FiMenu } from "react-icons/fi";
-import { Note, Panels, PanelsPartial } from "types/Note";
-import ConfirmExportModal from "components/ConfirmExportModal";
-import useDeleteNote from "hooks/useDeleteNote";
-import useUIZStore from "utils/useUIZStore";
+import { useCallback, useState } from 'react';
+import { Menu, Transition } from '@headlessui/react';
+import { useList } from 'hooks/useList';
+import { FiMenu } from 'react-icons/fi';
+import { Note, Panels, PanelsPartial } from 'types/Note';
+import ConfirmExportModal from 'components/ConfirmExportModal';
+import useDeleteNote from 'hooks/useDeleteNote';
+import useUIZStore from 'utils/useUIZStore';
 import {
   HiOutlineArrowsPointingIn,
   HiOutlineArrowsPointingOut,
@@ -15,10 +15,11 @@ import {
   HiOutlinePrinter,
   HiOutlineSwatch,
   HiOutlineViewColumns,
-} from "react-icons/hi2";
-import { FaMarkdown } from "react-icons/fa";
-import MenuButton2 from "components/MenuButton2";
-import RoundBigButton from "./RoundBigButton";
+} from 'react-icons/hi2';
+import { FaMarkdown } from 'react-icons/fa';
+import MenuButton2 from 'components/MenuButton2';
+import RoundBigButton from './RoundBigButton';
+import useNotesStore, { updateNote } from 'utils/useNotesStore';
 
 interface Props {
   noteId: string;
@@ -26,11 +27,8 @@ interface Props {
 
 const NoteMenu = (props: Props) => {
   const { noteId } = props;
-  const { list, dispatchList } = useList();
-  const note =
-    noteId &&
-    list?.notes.length &&
-    list.notes.find((n: Note) => n.id === noteId);
+  const { notes } = useNotesStore((state) => state);
+  const note = notes.find((n: Note) => n.id === noteId);
 
   const { wide } = note || {};
   const expandIcon = wide ? (
@@ -47,6 +45,10 @@ const NoteMenu = (props: Props) => {
   const closeConfirmExportModal = () => setShowConfirmExportModal(false);
 
   const rotatePanels = useCallback(() => {
+    if (!note) {
+      // TO-DO: Show toast
+      return;
+    }
     const { viewer, editor } = note.panels;
     let nextPanels: PanelsPartial;
     if (viewer && editor) {
@@ -58,45 +60,44 @@ const NoteMenu = (props: Props) => {
     }
 
     const panels = { ...note.panels, ...nextPanels };
-    dispatchList({
-      type: "merge",
-      id: noteId,
-      partial: { panels },
-    });
-  }, [dispatchList, noteId, note.panels]);
+    updateNote(note.id, { panels });
+  }, [note]);
 
   const updatePanels = useCallback(
-    (panels: Partial<Panels>) =>
-      dispatchList({
-        type: "merge-panels",
-        id: noteId,
-        panels,
-      }),
-    [noteId, dispatchList],
+    (panels: Partial<Panels>) => {
+      if (!note) {
+        // TO-DO: Show toast
+        return;
+      }
+      updateNote(note.id, { panels: { ...note.panels, ...panels } });
+    },
+    [note],
   );
 
   const updateWidth = useCallback(
-    (wide: boolean) =>
-      dispatchList({
-        type: "merge",
-        id: noteId,
-        partial: { wide },
-      }),
-    [noteId, dispatchList],
+    (wide: boolean) => {
+      if (!note) {
+        // TO-DO: Show toast
+        return;
+      }
+      updateNote(note.id, { wide });
+    },
+    [note],
   );
 
   const toggleToc = () => updatePanels({ toc: !tocVisible });
   const toggleFullWidth = () => updateWidth(!wide);
 
-  const rotateTheme = useCallback(() => {
-    dispatchList({
-      type: "next-style",
-      id: noteId,
-    });
-  }, [noteId, dispatchList]);
+  // TO-DO: Re-enable this by writing method in useNotesStore.ts
+  // const rotateTheme = useCallback(() => {
+  //   dispatchList({
+  //     type: 'next-style',
+  //     id: noteId,
+  //   });
+  // }, [noteId, dispatchList]);
 
-  const fullWidthText = wide ? "Compress" : "Expand";
-  const toggleTocText = tocVisible ? "Hide" : "Show";
+  const fullWidthText = wide ? 'Compress' : 'Expand';
+  const toggleTocText = tocVisible ? 'Hide' : 'Show';
 
   if (!note) {
     return null;
@@ -104,10 +105,10 @@ const NoteMenu = (props: Props) => {
 
   return (
     <>
-      <Menu as="div" className="no-print absolute inline-flex right-2 top-2">
+      <Menu as="div" className="no-print absolute right-2 top-2 inline-flex">
         <Menu.Button as="div" className="menu-btn">
           <RoundBigButton>
-            <FiMenu className="text-sm " />
+            <FiMenu className="text-sm" />
           </RoundBigButton>
         </Menu.Button>
         <Transition
@@ -119,13 +120,7 @@ const NoteMenu = (props: Props) => {
           leaveFrom="transform scale-100 opacity-100"
           leaveTo="transform scale-95 opacity-0"
         >
-          <Menu.Items
-            className="mt-1 flex w-max flex-col
-              rounded border
-              border-[var(--border-color)]
-              bg-[var(--solid-bg-color)]
-              py-4 px-3"
-          >
+          <Menu.Items className="mt-1 flex w-max flex-col rounded border border-[var(--border-color)] bg-[var(--solid-bg-color)] px-3 py-4">
             <MenuButton2
               className="two-panes"
               text="Change layout"
@@ -153,13 +148,6 @@ const NoteMenu = (props: Props) => {
               text={`${toggleTocText} Table of Contents`}
               onClick={toggleToc}
               icon={<HiOutlineListBullet />}
-              disabled={!note.panels.viewer}
-            />
-            <MenuButton2
-              data-test-change-style
-              text="Change theme"
-              onClick={rotateTheme}
-              icon={<HiOutlineSwatch />}
               disabled={!note.panels.viewer}
             />
             <MenuButton2

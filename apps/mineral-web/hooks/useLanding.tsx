@@ -1,22 +1,22 @@
-import { useEffect } from "react";
-import { useList } from "hooks/useList";
-import { useRouter } from "next/navigation";
+import { useEffect } from 'react';
+import { useRouter } from 'next/navigation';
+import useNotesStore from 'utils/useNotesStore';
 
 export const useLanding = () => {
-  const { list } = useList();
   const router = useRouter();
+  const { initialized, notes } = useNotesStore((state) => state);
 
   useEffect(() => {
-    if (!list.initialized) {
+    if (!initialized) {
       return;
     }
 
-    if (!list.notes.length) {
-      router.replace("/intro");
+    if (!notes.length) {
+      router.replace('/intro');
       return;
     }
-    router.replace("/notes");
-  }, [list]);
+    router.replace('/notes');
+  }, [initialized, notes, router]);
 
   return null;
 };

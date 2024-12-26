@@ -1,19 +1,18 @@
-"use client";
+'use client';
 
-import React, { useEffect, useState, useCallback, ChangeEvent } from "react";
-import ListHeader from "components/filelist/ListHeader";
-import BinView from "components/BinView";
-import { useList } from "hooks/useList";
-import EmptyList from "components/EmptyList";
-import { useRouter, useSearchParams } from "next/navigation";
-import BinMenu from "./BinMenu";
+import BinView from 'components/BinView';
+import EmptyList from 'components/EmptyList';
+import ListHeader from 'components/filelist/ListHeader';
+import { useRouter, useSearchParams } from 'next/navigation';
+import React, { ChangeEvent, useCallback, useEffect, useState } from 'react';
+import useNotesStore from 'utils/useNotesStore';
+import BinMenu from './BinMenu';
 
 const BinList = () => {
-  const { list } = useList();
+  const { notes, initialized } = useNotesStore((state) => state);
   const router = useRouter();
-  const initialSearchTerm = useSearchParams()?.get("search");
-  const [searchTerm, setSearchterm] = useState("");
-  const { notes } = list;
+  const initialSearchTerm = useSearchParams()?.get('search');
+  const [searchTerm, setSearchterm] = useState('');
 
   useEffect(() => {
     if (initialSearchTerm) {
@@ -37,28 +36,25 @@ const BinList = () => {
       setSearchterm(newSearchTerm);
       // TO-DO: Use pathname instead of window.location.href
       const url = new URL(window.location.href);
-      url.searchParams.set("search", newSearchTerm.trim());
+      url.searchParams.set('search', newSearchTerm.trim());
       router.replace(url.href);
     },
     [router],
   );
 
-  const onClear = () => setSearchterm("");
+  const onClear = () => setSearchterm('');
 
-  if (!list.initialized) {
+  if (!initialized) {
     return null;
   }
 
-  if (!list?.notes?.length) {
+  if (!notes?.length) {
     return <EmptyList />;
   }
 
   return (
     <>
-      <div
-        className="list-view mx-auto flex
-      w-full max-w-3xl flex-col px-4 pb-16 pt-4 sm:py-16"
-      >
+      <div className="list-view mx-auto flex w-full max-w-3xl flex-col px-4 pb-16 pt-4 sm:py-16">
         <div className="mb-12 flex items-center gap-4">
           <ListHeader
             searchTerm={searchTerm}

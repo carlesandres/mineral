@@ -4,24 +4,28 @@ import { useEffect, useCallback, useState } from 'react';
 import NoteContainer from 'components/NoteContainer';
 import { messageBroadcast, messageReceive } from 'utils/fileUtils';
 import FileInUse from 'components/FileInUse';
-import { useList } from 'hooks/useList';
 import { useSearchParams } from 'next/navigation';
 import { Note } from 'types/Note';
 import { notFound } from 'next/navigation';
+import useNotesStore from 'utils/useNotesStore';
 
 const NotePageClient = () => {
-  const { list, dispatchList } = useList();
+  const { notes: allNotes, initialized } = useNotesStore((state) => state);
   const [fileOpenSomewhereElse, setFileopensomewhereelse] = useState(false);
   const searchParams = useSearchParams();
   const noteId = searchParams?.get('id');
-  const allNotes = list?.notes;
 
   const note =
     allNotes && noteId && allNotes.find((note: Note) => note.id === noteId);
+
+  if (!note) {
+    notFound();
+  }
+
   const title = note?.title || '(Untitled note)';
 
   const reportFileAlreadyOpen = useCallback(
-    (ev2) => {
+    (ev2: StorageEvent) => {
       const message = messageReceive(ev2);
       if (!message) {
         return;
@@ -53,23 +57,24 @@ const NotePageClient = () => {
     };
   }, [noteId, reportFileAlreadyOpen]);
 
-  useEffect(() => {
-    if (list.initialized) {
-      dispatchList({
-        type: 'merge',
-        id: noteId,
-        partial: {
-          updatedAt: new Date().getTime(),
-        },
-      });
-    }
-  }, [noteId, dispatchList, list.initialized]);
+  // TO-DO: Re-enable this
+  // useEffect(() => {
+  //   if (initialized) {
+  //     dispatchList({
+  //       type: 'merge',
+  //       id: noteId,
+  //       partial: {
+  //         updatedAt: new Date().getTime(),
+  //       },
+  //     });
+  //   }
+  // }, [noteId, dispatchList, list.initialized]);
 
   useEffect(() => {
     document.title = title;
   }, [title]);
 
-  if (!list.initialized) {
+  if (!initialized) {
     return null;
   }
 

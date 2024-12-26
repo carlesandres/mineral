@@ -6,14 +6,14 @@ import RoundBigButton from './RoundBigButton';
 import { useMemo } from 'react';
 import { getShownFiles } from 'utils/fileUtils';
 import EmptyBinButton from './EmptyBinButton';
-import { useList } from 'hooks/useList';
 import { useRoutingHelpers } from 'utils/use-routing-helpers';
+import useNotesStore from 'utils/useNotesStore';
 
 const BinMenu = () => {
-  const { list } = useList();
+  const { notes } = useNotesStore((state) => state);
   const binnedNotes = useMemo(() => {
-    return getShownFiles(list.notes, 'BIN', '');
-  }, [list.notes]);
+    return getShownFiles(notes, 'BIN', '');
+  }, [notes]);
   const { goToNewFile, goToList } = useRoutingHelpers();
 
   return (

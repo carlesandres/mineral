@@ -2,6 +2,7 @@ import { create } from 'zustand';
 import { v4 as uuidv4 } from 'uuid';
 import { produce } from 'immer';
 import { Note } from 'types/Note';
+import { saveFile } from './fileUtils';
 
 interface StoreState {
   initialized: boolean;
@@ -19,11 +20,10 @@ export const loadNotes = () => {
     setNotes(JSON.parse(notes));
     setInitialized(true);
   }
-}
+};
 
 const setInitialized = (initialized: boolean) =>
   useNotesStore.setState((state) => ({ ...state, initialized }));
-
 
 const setNotes = (notes: Note[]) =>
   useNotesStore.setState((state) => {
@@ -39,6 +39,15 @@ export const setNote = (note: Note) =>
   useNotesStore.setState((state) => {
     const newState = produce(state, (draftState) => {
       draftState.notes[note.id] = note;
+    });
+    return newState;
+  });
+
+export const updateNote = (noteId: string, note: Partial<Note>) =>
+  useNotesStore.setState((state) => {
+    const newState = produce(state, (draftState) => {
+      draftState.notes[noteId] = { ...draftState.notes[noteId], ...note };
+      saveFile(draftState.notes[noteId]);
     });
     return newState;
   });
@@ -70,7 +79,7 @@ export const deleteNote = (noteId: string) =>
 
 export const getNotes = () => useNotesStore.getState().notes;
 
-export const getNote = (noteId: string) => useNotesStore.getState().notes[noteId];
+export const getNoteById = (noteId: string) =>
+  useNotesStore.getState().notes[noteId];
 
 export default useNotesStore;
-
