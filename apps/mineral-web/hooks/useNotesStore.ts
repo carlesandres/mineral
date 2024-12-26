@@ -39,6 +39,7 @@ export const setNote = (note: Note) =>
   useNotesStore.setState((state) => {
     const newState = produce(state, (draftState) => {
       draftState.notes[note.id] = note;
+      saveFile(draftState.notes[note.id]);
     });
     return newState;
   });

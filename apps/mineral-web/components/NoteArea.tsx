@@ -4,9 +4,9 @@ import EditorToolbar from 'components/EditorToolbar';
 import EditorFooter from 'components/EditorFooter';
 import HelpModal from 'components/HelpModal';
 import ColorSelector from 'components/ColorSelector';
-import { useList } from 'hooks/useList';
 import { Note } from 'types/Note';
 import NoteMenu from './NoteMenu';
+import { updateNote } from 'hooks/useNotesStore';
 
 interface Props {
   note: Note;
@@ -17,7 +17,6 @@ interface Props {
 
 const NoteArea = (props: Props) => {
   const [displayColorModal, setDisplaycolormodal] = useState(false);
-  const { dispatchList } = useList();
   const editorarea = useRef<HTMLDivElement | null>(null);
   const { note } = props;
   const noteId = note?.id;
@@ -54,24 +53,16 @@ const NoteArea = (props: Props) => {
 
   const changeColor = useCallback(
     (color: string) => {
-      dispatchList({
-        type: 'merge',
-        id: noteId,
-        partial: { color },
-      });
+      updateNote(noteId, { color });
       hideColorModal();
     },
-    [noteId, dispatchList],
+    [noteId],
   );
 
   const toggleFooter = useCallback(() => {
-    const { showFooter, id } = note;
-    dispatchList({
-      type: 'merge',
-      id,
-      partial: { showFooter: !showFooter },
-    });
-  }, [note, dispatchList]);
+    const { showFooter } = note;
+    updateNote(note.id, { showFooter: !showFooter });
+  }, [note]);
 
   if (!note) {
     return null;

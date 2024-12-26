@@ -4,14 +4,14 @@ import React, { useMemo } from 'react';
 import { useRouter } from 'next/navigation';
 import { fileUrl } from 'utils/paths';
 import { useEffect } from 'react';
-import useSettingsStore from 'utils/useSettingsStore';
+import useSettingsStore from 'hooks/useSettingsStore';
 import { newFile } from 'utils/fileUtils';
-import { useList } from 'hooks/useList';
+import useNotesStore, { setNote } from 'hooks/useNotesStore';
 
 const NewNotePageClient = () => {
   const router = useRouter();
+  const { initialized } = useNotesStore();
   const { startWithPreview, footerHiddenByDefault } = useSettingsStore();
-  const { list, dispatchList } = useList();
 
   const panels = useMemo(() => {
     return startWithPreview
@@ -22,17 +22,14 @@ const NewNotePageClient = () => {
   useEffect(() => {
     const create = () => {
       const note = newFile({ panels, showFooter: !footerHiddenByDefault });
-      dispatchList({
-        type: 'append',
-        note,
-      });
+      setNote(note);
       router.replace(fileUrl(note.id));
     };
 
-    if (list.initialized) {
+    if (initialized) {
       create();
     }
-  }, [router, list?.initialized, dispatchList, panels, footerHiddenByDefault]);
+  }, [router, initialized, panels, footerHiddenByDefault]);
 
   return <div>Creating new file...</div>;
 };

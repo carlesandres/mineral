@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import useNotesStore from 'utils/useNotesStore';
+import useNotesStore from 'hooks/useNotesStore';
 
 export const useLanding = () => {
   const router = useRouter();

@@ -1,4 +1,4 @@
-import useUIZStore from 'utils/useUIZStore';
+import useUIZStore from 'hooks/useUIZStore';
 import { motion } from 'motion/react';
 
 const Toast = () => {

@@ -5,7 +5,7 @@ import EmptyList from 'components/EmptyList';
 import ListHeader from 'components/filelist/ListHeader';
 import { useRouter, useSearchParams } from 'next/navigation';
 import React, { ChangeEvent, useCallback, useEffect, useState } from 'react';
-import useNotesStore from 'utils/useNotesStore';
+import useNotesStore from 'hooks/useNotesStore';
 import BinMenu from './BinMenu';
 
 const BinList = () => {

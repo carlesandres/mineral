@@ -4,7 +4,7 @@ import hilite from 'utils/custom-hilite';
 import { HLJSApi } from 'highlight.js';
 import PanelLabel from 'components/PanelLabel';
 import { FaMarkdown } from 'react-icons/fa';
-import useSettingsStore from 'utils/useSettingsStore';
+import useSettingsStore from 'hooks/useSettingsStore';
 import DOMPurify from 'dompurify';
 import CloseButton from './CloseButton';
 

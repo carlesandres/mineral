@@ -4,9 +4,9 @@ import { Note } from 'types/Note';
 import ConfirmDialog from 'components/ConfirmDialog';
 import TextInput from 'components/TextInput';
 import Checkbox from 'components/Checkbox';
-import useUIZStore from 'utils/useUIZStore';
+import useUIZStore from 'hooks/useUIZStore';
 import SuccessToast from 'components/SuccessToast';
-import useNotesStore from 'utils/useNotesStore';
+import useNotesStore from 'hooks/useNotesStore';
 
 const inputStyle = `border-b bg-transparent flex-1
 p-2 hover:border-gray-500 form-control cursor-pointer text-base

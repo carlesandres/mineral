@@ -3,7 +3,7 @@
 import { HiOutlinePlus, HiOutlineClipboard } from 'react-icons/hi';
 import Link from 'next/link';
 import { Button } from 'components/ui/button';
-import useNotesStore from 'utils/useNotesStore';
+import useNotesStore from 'hooks/useNotesStore';
 
 const style =
   'mx-auto flex items-center justify-center space-x-2 sm:!px-6 sm:!py-4 sm:text-lg';

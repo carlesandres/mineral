@@ -7,12 +7,12 @@ import React, {
   UIEventHandler,
 } from 'react';
 import { useState } from 'react';
-import { useList } from 'hooks/useList';
-import useSettingsStore from 'utils/useSettingsStore';
+import useSettingsStore from 'hooks/useSettingsStore';
 import PanelLabel from 'components/PanelLabel';
 import { HiOutlinePencil } from 'react-icons/hi';
 import type { Note } from 'types/Note';
 import CloseButton from './CloseButton';
+import { updateNote } from 'hooks/useNotesStore';
 
 interface Props extends Note {
   onScrollEditor: UIEventHandler<HTMLTextAreaElement>;
@@ -25,7 +25,6 @@ const Editor = React.forwardRef(
     const { id, panels, onClose } = props;
     const { lineHeightRem, dimBlurredEditor } = useSettingsStore();
     const [text, setText] = useState('');
-    const { dispatchList } = useList();
     const showEditor = panels?.editor;
     const isViewerOpen = panels?.viewer;
 
@@ -46,16 +45,9 @@ const Editor = React.forwardRef(
     const changeText = useCallback(
       (newText: string) => {
         setText(newText);
-        dispatchList({
-          type: 'merge',
-          id,
-          partial: {
-            text: newText,
-            updatedAt: new Date().getTime(),
-          },
-        });
+        updateNote(id, { text: newText, updatedAt: new Date().getTime() });
       },
-      [id, dispatchList],
+      [id],
     );
 
     const onChange = (event: ChangeEvent<HTMLTextAreaElement>) =>

@@ -2,7 +2,7 @@ import { useState, useCallback } from 'react';
 import Modal from 'components/Modal';
 import Error from 'components/Error';
 import useCreateFile from 'hooks/useCreateFile';
-import useUIZStore from 'utils/useUIZStore';
+import useUIZStore from 'hooks/useUIZStore';
 import SuccessToast from 'components/SuccessToast';
 
 export const readLocalFile = (file: File) => {

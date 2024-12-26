@@ -1,17 +1,16 @@
-import NoteArea from "components/NoteArea";
-import { useEffect, useCallback, useRef } from "react";
-import { useList } from "hooks/useList";
-import useSettingsStore from "utils/useSettingsStore";
-import "highlight.js/styles/github-dark.css";
-import "highlight.js/styles/github.css";
-import { NotePartial, Note, PanelsPartial } from "types/Note";
+import NoteArea from 'components/NoteArea';
+import { useEffect, useCallback, useRef } from 'react';
+import useSettingsStore from 'hooks/useSettingsStore';
+import 'highlight.js/styles/github-dark.css';
+import 'highlight.js/styles/github.css';
+import { Note, PanelsPartial } from 'types/Note';
+import { updateNote } from 'hooks/useNotesStore';
 
 interface Props {
   note: Note;
 }
 
 const NoteContainer = (props: Props) => {
-  const { dispatchList } = useList();
   const { note } = props;
   const { darkMode } = useSettingsStore();
   const darkStyleRef = useRef<HTMLStyleElement | null>(null);
@@ -48,26 +47,16 @@ const NoteContainer = (props: Props) => {
     const active = isNowDark ? lightStyleRef.current : darkStyleRef.current;
     const inactive = isNowDark ? darkStyleRef.current : lightStyleRef.current;
     if (active) {
-      active.setAttribute("media", "not all");
+      active.setAttribute('media', 'not all');
     }
     if (inactive) {
-      inactive.removeAttribute("media");
+      inactive.removeAttribute('media');
     }
   }, [darkMode]);
 
-  const updateNote = useCallback(
-    (partial: NotePartial) =>
-      dispatchList({
-        type: "merge",
-        partial,
-        id: noteId,
-      }),
-    [noteId],
-  );
-
   const editTitle = useCallback(
-    (title: string) => updateNote({ title }),
-    [updateNote],
+    (title: string) => updateNote(noteId, { title }),
+    [noteId],
   );
 
   const rotatePanels = useCallback(() => {
@@ -82,12 +71,8 @@ const NoteContainer = (props: Props) => {
     }
 
     const panels = { ...note.panels, ...nextPanels };
-    dispatchList({
-      type: "merge",
-      id: noteId,
-      partial: { panels },
-    });
-  }, [dispatchList, noteId, note.panels]);
+    updateNote(noteId, { panels });
+  }, [noteId, note.panels]);
 
   // // TO-DO: Simplify this ffect by extracting most of the code out
   // useEffect(() => {

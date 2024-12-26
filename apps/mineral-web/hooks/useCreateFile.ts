@@ -1,24 +1,25 @@
 import { useRouter } from 'next/navigation';
-import useSettingsStore from 'utils/useSettingsStore';
-import { useList } from 'hooks/useList';
-import { createNewFile } from 'utils/fileUtils';
+import useSettingsStore from 'hooks/useSettingsStore';
+import { newFile } from 'utils/fileUtils';
 import { fileUrl } from 'utils/paths';
+import { setNote } from './useNotesStore';
+import { Note } from 'types/Note';
 
 const useCreateFile = () => {
   const router = useRouter();
   const { startWithPreview } = useSettingsStore();
-  const { dispatchList } = useList();
 
   const panels = startWithPreview
-    ? { viewer: true, editor: true }
-    : { viewer: false, editor: true };
+    ? { viewer: true, editor: true, toc: false }
+    : { viewer: false, editor: true, toc: false };
 
-  const createFile = async (noteProps) => {
-    const note = await createNewFile({ ...noteProps, panels });
-    dispatchList({
-      type: 'append',
-      note: note,
-    });
+  const createFile = async (noteProps: Partial<Note> = {}) => {
+    const note = newFile({ ...noteProps, panels });
+    if (!note) {
+      // TO-DO: Toast
+      return;
+    }
+    setNote(note);
     router.push(fileUrl(note.id));
   };
 

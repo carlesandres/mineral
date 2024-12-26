@@ -7,9 +7,9 @@ import {
   HiOutlineTrash,
   HiOutlinePlus,
 } from 'react-icons/hi';
-import useUIZStore from 'utils/useUIZStore';
+import useUIZStore from 'hooks/useUIZStore';
 import RoundBigButton from './RoundBigButton';
-import { useRoutingHelpers } from 'utils/use-routing-helpers';
+import { useRoutingHelpers } from 'hooks/use-routing-helpers';
 
 const ListMenu = () => {
   const { showBackupModal, showFileImport } = useUIZStore();

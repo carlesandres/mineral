@@ -1,8 +1,8 @@
 import { useCallback } from 'react';
-import useUIZStore from 'utils/useUIZStore';
+import useUIZStore from 'hooks/useUIZStore';
 import SuccessToast from 'components/SuccessToast';
-import { binNote, unbinNote } from 'utils/useNotesStore';
-import { useRoutingHelpers } from 'utils/use-routing-helpers';
+import { binNote, unbinNote } from 'hooks/useNotesStore';
+import { useRoutingHelpers } from 'hooks/use-routing-helpers';
 
 type NoteDeletedAt = number | undefined | null;
 

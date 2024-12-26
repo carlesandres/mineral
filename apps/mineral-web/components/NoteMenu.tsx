@@ -1,11 +1,10 @@
 import { useCallback, useState } from 'react';
 import { Menu, Transition } from '@headlessui/react';
-import { useList } from 'hooks/useList';
 import { FiMenu } from 'react-icons/fi';
 import { Note, Panels, PanelsPartial } from 'types/Note';
 import ConfirmExportModal from 'components/ConfirmExportModal';
 import useDeleteNote from 'hooks/useDeleteNote';
-import useUIZStore from 'utils/useUIZStore';
+import useUIZStore from 'hooks/useUIZStore';
 import {
   HiOutlineArrowsPointingIn,
   HiOutlineArrowsPointingOut,
@@ -13,13 +12,12 @@ import {
   HiOutlineListBullet,
   HiOutlineArrowDownTray,
   HiOutlinePrinter,
-  HiOutlineSwatch,
   HiOutlineViewColumns,
 } from 'react-icons/hi2';
 import { FaMarkdown } from 'react-icons/fa';
 import MenuButton2 from 'components/MenuButton2';
 import RoundBigButton from './RoundBigButton';
-import useNotesStore, { updateNote } from 'utils/useNotesStore';
+import useNotesStore, { updateNote } from 'hooks/useNotesStore';
 
 interface Props {
   noteId: string;

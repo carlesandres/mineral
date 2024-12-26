@@ -92,9 +92,6 @@ export const newFile = (file: Partial<Note> = {}): Note => {
   };
 };
 
-export const addFile = (fileDefaults: Partial<Note>) =>
-  saveFile(newFile(fileDefaults), true);
-
 export const readLocalFile = async (...rest) => {
   const file = await localforage.getItem(...rest);
   if (!file) {
@@ -437,14 +434,5 @@ export const readFile = async (dispatch, fileId) => {
     dispatch({ type: 'read', file });
   } else {
     dispatch({ type: 'error-reading' });
-  }
-};
-
-export const createNewFile = async (fileObj) => {
-  try {
-    const file = await addFile(fileObj);
-    return file;
-  } catch (err) {
-    console.log(err);
   }
 };

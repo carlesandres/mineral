@@ -7,7 +7,7 @@ import FileInUse from 'components/FileInUse';
 import { useSearchParams } from 'next/navigation';
 import { Note } from 'types/Note';
 import { notFound } from 'next/navigation';
-import useNotesStore from 'utils/useNotesStore';
+import useNotesStore from 'hooks/useNotesStore';
 
 const NotePageClient = () => {
   const { notes: allNotes, initialized } = useNotesStore((state) => state);

@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import React, {
   useState,
@@ -6,26 +6,26 @@ import React, {
   useRef,
   useCallback,
   ChangeEvent,
-} from "react";
-import ListHeader from "components/filelist/ListHeader";
-import ListMenu from "components/ListMenu";
-import ListElements from "components/ListElements";
-import { useList } from "hooks/useList";
-import EmptyList from "components/EmptyList";
-import DragAndDrop from "components/DragAndDrop";
-import useCreateFile from "hooks/useCreateFile";
-import { readLocalFile } from "components/FileImporter";
-import useUIZStore from "utils/useUIZStore";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import SuccessToast from "components/SuccessToast";
+} from 'react';
+import ListHeader from 'components/filelist/ListHeader';
+import ListMenu from 'components/ListMenu';
+import ListElements from 'components/ListElements';
+import EmptyList from 'components/EmptyList';
+import DragAndDrop from 'components/DragAndDrop';
+import useCreateFile from 'hooks/useCreateFile';
+import { readLocalFile } from 'components/FileImporter';
+import useUIZStore from 'hooks/useUIZStore';
+import { useRouter, useSearchParams } from 'next/navigation';
+import SuccessToast from 'components/SuccessToast';
+import useNotesStore from 'hooks/useNotesStore';
 
 const ListView = () => {
   const header = useRef<HTMLInputElement>(null);
   const { toast } = useUIZStore();
-  const { list } = useList();
+  const { notes, initialized } = useNotesStore((state) => state);
   const router = useRouter();
-  const initialSearchTerm = useSearchParams()?.get("search");
-  const [searchTerm, setSearchterm] = useState("");
+  const initialSearchTerm = useSearchParams()?.get('search');
+  const [searchTerm, setSearchterm] = useState('');
   // const pathname = usePathname();
 
   useEffect(() => {
@@ -42,13 +42,13 @@ const ListView = () => {
       setSearchterm(newSearchTerm);
       // TO-DO: Use pathname instead of window.location.href
       const url = new URL(window.location.href);
-      url.searchParams.set("search", newSearchTerm.trim());
+      url.searchParams.set('search', newSearchTerm.trim());
       router.replace(url.href);
     },
     [router],
   );
 
-  const onClear = () => setSearchterm("");
+  const onClear = () => setSearchterm('');
 
   const handleDrop = useCallback(
     async (files: FileList) => {
@@ -64,22 +64,19 @@ const ListView = () => {
     [createFile],
   );
 
-  if (!list.initialized) {
+  if (!initialized) {
     return null;
   }
 
-  if (!list?.notes?.length) {
+  if (!notes?.length) {
     return <EmptyList />;
   }
 
   return (
     <>
-      <DragAndDrop handleDrop={handleDrop} className="mx-auto w-full ">
+      <DragAndDrop handleDrop={handleDrop} className="mx-auto w-full">
         <div className="list-view mx-auto flex w-full max-w-3xl flex-col px-4 pb-16 pt-4 sm:py-16">
-          <div
-            className={`mb-12  flex items-center justify-end gap-4
-          `}
-          >
+          <div className={`mb-12 flex items-center justify-end gap-4`}>
             <ListHeader
               ref={header}
               searchTerm={searchTerm}
@@ -88,7 +85,7 @@ const ListView = () => {
             />
           </div>
           <div className="relative">
-            <ListElements notes={list?.notes} searchTerm={searchTerm} />
+            <ListElements notes={notes} searchTerm={searchTerm} />
           </div>
         </div>
       </DragAndDrop>

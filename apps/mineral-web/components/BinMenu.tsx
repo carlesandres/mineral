@@ -6,8 +6,8 @@ import RoundBigButton from './RoundBigButton';
 import { useMemo } from 'react';
 import { getShownFiles } from 'utils/fileUtils';
 import EmptyBinButton from './EmptyBinButton';
-import { useRoutingHelpers } from 'utils/use-routing-helpers';
-import useNotesStore from 'utils/useNotesStore';
+import { useRoutingHelpers } from 'hooks/use-routing-helpers';
+import useNotesStore from 'hooks/useNotesStore';
 
 const BinMenu = () => {
   const { notes } = useNotesStore((state) => state);

@@ -1,6 +1,6 @@
 'use client';
 
-import useSettingsStore, { setSetting } from 'utils/useSettingsStore';
+import useSettingsStore, { setSetting } from 'hooks/useSettingsStore';
 import HorzRadioGroup from 'components/HorzRadioGroup';
 import SettingsCheckbox from 'components/SettingsCheckbox';
 import Label from 'components/Label';

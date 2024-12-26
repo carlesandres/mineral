@@ -1,7 +1,7 @@
 import React from 'react';
 import Modal from 'components/Modal';
 import MDCheatsheet from 'components/MDCheatsheet';
-import useUIZStore from 'utils/useUIZStore';
+import useUIZStore from 'hooks/useUIZStore';
 
 const HelpModal = () => {
   const { mdCheatVisible, hideMdCheat } = useUIZStore((state) => state);

@@ -6,7 +6,7 @@ import PleaseWait from 'components/PleaseWait';
 import { useEffect } from 'react';
 import { sortBy } from 'lodash';
 import { useRouter } from 'next/navigation';
-import useNotesStore, { getNotes } from 'utils/useNotesStore';
+import useNotesStore, { getNotes } from 'hooks/useNotesStore';
 
 const LastPageClient = () => {
   const notes = getNotes();
