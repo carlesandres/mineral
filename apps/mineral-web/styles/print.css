@@ -1,0 +1,97 @@
+@media print {
+  @page {
+    margin: 1cm;
+  }
+
+  body {
+    margin: 1.6cm;
+  }
+
+  * {
+    color: black !important;
+  }
+
+  .no-print {
+    display: none !important;
+  }
+
+  pre {
+    white-space: pre-wrap !important;
+    background: #efefef !important;
+    -webkit-print-color-adjust: exact !important;
+  }
+
+  .title {
+    margin-top: -60px;
+    font-size: 20px;
+  }
+
+  .colorball {
+    display: none !important;
+  }
+
+  hr {
+    break-before: page;
+  }
+
+  p,
+  code {
+    orphans: 2;
+    widows: 2;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  pre code {
+    white-space: pre-wrap !important;
+  }
+
+  h2,
+  h3 {
+    break-after: avoid-page;
+  }
+
+  #main {
+    margin-top: 20px;
+  }
+
+  .navbar {
+    display: none !important;
+  }
+
+  /* stylelint-disable selector-class-pattern */
+  .__react_component_tooltip {
+    display: none !important;
+  }
+
+  .expand,
+  .toggle-full-width {
+    display: none !important;
+  }
+
+  .editor-toolbar {
+    margin-bottom: 0;
+  }
+
+  .notearea {
+    top: 10px;
+    overflow: initial;
+    box-shadow: none !important;
+  }
+
+  .editor-wrap {
+    margin-top: 0;
+    color: inherit !important;
+    display: block;
+    width: auto;
+
+    /* TO-DO: This is a super-ugly hack */
+    height: 100%;
+    overflow: visible;
+  }
+
+  .scrollable {
+    position: relative;
+    overflow: visible;
+  }
+}

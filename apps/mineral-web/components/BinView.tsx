@@ -1,8 +1,7 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect } from 'react';
 import ListItem from 'components/ListItem';
 import { Note } from 'types/Note';
-import throttle from 'lodash/throttle';
-import { getShownFiles } from 'utils/fileUtils.js';
+import { getShownFiles } from 'utils/fileUtils';
 import { sortBy } from 'lodash';
 import Label from 'components/Label';
 
@@ -13,16 +12,16 @@ interface BiewViewProps {
 
 const BinView = (props: BiewViewProps) => {
   const [initialised, setInitialised] = useState(false);
-  const [shownNotes, setFilestoshow] = useState([]);
+  const [shownNotes, setFilestoshow] = useState<Note[]>([]);
   const { notes, searchTerm } = props;
-  const throttledSetFiles = useCallback(throttle(setFilestoshow, 200), []);
 
+  // TO-DO: Debounce this (maybe)?
   useEffect(() => {
     const shownNotes = getShownFiles(notes, 'BIN', searchTerm);
     const sortedNotes = sortBy(shownNotes, 'updatedAt').reverse();
-    throttledSetFiles([...sortedNotes]);
+    setFilestoshow([...sortedNotes]);
     setInitialised(true);
-  }, [notes, searchTerm, throttledSetFiles]);
+  }, [notes, searchTerm]);
 
   if (!notes.length) {
     return <p className="py-4 text-center">Your Bin is empty.</p>;
@@ -41,8 +40,9 @@ const BinView = (props: BiewViewProps) => {
       </p>
     );
   } else {
+    // TO-DO: MIssing disabled prop on ListItem
     content = shownNotes.map((note) => (
-      <ListItem disabled key={note.id} note={note} />
+      <ListItem key={note.id} note={note} />
     ));
   }
 
@@ -52,11 +52,7 @@ const BinView = (props: BiewViewProps) => {
         <Label>Title</Label>
         <Label>Deleted</Label>
       </div>
-      <div
-        className="file-list mb-32 flex flex-1 flex-shrink-0 flex-col gap-2
-        pb-4 text-sm
-        "
-      >
+      <div className="file-list mb-32 flex flex-1 flex-shrink-0 flex-col gap-2 pb-4 text-sm">
         {content}
       </div>
     </>

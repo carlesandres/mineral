@@ -1,3 +1,5 @@
+'use client';
+
 import React, {
   useState,
   useEffect,
@@ -8,28 +10,22 @@ import React, {
 import ListHeader from 'components/filelist/ListHeader';
 import ListMenu from 'components/ListMenu';
 import ListElements from 'components/ListElements';
-import listShortcuts from 'components/listShortcuts';
-import { useShortcuts } from 'hooks/useShortcuts';
-import { useList } from 'hooks/useList';
 import EmptyList from 'components/EmptyList';
 import DragAndDrop from 'components/DragAndDrop';
-import useCreateFile from 'hooks/useCreateFile';
-import { readLocalFile } from 'components/FileImporter';
-import useUIZStore from 'utils/useUIZStore';
-import { useRouter } from 'next/router';
-import { useQueryParam } from 'hooks/useQueryP';
-import SuccessToast from 'components/SuccessToast';
-import Button from 'components/Button';
-import { HiOutlinePlus } from 'react-icons/hi';
+// import useCreateFile from 'hooks/useCreateFile';
+import { useRouter, useSearchParams } from 'next/navigation';
+import useNotesStore, { getNotes } from 'hooks/useNotesStore';
+import { useToast } from 'hooks/use-toast';
 
 const ListView = () => {
-  const header = useRef<HTMLInputElement>();
-  const { toast } = useUIZStore();
-  const { dispatch: dispatchShortcuts } = useShortcuts();
-  const { list } = useList();
+  const header = useRef<HTMLInputElement>(null);
+  const { toast } = useToast();
+  const { initialized } = useNotesStore((state) => state);
+  const notes = getNotes();
   const router = useRouter();
+  const initialSearchTerm = useSearchParams()?.get('search');
   const [searchTerm, setSearchterm] = useState('');
-  const { param: initialSearchTerm } = useQueryParam('search');
+  // const pathname = usePathname();
 
   useEffect(() => {
     if (initialSearchTerm) {
@@ -37,28 +33,16 @@ const ListView = () => {
     }
   }, [initialSearchTerm]);
 
-  const createFile = useCreateFile();
-
-  useEffect(() => {
-    const keyActionMap = {};
-
-    dispatchShortcuts({
-      type: 'set',
-      keyActionMap,
-      shortcutDescription: listShortcuts,
-    });
-  }, [dispatchShortcuts]);
-
   const onSearch = useCallback(
     (event: ChangeEvent<HTMLInputElement>) => {
       const newSearchTerm = event.target.value;
       setSearchterm(newSearchTerm);
-      const query = newSearchTerm.trim()
-        ? { search: newSearchTerm.trim() }
-        : {};
-      router.replace({ pathname: router.pathname, query });
+      // TO-DO: Use pathname instead of window.location.href
+      const url = new URL(window.location.href);
+      url.searchParams.set('search', newSearchTerm.trim());
+      router.replace(url.href);
     },
-    [router]
+    [router],
   );
 
   const onClear = () => setSearchterm('');
@@ -70,29 +54,29 @@ const ListView = () => {
       if (!firstFile.name) {
         return;
       }
-      const text = await readLocalFile(firstFile);
-      await createFile({ title: firstFile.name, text });
-      toast(<SuccessToast>File imported</SuccessToast>);
+      // const text = await readLocalFile(firstFile);
+      // await createFile({ title: firstFile.name, text });
+      toast({
+        description: 'Importing is not yet supported',
+        variant: 'destructive',
+      });
     },
-    [createFile]
+    [toast],
   );
 
-  if (!list.initialized || !router.isReady) {
+  if (!initialized) {
     return null;
   }
 
-  if (!list?.notes?.length) {
+  if (!notes?.length) {
     return <EmptyList />;
   }
 
   return (
     <>
-      <DragAndDrop handleDrop={handleDrop} className="mx-auto w-full ">
+      <DragAndDrop handleDrop={handleDrop} className="mx-auto w-full">
         <div className="list-view mx-auto flex w-full max-w-3xl flex-col px-4 pb-16 pt-4 sm:py-16">
-          <div
-            className={`mb-12  flex items-center justify-end gap-4
-          `}
-          >
+          <div className={`mb-12 flex items-center justify-end gap-4`}>
             <ListHeader
               ref={header}
               searchTerm={searchTerm}
@@ -101,11 +85,13 @@ const ListView = () => {
             />
           </div>
           <div className="relative">
-            <ListElements notes={list?.notes} searchTerm={searchTerm} />
+            <ListElements notes={notes} searchTerm={searchTerm} />
           </div>
         </div>
       </DragAndDrop>
-      <ListMenu />
+      <div className="absolute right-0 top-0">
+        <ListMenu />
+      </div>
     </>
   );
 };

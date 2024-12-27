@@ -1,12 +1,12 @@
-import { useRef, useState, useCallback, useEffect } from 'react';
+import { useRef, useCallback } from 'react';
 import Panes from 'components/Panes';
 import EditorToolbar from 'components/EditorToolbar';
 import EditorFooter from 'components/EditorFooter';
 import HelpModal from 'components/HelpModal';
-import ColorSelector from 'components/ColorSelector';
-import { useList } from 'hooks/useList';
 import { Note } from 'types/Note';
 import NoteMenu from './NoteMenu';
+import { updateNote } from 'hooks/useNotesStore';
+import { cn } from 'lib/utils';
 
 interface Props {
   note: Note;
@@ -16,62 +16,15 @@ interface Props {
 }
 
 const NoteArea = (props: Props) => {
-  const [displayColorModal, setDisplaycolormodal] = useState(false);
-  const { dispatchList } = useList();
-  const editorarea = useRef();
-  const { note, onRotatePanels } = props;
+  const editorarea = useRef<HTMLDivElement | null>(null);
+  const { note } = props;
   const noteId = note?.id;
-  const editorRef = useRef<HTMLTextAreaElement>();
-
-  const showColorModal = () => setDisplaycolormodal(true);
-  const hideColorModal = () => setDisplaycolormodal(false);
-
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Enter' && e.ctrlKey) {
-        onRotatePanels();
-        return;
-      }
-      if (e.key === 't' && e.ctrlKey) {
-        const { text } = note;
-        const newText =
-          text +
-          'aaa | bbb | ccc\n--|---|---\n1 | 2 | 3\n4 | 5 | 6\n7 | 8 | 9\n';
-        dispatchList({
-          type: 'merge',
-          id: noteId,
-          partial: { text: newText },
-        });
-        return;
-      }
-    };
-    document.addEventListener('keydown', handleKeyDown);
-
-    return () => {
-      document.removeEventListener('keydown', handleKeyDown);
-    };
-  }, [onRotatePanels, note, noteId, dispatchList]);
-
-  const changeColor = useCallback(
-    (color: string) => {
-      dispatchList({
-        type: 'merge',
-        id: noteId,
-        partial: { color },
-      });
-      hideColorModal();
-    },
-    [noteId, dispatchList],
-  );
+  const editorRef = useRef<HTMLTextAreaElement | null>(null);
 
   const toggleFooter = useCallback(() => {
-    const { showFooter, id } = note;
-    dispatchList({
-      type: 'merge',
-      id,
-      partial: { showFooter: !showFooter },
-    });
-  }, [note, dispatchList]);
+    const { showFooter } = note;
+    updateNote(note.id, { showFooter: !showFooter });
+  }, [note]);
 
   if (!note) {
     return null;
@@ -82,68 +35,45 @@ const NoteArea = (props: Props) => {
   const tocReallyShown = toc && viewer;
 
   const desiredWidth =
-    Number(Boolean(viewer)) * 75 +
-    Number(Boolean(editor)) * 75 +
-    Number(Boolean(tocReallyShown)) * 37;
+    Number(Boolean(viewer)) * 65 +
+    Number(Boolean(editor)) * 65 +
+    Number(Boolean(tocReallyShown)) * 26;
+
+  const customStyle = wide ? {} : { width: `${desiredWidth}ch` };
+
+  const bothMainPanes = viewer && editor;
+  const threePanes = bothMainPanes && tocReallyShown;
 
   const wideClass = wide
     ? 'wide w-full rounded-none m-0'
-    : 'dark:md:border max-w-full normal-mode sm:border';
+    : 'dark:md:border max-w-full sm:border';
 
-  const containerWideClass = wide ? '' : 'sm:px-8 sm:py-16 lg:py-32';
+  const containerWideClass = wide ? '' : 'sm:px-8 sm:py-12';
 
-  // @media (max-width: 800px) {
-  //   .notearea {
-  //     width: 100%;
-  //     border-radius: 0;
-  //     border: none;
-  //     margin: 0;
-  //   }
-  //
-  //   .editor-toolbar .actions button.toggle-full-width {
-  //     display: none;
-  //   }
-  // }
   return (
-    <>
-      <ColorSelector
-        show={displayColorModal}
-        onClose={hideColorModal}
-        onChange={changeColor}
-        selectedColor={note?.color}
-      />
-      <HelpModal />
-      <div className={`flex w-full ${containerWideClass}`}>
-        <div
-          ref={editorarea}
-          className={`
-            notearea relative mx-auto flex flex-col
-            overflow-hidden rounded
-            border-gray-400
-            transition-[width] duration-300 dark:border-gray-500
-            print:border-none
-            ${wideClass} ${style}`}
-        >
-          <style jsx>{`
-            .normal-mode {
-              width: ${desiredWidth}ch;
-            }
-          `}</style>
-          <EditorToolbar
-            note={note}
-            onChange={props.onChangeTitle}
-            editorRef={editorRef}
-          />
-          <Panes {...note} editorRef={editorRef} />
-          <EditorFooter
-            {...note}
-            onClickColorBall={showColorModal}
-            onToggle={toggleFooter}
-          />
-        <NoteMenu noteId={note.id} />
+    <div
+      className={cn(`group relative flex w-full ${containerWideClass}`, {
+        'both-panes': bothMainPanes,
+        'three-panes': threePanes,
+      })}
+    >
+      <div
+        ref={editorarea}
+        className={`notearea relative mx-auto flex w-full flex-col overflow-hidden rounded border-gray-400 transition-[width] duration-300 dark:border-gray-500 print:border-none ${wideClass} ${style}`}
+        style={customStyle}
+      >
+        <EditorToolbar
+          note={note}
+          onChange={props.onChangeTitle}
+          editorRef={editorRef}
+        />
+        <Panes {...note} editorRef={editorRef} />
+        <EditorFooter {...note} onToggle={toggleFooter} />
+        <div className="absolute right-0 top-0">
+          <NoteMenu noteId={note.id} />
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

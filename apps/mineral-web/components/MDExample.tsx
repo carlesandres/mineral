@@ -1,8 +1,8 @@
-import { useState } from 'react';
-import { HiOutlineChevronDown, HiOutlineChevronUp } from 'react-icons/hi';
-import { marked } from 'marked';
+import { useEffect, useState } from "react";
+import { HiOutlineChevronDown, HiOutlineChevronUp } from "react-icons/hi";
+import { marked } from "marked";
 
-const Description = ({ description = '', collapsed = false }) => {
+const Description = ({ description = "", collapsed = false }) => {
   const [isCollapsed, setCollapsed] = useState(collapsed);
   if (!description) {
     return null;
@@ -10,7 +10,7 @@ const Description = ({ description = '', collapsed = false }) => {
 
   const toggleCollapsed = () => setCollapsed(!isCollapsed);
   const ExpandIcon = isCollapsed ? HiOutlineChevronDown : HiOutlineChevronUp;
-  const descriptionClass = isCollapsed ? 'h-0 opacity-0' : 'h-auto';
+  const descriptionClass = isCollapsed ? "h-0 opacity-0" : "h-auto";
 
   return (
     <div className={`description flex gap-4 overflow-hidden py-4`}>
@@ -28,7 +28,16 @@ interface MDExampleProps {
 
 const MDExample = (props: MDExampleProps) => {
   const { text, ...restProps } = props;
-  const markdown = marked.parse(text);
+  const [markdown, setMarkdown] = useState("");
+
+  useEffect(() => {
+    const parseMD = async () => {
+      const markdown = await marked.parse(text);
+      setMarkdown(markdown);
+    };
+
+    parseMD();
+  }, [text]);
 
   return (
     <>

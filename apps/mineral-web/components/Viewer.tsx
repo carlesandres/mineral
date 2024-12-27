@@ -1,12 +1,11 @@
 import React, { Ref, MouseEvent, useState, useEffect } from 'react';
 import { marked } from 'marked';
-import { viewerRenderer } from 'components/markedRenderers';
-import hilite from 'utils/custom-hilite.js';
+import hilite from 'utils/custom-hilite';
 import { HLJSApi } from 'highlight.js';
 import PanelLabel from 'components/PanelLabel';
 import { FaMarkdown } from 'react-icons/fa';
-import useSettingsStore from 'utils/useSettingsStore';
-import { sanitize } from 'dompurify';
+import useSettingsStore from 'hooks/useSettingsStore';
+import DOMPurify from 'dompurify';
 import CloseButton from './CloseButton';
 
 interface Props {
@@ -19,11 +18,22 @@ interface Props {
 }
 
 const Viewer = React.forwardRef((props: Props, ref: Ref<HTMLDivElement>) => {
-  const { show, isEditorOpen, onClose } = props;
+  const { show, isEditorOpen, onClose, text } = props;
   const [mdContent, setMdcontent] = useState('');
   // TO-DO: Find out how to deal with dompurify types
   const [highlight, setHighlight] = useState<HLJSApi | null>(null);
   const { gfm } = useSettingsStore();
+  const [markdown, setMarkdown] = useState('');
+
+  useEffect(() => {
+    const parseMD = async () => {
+      const markdown = await marked.parse(text);
+      console.log('markdown', markdown);
+      setMarkdown(markdown);
+    };
+
+    parseMD();
+  }, [text]);
 
   useEffect(() => {
     const initPurify = async () => {
@@ -34,7 +44,6 @@ const Viewer = React.forwardRef((props: Props, ref: Ref<HTMLDivElement>) => {
     };
 
     const options = {
-      renderer: viewerRenderer,
       breaks: true,
       highlight: hilite,
       gfm,
@@ -45,12 +54,10 @@ const Viewer = React.forwardRef((props: Props, ref: Ref<HTMLDivElement>) => {
 
   useEffect(() => {
     if (props.show) {
-      const viewerContent = sanitize(marked.parse(props.text), {
-        ALLOWED_ATTR: ['target', 'href', 'id', 'name', 'type'],
-      });
+      const viewerContent = DOMPurify.sanitize(markdown);
       setMdcontent(viewerContent);
     }
-  }, [props.text, props.show]);
+  }, [props.text, props.show, markdown]);
 
   useEffect(() => {
     if (highlight && show) {
@@ -66,28 +73,27 @@ const Viewer = React.forwardRef((props: Props, ref: Ref<HTMLDivElement>) => {
     ? { onScroll: props.onScrollViewer }
     : null;
 
+  // TO-DO: Padding should be based on CSS variable
   return (
-    <div className={`viewerarea flex-2`}>
+    <div
+      className={`viewerarea relative w-full min-w-0 flex-[2] overflow-x-hidden`}
+    >
       <PanelLabel>
         <FaMarkdown />
       </PanelLabel>
       <div
-        className="viewer-content scrollable is-markdown prose
-        prose-code:before:content-none
-        prose-headings:text-[var(--viewer-titles-color)]
-        prose-pre:bg-[var(--viewer-code-bg-color)]
-        prose-code:after:content-none max-w-full"
+        className={`viewer scrollable is-markdown prose h-full w-full p-4 prose-headings:text-[var(--viewer-titles-color)] prose-code:before:content-none prose-code:after:content-none prose-pre:bg-[var(--viewer-code-bg-color)]`}
         ref={ref}
         {...onScrollObj}
         onDoubleClick={props.onDoubleClick}
         dangerouslySetInnerHTML={{ __html: mdContent }}
       />
-        {isEditorOpen && (
-          <CloseButton
-            onClick={onClose}
-            className="mr-1 text-gray-400 dark:text-gray-500 "
-          />
-        )}
+      {isEditorOpen && (
+        <CloseButton
+          onClick={onClose}
+          className="mr-1 text-gray-400 dark:text-gray-500"
+        />
+      )}
     </div>
   );
 });

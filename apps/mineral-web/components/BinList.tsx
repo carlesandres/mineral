@@ -1,85 +1,53 @@
-import React, {
-  useEffect,
-  useState,
-  useRef,
-  useCallback,
-  ChangeEvent,
-} from 'react';
-import ListHeader from 'components/filelist/ListHeader';
+'use client';
+
 import BinView from 'components/BinView';
-import listShortcuts from 'components/listShortcuts';
-import { useShortcuts } from 'hooks/useShortcuts';
-import { useList } from 'hooks/useList';
 import EmptyList from 'components/EmptyList';
-import { useQueryParam } from 'hooks/useQueryP';
-import { useRouter } from 'next/router';
-import BinMenu from './BinMenu';
+import ListHeader from 'components/filelist/ListHeader';
+import { useRouter } from 'next/navigation';
+import React, { ChangeEvent, useCallback, useState } from 'react';
+import useNotesStore, { getNotes } from 'hooks/useNotesStore';
+import { BinMenu } from './BinMenu';
 
 const BinList = () => {
-  const header = useRef<HTMLInputElement>();
-  const { dispatch: dispatchShortcuts } = useShortcuts();
-  const { list } = useList();
-  const [searchTerm, setSearchterm] = useState('');
+  const { initialized } = useNotesStore((state) => state);
+  const notes = getNotes();
   const router = useRouter();
-  const { param: initialSearchTerm } = useQueryParam('search');
-  const { notes } = list;
-
-  useEffect(() => {
-    if (initialSearchTerm) {
-      setSearchterm(initialSearchTerm);
-    }
-  }, [initialSearchTerm]);
-
-  useEffect(() => {
-    const keyActionMap = {};
-
-    dispatchShortcuts({
-      type: 'set',
-      keyActionMap,
-      shortcutDescription: listShortcuts,
-    });
-  }, [dispatchShortcuts]);
+  const [searchTerm, setSearchterm] = useState('');
 
   const onSearch = useCallback(
     (event: ChangeEvent<HTMLInputElement>) => {
       const newSearchTerm = event.target.value;
       setSearchterm(newSearchTerm);
-      const query = newSearchTerm.trim()
-        ? { search: newSearchTerm.trim() }
-        : {};
-      router.replace({ pathname: router.pathname, query });
     },
-    [router]
+    [router],
   );
 
   const onClear = () => setSearchterm('');
 
-  if (!list.initialized || !router.isReady) {
+  if (!initialized) {
     return null;
   }
 
-  if (!list?.notes?.length) {
+  if (!notes?.length) {
     return <EmptyList />;
   }
 
   return (
     <>
-      <div
-        className="list-view mx-auto flex
-      w-full max-w-3xl flex-col px-4 pb-16 pt-4 sm:py-16"
-      >
-        <div className="mb-12 flex items-center gap-4">
+      <div className="list-view mx-auto flex w-full max-w-3xl flex-col px-4 pb-16 pt-4 sm:py-16">
+        <div className="relative mb-12 flex items-center gap-4">
           <ListHeader
-            ref={header}
             searchTerm={searchTerm}
             onChange={onSearch}
             onClear={onClear}
             placeHolder="Search Bin"
           />
+          <div className="absolute right-0 top-0">
+            <BinMenu />
+          </div>
         </div>
         <BinView key="bin" searchTerm={searchTerm} notes={notes} />
       </div>
-      <BinMenu />
     </>
   );
 };

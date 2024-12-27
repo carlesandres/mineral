@@ -1,7 +1,7 @@
 import { useCallback } from 'react';
 import Checkbox from 'components/Checkbox';
 import { ChangeEvent } from 'react';
-import useSettingsStore, { setSetting } from 'utils/useSettingsStore';
+import useSettingsStore, { setSetting } from 'hooks/useSettingsStore';
 
 export interface SettingsCheckboxProps {
   label: string;
@@ -22,7 +22,7 @@ const SettingsCheckbox = (props: SettingsCheckboxProps) => {
         setSetting(target.name, value);
       }
     },
-    [setSetting]
+    [setSetting],
   );
 
   return (

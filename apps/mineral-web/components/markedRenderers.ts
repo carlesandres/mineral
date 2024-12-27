@@ -1,31 +1,41 @@
 import { marked } from 'marked';
+import type { Tokens } from 'marked';
 
-const renderer = new marked.Renderer();
+// TO-DO: Reinstate a rendered that handles opening links in new tabs
+// const renderer = {
+//   link(token: Token.Link) {
+//     const localLink = href.startsWith(
+//       `${location.protocol}//${location.hostname}`,
+//     );
+//     const html = marked.Renderer.prototype.link.call(
+//       renderer,
+//       href,
+//       title,
+//       text,
+//     );
+//     const modifiedLink = localLink
+//       ? html
+//       : html.replace(
+//           /^<a /,
+//           `<a target="_blank" rel="noreferrer noopener nofollow" `,
+//         );
+//     return modifiedLink;
+//   },
+// };
+//
+// export const viewerRenderer = renderer;
 
-renderer.link = (href, title, text) => {
-  const localLink = href.startsWith(
-    `${location.protocol}//${location.hostname}`
-  );
-  const html = marked.Renderer.prototype.link.call(renderer, href, title, text);
-  const modifiedLink = localLink
-    ? html
-    : html.replace(
-        /^<a /,
-        `<a target="_blank" rel="noreferrer noopener nofollow" `
-      );
-  return modifiedLink;
-};
+const createNewLink = (tocToken: Tokens.Heading): string => {
+  // eslint-disable-next-line
+  const { raw, depth } = tocToken;
 
-export const viewerRenderer = renderer;
-
-const createNewLink = (tocToken) => {
-  const { text, depth } = tocToken;
-  const anchor2 = text
+  const anchor2 = raw
     .trim()
     .toLowerCase()
     .replace(/[^\w]+/g, '-');
 
-  const anchor = `<h${depth}><a href="#${anchor2}">${text}</a></h${depth}>`;
+  // TO-DO: Re-enable anchor levels
+  const anchor = `<h${depth}><a href="#${anchor2}">${raw}</a></h${depth}>`;
   return anchor;
 };
 
@@ -33,7 +43,7 @@ export const tocRenderer = (text: string): string => {
   const tokens = marked.lexer(text, {});
   const headingTokens = tokens.filter((t) => t.type === 'heading');
   if (!headingTokens.length) {
-    return;
+    return ``;
   }
 
   const tocLines = headingTokens.map(createNewLink).join('\n');

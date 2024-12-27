@@ -1,6 +1,5 @@
-import React from 'react';
-import { appName } from 'components/constants';
-import LandingCTA from 'components/LandingCTA';
+import { appName } from "components/constants";
+import LandingCTA from "components/LandingCTA";
 
 const HeroSection = () => {
   return (

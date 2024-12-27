@@ -11,10 +11,11 @@ interface ConfirmButtonsProps {
   cancelLabel?: string;
 }
 
+// TO-DO: Rethink as shadcb component
 const ConfirmButtons = (props: ConfirmButtonsProps) => {
   const { disabled = false, confirmLabel = 'Yes', cancelLabel = 'No' } = props;
-  const confirmRef = useRef<HTMLButtonElement | null>();
-  const cancelRef = useRef<HTMLButtonElement | null>();
+  const confirmRef = useRef<HTMLButtonElement | null>(null);
+  const cancelRef = useRef<HTMLButtonElement | null>(null);
 
   const handleKeydown = (event: KeyboardEvent<HTMLDivElement>) => {
     if (['ArrowLeft', 'ArrowRight'].includes(event.key)) {
@@ -22,9 +23,9 @@ const ConfirmButtons = (props: ConfirmButtonsProps) => {
 
       const cancelHasFocus = cancelRef?.current === document.activeElement;
       if (cancelHasFocus) {
-        confirmRef.current.focus();
+        confirmRef.current?.focus();
       } else {
-        cancelRef.current.focus();
+        cancelRef.current?.focus();
       }
     }
   };

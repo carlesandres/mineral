@@ -9,12 +9,17 @@ interface DragAndDropProps {
 const DragAndDrop = (props: DragAndDropProps) => {
   const { className = '' } = props;
   const [hovering, setHovering] = useState(false);
-  const droppable = useRef<HTMLDivElement>();
+  const droppable = useRef<HTMLDivElement | null>(null);
   const { current } = droppable;
 
   const handleDragIn = (event: DragEvent) => {
     event.preventDefault();
     event.stopPropagation();
+
+    if (!event.dataTransfer) {
+      return;
+    }
+
     if (event.dataTransfer.items?.length > 0) {
       setHovering(true);
     }
@@ -22,6 +27,11 @@ const DragAndDrop = (props: DragAndDropProps) => {
   const handleDragOut = (event: DragEvent) => {
     event.preventDefault();
     event.stopPropagation();
+
+    if (!event.dataTransfer) {
+      return;
+    }
+
     if (event.dataTransfer.items?.length > 0) {
       setHovering(false);
     }
@@ -30,6 +40,11 @@ const DragAndDrop = (props: DragAndDropProps) => {
   const handleDrag = (event: DragEvent) => {
     event.preventDefault();
     event.stopPropagation();
+
+    if (!event.dataTransfer) {
+      return;
+    }
+
     if (event.dataTransfer.items?.length > 0) {
       setHovering(true);
     }
@@ -38,6 +53,11 @@ const DragAndDrop = (props: DragAndDropProps) => {
   const handleDrop = (event: DragEvent) => {
     event.preventDefault();
     event.stopPropagation();
+
+    if (!event.dataTransfer) {
+      return;
+    }
+
     if (event.dataTransfer.items?.length > 0) {
       props.handleDrop(event.dataTransfer.files);
       event.dataTransfer.clearData();

@@ -1,13 +1,10 @@
-/* eslint react/no-danger: 0 */
-
 import React, { useCallback, MouseEvent, UIEvent } from 'react';
 import TOC from 'components/TOC';
 import Viewer from 'components/Viewer';
 import Editor from 'components/Editor';
-import ErrorBoundary from 'components/ErrorBoundary';
 import { useEffect, useRef } from 'react';
-import { useList } from 'hooks/useList';
 import { PanelsPartial, Panels, Note } from 'types/Note';
+import { updateNote } from 'hooks/useNotesStore';
 
 // TODO: Adding the same listener to both panels, makes the onScroll
 // method to be triggered on both on any scroll action
@@ -18,50 +15,45 @@ const onScroll = (event, slave) => {
     const slaveOffsetHeight = slave.scrollHeight;
     const scrollPercent = scrollTop / (clientHeight - scrollHeight);
     const slaveScroll = Math.round(
-      scrollPercent * (slaveHeight - slaveOffsetHeight)
+      scrollPercent * (slaveHeight - slaveOffsetHeight),
     );
     slave.scrollTop = slaveScroll;
   }
 };
 
 interface Props extends Note {
-  editorRef: React.RefObject<HTMLTextAreaElement>;
+  editorRef: React.RefObject<HTMLTextAreaElement | null>;
 }
 
 const Panes = (props: Props) => {
-  const viewerRef = useRef();
+  const viewerRef = useRef<HTMLDivElement | null>(null);
   const { text, panels = {}, editorRef } = props;
   const { viewer = false, editor = false, toc = false } = panels as Panels;
-  const { dispatchList } = useList();
   const noteId = props.id;
 
   const updatePanels = useCallback(
     (panels: PanelsPartial) =>
-      dispatchList({
-        type: 'merge-panels',
-        id: noteId,
-        panels,
-      }),
-    [noteId, dispatchList]
+      updateNote(noteId, { panels: { ...props.panels, ...panels } }),
+    [noteId, props.panels],
   );
 
   const switchToWriteOnly = useCallback(
     () => updatePanels({ editor: true, viewer: false }),
-    [updatePanels]
+    [updatePanels],
   );
 
   const switchToReadOnly = useCallback(
     () => updatePanels({ editor: false, viewer: true }),
-    [updatePanels]
+    [updatePanels],
   );
   const switchToTwoPanes = useCallback(
     () => updatePanels({ editor: true, viewer: true }),
-    [updatePanels]
+    [updatePanels],
   );
 
   const closeTOC = useCallback(
     () => updatePanels({ toc: false }),
-    [updatePanels]
+    [updatePanels],
   );
 
   const toggleViewer = useCallback(() => {
@@ -71,17 +63,6 @@ const Panes = (props: Props) => {
       switchToTwoPanes();
     }
   }, [viewer, switchToWriteOnly, switchToTwoPanes]);
-
-  useEffect(() => {
-    const scrollToTop = () => {
-      const editor = editorRef.current;
-      if (editor instanceof HTMLTextAreaElement) {
-        editor.scrollTop = 0;
-      }
-    };
-
-    scrollToTop();
-  }, [editorRef]);
 
   const handleDoubleClickEditor = (event: MouseEvent<HTMLTextAreaElement>) => {
     if (event.shiftKey) {
@@ -131,41 +112,29 @@ const Panes = (props: Props) => {
   const reallyShowToc = toc && viewer;
 
   return (
-    <div className={'panes'}>
-      <div
-        className="editor-wrap align-stretch absolute inset-0
-        mx-auto
-        flex w-full flex-col divide-y
-        divide-[var(--border-soft-color)]
-        print:divide-none sm:flex-row
-        sm:divide-x sm:divide-y-0"
-      >
-        <TOC
-          onClose={closeTOC}
-          show={reallyShowToc}
-          text={text}
-          onDoubleClick={handleViewerDoubleClick}
-        />
-
-        <Editor
-          {...props}
-          ref={editorRef}
-          onScrollEditor={onScrollEditor}
-          onDoubleClick={handleDoubleClickEditor}
-          onClose={switchToReadOnly}
-        />
-        <ErrorBoundary>
-          <Viewer
-            ref={viewerRef}
-            show={viewer}
-            isEditorOpen={editor}
-            text={text}
-            onScrollViewer={onScrollViewer}
-            onDoubleClick={handleViewerDoubleClick}
-            onClose={switchToWriteOnly}
-          />
-        </ErrorBoundary>
-      </div>
+    <div className="editor-wrap align-stretch flex flex-1 flex-col divide-y divide-[var(--border-soft-color)] sm:flex-row sm:divide-x sm:divide-y-0 print:divide-none">
+      <TOC
+        onClose={closeTOC}
+        show={reallyShowToc}
+        text={text}
+        onDoubleClick={handleViewerDoubleClick}
+      />
+      <Editor
+        {...props}
+        ref={editorRef}
+        onScrollEditor={onScrollEditor}
+        onDoubleClick={handleDoubleClickEditor}
+        onClose={switchToReadOnly}
+      />
+      <Viewer
+        ref={viewerRef}
+        show={viewer}
+        isEditorOpen={editor}
+        text={text}
+        onScrollViewer={onScrollViewer}
+        onDoubleClick={handleViewerDoubleClick}
+        onClose={switchToWriteOnly}
+      />
     </div>
   );
 };

@@ -1,8 +1,8 @@
-import { useCallback, useState, useRef, ChangeEvent } from 'react';
+import { useCallback, useState, ChangeEvent } from 'react';
 import ConfirmDialog from 'components/ConfirmDialog';
-import { exportOneFile } from 'utils/fileUtils';
 import type { Note } from 'types/Note';
 import TextInput from 'components/TextInput';
+import { useToast } from 'hooks/use-toast';
 
 interface Props {
   show: boolean;
@@ -17,20 +17,23 @@ dark:text-gray-300 print:border-none print:text-black`;
 const ConfirmExportModal = (props: Props) => {
   const { note, show, onClose } = props;
   const [fileName, setFileName] = useState(`${note.title}.txt`);
-  const modalRef = useRef<HTMLDivElement | null>(null);
+  const { toast } = useToast();
 
   const changeFileName = useCallback(
     (event: ChangeEvent<HTMLInputElement>) => setFileName(event.target.value),
-    []
+    [],
   );
   const exportCurrentFile = useCallback(() => {
-    exportOneFile(note, fileName);
+    // exportOneFile(note, fileName);
+    toast({
+      description: 'Export still not available',
+      variant: 'destructive',
+    });
     onClose();
-  }, [note, fileName, onClose]);
+  }, [onClose, toast]);
 
   return (
     <ConfirmDialog
-      ref={modalRef}
       show={show}
       onCancel={onClose}
       onConfirm={exportCurrentFile}

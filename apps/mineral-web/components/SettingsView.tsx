@@ -1,12 +1,12 @@
-import useSettingsStore, { setSetting } from 'utils/useSettingsStore';
-import { useShortcuts } from 'hooks/useShortcuts';
-import { useEffect } from 'react';
+'use client';
+
+import useSettingsStore, { setSetting } from 'hooks/useSettingsStore';
 import HorzRadioGroup from 'components/HorzRadioGroup';
-// import { FiMoon, FiSun } from 'react-icons/fi';
 import SettingsCheckbox from 'components/SettingsCheckbox';
-// import BatchFileTools from 'components/BatchFileTools';
 import Label from 'components/Label';
 import { HiOutlineCog } from 'react-icons/hi';
+import { useState, useEffect, ChangeEvent } from 'react';
+import Checkbox from './Checkbox';
 
 const lineHeights = new Map([
   ['Small', '1.5'],
@@ -17,8 +17,24 @@ const lineHeights = new Map([
 ]);
 
 const SettingsPage = () => {
-  const { dispatch: dispatchShortcuts } = useShortcuts();
   const settings = useSettingsStore();
+  const [darkMode, setDarkMode] = useState(false);
+
+  useEffect(() => {
+    const darkMode = localStorage.theme === 'dark';
+    setDarkMode(darkMode);
+  }, []);
+
+  const handleDarkMode = (event: ChangeEvent<HTMLInputElement>) => {
+    const { target } = event;
+    if (target.type !== 'checkbox') {
+      return;
+    }
+    const value = target.checked;
+    localStorage.theme = value ? 'dark' : 'light';
+    setDarkMode(value);
+    document.documentElement.classList.toggle('dark', darkMode);
+  };
 
   // const _findDuplicates = () => {
   // TO-DO: Need to check if the fileList is initialized first
@@ -27,16 +43,6 @@ const SettingsPage = () => {
 
   // const keyActionMap = { l: goToList };
   // this.props.addShortcuts(keyActionMap, settingsShortcuts);
-
-  useEffect(() => {
-    const keyActionMap = {};
-
-    dispatchShortcuts({
-      type: 'set',
-      keyActionMap,
-      shortcutDescription: [],
-    });
-  }, [dispatchShortcuts]);
 
   const onChangeLinespacing = (value: any) =>
     setSetting('lineHeightRem', value);
@@ -52,7 +58,12 @@ const SettingsPage = () => {
         name="emptyBinConfirm"
         label="Ask for confirmation before emptying the bin"
       />
-      <SettingsCheckbox name="darkMode" label="Dark Mode" />
+      <Checkbox
+        label="Dark Mode"
+        checked={darkMode}
+        onChange={handleDarkMode}
+      />
+
       <Label className="mt-16">Editor</Label>
       <SettingsCheckbox
         name="dimBlurredEditor"

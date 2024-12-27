@@ -1,10 +1,11 @@
-import { useCallback } from 'react';
 import ListItem from 'components/ListItem';
 import { useState, useEffect } from 'react';
-import { getShownFiles } from 'utils/fileUtils.js';
-import { throttle, sortBy } from 'lodash';
+import { getShownFiles } from 'utils/fileUtils';
+import { sortBy } from 'lodash';
 import { Note } from 'types/Note';
 import Label from 'components/Label';
+import Link from 'next/link';
+import { Button } from './ui/button';
 
 interface ListElementProps {
   notes: Note[];
@@ -13,16 +14,15 @@ interface ListElementProps {
 
 const ListElements = (props: ListElementProps) => {
   const [initialised, setInitialised] = useState(false);
-  const [shownFiles, setFilestoshow] = useState([]);
+  const [shownFiles, setFilestoshow] = useState<Note[]>([]);
   const [subset, setSubset] = useState(true);
   const { notes, searchTerm } = props;
-  const throttledSetFiles = useCallback(throttle(setFilestoshow, 200), []);
 
   useEffect(() => {
     const shownFiles = getShownFiles(notes, 'INBOX', searchTerm);
-    throttledSetFiles([...shownFiles]);
+    setFilestoshow([...shownFiles]);
     setInitialised(true);
-  }, [notes, searchTerm, throttledSetFiles]);
+  }, [notes, searchTerm]);
 
   // Only show a subset of all files on first render to speed rendering up
   useEffect(() => setSubset(false), []);
@@ -32,6 +32,17 @@ const ListElements = (props: ListElementProps) => {
   }
 
   if (!shownFiles.length) {
+    if (!searchTerm) {
+      return (
+        <div className="py-4 text-center">
+          <div className="mb-2">There are no active notes.</div>
+          <Button asChild className="mt-4">
+            <Link href="/new">Create a new note</Link>
+          </Button>
+        </div>
+      );
+    }
+
     return (
       <div className="py-4 text-center">
         <div className="mb-2">
@@ -56,11 +67,7 @@ const ListElements = (props: ListElementProps) => {
         <Label>Title</Label>
         <Label>Last updated</Label>
       </div>
-      <div
-        className="file-list m text- flex flex-1
-        flex-shrink-0 flex-col gap-2
-        "
-      >
+      <div className="file-list m text- flex flex-1 flex-shrink-0 flex-col gap-2">
         {listItems}
       </div>
     </div>
