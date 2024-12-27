@@ -1,4 +1,3 @@
-/* eslint react/no-danger: 0 */
 import { MouseEvent } from 'react';
 import { tocRenderer } from 'components/markedRenderers';
 import CloseButton from 'components/CloseButton';
@@ -23,14 +22,14 @@ const TOC = (props: TOCProps) => {
 
   return (
     <div
-      className="toc no-print relative overflow-hidden bg-[var(--viewer-bg-color)] bg-yellow-100 group-[.both-panes]:w-2/12"
+      className="toc no-print relative h-full w-full min-w-0 flex-1 bg-[var(--viewer-bg-color)]"
       onDoubleClick={onDoubleClick}
     >
       <CloseButton onClick={props.onClose} />
       <PanelLabel>
         <HiMenuAlt2 />
       </PanelLabel>
-      <div className="toc-content flex-1 overflow-auto px-8 pt-8 text-[color:var(--viewer-titles-color)] text-blue-700">
+      <div className="toc-content px-8 pt-8 text-[color:var(--viewer-titles-color)] text-blue-700">
         <div dangerouslySetInnerHTML={{ __html: tocMarkdown }} />
       </div>
     </div>
