@@ -39,6 +39,8 @@ const NoteArea = (props: Props) => {
     Number(Boolean(editor)) * 65 +
     Number(Boolean(tocReallyShown)) * 26;
 
+  const customStyle = wide ? {} : { width: `${desiredWidth}ch` };
+
   const bothMainPanes = viewer && editor;
   const threePanes = bothMainPanes && tocReallyShown;
 
@@ -49,32 +51,29 @@ const NoteArea = (props: Props) => {
   const containerWideClass = wide ? '' : 'sm:px-8 sm:py-16 lg:py-32';
 
   return (
-    <>
-      <HelpModal />
+    <div
+      className={cn(`group relative flex w-full ${containerWideClass}`, {
+        'both-panes': bothMainPanes,
+        'three-panes': threePanes,
+      })}
+    >
       <div
-        className={cn(`group relative flex w-full ${containerWideClass}`, {
-          'both-panes': bothMainPanes,
-          'three-panes': threePanes,
-        })}
+        ref={editorarea}
+        className={`notearea relative mx-auto flex w-full flex-col overflow-hidden rounded border-gray-400 transition-[width] duration-300 dark:border-gray-500 print:border-none ${wideClass} ${style}`}
+        style={customStyle}
       >
-        <div
-          ref={editorarea}
-          className={`notearea relative mx-auto flex w-full flex-col overflow-hidden rounded border-gray-400 transition-[width] duration-300 dark:border-gray-500 print:border-none ${wideClass} ${style}`}
-          style={{ width: `${desiredWidth}ch` }}
-        >
-          <EditorToolbar
-            note={note}
-            onChange={props.onChangeTitle}
-            editorRef={editorRef}
-          />
-          <Panes {...note} editorRef={editorRef} />
-          <EditorFooter {...note} onToggle={toggleFooter} />
-          <div className="absolute right-0 top-0">
-            <NoteMenu noteId={note.id} />
-          </div>
+        <EditorToolbar
+          note={note}
+          onChange={props.onChangeTitle}
+          editorRef={editorRef}
+        />
+        <Panes {...note} editorRef={editorRef} />
+        <EditorFooter {...note} onToggle={toggleFooter} />
+        <div className="absolute right-0 top-0">
+          <NoteMenu noteId={note.id} />
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

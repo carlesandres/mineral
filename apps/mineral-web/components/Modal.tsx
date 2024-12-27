@@ -18,11 +18,11 @@ const Modal = (props: ModalProps) => {
     </DialogHeader>
   ) : null;
 
+  // TO-DO: It should not be necessary to set bg-white here.
   return (
     <Dialog open={isOpen} onOpenChange={props.onOpenChange}>
-      <DialogContent>
+      <DialogContent className="bg-white">
         {renderedTitle}
-
         {children}
       </DialogContent>
     </Dialog>

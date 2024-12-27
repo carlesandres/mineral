@@ -10,7 +10,7 @@ const useDeleteNote = (noteId: string, deletedAt: NoteDeletedAt) => {
   const { goToList, goToNote } = useRoutingHelpers();
 
   const deleteFn = useCallback(() => {
-    const message = deletedAt ? 'Unbinned!' : 'Deleted!';
+    const message = deletedAt ? 'Note unbinned' : 'Note sent to bin';
     if (deletedAt) {
       unbinNote(noteId);
     } else {

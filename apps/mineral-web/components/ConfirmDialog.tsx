@@ -1,4 +1,4 @@
-import React, { Ref, forwardRef } from 'react';
+import React from 'react';
 import Modal from 'components/Modal';
 import ConfirmButtons from 'components/ConfirmButtons';
 

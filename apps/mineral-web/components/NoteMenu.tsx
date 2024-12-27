@@ -102,7 +102,7 @@ const NoteMenu = (props: Props) => {
     <>
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <Button variant="ghost" size="icon">
+          <Button variant="ghost" size="icon" className="no-print">
             <MoreVertical className="h-4 w-4" />
             <span className="sr-only">Open menu</span>
           </Button>
@@ -132,10 +132,12 @@ const NoteMenu = (props: Props) => {
             <HiOutlinePrinter className="mr-2 h-4 w-4" />
             <span>Print</span>
           </DropdownMenuItem>
+          {/* TO-DO: Re-enable this when a proper cheatsheet is written
           <DropdownMenuItem onClick={showMdCheat}>
             <FaMarkdown className="mr-2 h-4 w-4" />
             <span>MD Cheatsheet</span>
           </DropdownMenuItem>
+          */}
         </DropdownMenuContent>
       </DropdownMenu>
       <ConfirmExportModal

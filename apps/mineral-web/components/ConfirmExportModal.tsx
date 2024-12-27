@@ -1,4 +1,4 @@
-import { useCallback, useState, useRef, ChangeEvent } from 'react';
+import { useCallback, useState, ChangeEvent } from 'react';
 import ConfirmDialog from 'components/ConfirmDialog';
 import type { Note } from 'types/Note';
 import TextInput from 'components/TextInput';

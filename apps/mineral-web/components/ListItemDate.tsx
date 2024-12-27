@@ -38,7 +38,7 @@ const ListItemDate = (props: ListItemDateProps) => {
     <div
       className={`hidden shrink-0 text-xs text-gray-400 transition duration-200 group-hover:opacity-0 dark:text-gray-400 sm:block`}
     >
-      {formattedDate}
+      Edited {formattedDate}
     </div>
   );
 };

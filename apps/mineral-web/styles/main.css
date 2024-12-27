@@ -100,10 +100,6 @@ table.shortcuts td:first-child {
   display: inline-block;
 }
 
-.big-btn .modal-content {
-  border-radius: 0;
-}
-
 *,
 ::after,
 ::before {
@@ -116,11 +112,6 @@ table.shortcuts td:first-child {
 
 .feature-section {
   @apply mx-auto inline-grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3;
-}
-
-.confirm-dialog .modal-body [type='button'] {
-  min-width: 90px;
-  margin: 0 10px;
 }
 
 @media (max-height: 600px) {
