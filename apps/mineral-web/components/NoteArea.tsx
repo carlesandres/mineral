@@ -1,12 +1,12 @@
-import { useRef, useState, useCallback } from 'react';
+import { useRef, useCallback } from 'react';
 import Panes from 'components/Panes';
 import EditorToolbar from 'components/EditorToolbar';
 import EditorFooter from 'components/EditorFooter';
 import HelpModal from 'components/HelpModal';
-import ColorSelector from 'components/ColorSelector';
 import { Note } from 'types/Note';
 import NoteMenu from './NoteMenu';
 import { updateNote } from 'hooks/useNotesStore';
+import { cn } from 'lib/utils';
 
 interface Props {
   note: Note;
@@ -34,12 +34,13 @@ const NoteArea = (props: Props) => {
   const { viewer, editor, toc } = panels;
   const tocReallyShown = toc && viewer;
 
-  console.dir(panels);
-
   const desiredWidth =
     Number(Boolean(viewer)) * 65 +
     Number(Boolean(editor)) * 65 +
-    Number(Boolean(tocReallyShown)) * 32.5;
+    Number(Boolean(tocReallyShown)) * 26;
+
+  const bothMainPanes = viewer && editor;
+  const threePanes = bothMainPanes && tocReallyShown;
 
   const wideClass = wide
     ? 'wide w-full rounded-none m-0'
@@ -47,29 +48,15 @@ const NoteArea = (props: Props) => {
 
   const containerWideClass = wide ? '' : 'sm:px-8 sm:py-16 lg:py-32';
 
-  // @media (max-width: 800px) {
-  //   .notearea {
-  //     width: 100%;
-  //     border-radius: 0;
-  //     border: none;
-  //     margin: 0;
-  //   }
-  //
-  //   .editor-toolbar .actions button.toggle-full-width {
-  //     display: none;
-  //   }
-  // }
-
-  // <style jsx>{`
-  //   .normal-mode {
-  //     width: ${desiredWidth}ch;
-  //   }
-  // `}</style>
-
   return (
     <>
       <HelpModal />
-      <div className={`relative flex w-full ${containerWideClass}`}>
+      <div
+        className={cn(`group relative flex w-full ${containerWideClass}`, {
+          'both-panes': bothMainPanes,
+          'three-panes': threePanes,
+        })}
+      >
         <div
           ref={editorarea}
           className={`notearea relative mx-auto flex w-full flex-col overflow-hidden rounded border-gray-400 bg-red-100 transition-[width] duration-300 dark:border-gray-500 print:border-none ${wideClass} ${style}`}

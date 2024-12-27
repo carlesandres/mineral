@@ -67,7 +67,7 @@ const Editor = React.forwardRef(
     return (
       <div
         id="editorarea"
-        className="editorarea flex-2 relative h-full font-mono"
+        className="editorarea flex-2 relative h-full w-full font-mono group-[.both-panes]:w-1/2 group-[.three-panes]:w-5/12"
       >
         <PanelLabel>
           <HiOutlinePencil />

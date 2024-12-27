@@ -64,17 +64,6 @@ const Panes = (props: Props) => {
     }
   }, [viewer, switchToWriteOnly, switchToTwoPanes]);
 
-  useEffect(() => {
-    const scrollToTop = () => {
-      const editor = editorRef?.current;
-      if (editor) {
-        editor.scrollTop = 0;
-      }
-    };
-
-    scrollToTop();
-  }, [editorRef]);
-
   const handleDoubleClickEditor = (event: MouseEvent<HTMLTextAreaElement>) => {
     if (event.shiftKey) {
       event.preventDefault();

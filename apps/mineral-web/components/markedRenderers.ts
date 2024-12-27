@@ -1,5 +1,5 @@
 import { marked } from 'marked';
-import type { Token } from 'marked';
+import type { Tokens } from 'marked';
 
 // TO-DO: Reinstate a rendered that handles opening links in new tabs
 // const renderer = {
@@ -25,8 +25,9 @@ import type { Token } from 'marked';
 //
 // export const viewerRenderer = renderer;
 
-const createNewLink = (tocToken: Token): string => {
-  const { raw } = tocToken;
+const createNewLink = (tocToken: Tokens.Heading): string => {
+  // eslint-disable-next-line
+  const { raw, depth } = tocToken;
 
   const anchor2 = raw
     .trim()
@@ -34,7 +35,7 @@ const createNewLink = (tocToken: Token): string => {
     .replace(/[^\w]+/g, '-');
 
   // TO-DO: Re-enable anchor levels
-  const anchor = `<h1><a href="#${anchor2}">${raw}</a></h1>`;
+  const anchor = `<h${depth}><a href="#${anchor2}">${raw}</a></h${depth}>`;
   return anchor;
 };
 

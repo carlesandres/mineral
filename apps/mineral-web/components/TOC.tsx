@@ -23,16 +23,14 @@ const TOC = (props: TOCProps) => {
 
   return (
     <div
-      className="toc no-print relative flex flex-1 
-      flex-col w-full h-full bg-yellow-100
-        overflow-hidden bg-[var(--viewer-bg-color)]"
+      className="toc no-print relative overflow-hidden bg-[var(--viewer-bg-color)] bg-yellow-100 group-[.both-panes]:w-2/12"
       onDoubleClick={onDoubleClick}
     >
       <CloseButton onClick={props.onClose} />
       <PanelLabel>
         <HiMenuAlt2 />
       </PanelLabel>
-      <div className="toc-content flex-1 overflow-auto px-8 pt-8 text-blue-700 text-[color:var(--viewer-titles-color)]">
+      <div className="toc-content flex-1 overflow-auto px-8 pt-8 text-[color:var(--viewer-titles-color)] text-blue-700">
         <div dangerouslySetInnerHTML={{ __html: tocMarkdown }} />
       </div>
     </div>
