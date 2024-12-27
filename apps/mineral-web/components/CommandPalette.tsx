@@ -8,17 +8,19 @@ import {
   CommandItem,
   CommandList,
 } from '@/components/ui/command';
+import { useRoutingHelpers } from 'hooks/use-routing-helpers';
 
-import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
 export default function CommandPalette() {
   const [open, setOpen] = useState(false);
-  const router = useRouter();
+  const { goToNewFile, goToList, goToBin, goToSettings } = useRoutingHelpers();
 
-  const goTo = (path: string) => {
-    router.push(path);
-    setOpen(false);
+  const handleAndClose = (cb: () => void) => {
+    return () => {
+      cb();
+      setOpen(false);
+    };
   };
 
   useEffect(() => {
@@ -37,9 +39,15 @@ export default function CommandPalette() {
       <CommandInput placeholder="Type a command or search..." />
       <CommandList>
         <CommandEmpty>No results found.</CommandEmpty>
+        <CommandGroup heading="Actions">
+          <CommandItem onSelect={handleAndClose(goToNewFile)}>New</CommandItem>
+        </CommandGroup>
         <CommandGroup heading="Pages">
-          <CommandItem onSelect={() => goTo('/new')}>New note</CommandItem>
-          <CommandItem onSelect={() => goTo('/notes')}>List</CommandItem>
+          <CommandItem onSelect={handleAndClose(goToList)}>List</CommandItem>
+          <CommandItem onSelect={handleAndClose(goToBin)}>Bin</CommandItem>
+          <CommandItem onSelect={handleAndClose(goToSettings)}>
+            Settings
+          </CommandItem>
         </CommandGroup>
       </CommandList>
     </CommandDialog>

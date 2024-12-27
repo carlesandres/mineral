@@ -12,22 +12,17 @@ interface ConfirmDialogProps {
   cancelLabel?: string;
 }
 
-const ConfirmDialog = forwardRef(
-  (props: ConfirmDialogProps, ref: Ref<HTMLDivElement>) => {
-    return (
-      <Modal
-        ref={ref}
-        onClose={props.onCancel}
-        title={props.title}
-        isOpen={props.show}
-      >
-        <div className="p-4">{props.children}</div>
-        <ConfirmButtons {...props} />
-      </Modal>
-    );
-  },
-);
-
-ConfirmDialog.displayName = 'ConfirmDialog';
+const ConfirmDialog = (props: ConfirmDialogProps) => {
+  return (
+    <Modal
+      onOpenChange={props.onCancel}
+      title={props.title}
+      isOpen={props.show}
+    >
+      <div className="p-4">{props.children}</div>
+      <ConfirmButtons {...props} />
+    </Modal>
+  );
+};
 
 export default ConfirmDialog;

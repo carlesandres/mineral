@@ -13,6 +13,6 @@ const compat = new FlatCompat({
 
 const config = [{
     ignores: ["**/node_modules"],
-}, ...compat.extends("next/core-web-vitals", "prettier")];
+}, ...compat.extends("next/core-web-vitals", "next/typescript", "prettier")];
 
 export default config;

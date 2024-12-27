@@ -2,13 +2,12 @@ import React from 'react';
 import CloseButton from 'components/CloseButton';
 import StyleSelector from 'components/StyleSelector';
 import EditorStatistics from 'components/EditorStatistics';
-import ColorBall from 'components/ColorBall';
 import { BsFillBarChartFill } from 'react-icons/bs';
 import { Note } from 'types/Note';
 import { motion } from 'motion/react';
+import ColorSelector from './ColorSelector';
 
 interface Props extends Note {
-  onClickColorBall: () => void;
   onToggle: () => void;
 }
 
@@ -48,7 +47,7 @@ const EditorFooter = (props: Props) => {
           className={`editor-footer monospace no-print relative flex items-center justify-between overflow-hidden border-t border-[var(--border-soft-color)] bg-[var(--solid-bg-color)] px-4 py-3 pr-12 text-sm text-gray-500 transition-all dark:text-gray-800`}
         >
           <div className="flex items-center justify-start gap-4">
-            <ColorBall color={color} onClick={props.onClickColorBall} small />
+            <ColorSelector noteId={noteId} selectedColor={color} />
             <EditorStatistics
               show={editorVisible}
               text={text}

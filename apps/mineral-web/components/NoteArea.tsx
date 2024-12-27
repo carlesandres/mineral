@@ -16,48 +16,10 @@ interface Props {
 }
 
 const NoteArea = (props: Props) => {
-  const [displayColorModal, setDisplaycolormodal] = useState(false);
   const editorarea = useRef<HTMLDivElement | null>(null);
   const { note } = props;
   const noteId = note?.id;
   const editorRef = useRef<HTMLTextAreaElement | null>(null);
-
-  const showColorModal = () => setDisplaycolormodal(true);
-  const hideColorModal = () => setDisplaycolormodal(false);
-
-  // useEffect(() => {
-  //   const handleKeyDown = (e: KeyboardEvent) => {
-  //     if (e.key === "Enter" && e.ctrlKey) {
-  //       onRotatePanels();
-  //       return;
-  //     }
-  //     if (e.key === "t" && e.ctrlKey) {
-  //       const { text } = note;
-  //       const newText =
-  //         text +
-  //         "aaa | bbb | ccc\n--|---|---\n1 | 2 | 3\n4 | 5 | 6\n7 | 8 | 9\n";
-  //       dispatchList({
-  //         type: "merge",
-  //         id: noteId,
-  //         partial: { text: newText },
-  //       });
-  //       return;
-  //     }
-  //   };
-  //   document.addEventListener("keydown", handleKeyDown);
-  //
-  //   return () => {
-  //     document.removeEventListener("keydown", handleKeyDown);
-  //   };
-  // }, [onRotatePanels, note, noteId, dispatchList]);
-
-  const changeColor = useCallback(
-    (color: string) => {
-      updateNote(noteId, { color });
-      hideColorModal();
-    },
-    [noteId],
-  );
 
   const toggleFooter = useCallback(() => {
     const { showFooter } = note;
@@ -72,10 +34,12 @@ const NoteArea = (props: Props) => {
   const { viewer, editor, toc } = panels;
   const tocReallyShown = toc && viewer;
 
+  console.dir(panels);
+
   const desiredWidth =
-    Number(Boolean(viewer)) * 75 +
-    Number(Boolean(editor)) * 75 +
-    Number(Boolean(tocReallyShown)) * 37;
+    Number(Boolean(viewer)) * 65 +
+    Number(Boolean(editor)) * 65 +
+    Number(Boolean(tocReallyShown)) * 32.5;
 
   const wideClass = wide
     ? 'wide w-full rounded-none m-0'
@@ -104,17 +68,11 @@ const NoteArea = (props: Props) => {
 
   return (
     <>
-      <ColorSelector
-        show={displayColorModal}
-        onClose={hideColorModal}
-        onChange={changeColor}
-        selectedColor={note?.color}
-      />
       <HelpModal />
       <div className={`relative flex w-full ${containerWideClass}`}>
         <div
           ref={editorarea}
-          className={`notearea relative mx-auto flex w-full flex-col overflow-hidden rounded border-gray-400 transition-[width] duration-300 dark:border-gray-500 print:border-none ${wideClass} ${style}`}
+          className={`notearea relative mx-auto flex w-full flex-col overflow-hidden rounded border-gray-400 bg-red-100 transition-[width] duration-300 dark:border-gray-500 print:border-none ${wideClass} ${style}`}
           style={{ width: `${desiredWidth}ch` }}
         >
           <EditorToolbar
@@ -123,12 +81,10 @@ const NoteArea = (props: Props) => {
             editorRef={editorRef}
           />
           <Panes {...note} editorRef={editorRef} />
-          <EditorFooter
-            {...note}
-            onClickColorBall={showColorModal}
-            onToggle={toggleFooter}
-          />
-          <NoteMenu noteId={note.id} />
+          <EditorFooter {...note} onToggle={toggleFooter} />
+          <div className="absolute right-0 top-0">
+            <NoteMenu noteId={note.id} />
+          </div>
         </div>
       </div>
     </>

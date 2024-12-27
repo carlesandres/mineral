@@ -13,10 +13,10 @@ export const useRoutingHelpers = () => {
     router.push(`/notes${query}`);
   };
 
-  const goToNewFile = () => router.push('/new');
-  const goToSettings = () => router.push('/settings');
-  const goToBin = () => router.push(`/bin`);
-  const goBack = () => router.back();
+  const goToNewFile = (_ev?: any) => router.push('/new');
+  const goToSettings = (_ev?: any) => router.push('/settings');
+  const goToBin = (_ev?: any) => router.push(`/bin`);
+  const goBack = (_ev?: any) => router.back();
 
   const goToNote = (
     noteId: string,

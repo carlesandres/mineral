@@ -1,6 +1,4 @@
-import { Menu, Transition } from '@headlessui/react';
-import { FiMenu } from 'react-icons/fi';
-import MenuButton2 from 'components/MenuButton2';
+import { Button } from './ui/button';
 import {
   HiOutlineUpload,
   HiOutlineDownload,
@@ -8,53 +6,46 @@ import {
   HiOutlinePlus,
 } from 'react-icons/hi';
 import useUIZStore from 'hooks/useUIZStore';
-import RoundBigButton from './RoundBigButton';
 import { useRoutingHelpers } from 'hooks/use-routing-helpers';
+import { MoreVertical } from 'lucide-react';
+import {
+  DropdownMenu,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuItem,
+} from './ui/dropdown-menu';
 
 const ListMenu = () => {
   const { showBackupModal, showFileImport } = useUIZStore();
   const { goToNewFile, goToBin } = useRoutingHelpers();
 
   return (
-    <Menu as="div" className="no-print fixed right-2 top-2">
-      <Menu.Button as="div" className="menu-btn">
-        <RoundBigButton>
-          <FiMenu />
-        </RoundBigButton>
-      </Menu.Button>
-      <Transition
-        className="absolute right-0 top-full z-10"
-        enter="transition duration-100 ease-out"
-        enterFrom="transform scale-95 opacity-0"
-        enterTo="transform scale-100 opacity-100"
-        leave="transition duration-75 ease-out"
-        leaveFrom="transform scale-100 opacity-100"
-        leaveTo="transform scale-95 opacity-0"
-      >
-        <Menu.Items className="mt-1 flex w-max flex-col rounded border border-[var(--border-color)] bg-[var(--solid-bg-color)] px-3 py-4">
-          <MenuButton2
-            onClick={goToNewFile}
-            icon={<HiOutlinePlus />}
-            text="New note"
-          />
-          <MenuButton2
-            onClick={showBackupModal}
-            icon={<HiOutlineDownload />}
-            text="Backup"
-          />
-          <MenuButton2
-            onClick={showFileImport}
-            icon={<HiOutlineUpload />}
-            text="Import note"
-          />
-          <MenuButton2
-            icon={<HiOutlineTrash />}
-            onClick={goToBin}
-            text="Go to Bin"
-          />
-        </Menu.Items>
-      </Transition>
-    </Menu>
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <Button variant="ghost" size="icon">
+          <MoreVertical className="h-4 w-4" />
+          <span className="sr-only">Open menu</span>
+        </Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent align="end">
+        <DropdownMenuItem onClick={goToNewFile}>
+          <HiOutlinePlus className="mr-2 h-4 w-4" />
+          <span>New note</span>
+        </DropdownMenuItem>
+        <DropdownMenuItem onClick={showBackupModal}>
+          <HiOutlineDownload className="mr-2 h-4 w-4" />
+          <span>Backup</span>
+        </DropdownMenuItem>
+        <DropdownMenuItem onClick={showFileImport}>
+          <HiOutlineUpload className="mr-2 h-4 w-4" />
+          <span>Import note</span>
+        </DropdownMenuItem>
+        <DropdownMenuItem onClick={goToBin}>
+          <HiOutlineTrash className="mr-2 h-4 w-4" />
+          <span>BIN</span>
+        </DropdownMenuItem>
+      </DropdownMenuContent>
+    </DropdownMenu>
   );
 };
 

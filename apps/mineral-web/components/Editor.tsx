@@ -61,12 +61,13 @@ const Editor = React.forwardRef(
 
     // It would be better to add a bunch of classes based on the current settings
     // at a parent component
-    const dimOnBlurClass = dimBlurredEditor ? 'dimmedOnBlur' : '';
+    // TO-DO: Add a class to dim the editor when it's blurred
+    // const dimOnBlurClass = dimBlurredEditor ? 'dimmedOnBlur' : '';
 
     return (
       <div
         id="editorarea"
-        className="editorarea flex-2 relative h-full w-full overflow-hidden font-mono"
+        className="editorarea flex-2 relative h-full font-mono"
       >
         <PanelLabel>
           <HiOutlinePencil />
@@ -81,7 +82,7 @@ const Editor = React.forwardRef(
           }
         `}</style>
         <textarea
-          className={`editor-content scrollable h-full no-print resize-none rounded-none border-none bg-[color:var(--editor-bg-color)] p-[var(--editor-padding)] text-[color:var(--editor-text-color)] outline-none ${dimOnBlurClass}`}
+          className={`editor-content scrollable no-print h-full w-full resize-none rounded-none border-none bg-[color:var(--editor-bg-color)] p-[var(--editor-padding)] text-[color:var(--editor-text-color)] outline-none`}
           ref={ref}
           onDoubleClick={props.onDoubleClick}
           onChange={onChange}

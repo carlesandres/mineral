@@ -1,7 +1,7 @@
 import { HTMLAttributes } from 'react';
 import Button from 'components/Button';
 import { HiOutlineSwatch } from 'react-icons/hi2';
-// import { getNoteById } from 'utils/useNotesStore';
+// import { getNoteById } from 'hooks/useNotesStore';
 
 export interface StyleSelectorProps extends HTMLAttributes<HTMLButtonElement> {
   noteId: string;

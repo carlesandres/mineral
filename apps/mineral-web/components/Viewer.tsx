@@ -75,7 +75,7 @@ const Viewer = React.forwardRef((props: Props, ref: Ref<HTMLDivElement>) => {
 
   // TO-DO: Padding should be based on CSS variable
   return (
-    <div className={`viewerarea flex-2 relative h-full w-full`}>
+    <div className={`viewerarea flex-2 relative w-full`}>
       <PanelLabel>
         <FaMarkdown />
       </PanelLabel>

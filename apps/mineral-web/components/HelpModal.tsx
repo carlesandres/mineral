@@ -10,7 +10,7 @@ const HelpModal = () => {
     <Modal
       isOpen={mdCheatVisible}
       title="Markdown Cheatsheet"
-      onClose={hideMdCheat}
+      onOpenChange={hideMdCheat}
       className="md:max-w-4xl"
     >
       <MDCheatsheet />

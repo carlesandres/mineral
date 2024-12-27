@@ -1,45 +1,51 @@
-import React from 'react';
-import Modal from 'components/Modal';
-import CloseButton from 'components/CloseButton';
+import React, { useCallback } from 'react';
 import ColorBall from 'components/ColorBall';
 import colors from 'components/colors';
+import { Dialog, DialogTrigger, DialogContent } from './ui/dialog';
+import { updateNote } from 'hooks/useNotesStore';
+import type { Note } from 'types/Note';
 
 interface ColorSelectorProps {
-  onChange: (arg0: string) => void;
-  onClose: () => void;
-  show: boolean;
   selectedColor?: string;
+  noteId: Note['id'];
 }
 
 const ColorSelector = (props: ColorSelectorProps) => {
-  const { selectedColor } = props;
+  const { selectedColor, noteId } = props;
+
+  const changeColor = useCallback(
+    (color: string) => {
+      updateNote(noteId, { color });
+    },
+    [noteId],
+  );
 
   const colorballs = colors.map((color) => (
     <ColorBall
       key={color}
-      onClick={props.onChange}
+      onClick={() => changeColor(color)}
       selected={color === selectedColor}
       color={color}
     />
   ));
 
   return (
-    <Modal
-      onClose={props.onClose}
-      title={'Choose a label color'}
-      isOpen={props.show}
-    >
-      <CloseButton onClick={props.onClose} />
-      <div className="p-4">
-        <p className="px-4 py-2">
-          Different colors can help you find your notes faster in the notes
-          list.
-        </p>
-        <div className="flex w-full flex-wrap justify-start gap-4 overflow-hidden sm:p-4">
-          {colorballs}
+    <Dialog>
+      <DialogTrigger asChild>
+        <ColorBall color={selectedColor} small />
+      </DialogTrigger>
+      <DialogContent>
+        <div className="p-4">
+          <p className="px-4 py-2">
+            Different colors can help you find your notes faster in the notes
+            list.
+          </p>
+          <div className="flex w-full flex-wrap justify-start gap-4 overflow-hidden sm:p-4">
+            {colorballs}
+          </div>
         </div>
-      </div>
-    </Modal>
+      </DialogContent>
+    </Dialog>
   );
 };
 

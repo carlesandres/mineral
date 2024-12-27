@@ -45,7 +45,7 @@ const FileImporter = () => {
   return (
     <Modal
       isOpen={fileImportModalVisible}
-      onClose={closeModal}
+      onOpenChange={closeModal}
       title="Load file"
     >
       <div className="p-4">

@@ -1,53 +1,38 @@
-import { Menu, Transition } from '@headlessui/react';
-import { FiMenu } from 'react-icons/fi';
-import MenuButton2 from 'components/MenuButton2';
-import { HiOutlinePlus, HiOutlineClipboard } from 'react-icons/hi';
-import RoundBigButton from './RoundBigButton';
-import { useMemo } from 'react';
-import { getShownFiles } from 'utils/fileUtils';
-import EmptyBinButton from './EmptyBinButton';
 import { useRoutingHelpers } from 'hooks/use-routing-helpers';
-import { getNotes } from 'hooks/useNotesStore';
+import { MoreVertical, Maximize2 } from 'lucide-react';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
+import { Button } from '@/components/ui/button';
 
-const BinMenu = () => {
-  const notes = getNotes();
-  const binnedNotes = useMemo(() => {
-    return getShownFiles(notes, 'BIN', '');
-  }, [notes]);
+export function BinMenu() {
+  // const notes = getNotes();
+  // const binnedNotes = useMemo(() => {
+  //   return getShownFiles(notes, 'BIN', '');
+  // }, [notes]);
   const { goToNewFile, goToList } = useRoutingHelpers();
 
   return (
-    <Menu as="div" className="no-print fixed right-2 top-2">
-      <Menu.Button as="div" className="menu-btn">
-        <RoundBigButton>
-          <FiMenu />
-        </RoundBigButton>
-      </Menu.Button>
-      <Transition
-        className="absolute right-0 top-full z-10"
-        enter="transition duration-100 ease-out"
-        enterFrom="transform scale-95 opacity-0"
-        enterTo="transform scale-100 opacity-100"
-        leave="transition duration-75 ease-out"
-        leaveFrom="transform scale-100 opacity-100"
-        leaveTo="transform scale-95 opacity-0"
-      >
-        <Menu.Items className="mt-1 flex w-max flex-col rounded border border-[var(--border-color)] bg-[var(--solid-bg-color)] px-3 py-4">
-          <MenuButton2
-            onClick={goToNewFile}
-            icon={<HiOutlinePlus />}
-            text="New note"
-          />
-          <MenuButton2
-            icon={<HiOutlineClipboard />}
-            onClick={() => goToList()}
-            text="Go to Notes"
-          />
-          <EmptyBinButton binnedNotes={binnedNotes} />
-        </Menu.Items>
-      </Transition>
-    </Menu>
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <Button variant="ghost" size="icon">
+          <MoreVertical className="h-4 w-4" />
+          <span className="sr-only">Open menu</span>
+        </Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent align="end">
+        <DropdownMenuItem onClick={() => goToList('')}>
+          <Maximize2 className="mr-2 h-4 w-4" />
+          <span>List</span>
+        </DropdownMenuItem>
+        <DropdownMenuItem onClick={goToNewFile}>
+          <Maximize2 className="mr-2 h-4 w-4" />
+          <span>New</span>
+        </DropdownMenuItem>
+      </DropdownMenuContent>
+    </DropdownMenu>
   );
-};
-
-export default BinMenu;
+}

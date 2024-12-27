@@ -17,7 +17,6 @@ dark:text-gray-300 print:border-none print:text-black`;
 const ConfirmExportModal = (props: Props) => {
   const { note, show, onClose } = props;
   const [fileName, setFileName] = useState(`${note.title}.txt`);
-  const modalRef = useRef<HTMLDivElement | null>(null);
   const { toast } = useToast();
 
   const changeFileName = useCallback(
@@ -35,7 +34,6 @@ const ConfirmExportModal = (props: Props) => {
 
   return (
     <ConfirmDialog
-      ref={modalRef}
       show={show}
       onCancel={onClose}
       onConfirm={exportCurrentFile}
