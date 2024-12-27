@@ -33,7 +33,7 @@ const SettingsPage = () => {
     const value = target.checked;
     localStorage.theme = value ? 'dark' : 'light';
     setDarkMode(value);
-    document.documentElement.classList.toggle('dark', darkMode);
+    document.documentElement.classList.toggle('dark', !darkMode);
   };
 
   // const _findDuplicates = () => {

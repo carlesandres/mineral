@@ -2,7 +2,7 @@ import { useState, useCallback } from 'react';
 import Modal from 'components/Modal';
 import Error from 'components/Error';
 import useUIZStore from 'hooks/useUIZStore';
-import { useToast } from 'hooks/use-toast';
+import { toast } from 'sonner';
 
 export const readLocalFile = (file: File) => {
   return new Promise((resolve, reject) => {
@@ -21,7 +21,6 @@ export const readLocalFile = (file: File) => {
 const FileImporter = () => {
   const [errorMsg, setErrormsg] = useState<string | null>(null);
   const { fileImportModalVisible, hideFileImport } = useUIZStore();
-  const { toast } = useToast();
 
   const closeModal = useCallback(() => {
     hideFileImport();
@@ -35,7 +34,7 @@ const FileImporter = () => {
       // const text = await readLocalFile(file);
       // createFile({ title: file.name, text });
       // toast(<SuccessToast>File imported</SuccessToast>);
-      toast({ description: 'File imported', variant: 'destructive' });
+      toast.error('File import not implemented');
       closeModal();
     } catch (err) {
       setErrormsg('There has been a problem loading your file');
