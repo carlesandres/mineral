@@ -5,6 +5,8 @@ import HorzRadioGroup from 'components/HorzRadioGroup';
 import SettingsCheckbox from 'components/SettingsCheckbox';
 import Label from 'components/Label';
 import { HiOutlineCog } from 'react-icons/hi';
+import { useState, useEffect, ChangeEvent } from 'react';
+import Checkbox from './Checkbox';
 
 const lineHeights = new Map([
   ['Small', '1.5'],
@@ -16,6 +18,23 @@ const lineHeights = new Map([
 
 const SettingsPage = () => {
   const settings = useSettingsStore();
+  const [darkMode, setDarkMode] = useState(false);
+
+  useEffect(() => {
+    const darkMode = localStorage.theme === 'dark';
+    setDarkMode(darkMode);
+  }, []);
+
+  const handleDarkMode = (event: ChangeEvent<HTMLInputElement>) => {
+    const { target } = event;
+    if (target.type !== 'checkbox') {
+      return;
+    }
+    const value = target.checked;
+    localStorage.theme = value ? 'dark' : 'light';
+    setDarkMode(value);
+    document.documentElement.classList.toggle('dark', darkMode);
+  };
 
   // const _findDuplicates = () => {
   // TO-DO: Need to check if the fileList is initialized first
@@ -39,7 +58,12 @@ const SettingsPage = () => {
         name="emptyBinConfirm"
         label="Ask for confirmation before emptying the bin"
       />
-      <SettingsCheckbox name="darkMode" label="Dark Mode" />
+      <Checkbox
+        label="Dark Mode"
+        checked={darkMode}
+        onChange={handleDarkMode}
+      />
+
       <Label className="mt-16">Editor</Label>
       <SettingsCheckbox
         name="dimBlurredEditor"

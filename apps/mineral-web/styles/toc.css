@@ -3,11 +3,11 @@
 }
 
 .toc h1 {
-  @apply text-xl font-semibold;
+  @apply text-lg font-semibold;
 }
 
 .toc h2 {
-  @apply pl-4 text-lg font-semibold;
+  @apply pl-4 text-base font-semibold;
 }
 
 .toc h3 {
@@ -18,7 +18,7 @@
 .toc h4,
 .toc h5,
 .toc h6 {
-  @apply text-base;
+  @apply text-sm;
 }
 
 .toc h4 {

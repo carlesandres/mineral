@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import Button from 'components/Button';
+import { Button } from './ui/button';
 
 const FileInUse = () => (
   <div className="generic-content mt-16 sm:mt-32">
@@ -17,9 +17,7 @@ const FileInUse = () => (
       >
         Reopen note in this tab
       </Button>
-      <Link href="/">
-        <Button className="">Go to Dashboard</Button>
-      </Link>
+      <Link href="/">Go to Dashboard</Link>
     </div>
   </div>
 );

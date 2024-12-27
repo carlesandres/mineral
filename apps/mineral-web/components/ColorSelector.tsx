@@ -1,9 +1,10 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useState } from 'react';
 import ColorBall from 'components/ColorBall';
 import colors from 'components/colors';
 import { Dialog, DialogTrigger, DialogContent } from './ui/dialog';
 import { updateNote } from 'hooks/useNotesStore';
 import type { Note } from 'types/Note';
+import { Button } from './ui/button';
 
 interface ColorSelectorProps {
   selectedColor?: string;
@@ -12,33 +13,33 @@ interface ColorSelectorProps {
 
 const ColorSelector = (props: ColorSelectorProps) => {
   const { selectedColor, noteId } = props;
+  const [open, setOpen] = useState(false);
 
   const changeColor = useCallback(
     (color: string) => {
       updateNote(noteId, { color });
+      setOpen(false);
     },
     [noteId],
   );
 
   const colorballs = colors.map((color) => (
-    <ColorBall
-      key={color}
-      onClick={() => changeColor(color)}
-      selected={color === selectedColor}
-      color={color}
-    />
+    <button key={color} onClick={() => changeColor(color)}>
+      <ColorBall key={color} selected={color === selectedColor} color={color} />
+    </button>
   ));
 
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <ColorBall color={selectedColor} small />
+        <Button variant="ghost" size="icon">
+          <ColorBall color={selectedColor} small />
+        </Button>
       </DialogTrigger>
-      <DialogContent>
+      <DialogContent className="bg-white">
         <div className="p-4">
           <p className="px-4 py-2">
-            Different colors can help you find your notes faster in the notes
-            list.
+            A color can help you find your note faster in the list.
           </p>
           <div className="flex w-full flex-wrap justify-start gap-4 overflow-hidden sm:p-4">
             {colorballs}

@@ -1,5 +1,5 @@
 import { HTMLAttributes } from 'react';
-import Button from 'components/Button';
+import { Button } from './ui/button';
 import { HiOutlineSwatch } from 'react-icons/hi2';
 // import { getNoteById } from 'hooks/useNotesStore';
 
@@ -27,7 +27,7 @@ const StyleSelector = (props: StyleSelectorProps) => {
   }
 
   return (
-    <Button className="w-24" onClick={() => {}} variant="small" {...restProps}>
+    <Button className="w-24" onClick={() => {}} {...restProps}>
       <HiOutlineSwatch className="text-base" />
       <span className="bg-transparent text-xs">{themeName}</span>
     </Button>

@@ -48,7 +48,7 @@ const NoteArea = (props: Props) => {
     ? 'wide w-full rounded-none m-0'
     : 'dark:md:border max-w-full sm:border';
 
-  const containerWideClass = wide ? '' : 'sm:px-8 sm:py-16 lg:py-32';
+  const containerWideClass = wide ? '' : 'sm:px-8 sm:py-12';
 
   return (
     <div

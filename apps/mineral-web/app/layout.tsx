@@ -5,7 +5,8 @@ import { GeistMono } from 'geist/font/mono';
 import 'styles/main.css';
 import ClientLayout from 'components/ClientLayout';
 import { Suspense } from 'react';
-import { Toaster } from '@/components/ui/toaster';
+import { Toaster } from '@/components/ui/sonner';
+import Script from 'next/script';
 
 async function MyApp({ children }: { children: React.ReactNode }) {
   // const {
@@ -15,7 +16,7 @@ async function MyApp({ children }: { children: React.ReactNode }) {
   //   menu = <MainMenu />,
   // } = props;
   // const fixedHeight = "flex overflow-hidden flex-1 ";
-  // const fhClass = isFixedHeight ? fixedHeight : "px-4 lg:px-0";
+  // const fhClass = isFixedHeight ? fixedHeight : "px- lg:px-0";
   // const fhClassInner = isFixedHeight ? "flex flex-1" : "px-4 lg:px-0";
   // const allowScrollClass = allowScroll ? "overflow-y-auto" : "overflow-hidden";
 
@@ -27,6 +28,7 @@ async function MyApp({ children }: { children: React.ReactNode }) {
           data-domain="mnral.com"
           src="https://plausible.io/js/script.tagged-events.js"
         ></script>
+        <Script src="/darkmode.js" />
         <link rel="icon" href="/favicon.ico" sizes="any" />
         <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
@@ -39,7 +41,7 @@ async function MyApp({ children }: { children: React.ReactNode }) {
             <CommandPalette />
           </Suspense>
           <ClientLayout>{children}</ClientLayout>
-          <Toaster />
+          <Toaster richColors position="top-center" />
         </div>
       </body>
     </html>

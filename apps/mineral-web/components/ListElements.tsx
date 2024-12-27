@@ -4,6 +4,8 @@ import { getShownFiles } from 'utils/fileUtils';
 import { sortBy } from 'lodash';
 import { Note } from 'types/Note';
 import Label from 'components/Label';
+import Link from 'next/link';
+import { Button } from './ui/button';
 
 interface ListElementProps {
   notes: Note[];
@@ -30,6 +32,17 @@ const ListElements = (props: ListElementProps) => {
   }
 
   if (!shownFiles.length) {
+    if (!searchTerm) {
+      return (
+        <div className="py-4 text-center">
+          <div className="mb-2">There are no active notes.</div>
+          <Button asChild className="mt-4">
+            <Link href="/new">Create a new note</Link>
+          </Button>
+        </div>
+      );
+    }
+
     return (
       <div className="py-4 text-center">
         <div className="mb-2">

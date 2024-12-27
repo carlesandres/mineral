@@ -43,7 +43,7 @@ const EditorToolbar = (props: EditorToolbarProps) => {
 
   return (
     <div
-      className={`editor-toolbar no-print flex items-center justify-between border-b border-[var(--border-soft-color)] bg-[var(--solid-bg-color)] print:border-none`}
+      className={`editor-toolbar no-print flex items-center justify-between border-b border-[var(--border-soft-color)] bg-[var(--solid-bg-color)] px-2 py-0.5 print:border-none`}
     >
       <Input
         type="text"
@@ -53,7 +53,7 @@ const EditorToolbar = (props: EditorToolbarProps) => {
         placeholder="(Untitled)"
         onChange={onChange}
         onKeyDown={handleKeyDown}
-        className={`title mx-10 overflow-hidden text-ellipsis whitespace-nowrap border-none shadow-none ${wideClass}`}
+        className={`title overflow-hidden text-ellipsis whitespace-nowrap rounded-none border-0 border-b border-b-transparent px-0 shadow-none focus-visible:border-b-blue-500 focus-visible:ring-0 sm:!text-base ${wideClass}`}
       />
     </div>
   );

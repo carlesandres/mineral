@@ -10,7 +10,6 @@ interface StoreState {
   mdCheatVisible: boolean;
   showMdCheat: () => void;
   hideMdCheat: () => void;
-  notifications: Notif[];
   backupModalVisible: boolean;
   showBackupModal: () => void;
   hideBackupModal: () => void;
@@ -25,7 +24,6 @@ const useUIZStore = create<StoreState>((set) => ({
   mdCheatVisible: false,
   showMdCheat: () => set(() => ({ mdCheatVisible: true })),
   hideMdCheat: () => set(() => ({ mdCheatVisible: false })),
-  notifications: [],
   backupModalVisible: false,
   showBackupModal: () => set(() => ({ backupModalVisible: true })),
   hideBackupModal: () => set(() => ({ backupModalVisible: false })),

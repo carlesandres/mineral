@@ -20,14 +20,14 @@ const EditorStatistics = (props: EditorStatisticsProps) => {
   const creationDate = formatDate(createdAt);
 
   return (
-    <div className="flex">
-      <div className="pill w-24 text-blue-700 dark:text-blue-400">
+    <div className="flex text-xs">
+      <div className="w-[12ch] text-blue-700 dark:text-blue-400">
         {text.length} chars
       </div>
-      <div className="pill w-24 text-pink-700 dark:text-pink-400">
+      <div className="w-[12ch] text-pink-700 dark:text-pink-400">
         {numWords} words
       </div>
-      <div className="pill text-gray-500">Created: {creationDate}</div>
+      <div className="text-gray-500">Created: {creationDate}</div>
     </div>
   );
 };
