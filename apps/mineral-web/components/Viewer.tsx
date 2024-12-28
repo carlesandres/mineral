@@ -28,7 +28,6 @@ const Viewer = React.forwardRef((props: Props, ref: Ref<HTMLDivElement>) => {
   useEffect(() => {
     const parseMD = async () => {
       const markdown = await marked.parse(text);
-      console.log('markdown', markdown);
       setMarkdown(markdown);
     };
 

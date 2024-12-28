@@ -38,7 +38,7 @@ input[type='checkbox'] {
   @apply rounded bg-yellow-200 p-4 dark:bg-yellow-800;
 }
 
-body.dark {
+html.dark {
   --background: var(--ultra-dark-grey);
   --text-color: white;
   --preview-bg-color: var(--medium-dark-grey);
