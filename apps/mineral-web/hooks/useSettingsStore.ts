@@ -8,7 +8,6 @@ const saveSettings = (settings: StoreState) =>
   localforage.setItem(SETTINGS_KEY, settings);
 
 interface StoreState {
-  darkMode: boolean;
   dimBlurredEditor: boolean;
   emptyBinConfirm: boolean;
   startWithPreview: boolean;
@@ -19,7 +18,6 @@ interface StoreState {
 }
 
 export const hardCodedDefaults: StoreState = {
-  darkMode: false,
   dimBlurredEditor: false,
   emptyBinConfirm: true,
   startWithPreview: false,

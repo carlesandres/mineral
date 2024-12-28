@@ -6,7 +6,7 @@ import 'styles/main.css';
 import ClientLayout from 'components/ClientLayout';
 import { Suspense } from 'react';
 import { Toaster } from '@/components/ui/sonner';
-import Script from 'next/script';
+import { ThemeProvider } from '@/components/theme-provider';
 
 async function MyApp({ children }: { children: React.ReactNode }) {
   // const {
@@ -21,14 +21,17 @@ async function MyApp({ children }: { children: React.ReactNode }) {
   // const allowScrollClass = allowScroll ? "overflow-y-auto" : "overflow-hidden";
 
   return (
-    <html lang="en" className={`${GeistSans.variable} ${GeistMono.variable}`}>
+    <html
+      lang="en"
+      className={`${GeistSans.variable} ${GeistMono.variable}`}
+      suppressHydrationWarning
+    >
       <head>
         <script
           defer
           data-domain="mnral.com"
           src="https://plausible.io/js/script.tagged-events.js"
         ></script>
-        <Script src="/darkmode.js" />
         <link rel="icon" href="/favicon.ico" sizes="any" />
         <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
@@ -36,13 +39,20 @@ async function MyApp({ children }: { children: React.ReactNode }) {
         <meta name="theme-color" content="#4a4a4a" />
       </head>
       <body>
-        <div className={`page-content min-h-screen`}>
-          <Suspense>
-            <CommandPalette />
-          </Suspense>
-          <ClientLayout>{children}</ClientLayout>
-          <Toaster richColors position="top-center" />
-        </div>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <div className={`page-content min-h-screen`}>
+            <Suspense>
+              <CommandPalette />
+            </Suspense>
+            <ClientLayout>{children}</ClientLayout>
+            <Toaster richColors position="top-center" />
+          </div>
+        </ThemeProvider>
       </body>
     </html>
   );

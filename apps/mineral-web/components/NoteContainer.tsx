@@ -1,6 +1,5 @@
 import NoteArea from 'components/NoteArea';
 import { useEffect, useCallback, useRef } from 'react';
-import useSettingsStore from 'hooks/useSettingsStore';
 import 'highlight.js/styles/github-dark.css';
 import 'highlight.js/styles/github.css';
 import { Note, PanelsPartial } from 'types/Note';
@@ -12,7 +11,6 @@ interface Props {
 
 const NoteContainer = (props: Props) => {
   const { note } = props;
-  const { darkMode } = useSettingsStore();
   const darkStyleRef = useRef<HTMLStyleElement | null>(null);
   const lightStyleRef = useRef<HTMLStyleElement | null>(null);
   const noteId = note?.id;
@@ -41,18 +39,6 @@ const NoteContainer = (props: Props) => {
       darkStyleRef.current = darkStyleEl;
     }
   }, []);
-
-  useEffect(() => {
-    const isNowDark = darkMode;
-    const active = isNowDark ? lightStyleRef.current : darkStyleRef.current;
-    const inactive = isNowDark ? darkStyleRef.current : lightStyleRef.current;
-    if (active) {
-      active.setAttribute('media', 'not all');
-    }
-    if (inactive) {
-      inactive.removeAttribute('media');
-    }
-  }, [darkMode]);
 
   const editTitle = useCallback(
     (title: string) => updateNote(noteId, { title }),
