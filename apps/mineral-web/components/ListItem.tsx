@@ -5,7 +5,7 @@ import ListItemDate from 'components/ListItemDate';
 import ColorBall from 'components/ColorBall';
 import Link from 'next/link';
 import { binNote, unbinNote } from 'hooks/useNotesStore';
-import { useToast } from 'hooks/use-toast';
+import { toast } from 'sonner';
 
 interface Props {
   note: Note;
@@ -14,18 +14,17 @@ interface Props {
 const ListItem = (props: Props) => {
   const { note } = props;
   const { id: noteId, deletedAt, title } = note;
-  const { toast } = useToast();
 
   const untitledClass = title ? '' : 'text-gray-400 dark:text-gray-500';
 
   const handleBinNote = () => {
     if (deletedAt) {
       unbinNote(noteId);
-      toast({ description: 'Unbinned!' });
+      toast.success('Note unbinned');
       return;
     }
     binNote(noteId);
-    toast({ description: 'Deleted!' });
+    toast.success('Note sent to bin');
   };
 
   // TO-DO: Fix action on undelete

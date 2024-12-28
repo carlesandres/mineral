@@ -22,7 +22,7 @@ const useDeleteNote = (noteId: string, deletedAt: NoteDeletedAt) => {
     } else {
       goToList();
     }
-  }, [deletedAt, noteId, toast, goToList, goToNote]);
+  }, [deletedAt, noteId, goToList, goToNote]);
 
   return deleteFn;
 };

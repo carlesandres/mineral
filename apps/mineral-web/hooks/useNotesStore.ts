@@ -15,7 +15,6 @@ const useNotesStore = create<StoreState>(() => ({
 
 export const loadNotes = async () => {
   const notes = await getFullList();
-  console.log('notes', notes);
   setNotes(notes);
   setInitialized(true);
 };

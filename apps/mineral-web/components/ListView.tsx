@@ -15,11 +15,10 @@ import DragAndDrop from 'components/DragAndDrop';
 // import useCreateFile from 'hooks/useCreateFile';
 import { useRouter, useSearchParams } from 'next/navigation';
 import useNotesStore, { getNotes } from 'hooks/useNotesStore';
-import { useToast } from 'hooks/use-toast';
+import { toast } from 'sonner';
 
 const ListView = () => {
   const header = useRef<HTMLInputElement>(null);
-  const { toast } = useToast();
   const { initialized } = useNotesStore((state) => state);
   const notes = getNotes();
   const router = useRouter();
@@ -47,22 +46,16 @@ const ListView = () => {
 
   const onClear = () => setSearchterm('');
 
-  const handleDrop = useCallback(
-    async (files: FileList) => {
-      // TO-DO:  Handle more than one file
-      const firstFile = files[0];
-      if (!firstFile.name) {
-        return;
-      }
-      // const text = await readLocalFile(firstFile);
-      // await createFile({ title: firstFile.name, text });
-      toast({
-        description: 'Importing is not yet supported',
-        variant: 'destructive',
-      });
-    },
-    [toast],
-  );
+  const handleDrop = useCallback(async (files: FileList) => {
+    // TO-DO:  Handle more than one file
+    const firstFile = files[0];
+    if (!firstFile.name) {
+      return;
+    }
+    // const text = await readLocalFile(firstFile);
+    // await createFile({ title: firstFile.name, text });
+    toast.error('Importing is not yet supported');
+  }, []);
 
   if (!initialized) {
     return null;

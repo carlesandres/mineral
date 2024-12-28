@@ -7,6 +7,7 @@ import Label from 'components/Label';
 import { HiOutlineCog } from 'react-icons/hi';
 import { useState, useEffect, ChangeEvent } from 'react';
 import Checkbox from './Checkbox';
+import { useTheme } from 'next-themes';
 
 const lineHeights = new Map([
   ['Small', '1.5'],
@@ -18,23 +19,7 @@ const lineHeights = new Map([
 
 const SettingsPage = () => {
   const settings = useSettingsStore();
-  const [darkMode, setDarkMode] = useState(false);
-
-  useEffect(() => {
-    const darkMode = localStorage.theme === 'dark';
-    setDarkMode(darkMode);
-  }, []);
-
-  const handleDarkMode = (event: ChangeEvent<HTMLInputElement>) => {
-    const { target } = event;
-    if (target.type !== 'checkbox') {
-      return;
-    }
-    const value = target.checked;
-    localStorage.theme = value ? 'dark' : 'light';
-    setDarkMode(value);
-    document.documentElement.classList.toggle('dark', darkMode);
-  };
+  const { theme, setTheme } = useTheme();
 
   // const _findDuplicates = () => {
   // TO-DO: Need to check if the fileList is initialized first
@@ -60,8 +45,10 @@ const SettingsPage = () => {
       />
       <Checkbox
         label="Dark Mode"
-        checked={darkMode}
-        onChange={handleDarkMode}
+        checked={theme === 'dark'}
+        onChange={(e: ChangeEvent<HTMLInputElement>) => {
+          setTheme(e.target.checked ? 'dark' : 'light');
+        }}
       />
 
       <Label className="mt-16">Editor</Label>

@@ -11,7 +11,6 @@ import {
   HiOutlinePrinter,
   HiOutlineViewColumns,
 } from 'react-icons/hi2';
-import { FaMarkdown } from 'react-icons/fa';
 import { getNotes, updateNote } from 'hooks/useNotesStore';
 import { MoreVertical, Maximize2 } from 'lucide-react';
 import {
@@ -34,14 +33,12 @@ const NoteMenu = (props: Props) => {
   const tocVisible = note?.panels?.toc;
   const [showConfirmExportModal, setShowConfirmExportModal] = useState(false);
   const binNote = useDeleteNote(noteId, note?.deletedAt);
-  const { showMdCheat } = useUIZStore((state) => state);
 
   const openConfirmExportModal = () => setShowConfirmExportModal(true);
   const closeConfirmExportModal = () => setShowConfirmExportModal(false);
 
   const rotatePanels = useCallback(() => {
     if (!note) {
-      // TO-DO: Show toast
       return;
     }
     const { viewer, editor } = note.panels;
@@ -61,7 +58,6 @@ const NoteMenu = (props: Props) => {
   const updatePanels = useCallback(
     (panels: Partial<Panels>) => {
       if (!note) {
-        // TO-DO: Show toast
         return;
       }
       updateNote(note.id, { panels: { ...note.panels, ...panels } });
@@ -72,7 +68,6 @@ const NoteMenu = (props: Props) => {
   const updateWidth = useCallback(
     (wide: boolean) => {
       if (!note) {
-        // TO-DO: Show toast
         return;
       }
       updateNote(note.id, { wide });
