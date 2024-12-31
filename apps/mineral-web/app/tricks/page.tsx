@@ -22,7 +22,7 @@ const FeaturesPage = () => {
         <FeatureSectionTitle>Editor</FeatureSectionTitle>
         <p>
           Press <kbd>Cmd</kbd> and double-click on any panel in the editor to
-          togglr between <strong>read-only</strong> and{' '}
+          toggle between <strong>read-only</strong> and{' '}
           <strong>write-focus</strong> modes.
         </p>
 

@@ -7,6 +7,8 @@ import ClientLayout from 'components/ClientLayout';
 import { Suspense } from 'react';
 import { Toaster } from '@/components/ui/sonner';
 import { ThemeProvider } from '@/components/theme-provider';
+import { AppSidebar } from 'components/AppSidebar';
+import { SidebarProvider, SidebarTrigger } from 'components/ui/sidebar';
 
 async function MyApp({ children }: { children: React.ReactNode }) {
   // const {
@@ -45,13 +47,17 @@ async function MyApp({ children }: { children: React.ReactNode }) {
           enableSystem
           disableTransitionOnChange
         >
-          <div className={`page-content min-h-screen`}>
-            <Suspense>
-              <CommandPalette />
-            </Suspense>
-            <ClientLayout>{children}</ClientLayout>
-            <Toaster richColors position="top-center" />
-          </div>
+          <SidebarProvider>
+            <AppSidebar />
+            <main className={`page-content min-h-screen w-full`}>
+              <SidebarTrigger />
+              <Suspense>
+                <CommandPalette />
+              </Suspense>
+              <ClientLayout>{children}</ClientLayout>
+              <Toaster richColors position="top-center" />
+            </main>
+          </SidebarProvider>
         </ThemeProvider>
       </body>
     </html>
