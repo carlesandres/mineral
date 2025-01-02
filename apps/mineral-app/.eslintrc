@@ -1,11 +1,39 @@
 {
   "env": {
-    "node": true
+    "browser": true,
+    "node": true,
+    "es2024": true
+  },
+  "extends": [
+    "eslint:recommended"
+  ],
+  "parserOptions": {
+    "ecmaVersion": "latest",
+    "sourceType": "module"
   },
   "rules": {
-    "import/no-extraneous-dependencies": ["off"],
-    "import/no-commonjs": ["off"],
-    "import/no-nodejs-modules": ["off"]
-  }
+    "no-unused-vars": "warn",
+    "no-console": "off",
+    "node/no-missing-require": "off",
+    "node/no-unpublished-require": "off"
+  },
+  "overrides": [
+    {
+      "files": [
+        "main.js",
+        "preload.js"
+      ],
+      "env": {
+        "node": true
+      }
+    },
+    {
+      "files": [
+        "renderer/**/*.js"
+      ],
+      "env": {
+        "browser": true
+      }
+    }
+  ]
 }
-

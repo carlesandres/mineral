@@ -1,5 +1,5 @@
-const { screen } = require("electron");
-const settings = require("electron-settings");
+import { screen } from "electron";
+import settings from "electron-settings";
 
 const windowStateKeeper = async (windowName) => {
   let window, windowState;
@@ -50,4 +50,4 @@ const windowStateKeeper = async (windowName) => {
   };
 };
 
-module.exports = windowStateKeeper;
+export default windowStateKeeper;

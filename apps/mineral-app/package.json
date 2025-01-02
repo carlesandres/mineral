@@ -4,6 +4,7 @@
   "version": "0.0.0",
   "description": "Offline Markdown Notebook",
   "main": "main.js",
+  "type": "module",
   "scripts": {
     "start": "electron .",
     "dist-test": "electron-builder --dir",
@@ -30,6 +31,7 @@
     }
   },
   "dependencies": {
+    "electron-serve": "^2.1.1",
     "electron-settings": "4.0.4",
     "electron-squirrel-startup": "^1.0.1",
     "minimist": "^1.2.8"
