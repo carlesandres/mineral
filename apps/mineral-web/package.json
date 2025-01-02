@@ -10,6 +10,7 @@
     "jest-e2e-ci": "jest --config jest.e2e.config.json -i --colors",
     "jest-e2e-dev-watch": "HEADLESS=false jest --config jest.e2e-dev.config.json -i --watch",
     "build": "next build",
+    "build-static": "BUILD_STATIC=true next build",
     "start": "next start",
     "build-and-start": "npm-run-all build start",
     "dev": "next dev --turbopack -p 3007",

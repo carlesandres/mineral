@@ -1,7 +1,10 @@
-const { app, BrowserWindow } = require("electron");
-const minimist = require("minimist");
-const args = minimist(process.argv.slice(2));
-const windowStateKeeper = require("./windowStateKeeper");
+import { app, BrowserWindow } from "electron";
+// const minimist = require("minimist");
+// const args = minimist(process.argv.slice(2));
+import windowStateKeeper from "./windowStateKeeper.js";
+import serve from "electron-serve";
+
+const loadURL = serve({ directory: "../mineral-web/out" });
 
 async function createWindow() {
   const mainWindowStateKeeper = await windowStateKeeper("main");
@@ -16,23 +19,18 @@ async function createWindow() {
     },
   });
 
-  let url = "https://mnral.com";
+  // TO-DO: Prevent links from opening in the app
+  // mainWindow.webContents.on("will-navigate", (e, destinationUrl) => {
+  //   const isInternal =
+  //     destinationUrl.startsWith("/") ||
+  //     destinationUrl.match("https://mnral.com");
+  //   if (!isInternal) {
+  //     e.preventDefault();
+  //     require("electron").shell.openExternal(destinationUrl);
+  //   }
+  // });
 
-  if (args.search) {
-    url = `${url}/notes?search=${encodeURIComponent(args.search)}`;
-  }
-
-  mainWindow.webContents.on("will-navigate", (e, destinationUrl) => {
-    const isInternal =
-      destinationUrl.startsWith("/") ||
-      destinationUrl.match("https://mnral.com");
-    if (!isInternal) {
-      e.preventDefault();
-      require("electron").shell.openExternal(destinationUrl);
-    }
-  });
-
-  mainWindow.loadURL(url);
+  loadURL(mainWindow);
 
   // let win = BrowserWindow.getAllWindows()[0];
 
