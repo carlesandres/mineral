@@ -30,13 +30,13 @@
     }
   },
   "dependencies": {
-    "electron-settings": "4.0.2",
-    "electron-squirrel-startup": "^1.0.0",
+    "electron-settings": "4.0.4",
+    "electron-squirrel-startup": "^1.0.1",
     "minimist": "^1.2.8"
   },
   "devDependencies": {
-    "electron": "24.1.1",
-    "electron-builder": "^23.0.3"
+    "electron": "33.2.1",
+    "electron-builder": "^25.1.8"
   },
   "build": {
     "productName": "Mineral",
