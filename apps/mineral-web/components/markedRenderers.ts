@@ -26,7 +26,7 @@ import type { Tokens } from 'marked';
 // export const viewerRenderer = renderer;
 
 const createNewLink = (tocToken: Tokens.Heading): string => {
-  // eslint-disable-next-line
+   
   const { raw, depth } = tocToken;
 
   const anchor2 = raw

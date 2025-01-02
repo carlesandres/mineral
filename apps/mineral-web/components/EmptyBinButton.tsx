@@ -1,8 +1,7 @@
 import { useState } from 'react';
 import ConfirmDialog from 'components/ConfirmDialog';
-import { HiOutlineTrash } from 'react-icons/hi';
 import type { Note } from 'types/Note';
-import MenuButton2 from './MenuButton2';
+import { Button } from './ui/button';
 
 interface Props {
   binnedNotes: Note[];
@@ -31,11 +30,9 @@ const EmptyBinButton = ({ binnedNotes }: Props) => {
   // }, [emptyBinConfirm, emptyBin]);
 
   const emptyBinButton = binnedNotes.length ? (
-    <MenuButton2
-      text="Empty Bin"
+    <Button
       onClick={() => {}}
-      icon={<HiOutlineTrash />}
-    ></MenuButton2>
+    >Empty bin</Button>
   ) : null;
 
   return (

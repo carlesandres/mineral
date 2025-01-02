@@ -1,5 +1,5 @@
 export default {
   eslint: {
-    dirs: ["pages", "src", "__test__"],
+    dirs: ['app', 'components', 'hooks', 'utils', 'types'],
   },
 };

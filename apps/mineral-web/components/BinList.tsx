@@ -3,7 +3,6 @@
 import BinView from 'components/BinView';
 import EmptyList from 'components/EmptyList';
 import ListHeader from 'components/filelist/ListHeader';
-import { useRouter } from 'next/navigation';
 import React, { ChangeEvent, useCallback, useState } from 'react';
 import useNotesStore, { getNotes } from 'hooks/useNotesStore';
 import { BinMenu } from './BinMenu';
@@ -11,16 +10,12 @@ import { BinMenu } from './BinMenu';
 const BinList = () => {
   const { initialized } = useNotesStore((state) => state);
   const notes = getNotes();
-  const router = useRouter();
   const [searchTerm, setSearchterm] = useState('');
 
-  const onSearch = useCallback(
-    (event: ChangeEvent<HTMLInputElement>) => {
-      const newSearchTerm = event.target.value;
-      setSearchterm(newSearchTerm);
-    },
-    [router],
-  );
+  const onSearch = useCallback((event: ChangeEvent<HTMLInputElement>) => {
+    const newSearchTerm = event.target.value;
+    setSearchterm(newSearchTerm);
+  }, []);
 
   const onClear = () => setSearchterm('');
 

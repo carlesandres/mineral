@@ -24,6 +24,7 @@ const DragAndDrop = (props: DragAndDropProps) => {
       setHovering(true);
     }
   };
+
   const handleDragOut = (event: DragEvent) => {
     event.preventDefault();
     event.stopPropagation();

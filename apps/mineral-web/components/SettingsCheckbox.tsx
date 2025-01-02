@@ -15,7 +15,7 @@ const SettingsCheckbox = (props: SettingsCheckboxProps) => {
   const changeCheckboxSetting = useCallback(
     (event: ChangeEvent<HTMLInputElement>) => {
       const { target } = event;
-      let value = target.type === 'checkbox' ? target.checked : target.value;
+      const value = target.type === 'checkbox' ? target.checked : target.value;
       if (target.name in settings) {
         // TO-DO: I need to find out how to do this properly in TS
         // @ts-ignore
