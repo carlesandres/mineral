@@ -5,7 +5,7 @@ import HorzRadioGroup from 'components/HorzRadioGroup';
 import SettingsCheckbox from 'components/SettingsCheckbox';
 import Label from 'components/Label';
 import { HiOutlineCog } from 'react-icons/hi';
-import { useState, useEffect, ChangeEvent } from 'react';
+import { ChangeEvent } from 'react';
 import Checkbox from './Checkbox';
 import { useTheme } from 'next-themes';
 

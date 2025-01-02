@@ -22,7 +22,7 @@ const SettingsCheckbox = (props: SettingsCheckboxProps) => {
         setSetting(target.name, value);
       }
     },
-    [setSetting],
+    [settings],
   );
 
   return (
