@@ -1,4 +1,4 @@
-import { useRef, useEffect, useState, ReactNode } from 'react';
+import { useRef, useEffect, useState, ReactNode, useCallback } from 'react';
 
 interface DragAndDropProps {
   className?: string;
@@ -12,7 +12,7 @@ const DragAndDrop = (props: DragAndDropProps) => {
   const droppable = useRef<HTMLDivElement | null>(null);
   const { current } = droppable;
 
-  const handleDragIn = (event: DragEvent) => {
+  const handleDragIn = useCallback((event: DragEvent) => {
     event.preventDefault();
     event.stopPropagation();
 
@@ -23,8 +23,9 @@ const DragAndDrop = (props: DragAndDropProps) => {
     if (event.dataTransfer.items?.length > 0) {
       setHovering(true);
     }
-  };
-  const handleDragOut = (event: DragEvent) => {
+  }, []);
+
+  const handleDragOut = useCallback((event: DragEvent) => {
     event.preventDefault();
     event.stopPropagation();
 
@@ -35,9 +36,9 @@ const DragAndDrop = (props: DragAndDropProps) => {
     if (event.dataTransfer.items?.length > 0) {
       setHovering(false);
     }
-  };
+  }, []);
 
-  const handleDrag = (event: DragEvent) => {
+  const handleDrag = useCallback((event: DragEvent) => {
     event.preventDefault();
     event.stopPropagation();
 
@@ -48,21 +49,24 @@ const DragAndDrop = (props: DragAndDropProps) => {
     if (event.dataTransfer.items?.length > 0) {
       setHovering(true);
     }
-  };
+  }, []);
 
-  const handleDrop = (event: DragEvent) => {
-    event.preventDefault();
-    event.stopPropagation();
+  const handleDrop = useCallback(
+    (event: DragEvent) => {
+      event.preventDefault();
+      event.stopPropagation();
 
-    if (!event.dataTransfer) {
-      return;
-    }
+      if (!event.dataTransfer) {
+        return;
+      }
 
-    if (event.dataTransfer.items?.length > 0) {
-      props.handleDrop(event.dataTransfer.files);
-      event.dataTransfer.clearData();
-    }
-  };
+      if (event.dataTransfer.items?.length > 0) {
+        props.handleDrop(event.dataTransfer.files);
+        event.dataTransfer.clearData();
+      }
+    },
+    [props],
+  );
 
   useEffect(() => {
     if (current) {
@@ -80,7 +84,7 @@ const DragAndDrop = (props: DragAndDropProps) => {
         current.removeEventListener('drop', handleDrop);
       }
     };
-  }, [current]);
+  }, [current, handleDragIn, handleDragOut, handleDrag, handleDrop]);
 
   const innerClassName = hovering ? 'ring-2 ring-blue-500' : '';
 

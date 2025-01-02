@@ -1,4 +1,4 @@
-const noop = () => {}; // eslint-disable-line no-empty-function
+const noop = () => {};  
 const noLog = {
   log: noop,
   time: noop,
@@ -8,6 +8,6 @@ const noLog = {
 };
 
 const isProd = process.env.NODE_ENV === 'production';
-const actualLog = isProd ? noLog : console; // eslint-disable-line no-console
+const actualLog = isProd ? noLog : console;  
 
 export default actualLog;

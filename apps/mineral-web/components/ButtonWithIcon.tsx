@@ -43,4 +43,6 @@ const ButtonWithIcon = forwardRef(
   },
 );
 
+ButtonWithIcon.displayName = "ButtonWithIcon";
+
 export default ButtonWithIcon;

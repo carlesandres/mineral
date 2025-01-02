@@ -20,10 +20,8 @@ export const setSetting = (key: keyof StoreState, value: any) => {
     const validKeys = Object.keys(hardCodedDefaults) as (keyof StoreState)[];
     const recommendations = {} as StoreState;
     for (const k of validKeys) {
-      // @ts-ignore
       recommendations[k] = state[k];
     }
-    // @ts-ignore
     recommendations[key] = value;
     saveRecommendations(recommendations);
     return { [key]: value };
@@ -31,9 +29,8 @@ export const setSetting = (key: keyof StoreState, value: any) => {
 };
 
 export const loadRecommendations = async () => {
-  const recommendations = await localforage.getItem<StoreState>(
-    RECOMMENDATIONS_KEY
-  );
+  const recommendations =
+    await localforage.getItem<StoreState>(RECOMMENDATIONS_KEY);
   useRecommendationsStore.setState((state) => {
     return recommendations || state;
   });
