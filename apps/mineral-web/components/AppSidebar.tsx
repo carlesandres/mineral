@@ -1,4 +1,4 @@
-import { Calendar, Home, Trash } from 'lucide-react';
+import { Cog, Home, Layers, Trash } from 'lucide-react';
 import Link from 'next/link';
 
 import {
@@ -29,7 +29,12 @@ const items = [
   {
     title: 'Settings',
     url: '/settings',
-    icon: Calendar,
+    icon: Cog,
+  },
+  {
+    title: 'Features',
+    url: '/intro',
+    icon: Layers,
   },
 ];
 

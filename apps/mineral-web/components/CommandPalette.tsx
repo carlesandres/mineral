@@ -9,12 +9,19 @@ import {
   CommandList,
 } from '@/components/ui/command';
 import { useRoutingHelpers } from 'hooks/use-routing-helpers';
+import { useTheme } from 'next-themes';
 
 import { useEffect, useState } from 'react';
 
 export default function CommandPalette() {
   const [open, setOpen] = useState(false);
   const { goToNewFile, goToList, goToBin, goToSettings } = useRoutingHelpers();
+  const { theme, setTheme } = useTheme();
+
+  const toggleTheme = () => {
+    setTheme(theme === 'dark' ? 'light' : 'dark');
+    setOpen(false);
+  };
 
   const handleAndClose = (cb: () => void) => {
     return () => {
@@ -34,6 +41,8 @@ export default function CommandPalette() {
     return () => document.removeEventListener('keydown', down);
   }, []);
 
+  const darkModeLabel = theme === 'dark' ? 'Light Mode' : 'Dark Mode';
+
   return (
     <CommandDialog open={open} onOpenChange={setOpen}>
       <CommandInput placeholder="Type a command or search..." />
@@ -48,6 +57,7 @@ export default function CommandPalette() {
           <CommandItem onSelect={handleAndClose(goToSettings)}>
             Settings
           </CommandItem>
+          <CommandItem onSelect={toggleTheme}>{darkModeLabel}</CommandItem>
         </CommandGroup>
       </CommandList>
     </CommandDialog>
