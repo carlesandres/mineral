@@ -4,7 +4,7 @@ import { app, BrowserWindow } from "electron";
 import windowStateKeeper from "./windowStateKeeper.js";
 import serve from "electron-serve";
 
-const loadURL = serve({ directory: "../mineral-web/out" });
+const loadURL = serve({ directory: "source" });
 
 async function createWindow() {
   const mainWindowStateKeeper = await windowStateKeeper("main");
