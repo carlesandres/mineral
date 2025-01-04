@@ -7,6 +7,7 @@ import {
   CommandInput,
   CommandItem,
   CommandList,
+  CommandShortcut,
 } from '@/components/ui/command';
 import { useRoutingHelpers } from 'hooks/use-routing-helpers';
 import { useTheme } from 'next-themes';
@@ -32,6 +33,16 @@ export default function CommandPalette() {
 
   useEffect(() => {
     const down = (e: KeyboardEvent) => {
+      if (e.key === 'n' && e.ctrlKey) {
+        e.preventDefault();
+        goToNewFile();
+        return;
+      }
+      if (e.key === 'l' && e.ctrlKey) {
+        e.preventDefault();
+        goToList();
+        return;
+      }
       if (e.key === 'k' && (e.metaKey || e.ctrlKey)) {
         e.preventDefault();
         setOpen((open) => !open);
@@ -39,7 +50,7 @@ export default function CommandPalette() {
     };
     document.addEventListener('keydown', down);
     return () => document.removeEventListener('keydown', down);
-  }, []);
+  }, [goToNewFile, goToList]);
 
   const darkModeLabel = theme === 'dark' ? 'Light Mode' : 'Dark Mode';
 
@@ -49,10 +60,16 @@ export default function CommandPalette() {
       <CommandList>
         <CommandEmpty>No results found.</CommandEmpty>
         <CommandGroup heading="Actions">
-          <CommandItem onSelect={handleAndClose(goToNewFile)}>New</CommandItem>
+          <CommandItem onSelect={handleAndClose(goToNewFile)}>
+            <span>New note</span>
+            <CommandShortcut>^N</CommandShortcut>
+          </CommandItem>
         </CommandGroup>
         <CommandGroup heading="Pages">
-          <CommandItem onSelect={handleAndClose(goToList)}>List</CommandItem>
+          <CommandItem onSelect={handleAndClose(goToList)}>
+            <span>List</span>
+            <CommandShortcut>^L</CommandShortcut>
+          </CommandItem>
           <CommandItem onSelect={handleAndClose(goToBin)}>Bin</CommandItem>
           <CommandItem onSelect={handleAndClose(goToSettings)}>
             Settings

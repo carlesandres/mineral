@@ -20,7 +20,6 @@ const SettingsPage = () => {
   const settings = useSettingsStore();
   const { theme, setTheme } = useTheme();
 
-  console.log('theme', theme);
   const isDark = theme === 'dark';
 
   // const _findDuplicates = () => {
