@@ -2,7 +2,6 @@
 
 import React, { useState } from 'react';
 import { getShownFiles } from 'utils/fileUtils';
-import PleaseWait from 'components/PleaseWait';
 import { useEffect } from 'react';
 import { sortBy } from 'lodash';
 import { useRouter } from 'next/navigation';
@@ -33,7 +32,7 @@ const LastPageClient = () => {
     return <p>{error}</p>;
   }
 
-  return <PleaseWait message="Opening last note..." />;
+  return null;
 };
 
 export default LastPageClient;

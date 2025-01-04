@@ -3,7 +3,6 @@ import { Button } from 'components/ui/button';
 import { Note, Panels, PanelsPartial } from 'types/Note';
 import ConfirmExportModal from 'components/ConfirmExportModal';
 import useDeleteNote from 'hooks/useDeleteNote';
-import useUIZStore from 'hooks/useUIZStore';
 import {
   HiOutlineTrash,
   HiOutlineListBullet,
@@ -31,6 +30,7 @@ const NoteMenu = (props: Props) => {
 
   const { wide } = note || {};
   const tocVisible = note?.panels?.toc;
+  const viewerVisible = note?.panels?.viewer;
   const [showConfirmExportModal, setShowConfirmExportModal] = useState(false);
   const binNote = useDeleteNote(noteId, note?.deletedAt);
 
@@ -119,10 +119,12 @@ const NoteMenu = (props: Props) => {
             <HiOutlineTrash className="mr-2 h-4 w-4" />
             <span>Delete</span>
           </DropdownMenuItem>
-          <DropdownMenuItem onClick={toggleToc}>
-            <HiOutlineListBullet className="mr-2 h-4 w-4" />
-            <span>{`${toggleTocText} Table of Contents`}</span>
-          </DropdownMenuItem>
+          {viewerVisible && (
+            <DropdownMenuItem onClick={toggleToc}>
+              <HiOutlineListBullet className="mr-2 h-4 w-4" />
+              <span>{`${toggleTocText} Table of Contents`}</span>
+            </DropdownMenuItem>
+          )}
           <DropdownMenuItem onClick={() => window.print()}>
             <HiOutlinePrinter className="mr-2 h-4 w-4" />
             <span>Print</span>

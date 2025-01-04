@@ -40,19 +40,21 @@ async function MyApp({ children }: { children: React.ReactNode }) {
         <link rel="manifest" href="/site.webmanifest" />
         <meta name="theme-color" content="#4a4a4a" />
       </head>
-      <body>
+      <body className="overflow-hidden">
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
           enableSystem
           disableTransitionOnChange
         >
-          <SidebarProvider>
+          <SidebarProvider className="h-screen">
             <div className="relative">
               <AppSidebar />
               <SidebarTrigger className="absolute -right-8 top-0 z-50" />
             </div>
-            <main className={`page-content min-h-screen w-full`}>
+            <main
+              className={`page-content min-h-screen w-full overflow-y-auto`}
+            >
               <Suspense>
                 <CommandPalette />
               </Suspense>

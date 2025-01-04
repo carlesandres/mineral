@@ -10,7 +10,7 @@ const IntroPage = () => {
       <div className="container mx-auto text-center">
         <p className="mb-8 inline-flex items-center justify-center gap-2 text-sm">
           <HiOutlineArrowDown className="animate-bounce" />
-          <span>Or check out our features</span>
+          <span>Or check out the features</span>
           <HiOutlineArrowDown className="animate-bounce" />
         </p>
         <FeatureSectionTitle>Writing</FeatureSectionTitle>
@@ -24,9 +24,11 @@ const IntroPage = () => {
           <FeatureCard title="Auto-saving">
             {`Your changes are automatically saved so that you don't have to remember doing it. `}{' '}
           </FeatureCard>
+          {/*
           <FeatureCard title="Import text">
             {`Import any text file from the side panel or by simply dragging it into the notes list. `}
           </FeatureCard>
+              */}
           <FeatureCard title="Bin">
             {`Send any note to the Bin folder and decide to recover it later or delete it forever.`}
           </FeatureCard>
@@ -34,14 +36,16 @@ const IntroPage = () => {
         <FeatureSectionTitle>Productivity</FeatureSectionTitle>
         <div className="feature-section">
           <FeatureCard title="Keyboard shortcuts">
-            {`Every possible action at your finger tip`}
+            {`Use Command + K to open a menu with all available shortcuts`}
           </FeatureCard>
           <FeatureCard title="Full search">
             {`Search your notes by title or content`}
           </FeatureCard>
+          {/*
           <FeatureCard title="Content preview">
             {`Hover over a note in the notes list to see a preview of its content`}
           </FeatureCard>
+              */}
           <FeatureCard title="Color labels">
             {`Assing different colors to different notes to find them more easily`}
           </FeatureCard>
@@ -60,12 +64,14 @@ const IntroPage = () => {
           <FeatureCard title="Preview panel">
             {`A separate preview panel you can toggle separately from the editor.`}
           </FeatureCard>
+          {/*
           <FeatureCard title="Markdown Themes">
             {`Choose between 4 different themes in your markdown preview.`}
           </FeatureCard>
           <FeatureCard title="Syntax highlighting">
             {`Your code as beautiful as possible`}
           </FeatureCard>
+            */}
           <FeatureCard title="Table of contents">
             {`Automatically generated ToC based on your markdown headings.`}
           </FeatureCard>
