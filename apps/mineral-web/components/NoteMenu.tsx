@@ -3,7 +3,6 @@ import { Button } from 'components/ui/button';
 import { Note, Panels, PanelsPartial } from 'types/Note';
 import ConfirmExportModal from 'components/ConfirmExportModal';
 import useDeleteNote from 'hooks/useDeleteNote';
-import useUIZStore from 'hooks/useUIZStore';
 import {
   HiOutlineTrash,
   HiOutlineListBullet,
