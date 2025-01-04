@@ -10,7 +10,7 @@ const IntroPage = () => {
       <div className="container mx-auto text-center">
         <p className="mb-8 inline-flex items-center justify-center gap-2 text-sm">
           <HiOutlineArrowDown className="animate-bounce" />
-          <span>Or check out our features</span>
+          <span>Or check out the features</span>
           <HiOutlineArrowDown className="animate-bounce" />
         </p>
         <FeatureSectionTitle>Writing</FeatureSectionTitle>

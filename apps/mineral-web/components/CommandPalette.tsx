@@ -16,7 +16,8 @@ import { useCallback, useEffect, useState } from 'react';
 
 export default function CommandPalette() {
   const [open, setOpen] = useState(false);
-  const { goToNewFile, goToList, goToBin, goToSettings } = useRoutingHelpers();
+  const { goToNewFile, goToList, goToBin, goToSettings, goToLast } =
+    useRoutingHelpers();
   const { theme, setTheme } = useTheme();
 
   const handleToggleTheme = useCallback(() => {
@@ -53,6 +54,11 @@ export default function CommandPalette() {
         handleToggleTheme();
         return;
       }
+      if (e.key === 'l' && e.ctrlKey) {
+        e.preventDefault();
+        goToLast();
+        return;
+      }
       if (e.key === 'k' && (e.metaKey || e.ctrlKey)) {
         e.preventDefault();
         setOpen((open) => !open);
@@ -60,7 +66,14 @@ export default function CommandPalette() {
     };
     document.addEventListener('keydown', down);
     return () => document.removeEventListener('keydown', down);
-  }, [goToNewFile, goToList, goToBin, goToSettings, handleToggleTheme]);
+  }, [
+    goToNewFile,
+    goToList,
+    goToBin,
+    goToSettings,
+    handleToggleTheme,
+    goToLast,
+  ]);
 
   return (
     <CommandDialog open={open} onOpenChange={setOpen}>
@@ -88,6 +101,10 @@ export default function CommandPalette() {
           <CommandItem onSelect={handleAndClose(goToSettings)}>
             <span>Go to Settings</span>
             <CommandShortcut>^S</CommandShortcut>
+          </CommandItem>
+          <CommandItem onSelect={handleAndClose(goToLast)}>
+            <span>Go to most recent note</span>
+            <CommandShortcut>^L</CommandShortcut>
           </CommandItem>
         </CommandGroup>
       </CommandList>

@@ -1,4 +1,4 @@
-import { Cog, GalleryVerticalEnd, Home, Layers, Trash } from 'lucide-react';
+import { Cog, Gem, Layers, LayoutDashboard, Trash } from 'lucide-react';
 import Link from 'next/link';
 
 import {
@@ -16,9 +16,9 @@ import {
 // Menu items.
 const items = [
   {
-    title: 'Home',
+    title: 'Dashboard',
     url: '/notes',
-    icon: Home,
+    icon: LayoutDashboard,
   },
   {
     title: 'Bin',
@@ -46,9 +46,9 @@ export function AppSidebar() {
             <SidebarMenuButton size="lg" asChild>
               <Link href="/intro">
                 <div className="bg-sidebar-primary text-sidebar-primary-foreground flex aspect-square size-8 items-center justify-center rounded-lg">
-                  <GalleryVerticalEnd className="size-4" />
+                  <Gem className="size-4" />
                 </div>
-                <div className="flex flex-col gap-0.5 leading-none">
+                <div className="flex flex-col leading-none">
                   <span className="font-semibold">Mineral</span>
                 </div>
               </Link>

@@ -16,6 +16,7 @@ export const useRoutingHelpers = () => {
   const goToNewFile = (_ev?: any) => router.push('/new');
   const goToSettings = (_ev?: any) => router.push('/settings');
   const goToBin = (_ev?: any) => router.push(`/bin`);
+  const goToLast = (_ev?: any) => router.push(`/last`);
   const goBack = (_ev?: any) => router.back();
 
   const goToNote = (
@@ -39,5 +40,6 @@ export const useRoutingHelpers = () => {
     goToBin,
     goBack,
     goToNote,
+    goToLast,
   };
 };
