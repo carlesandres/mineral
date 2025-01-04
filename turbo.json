@@ -27,6 +27,17 @@
     "start": {
       "cache": false,
       "persistent": true
+    },
+    "mineral-app#dist": {
+      "dependsOn": [
+        "mineral-web#build-static"
+      ]
+    },
+    "mineral-web#build-static": {
+      "outputs": [
+        "dist/**",
+        ".next/**"
+      ]
     }
   }
 }

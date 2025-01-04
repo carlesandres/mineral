@@ -13,8 +13,6 @@ const NewNotePageClient = () => {
   const { initialized } = useNotesStore();
   const { startWithPreview, footerHiddenByDefault } = useSettingsStore();
 
-  console.log('initialized', initialized);
-
   const panels = useMemo(() => {
     return startWithPreview
       ? { viewer: true, editor: true, toc: false }

@@ -1,10 +1,9 @@
-import { app, BrowserWindow } from "electron";
-// const minimist = require("minimist");
-// const args = minimist(process.argv.slice(2));
+import { app, BrowserWindow, shell } from "electron";
 import windowStateKeeper from "./windowStateKeeper.js";
 import serve from "electron-serve";
 
-const loadURL = serve({ directory: "../mineral-web/out" });
+const loadURL = serve({ directory: "source" });
+let myWindow = null;
 
 async function createWindow() {
   const mainWindowStateKeeper = await windowStateKeeper("main");
@@ -20,15 +19,16 @@ async function createWindow() {
   });
 
   // TO-DO: Prevent links from opening in the app
-  // mainWindow.webContents.on("will-navigate", (e, destinationUrl) => {
-  //   const isInternal =
-  //     destinationUrl.startsWith("/") ||
-  //     destinationUrl.match("https://mnral.com");
-  //   if (!isInternal) {
-  //     e.preventDefault();
-  //     require("electron").shell.openExternal(destinationUrl);
-  //   }
-  // });
+  mainWindow.webContents.on("will-navigate", (e, destinationUrl) => {
+    const isInternal =
+      destinationUrl.startsWith("/") ||
+      destinationUrl.startsWith("app://") ||
+      destinationUrl.match("https://mnral.com");
+    if (!isInternal) {
+      e.preventDefault();
+      shell.openExternal(destinationUrl);
+    }
+  });
 
   loadURL(mainWindow);
 
@@ -64,6 +64,33 @@ async function createWindow() {
   });
 
   mainWindowStateKeeper.track(mainWindow);
+  return mainWindow;
 }
 
-app.on("ready", createWindow);
+const gotTheLock = app.requestSingleInstanceLock();
+
+if (!gotTheLock) {
+  app.quit();
+} else {
+  app.on(
+    "second-instance",
+    (event, commandLine, workingDirectory, additionalData) => {
+      // Print out data received from the second instance.
+      console.log("--------------------------------------------------- ");
+      console.log(additionalData);
+
+      // Someone tried to run a second instance, we should focus our window.
+      if (myWindow) {
+        if (myWindow.isMinimized()) myWindow.restore();
+        myWindow.focus();
+      }
+    },
+  );
+
+  app.whenReady().then(() => {
+    createWindow().then((mainWindow) => {
+      myWindow = mainWindow;
+      mainWindow.webContents.send("ping", "whoooooooh!");
+    });
+  });
+}

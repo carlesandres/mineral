@@ -4,10 +4,10 @@ import { messageBroadcast } from 'utils/fileUtils';
 
 const SETTINGS_KEY = 'USER_SETTINGS';
 const loadSettings = () => localforage.getItem(SETTINGS_KEY);
-const saveSettings = (settings: StoreState) =>
+const saveSettings = (settings: SettingsStoreState) =>
   localforage.setItem(SETTINGS_KEY, settings);
 
-interface StoreState {
+export interface SettingsStoreState {
   dimBlurredEditor: boolean;
   emptyBinConfirm: boolean;
   startWithPreview: boolean;
@@ -17,7 +17,7 @@ interface StoreState {
   footerHiddenByDefault: boolean;
 }
 
-export const hardCodedDefaults: StoreState = {
+export const hardCodedDefaults: SettingsStoreState = {
   dimBlurredEditor: false,
   emptyBinConfirm: true,
   startWithPreview: false,
@@ -26,12 +26,14 @@ export const hardCodedDefaults: StoreState = {
   footerHiddenByDefault: false,
 };
 
-const useSettingsStore = create<StoreState>(() => hardCodedDefaults);
+const useSettingsStore = create<SettingsStoreState>(() => hardCodedDefaults);
 
-export const setSetting = async (key: keyof StoreState, value: any) => {
+export const setSetting = async (key: keyof SettingsStoreState, value: any) => {
   useSettingsStore.setState((state) => {
-    const validKeys = Object.keys(hardCodedDefaults) as (keyof StoreState)[];
-    const settings = {} as StoreState;
+    const validKeys = Object.keys(
+      hardCodedDefaults,
+    ) as (keyof SettingsStoreState)[];
+    const settings = {} as SettingsStoreState;
     for (const k of validKeys) {
       // @ts-ignore
       settings[k] = state[k];

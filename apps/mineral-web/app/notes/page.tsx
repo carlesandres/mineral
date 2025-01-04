@@ -1,9 +1,14 @@
 import ListView from 'components/ListView';
 import { Suspense } from 'react';
 
+export const metadata = {
+  title: 'Notes',
+  description: 'Your quick notes',
+};
+
 const NotesPage = () => {
   return (
-    <Suspense fallback={<div>Loading...</div>}>
+    <Suspense>
       <ListView />
     </Suspense>
   );
