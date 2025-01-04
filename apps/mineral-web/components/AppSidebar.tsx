@@ -1,4 +1,4 @@
-import { Cog, Home, Layers, Trash } from 'lucide-react';
+import { Cog, GalleryVerticalEnd, Home, Layers, Trash } from 'lucide-react';
 import Link from 'next/link';
 
 import {
@@ -7,7 +7,6 @@ import {
   SidebarFooter,
   SidebarGroup,
   SidebarGroupContent,
-  SidebarGroupLabel,
   SidebarHeader,
   SidebarMenu,
   SidebarMenuButton,
@@ -41,10 +40,25 @@ const items = [
 export function AppSidebar() {
   return (
     <Sidebar>
-      <SidebarHeader />
+      <SidebarHeader>
+        <SidebarMenu>
+          <SidebarMenuItem>
+            <SidebarMenuButton size="lg" asChild>
+              <Link href="/intro">
+                <div className="bg-sidebar-primary text-sidebar-primary-foreground flex aspect-square size-8 items-center justify-center rounded-lg">
+                  <GalleryVerticalEnd className="size-4" />
+                </div>
+                <div className="flex flex-col gap-0.5 leading-none">
+                  <span className="font-semibold">Mineral</span>
+                </div>
+              </Link>
+            </SidebarMenuButton>
+          </SidebarMenuItem>
+        </SidebarMenu>
+      </SidebarHeader>
+
       <SidebarContent>
         <SidebarGroup />
-        <SidebarGroupLabel>Menu</SidebarGroupLabel>
         <SidebarGroupContent>
           <SidebarMenu>
             {items.map((item) => (
