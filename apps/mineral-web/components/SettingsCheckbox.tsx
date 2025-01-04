@@ -1,11 +1,13 @@
 import { useCallback } from 'react';
 import Checkbox from 'components/Checkbox';
-import { ChangeEvent } from 'react';
-import useSettingsStore, { setSetting } from 'hooks/useSettingsStore';
+import useSettingsStore, {
+  setSetting,
+  SettingsStoreState,
+} from 'hooks/useSettingsStore';
 
 export interface SettingsCheckboxProps {
   label: string;
-  name: string;
+  name: keyof SettingsStoreState;
 }
 
 const SettingsCheckbox = (props: SettingsCheckboxProps) => {
@@ -13,16 +15,12 @@ const SettingsCheckbox = (props: SettingsCheckboxProps) => {
   const { label, name } = props;
 
   const changeCheckboxSetting = useCallback(
-    (event: ChangeEvent<HTMLInputElement>) => {
-      const { target } = event;
-      const value = target.type === 'checkbox' ? target.checked : target.value;
-      if (target.name in settings) {
-        // TO-DO: I need to find out how to do this properly in TS
-        // @ts-ignore
-        setSetting(target.name, value);
+    (value: boolean) => {
+      if (name in settings) {
+        setSetting(name, value);
       }
     },
-    [settings],
+    [settings, name],
   );
 
   return (
@@ -30,7 +28,7 @@ const SettingsCheckbox = (props: SettingsCheckboxProps) => {
       name={name}
       label={label}
       checked={!!settings[name]}
-      onChange={changeCheckboxSetting}
+      onCheckedChange={changeCheckboxSetting}
     />
   );
 };

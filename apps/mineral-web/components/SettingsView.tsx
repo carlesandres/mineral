@@ -5,7 +5,6 @@ import HorzRadioGroup from 'components/HorzRadioGroup';
 import SettingsCheckbox from 'components/SettingsCheckbox';
 import Label from 'components/Label';
 import { HiOutlineCog } from 'react-icons/hi';
-import { ChangeEvent } from 'react';
 import Checkbox from './Checkbox';
 import { useTheme } from 'next-themes';
 
@@ -20,6 +19,9 @@ const lineHeights = new Map([
 const SettingsPage = () => {
   const settings = useSettingsStore();
   const { theme, setTheme } = useTheme();
+
+  console.log('theme', theme);
+  const isDark = theme === 'dark';
 
   // const _findDuplicates = () => {
   // TO-DO: Need to check if the fileList is initialized first
@@ -45,10 +47,8 @@ const SettingsPage = () => {
       />
       <Checkbox
         label="Dark Mode"
-        checked={theme === 'dark'}
-        onChange={(e: ChangeEvent<HTMLInputElement>) => {
-          setTheme(e.target.checked ? 'dark' : 'light');
-        }}
+        checked={isDark}
+        onCheckedChange={(checked) => setTheme(checked ? 'dark' : 'light')}
       />
 
       <Label className="mt-16">Editor</Label>

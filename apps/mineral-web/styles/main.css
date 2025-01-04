@@ -26,18 +26,6 @@ body {
   @apply font-mono;
 }
 
-input[type='checkbox'] {
-  background: transparent;
-}
-
-.tricks kbd {
-  @apply bg-gray-200 font-semibold dark:bg-gray-700;
-}
-
-.tricks .example {
-  @apply rounded bg-yellow-200 p-4 dark:bg-yellow-800;
-}
-
 html.dark {
   --background: var(--ultra-dark-grey);
   --text-color: white;
@@ -49,7 +37,7 @@ html.dark {
   --scrollbar-color: var(--medium-dark-grey);
   --scrollbar-border: transparent;
   /* stylelint-disable */
-  --border-color: theme(colors.gray.500);
+  --border-my-color: theme(colors.gray.500);
   --border-soft-color: theme(colors.gray.700);
   --solid-bg-color: theme(colors.gray.800);
   --solid-hover-bg-color: theme(colors.gray.700);
@@ -58,13 +46,13 @@ html.dark {
   /* stylelint-enable */
 }
 
-.button {
-  background: var(--text-color);
-  color: var(--background);
-  transition: background 150ms ease-in-out, transform 150ms ease;
-
-  @apply inline-block cursor-pointer rounded py-2 px-4 text-center;
-}
+/* .button { */
+/*   background: var(--text-color); */
+/*   color: var(--background); */
+/*   transition: background 150ms ease-in-out, transform 150ms ease; */
+/*  */
+/*   @apply inline-block cursor-pointer rounded py-2 px-4 text-center; */
+/* } */
 
 /* Small ball to indicate a color */
 .colorball {
@@ -77,33 +65,9 @@ html.dark {
   margin: 0 0.3em 0 0;
 }
 
-.messenger {
-  z-index: 1051;
-}
-
-.navbar .navbar-toggle .mdi::before {
-  position: relative;
-  top: 4px;
-  color: #fff;
-}
 
 table.shortcuts td:first-child {
   padding: 5px 10px 5px 0;
-}
-
-.big-btn {
-  font-size: 2em;
-  text-align: center;
-}
-
-.big-btn div {
-  display: inline-block;
-}
-
-*,
-::after,
-::before {
-  box-sizing: border-box;
 }
 
 .generic-content {
@@ -120,3 +84,12 @@ table.shortcuts td:first-child {
     display: none;
   }
 }
+
+.tricks kbd {
+  @apply bg-gray-200 font-semibold dark:bg-gray-700;
+}
+
+.tricks .example {
+  @apply rounded bg-yellow-200 p-4 dark:bg-yellow-800;
+}
+

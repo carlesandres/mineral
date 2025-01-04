@@ -1,30 +1,23 @@
-import { InputHTMLAttributes } from 'react';
+import { Checkbox } from 'components/ui/checkbox';
 
-interface Props extends InputHTMLAttributes<HTMLInputElement> {
+type CheckboxProps =
+  typeof Checkbox extends React.ComponentType<infer P> ? P : never;
+
+interface Props extends CheckboxProps {
   label: string;
 }
 
-const Checkbox = (props: Props) => {
-  const { name, label, checked, onChange } = props;
+const SettingsCheckbox = (props: Props) => {
+  const { label, ...rest } = props;
 
   return (
-    <div
-      className="row flex cursor-pointer items-center
-        space-x-4 py-4 hover:text-gray-900 dark:hover:text-gray-300"
-    >
-      <input
-        className="cursor-pointer"
-        type="checkbox"
-        id={name}
-        name={name}
-        checked={checked}
-        onChange={onChange}
-      />
-      <label className="cursor-pointer" htmlFor={name}>
+    <div className="row flex cursor-pointer items-center space-x-4 py-4 hover:text-gray-900 dark:hover:text-gray-300">
+      <Checkbox {...rest} id={label} />
+      <label className="cursor-pointer" htmlFor={label}>
         {label}
       </label>
     </div>
   );
 };
 
-export default Checkbox;
+export default SettingsCheckbox;
