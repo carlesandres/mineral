@@ -12,17 +12,17 @@ import {
 import { useRoutingHelpers } from 'hooks/use-routing-helpers';
 import { useTheme } from 'next-themes';
 
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 export default function CommandPalette() {
   const [open, setOpen] = useState(false);
   const { goToNewFile, goToList, goToBin, goToSettings } = useRoutingHelpers();
   const { theme, setTheme } = useTheme();
 
-  const toggleTheme = () => {
+  const handleToggleTheme = useCallback(() => {
     setTheme(theme === 'dark' ? 'light' : 'dark');
     setOpen(false);
-  };
+  }, [theme, setTheme]);
 
   const handleAndClose = (cb: () => void) => {
     return () => {
@@ -38,9 +38,19 @@ export default function CommandPalette() {
         goToNewFile();
         return;
       }
-      if (e.key === 'l' && e.ctrlKey) {
+      if (e.key === 'd' && e.ctrlKey) {
         e.preventDefault();
         goToList();
+        return;
+      }
+      if (e.key === 's' && e.ctrlKey) {
+        e.preventDefault();
+        goToSettings();
+        return;
+      }
+      if (e.key === 't' && e.ctrlKey) {
+        e.preventDefault();
+        handleToggleTheme();
         return;
       }
       if (e.key === 'k' && (e.metaKey || e.ctrlKey)) {
@@ -50,9 +60,7 @@ export default function CommandPalette() {
     };
     document.addEventListener('keydown', down);
     return () => document.removeEventListener('keydown', down);
-  }, [goToNewFile, goToList]);
-
-  const darkModeLabel = theme === 'dark' ? 'Light Mode' : 'Dark Mode';
+  }, [goToNewFile, goToList, goToBin, goToSettings, handleToggleTheme]);
 
   return (
     <CommandDialog open={open} onOpenChange={setOpen}>
@@ -64,17 +72,23 @@ export default function CommandPalette() {
             <span>New note</span>
             <CommandShortcut>^N</CommandShortcut>
           </CommandItem>
+          <CommandItem onSelect={handleToggleTheme}>
+            <span>Toggle Theme (light/dark)</span>
+            <CommandShortcut>^T</CommandShortcut>
+          </CommandItem>
         </CommandGroup>
         <CommandGroup heading="Pages">
           <CommandItem onSelect={handleAndClose(goToList)}>
-            <span>List</span>
-            <CommandShortcut>^L</CommandShortcut>
+            <span>Go to Dashboard</span>
+            <CommandShortcut>^D</CommandShortcut>
           </CommandItem>
-          <CommandItem onSelect={handleAndClose(goToBin)}>Bin</CommandItem>
+          <CommandItem onSelect={handleAndClose(goToBin)}>
+            <span>Go to Bin</span>
+          </CommandItem>
           <CommandItem onSelect={handleAndClose(goToSettings)}>
-            Settings
+            <span>Go to Settings</span>
+            <CommandShortcut>^S</CommandShortcut>
           </CommandItem>
-          <CommandItem onSelect={toggleTheme}>{darkModeLabel}</CommandItem>
         </CommandGroup>
       </CommandList>
     </CommandDialog>
