@@ -1,11 +1,11 @@
-"use client";
+'use client';
 
-import { useLanding } from "hooks/useLanding";
+import { useLanding } from 'hooks/useLanding';
 
 const HomePageClient = () => {
   useLanding();
 
-  return <div>Loading...</div>;
+  return null;
 };
 
 export default HomePageClient;
