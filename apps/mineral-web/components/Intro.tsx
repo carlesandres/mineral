@@ -83,8 +83,10 @@ const IntroPage = () => {
           <li>Create a new note with a link</li>
           <li>Visit most recent note from a link</li>
           <li>Document statistics in the footer</li>
+          {/*
           <li>Full backup of all notes</li>
           <li>Export note as text file</li>
+          */}
         </ul>
       </div>
     </div>
