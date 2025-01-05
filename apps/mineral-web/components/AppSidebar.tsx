@@ -1,4 +1,4 @@
-import { Cog, Gem, Layers, LayoutDashboard, Trash } from 'lucide-react';
+import { Cog, Gem, Info, Layers, LayoutDashboard, Trash } from 'lucide-react';
 import Link from 'next/link';
 
 import {
@@ -34,6 +34,11 @@ const items = [
     title: 'Features',
     url: '/intro',
     icon: Layers,
+  },
+  {
+    title: 'About',
+    url: '/about',
+    icon: Info,
   },
 ];
 

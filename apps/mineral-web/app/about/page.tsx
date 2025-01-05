@@ -13,12 +13,14 @@ const AboutPage = () => {
       <div className="flex flex-col gap-4">
         <p>
           mnral is built by{' '}
-          <Link href="x.com/carlesandres" className="text-yellow-500 underline">
+          <Link
+            href="https://carlesandres.com"
+            className="text-yellow-500 underline"
+          >
             Carles Andrés
           </Link>
         </p>
-        <p>{`I'd love to hear your feedback!`}</p>
-        <p>You can also react out to me at carles@16protons.com</p>
+        <p>{`Reach out me. I'd love to hear your feedback!`}</p>
       </div>
     </div>
   );
