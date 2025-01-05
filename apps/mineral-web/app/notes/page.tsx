@@ -3,7 +3,8 @@ import { Suspense } from 'react';
 
 export const metadata = {
   title: 'Notes',
-  description: 'Your quick notes',
+  description:
+    'A list with all your notes. Search by title or title + content.',
 };
 
 const NotesPage = () => {
