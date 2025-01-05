@@ -5,7 +5,6 @@ import EmptyBin from 'components/EmptyBin';
 import ListHeader from 'components/filelist/ListHeader';
 import React, { ChangeEvent, useCallback, useState } from 'react';
 import useNotesStore, { getNotes } from 'hooks/useNotesStore';
-import { BinMenu } from './BinMenu';
 
 const BinList = () => {
   const { initialized } = useNotesStore((state) => state);
@@ -37,9 +36,6 @@ const BinList = () => {
             onClear={onClear}
             placeHolder="Search Bin"
           />
-          <div className="absolute right-0 top-0">
-            <BinMenu />
-          </div>
         </div>
         <BinView key="bin" searchTerm={searchTerm} notes={notes} />
       </div>
