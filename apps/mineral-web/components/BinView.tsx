@@ -33,25 +33,27 @@ const BinView = (props: BiewViewProps) => {
     return null;
   }
 
-  if (!shownNotes.length) {
+  const isEmpty = !shownNotes.length;
+  if (isEmpty) {
+    const message = searchTerm.trim() ? ' matching your search' : '';
     content = (
       <p className="py-4 text-center">
-        There are no binned notes matching your search
+        {`There are no binned notes${message}.`}
       </p>
     );
   } else {
     // TO-DO: MIssing disabled prop on ListItem
-    content = shownNotes.map((note) => (
-      <ListItem key={note.id} note={note} />
-    ));
+    content = shownNotes.map((note) => <ListItem key={note.id} note={note} />);
   }
 
   return (
     <>
-      <div className="mb-2 flex w-full justify-between px-2">
-        <Label>Title</Label>
-        <Label>Deleted</Label>
-      </div>
+      {!isEmpty && (
+        <div className="mb-2 flex w-full justify-between px-2">
+          <Label>Title</Label>
+          <Label>Deleted</Label>
+        </div>
+      )}
       <div className="file-list mb-32 flex flex-1 flex-shrink-0 flex-col gap-2 pb-4 text-sm">
         {content}
       </div>
