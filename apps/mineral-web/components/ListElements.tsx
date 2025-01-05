@@ -67,7 +67,7 @@ const ListElements = (props: ListElementProps) => {
         <Label>Title</Label>
         <Label>Last updated</Label>
       </div>
-      <div className="file-list m text- flex flex-1 flex-shrink-0 flex-col gap-2">
+      <div className="file-list flex flex-1 flex-shrink-0 flex-col gap-2 text-sm">
         {listItems}
       </div>
     </div>

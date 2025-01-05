@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { Button } from './ui/button';
 
 const FileInUse = () => (
-  <div className="generic-content mt-16 sm:mt-32">
+  <div className="mt-16 sm:mt-32">
     <h1 className="text-2xl font-bold">
       This file has been opened in another tab or window
     </h1>
