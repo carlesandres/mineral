@@ -45,11 +45,13 @@ export function AppSidebar() {
           <SidebarMenuItem>
             <SidebarMenuButton size="lg" asChild>
               <Link href="/intro">
-                <div className="bg-sidebar-primary text-sidebar-primary-foreground flex aspect-square size-8 items-center justify-center rounded-lg">
+                <div className="bg-sidebar-primary flex aspect-square size-8 items-center justify-center rounded-lg text-gray-500">
                   <Gem className="size-4" />
                 </div>
                 <div className="flex flex-col leading-none">
-                  <span className="font-semibold">Mineral</span>
+                  <span className="text-xl font-semibold text-yellow-500">
+                    mineral
+                  </span>
                 </div>
               </Link>
             </SidebarMenuButton>
