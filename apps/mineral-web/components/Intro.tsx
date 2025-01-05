@@ -7,7 +7,7 @@ const IntroPage = () => {
   return (
     <div className="pt-8 text-gray-600 sm:my-32 dark:text-gray-300">
       <HeroSection />
-      <div className="container mx-auto text-center">
+      <div className="container mx-auto text-center" id="features">
         <p className="mb-8 inline-flex items-center justify-center gap-2 text-sm">
           <HiOutlineArrowDown className="animate-bounce" />
           <span>Or check out the features</span>
@@ -82,9 +82,11 @@ const IntroPage = () => {
         <ul className="flex flex-col gap-2">
           <li>Create a new note with a link</li>
           <li>Visit most recent note from a link</li>
-          <li>Document statistics in the footer</li>
+          {/*
+          <li>Note statistics in the footer</li>
           <li>Full backup of all notes</li>
           <li>Export note as text file</li>
+          */}
         </ul>
       </div>
     </div>

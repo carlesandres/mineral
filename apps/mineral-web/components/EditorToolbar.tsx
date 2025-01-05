@@ -39,7 +39,7 @@ const EditorToolbar = (props: EditorToolbarProps) => {
     return null;
   }
 
-  const wideClass = wide ? 'wide' : 'sm:mx-0';
+  const wideClass = wide ? 'sm: ml-8' : 'sm:mx-0';
 
   return (
     <div

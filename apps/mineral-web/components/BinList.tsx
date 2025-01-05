@@ -1,7 +1,7 @@
 'use client';
 
 import BinView from 'components/BinView';
-import EmptyList from 'components/EmptyList';
+import EmptyBin from 'components/EmptyBin';
 import ListHeader from 'components/filelist/ListHeader';
 import React, { ChangeEvent, useCallback, useState } from 'react';
 import useNotesStore, { getNotes } from 'hooks/useNotesStore';
@@ -24,7 +24,7 @@ const BinList = () => {
   }
 
   if (!notes?.length) {
-    return <EmptyList />;
+    return <EmptyBin />;
   }
 
   return (

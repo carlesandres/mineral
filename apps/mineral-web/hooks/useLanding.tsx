@@ -1,10 +1,11 @@
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import useNotesStore from 'hooks/useNotesStore';
+import useNotesStore, { getNotes } from 'hooks/useNotesStore';
 
 export const useLanding = () => {
   const router = useRouter();
-  const { initialized, notes } = useNotesStore((state) => state);
+  const { initialized } = useNotesStore((state) => state);
+  const notes = getNotes();
 
   useEffect(() => {
     if (!initialized) {
@@ -15,6 +16,7 @@ export const useLanding = () => {
       router.replace('/intro');
       return;
     }
+
     router.replace('/notes');
   }, [initialized, notes, router]);
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import CloseButton from 'components/CloseButton';
-import StyleSelector from 'components/StyleSelector';
+// import StyleSelector from 'components/StyleSelector';
 import EditorStatistics from 'components/EditorStatistics';
 import { BsFillBarChartFill } from 'react-icons/bs';
 import { Note } from 'types/Note';
@@ -19,11 +19,11 @@ const EditorFooter = (props: Props) => {
     createdAt,
     panels,
     text,
-    style = '',
+    // style = '',
     color = '#111111',
   } = props;
 
-  const viewerVisible = panels?.viewer ?? false;
+  // const viewerVisible = panels?.viewer ?? false;
   const editorVisible = panels?.editor ?? false;
 
   const expandButton = showFooter ? null : (
@@ -54,11 +54,13 @@ const EditorFooter = (props: Props) => {
               createdAt={createdAt}
             />
           </div>
+          {/*
           <StyleSelector
             noteId={noteId}
             themeName={style}
             show={viewerVisible}
           />
+          */}
           <CloseButton onClick={onToggle} className="-mt-1" />
         </div>
       </motion.div>

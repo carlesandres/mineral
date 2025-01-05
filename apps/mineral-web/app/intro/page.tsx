@@ -2,5 +2,6 @@ export { default } from 'components/Intro';
 
 export const metadata = {
   title: 'Features',
-  description: 'Mineral notes features',
+  description:
+    'A minimalistic editor for your quick notes. Markdown support. Fully private notes.',
 };
