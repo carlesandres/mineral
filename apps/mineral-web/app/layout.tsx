@@ -50,7 +50,7 @@ async function MyApp({ children }: { children: React.ReactNode }) {
           <SidebarProvider className="h-screen">
             <div className="relative">
               <AppSidebar />
-              <SidebarTrigger className="absolute -right-8 top-0 z-50" />
+              <SidebarTrigger className="absolute -right-8 top-1.5 z-50" />
             </div>
             <main
               className={`page-content min-h-screen w-full overflow-y-auto`}
