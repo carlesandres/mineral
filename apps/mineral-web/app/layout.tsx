@@ -1,4 +1,3 @@
-// import MainMenu from "components/MainMenu";
 import CommandPalette from 'components/CommandPalette';
 import { GeistSans } from 'geist/font/sans';
 import { GeistMono } from 'geist/font/mono';
@@ -10,18 +9,16 @@ import { ThemeProvider } from '@/components/theme-provider';
 import { AppSidebar } from 'components/AppSidebar';
 import { SidebarProvider, SidebarTrigger } from 'components/ui/sidebar';
 
-async function MyApp({ children }: { children: React.ReactNode }) {
-  // const {
-  //   pageClass = "",
-  //   allowScroll,
-  //   isFixedHeight,
-  //   menu = <MainMenu />,
-  // } = props;
-  // const fixedHeight = "flex overflow-hidden flex-1 ";
-  // const fhClass = isFixedHeight ? fixedHeight : "px- lg:px-0";
-  // const fhClassInner = isFixedHeight ? "flex flex-1" : "px-4 lg:px-0";
-  // const allowScrollClass = allowScroll ? "overflow-y-auto" : "overflow-hidden";
+export const metadata = {
+  title: 'Mineral',
+  openGraph: {
+    title: 'Mineral',
+    description:
+      'A minimalistic editor for your quick notes. Markdown support. Fully private notes.',
+  },
+};
 
+async function MyApp({ children }: { children: React.ReactNode }) {
   return (
     <html
       lang="en"
