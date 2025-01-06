@@ -2,11 +2,8 @@
 :root,
 ::after,
 ::before {
-  --main-font: 'Inter', 'Open Sans', 'Helvetica', 'Arial', sans-serif;
-
   /* Greys */
   /* stylelint-disable */
-  --ultra-light-grey: theme(colors.gray.50);
   --light-grey: theme(colors.gray.200);
   --medium-light-grey: theme(colors.gray.300);
   --medium-grey: theme(colors.gray.400);
@@ -19,7 +16,6 @@
   /* Global */
   --separator-color: var(--light-grey);
   --editor-padding: 2em;
-  --background: theme(colors.gray.50); /* stylelint-disable-line */
   --text-color: var(--dark-grey);
   --scrollbar-color: var(--medium-light-grey);
   --scrollbar-border: transparent;
@@ -37,7 +33,7 @@
   /* stylelint-enable */
 
   /* Editor Area */
-  --editor-bg-color: var(--ultra-light-grey);
+  --editor-bg-color: theme(colors.gray.50);
   --editor-text-color: var(--black);
   --editor-unfocused-color: var(--medium-grey);
   --editor-normal-color: var(--light-grey);

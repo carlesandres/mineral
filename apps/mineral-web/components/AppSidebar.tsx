@@ -1,4 +1,12 @@
-import { Cog, Gem, Layers, LayoutDashboard, Trash } from 'lucide-react';
+import {
+  Cog,
+  Gem,
+  Info,
+  Layers,
+  LayoutDashboard,
+  PlusCircle,
+  Trash,
+} from 'lucide-react';
 import Link from 'next/link';
 
 import {
@@ -7,6 +15,7 @@ import {
   SidebarFooter,
   SidebarGroup,
   SidebarGroupContent,
+  SidebarGroupLabel,
   SidebarHeader,
   SidebarMenu,
   SidebarMenuButton,
@@ -35,6 +44,19 @@ const items = [
     url: '/intro',
     icon: Layers,
   },
+  {
+    title: 'About',
+    url: '/about',
+    icon: Info,
+  },
+];
+
+const actions = [
+  {
+    title: 'New note',
+    url: '/new',
+    icon: PlusCircle,
+  },
 ];
 
 export function AppSidebar() {
@@ -60,22 +82,42 @@ export function AppSidebar() {
       </SidebarHeader>
 
       <SidebarContent>
-        <SidebarGroup />
-        <SidebarGroupContent>
-          <SidebarMenu>
-            {items.map((item) => (
-              <SidebarMenuItem key={item.title}>
-                <SidebarMenuButton asChild>
-                  <Link href={item.url}>
-                    <item.icon />
-                    <span>{item.title}</span>
-                  </Link>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
-            ))}
-          </SidebarMenu>
-        </SidebarGroupContent>
-        <SidebarGroup />
+        <SidebarGroup>
+          <SidebarGroupLabel>Navigation</SidebarGroupLabel>
+
+          <SidebarGroupContent>
+            <SidebarMenu>
+              {items.map((item) => (
+                <SidebarMenuItem key={item.title}>
+                  <SidebarMenuButton asChild>
+                    <Link href={item.url}>
+                      <item.icon />
+                      <span>{item.title}</span>
+                    </Link>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+              ))}
+            </SidebarMenu>
+          </SidebarGroupContent>
+        </SidebarGroup>
+        <SidebarGroup>
+          <SidebarGroupLabel>Actions</SidebarGroupLabel>
+
+          <SidebarGroupContent>
+            <SidebarMenu>
+              {actions.map((item) => (
+                <SidebarMenuItem key={item.title}>
+                  <SidebarMenuButton asChild>
+                    <Link href={item.url}>
+                      <item.icon />
+                      <span>{item.title}</span>
+                    </Link>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+              ))}
+            </SidebarMenu>
+          </SidebarGroupContent>
+        </SidebarGroup>
       </SidebarContent>
       <SidebarFooter />
     </Sidebar>

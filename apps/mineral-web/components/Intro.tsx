@@ -2,6 +2,7 @@ import FeatureCard from 'components/FeatureCard';
 import FeatureSectionTitle from 'components/FeatureSectionTitle';
 import HeroSection from 'components/HeroSection';
 import { HiOutlineArrowDown } from 'react-icons/hi';
+import FeatureSection from './FeatureSection';
 
 const IntroPage = () => {
   return (
@@ -14,7 +15,7 @@ const IntroPage = () => {
           <HiOutlineArrowDown className="animate-bounce" />
         </p>
         <FeatureSectionTitle>Writing</FeatureSectionTitle>
-        <div className="feature-section">
+        <FeatureSection>
           <FeatureCard title="Focus">
             {`We've designed a minimalistic UI to help you focus on your writing.`}
           </FeatureCard>
@@ -32,9 +33,9 @@ const IntroPage = () => {
           <FeatureCard title="Bin">
             {`Send any note to the Bin folder and decide to recover it later or delete it forever.`}
           </FeatureCard>
-        </div>
+        </FeatureSection>
         <FeatureSectionTitle>Productivity</FeatureSectionTitle>
-        <div className="feature-section">
+        <FeatureSection>
           <FeatureCard title="Keyboard shortcuts">
             {`Use Command + K to open a menu with all available shortcuts`}
           </FeatureCard>
@@ -49,18 +50,18 @@ const IntroPage = () => {
           <FeatureCard title="Color labels">
             {`Assing different colors to different notes to find them more easily`}
           </FeatureCard>
-        </div>
+        </FeatureSection>
         <FeatureSectionTitle>Customisation</FeatureSectionTitle>
-        <div className="feature-section">
+        <FeatureSection>
           <FeatureCard title="Dark mode">
             {`Choose between light and dark mode to suit your preferences.`}
           </FeatureCard>
           <FeatureCard title="Custom line spacing">
             {`Choose from 5 different line-spacing options`}
           </FeatureCard>
-        </div>
+        </FeatureSection>
         <FeatureSectionTitle>Markdown</FeatureSectionTitle>
-        <div className="feature-section">
+        <FeatureSection>
           <FeatureCard title="Preview panel">
             {`A separate preview panel you can toggle separately from the editor.`}
           </FeatureCard>
@@ -75,7 +76,7 @@ const IntroPage = () => {
           <FeatureCard title="Table of contents">
             {`Automatically generated ToC based on your markdown headings.`}
           </FeatureCard>
-        </div>
+        </FeatureSection>
       </div>
       <div className="container mx-auto max-w-lg text-center">
         <FeatureSectionTitle>And more...</FeatureSectionTitle>

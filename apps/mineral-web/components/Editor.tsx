@@ -23,7 +23,7 @@ interface Props extends Note {
 const Editor = React.forwardRef(
   (props: Props, ref: RefObject<HTMLTextAreaElement>) => {
     const { id, panels, onClose } = props;
-    const { lineHeightRem, dimBlurredEditor } = useSettingsStore();
+    const { lineHeightRem } = useSettingsStore();
     const [text, setText] = useState('');
     const showEditor = panels?.editor;
     const isViewerOpen = panels?.viewer;
@@ -67,7 +67,7 @@ const Editor = React.forwardRef(
     return (
       <div
         id="editorarea"
-        className="editorarea no-print relative h-full w-full min-w-0 flex-[2] font-mono"
+        className="editorarea panel-padding no-print relative h-full w-full min-w-0 flex-[2] font-mono"
       >
         <PanelLabel>
           <HiOutlinePencil />

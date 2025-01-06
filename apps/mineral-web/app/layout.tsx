@@ -56,7 +56,17 @@ async function MyApp({ children }: { children: React.ReactNode }) {
                 <CommandPalette />
               </Suspense>
               <ClientLayout>{children}</ClientLayout>
-              <Toaster richColors position="top-center" />
+              <Toaster
+                position="top-center"
+                toastOptions={{
+                  classNames: {
+                    title: 'font-mono',
+                    description: 'font-mono',
+                    success:
+                      'bg-green-50 text-gray-700 dark:bg-gray-900 dark:text-green-300',
+                  },
+                }}
+              />
             </main>
           </SidebarProvider>
         </ThemeProvider>

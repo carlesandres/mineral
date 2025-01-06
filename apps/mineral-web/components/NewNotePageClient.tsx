@@ -31,7 +31,7 @@ const NewNotePageClient = () => {
     }
   }, [router, initialized, panels, footerHiddenByDefault]);
 
-  return <div>Creating new file...</div>;
+  return null;
 };
 
 export default NewNotePageClient;

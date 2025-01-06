@@ -1,81 +1,20 @@
 @import url('../app/globals.css');
-@import url('_variables.css');
-@import url('themes.css');
-@import url('editor.css');
-@import url('slides.css');
-@import url('toc.css');
-@import url('print.css');
-@import url('scrollbar.css');
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-html,
-body {
-  scroll-behavior: smooth;
-}
+/* @import url('themes.css'); */
+/* @import url('variables.css'); */
+/* @import url('editor.css'); */
+/* @import url('slides.css'); */
+/* @import url('toc.css'); */
+/* @import url('print.css'); */
+/* @import url('scrollbar.css'); */
 
 body {
-  margin: 0;
-  line-height: 1.4286;
-  color: var(--text-color);
-  transition: background 300ms ease-in-out;
   overscroll-behavior-y: none;
-
   @apply font-mono;
 }
 
-html.dark {
-  --background: var(--ultra-dark-grey);
-  --text-color: white;
-  --preview-bg-color: var(--medium-dark-grey);
-  --navbar-btn-color: var(--light-grey);
-  --editor-text-color: var(--light-grey);
-  --editor-unfocused-color: var(--medium-grey);
-  --editor-bg-color: var(--ultra-dark-grey);
-  --scrollbar-color: var(--medium-dark-grey);
-  --scrollbar-border: transparent;
-  /* stylelint-disable */
-  --border-my-color: theme(colors.gray.500);
-  --border-soft-color: theme(colors.gray.700);
-  --solid-bg-color: theme(colors.gray.800);
-  --solid-hover-bg-color: theme(colors.gray.700);
-  --success-color: theme(colors.green.400);
-  --error-color: theme(colors.red.400);
-  /* stylelint-enable */
-}
-
-/* .button { */
-/*   background: var(--text-color); */
-/*   color: var(--background); */
-/*   transition: background 150ms ease-in-out, transform 150ms ease; */
-/*  */
-/*   @apply inline-block cursor-pointer rounded py-2 px-4 text-center; */
-/* } */
-
-/* Small ball to indicate a color */
-.colorball {
-  display: inline-block;
-  width: 1em;
-  height: 1em;
-  border-radius: 50%;
-  border: none;
-  background-color: #aaa;
-  margin: 0 0.3em 0 0;
-}
-
-
 table.shortcuts td:first-child {
   padding: 5px 10px 5px 0;
-}
-
-.generic-content {
-  @apply min-h-screen w-full p-8 text-center;
-}
-
-.feature-section {
-  @apply mx-auto inline-grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3;
 }
 
 @media (max-height: 600px) {
@@ -93,3 +32,6 @@ table.shortcuts td:first-child {
   @apply rounded bg-yellow-200 p-4 dark:bg-yellow-800;
 }
 
+.panel-padding {
+  @apply p-4;
+}

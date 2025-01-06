@@ -29,7 +29,7 @@ const TOC = (props: TOCProps) => {
       <PanelLabel>
         <HiMenuAlt2 />
       </PanelLabel>
-      <div className="toc-content px-8 pt-8 text-[color:var(--viewer-titles-color)] text-blue-700">
+      <div className="toc-content px-8 pt-8">
         <div dangerouslySetInnerHTML={{ __html: tocMarkdown }} />
       </div>
     </div>
