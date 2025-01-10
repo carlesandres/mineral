@@ -9,7 +9,9 @@ import {
   CommandList,
   CommandShortcut,
 } from '@/components/ui/command';
+import { useGetNoteid } from 'hooks/use-get-note-id';
 import { useRoutingHelpers } from 'hooks/use-routing-helpers';
+import useDeleteNote from 'hooks/useDeleteNote';
 import { useTheme } from 'next-themes';
 
 import { useCallback, useEffect, useState } from 'react';
@@ -19,6 +21,10 @@ export default function CommandPalette() {
   const { goToNewFile, goToList, goToBin, goToSettings, goToLast } =
     useRoutingHelpers();
   const { theme, setTheme } = useTheme();
+  const noteId = useGetNoteid();
+  const binNote = useDeleteNote(noteId, null);
+
+  console.log('noteId', noteId);
 
   const handleToggleTheme = useCallback(() => {
     setTheme(theme === 'dark' ? 'light' : 'dark');
@@ -89,6 +95,11 @@ export default function CommandPalette() {
             <span>Toggle Theme (light/dark)</span>
             <CommandShortcut>^T</CommandShortcut>
           </CommandItem>
+          {noteId && (
+            <CommandItem onSelect={handleAndClose(binNote)}>
+              <span>Delete note</span>
+            </CommandItem>
+          )}
         </CommandGroup>
         <CommandGroup heading="Pages">
           <CommandItem onSelect={handleAndClose(goToList)}>

@@ -5,11 +5,14 @@ import { toast } from 'sonner';
 
 type NoteDeletedAt = number | undefined | null;
 
-const useDeleteNote = (noteId: string, deletedAt: NoteDeletedAt) => {
+const useDeleteNote = (noteId: string | null, deletedAt: NoteDeletedAt) => {
   const { goToList, goToNote } = useRoutingHelpers();
 
   const deleteFn = useCallback(() => {
     const message = deletedAt ? 'Note unbinned' : 'Note sent to bin';
+    if (!noteId) {
+      return;
+    }
     if (deletedAt) {
       unbinNote(noteId);
     } else {
