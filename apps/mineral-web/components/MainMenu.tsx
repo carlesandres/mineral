@@ -1,10 +1,5 @@
-import {
-  HiOutlineCog,
-  HiOutlineClipboard,
-  HiOutlineTrash,
-} from 'react-icons/hi';
 import { Button } from './ui/button';
-import { MoreVertical } from 'lucide-react';
+import { Cog, LayoutDashboard, MoreVertical, Trash } from 'lucide-react';
 import {
   DropdownMenu,
   DropdownMenuTrigger,
@@ -26,15 +21,15 @@ const MainMenu = () => {
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
         <DropdownMenuItem onClick={() => goToList('')}>
-          <HiOutlineClipboard className="mr-2 h-4 w-4" />
+          <LayoutDashboard className="mr-2 h-4 w-4" />
           <span>List</span>
         </DropdownMenuItem>
         <DropdownMenuItem onClick={goToBin}>
-          <HiOutlineTrash className="mr-2 h-4 w-4" />
+          <Trash className="mr-2 h-4 w-4" />
           <span>Bin</span>
         </DropdownMenuItem>
         <DropdownMenuItem onClick={goToSettings}>
-          <HiOutlineCog className="mr-2 h-4 w-4" />
+          <Cog className="mr-2 h-4 w-4" />
           <span>Settings</span>
         </DropdownMenuItem>
       </DropdownMenuContent>

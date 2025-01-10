@@ -2,10 +2,10 @@ import React from 'react';
 import CloseButton from 'components/CloseButton';
 // import StyleSelector from 'components/StyleSelector';
 import EditorStatistics from 'components/EditorStatistics';
-import { BsFillBarChartFill } from 'react-icons/bs';
 import { Note } from 'types/Note';
 import { motion } from 'motion/react';
 import ColorSelector from './ColorSelector';
+import { ChevronUp } from 'lucide-react';
 
 interface Props extends Note {
   onToggle: () => void;
@@ -31,7 +31,7 @@ const EditorFooter = (props: Props) => {
       className="no-print chart absolute bottom-0 right-0 cursor-pointer p-2 text-gray-800 hover:text-blue-500 dark:text-gray-200 dark:hover:text-blue-300"
       onClick={onToggle}
     >
-      <BsFillBarChartFill />
+      <ChevronUp />
     </button>
   );
 

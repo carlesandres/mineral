@@ -2,7 +2,7 @@ import { MouseEvent } from 'react';
 import { tocRenderer } from 'components/markedRenderers';
 import CloseButton from 'components/CloseButton';
 import PanelLabel from './PanelLabel';
-import { HiMenuAlt2 } from 'react-icons/hi';
+import { Logs } from 'lucide-react';
 
 interface TOCProps {
   show: boolean;
@@ -27,7 +27,7 @@ const TOC = (props: TOCProps) => {
     >
       <CloseButton onClick={props.onClose} />
       <PanelLabel>
-        <HiMenuAlt2 />
+        <Logs />
       </PanelLabel>
       <div className="toc-content px-8 pt-8">
         <div dangerouslySetInnerHTML={{ __html: tocMarkdown }} />
