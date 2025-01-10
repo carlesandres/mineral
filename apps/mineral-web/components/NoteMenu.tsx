@@ -3,14 +3,17 @@ import { Button } from 'components/ui/button';
 import { Note, Panels, PanelsPartial } from 'types/Note';
 import ConfirmExportModal from 'components/ConfirmExportModal';
 import useDeleteNote from 'hooks/useDeleteNote';
-import {
-  HiOutlineListBullet,
-  HiOutlineArrowDownTray,
-  HiOutlinePrinter,
-  HiOutlineViewColumns,
-} from 'react-icons/hi2';
 import { getNotes, updateNote } from 'hooks/useNotesStore';
-import { MoreVertical, Maximize2, Copy, Trash } from 'lucide-react';
+import {
+  MoreVertical,
+  Maximize2,
+  Copy,
+  Trash,
+  ListOrdered,
+  Printer,
+  Download,
+  Columns3,
+} from 'lucide-react';
 import {
   DropdownMenu,
   DropdownMenuTrigger,
@@ -119,7 +122,7 @@ const NoteMenu = (props: Props) => {
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">
           <DropdownMenuItem onClick={rotatePanels}>
-            <HiOutlineViewColumns className="mr-2 h-4 w-4" />
+            <Columns3 className="mr-2 h-4 w-4" />
             <span>Change layout</span>
           </DropdownMenuItem>
           <DropdownMenuItem onClick={toggleFullWidth}>
@@ -127,7 +130,7 @@ const NoteMenu = (props: Props) => {
             <span>{fullWidthText}</span>
           </DropdownMenuItem>
           <DropdownMenuItem onClick={openConfirmExportModal}>
-            <HiOutlineArrowDownTray className="mr-2 h-4 w-4" />
+            <Download className="mr-2 h-4 w-4" />
             <span>Export</span>
           </DropdownMenuItem>
           <DropdownMenuItem onClick={binNote}>
@@ -140,12 +143,12 @@ const NoteMenu = (props: Props) => {
           </DropdownMenuItem>
           {viewerVisible && (
             <DropdownMenuItem onClick={toggleToc}>
-              <HiOutlineListBullet className="mr-2 h-4 w-4" />
+              <ListOrdered className="mr-2 h-4 w-4" />
               <span>{`${toggleTocText} Table of Contents`}</span>
             </DropdownMenuItem>
           )}
           <DropdownMenuItem onClick={() => window.print()}>
-            <HiOutlinePrinter className="mr-2 h-4 w-4" />
+            <Printer className="mr-2 h-4 w-4" />
             <span>Print</span>
           </DropdownMenuItem>
           {/* TO-DO: Re-enable this when a proper cheatsheet is written

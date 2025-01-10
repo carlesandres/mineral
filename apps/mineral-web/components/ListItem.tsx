@@ -1,11 +1,11 @@
 import FloatingActions from 'components/FloatingActions';
-import { HiReply, HiOutlineTrash } from 'react-icons/hi';
 import { Note } from 'types/Note';
 import ListItemDate from 'components/ListItemDate';
 import ColorBall from 'components/ColorBall';
 import Link from 'next/link';
 import { binNote, unbinNote } from 'hooks/useNotesStore';
 import { toast } from 'sonner';
+import { Trash, Undo2 } from 'lucide-react';
 
 interface Props {
   note: Note;
@@ -29,7 +29,7 @@ const ListItem = (props: Props) => {
 
   // TO-DO: Fix action on undelete
 
-  const ActionIcon = deletedAt ? HiReply : HiOutlineTrash;
+  const ActionIcon = deletedAt ? Undo2 : Trash;
 
   return (
     <Link

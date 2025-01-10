@@ -2,10 +2,6 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "*": [
-        "./*",
-        "../../shared/*"
-      ],
       "@/*": [
         "./*",
         "../../shared/*"
@@ -27,7 +23,7 @@
     "module": "esnext",
     "isolatedModules": true,
     "jsx": "preserve",
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "plugins": [
       {

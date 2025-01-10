@@ -1,8 +1,8 @@
 import FeatureCard from 'components/FeatureCard';
 import FeatureSectionTitle from 'components/FeatureSectionTitle';
 import HeroSection from 'components/HeroSection';
-import { HiOutlineArrowDown } from 'react-icons/hi';
 import FeatureSection from './FeatureSection';
+import { ArrowDown } from 'lucide-react';
 
 const IntroPage = () => {
   return (
@@ -10,9 +10,9 @@ const IntroPage = () => {
       <HeroSection />
       <div className="container mx-auto text-center" id="features">
         <p className="mb-8 inline-flex items-center justify-center gap-2 text-sm">
-          <HiOutlineArrowDown className="animate-bounce" />
+          <ArrowDown className="animate-bounce" />
           <span>Or check out the features</span>
-          <HiOutlineArrowDown className="animate-bounce" />
+          <ArrowDown className="animate-bounce" />
         </p>
         <FeatureSectionTitle>Writing</FeatureSectionTitle>
         <FeatureSection>
