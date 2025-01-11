@@ -41,19 +41,21 @@ const EditorToolbar = (props: EditorToolbarProps) => {
 
   const wideClass = wide ? 'sm: ml-8' : 'sm:mx-0';
 
+  // TO-DO: Change the padding-left in the input depending on
+  // whether the note menu is available or not
   return (
     <div
-      className={`editor-toolbar no-print flex items-center justify-between border-b border-[var(--border-soft-color)] bg-[var(--solid-bg-color)] px-2 py-0.5 print:border-none`}
+      className={`editor-toolbar no-print flex items-center justify-between border-b border-[var(--border-soft-color)] bg-[var(--solid-bg-color)] print:border-none`}
     >
-      <Input
+      <input
         type="text"
         ref={titleRef}
         autoFocus={!title}
         value={title}
-        placeholder="(Untitled)"
+        placeholder="(untitled)"
         onChange={onChange}
         onKeyDown={handleKeyDown}
-        className={`title overflow-hidden text-ellipsis whitespace-nowrap rounded-none border-0 border-b border-b-transparent px-0 shadow-none focus-visible:border-b-blue-500 focus-visible:ring-0 sm:!text-base ${wideClass}`}
+        className={`title focus-bg mx-6 flex-1 overflow-hidden text-ellipsis whitespace-nowrap border-none bg-transparent px-4 py-2 shadow-none ring-0 sm:!text-base ${wideClass}`}
       />
     </div>
   );

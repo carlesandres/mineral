@@ -1,7 +1,7 @@
 import CommandPalette from 'components/CommandPalette';
 import { GeistSans } from 'geist/font/sans';
 import { GeistMono } from 'geist/font/mono';
-import 'styles/main.css';
+import './globals.css';
 import ClientLayout from 'components/ClientLayout';
 import { Suspense } from 'react';
 import { Toaster } from '@/components/ui/sonner';
