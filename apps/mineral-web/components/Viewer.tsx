@@ -78,7 +78,7 @@ const Viewer = React.forwardRef((props: Props, ref: Ref<HTMLDivElement>) => {
       className={`viewerarea panel-padding relative w-full min-w-0 flex-[2] overflow-x-hidden`}
     >
       <PanelLabel>
-        <Eye />
+        <Eye size={16} />
       </PanelLabel>
       <div
         className={`viewer scrollable is-markdown prose h-full w-full prose-code:before:content-none prose-code:after:content-none prose-pre:bg-[var(--viewer-code-bg-color)]`}

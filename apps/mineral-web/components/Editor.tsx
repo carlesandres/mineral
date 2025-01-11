@@ -70,7 +70,7 @@ const Editor = React.forwardRef(
         className="editorarea panel-padding no-print relative h-full w-full min-w-0 flex-[2] font-mono"
       >
         <PanelLabel>
-          <Pen />
+          <Pen size={16} />
         </PanelLabel>
         <style jsx>{`
           textarea {

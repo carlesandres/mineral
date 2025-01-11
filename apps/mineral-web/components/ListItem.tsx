@@ -13,7 +13,7 @@ interface Props {
 
 const ListItem = (props: Props) => {
   const { note } = props;
-  const { id: noteId, deletedAt, title } = note;
+  const { id: noteId, deletedAt, title, text } = note;
 
   const untitledClass = title ? '' : 'text-gray-400 dark:text-gray-500';
 
@@ -31,6 +31,8 @@ const ListItem = (props: Props) => {
 
   const ActionIcon = deletedAt ? Undo2 : Trash;
 
+  const renderedTitle = title || text.slice(0, 20) || '(no content)';
+
   return (
     <Link
       href={`/note?id=${noteId}`}
@@ -41,7 +43,7 @@ const ListItem = (props: Props) => {
         <div
           className={`title mr-4 w-full truncate whitespace-nowrap text-left font-mono ${untitledClass}`}
         >
-          {title || '(untitled)'}
+          {renderedTitle}
         </div>
         <ListItemDate date={note.updatedAt} />
       </div>

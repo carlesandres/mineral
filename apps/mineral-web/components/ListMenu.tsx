@@ -26,6 +26,7 @@ const ListMenu = () => {
           <Plus className="mr-2 h-4 w-4" />
           <span>New note</span>
         </DropdownMenuItem>
+        {/*
         <DropdownMenuItem onClick={showBackupModal}>
           <Download className="mr-2 h-4 w-4" />
           <span>Backup</span>
@@ -34,9 +35,10 @@ const ListMenu = () => {
           <Upload className="mr-2 h-4 w-4" />
           <span>Import note</span>
         </DropdownMenuItem>
+        */}
         <DropdownMenuItem onClick={goToBin}>
           <Trash className="mr-2 h-4 w-4" />
-          <span>BIN</span>
+          <span>Bin</span>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
