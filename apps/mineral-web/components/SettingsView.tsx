@@ -1,21 +1,20 @@
 'use client';
 
 import useSettingsStore, { setSetting } from 'hooks/useSettingsStore';
-import HorzRadioGroup from 'components/HorzRadioGroup';
 import SettingsCheckbox from 'components/SettingsCheckbox';
 import Label from 'components/Label';
 import Checkbox from './Checkbox';
 import { useTheme } from 'next-themes';
 import { Cog } from 'lucide-react';
 
-const lineHeights = new Map([
-  ['Small', '1.5'],
-  ['Medium', '1.6'],
-  ['Normal', '1.75'],
-  ['Large', '2'],
-  ['Very large', '2.5'],
-]);
-
+// const lineHeights = new Map([
+//   ['Small', '1.5'],
+//   ['Medium', '1.6'],
+//   ['Normal', '1.75'],
+//   ['Large', '2'],
+//   ['Very large', '2.5'],
+// ]);
+//
 const SettingsPage = () => {
   const settings = useSettingsStore();
   const { theme, setTheme } = useTheme();
@@ -59,12 +58,14 @@ const SettingsPage = () => {
         name="footerHiddenByDefault"
         label="Hide editor footer in new notes"
       />
+      {/*
       <HorzRadioGroup
         options={lineHeights}
         onChange={onChangeLinespacing}
         selectedOption={settings?.lineHeightRem}
         label="Editor line space:"
       />
+      */}
       <Label className="mt-16">Markdown</Label>
       <SettingsCheckbox
         name="startWithPreview"
