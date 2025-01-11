@@ -24,9 +24,14 @@ const ColorSelector = (props: ColorSelectorProps) => {
   );
 
   const colorballs = colors.map((color) => (
-    <button key={color} onClick={() => changeColor(color)}>
+    <Button
+      key={color}
+      onClick={() => changeColor(color)}
+      variant="ghost"
+      size="icon"
+    >
       <ColorBall key={color} selected={color === selectedColor} color={color} />
-    </button>
+    </Button>
   ));
 
   return (
@@ -36,7 +41,7 @@ const ColorSelector = (props: ColorSelectorProps) => {
           <ColorBall color={selectedColor} small />
         </Button>
       </DialogTrigger>
-      <DialogContent className="bg-white">
+      <DialogContent>
         <div className="p-4">
           <p className="px-4 py-2">
             A color can help you find your note faster in the list.
