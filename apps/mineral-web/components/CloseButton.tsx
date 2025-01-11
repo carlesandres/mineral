@@ -1,5 +1,6 @@
 import { X } from 'lucide-react';
 import { HTMLAttributes } from 'react';
+import { Button } from 'components/ui/button';
 import { twMerge } from 'tailwind-merge';
 
 interface CloseButtonProps extends HTMLAttributes<HTMLButtonElement> {
@@ -10,14 +11,14 @@ const CloseButton = (props: CloseButtonProps) => {
   const { className = '', ...otherProps } = props;
 
   return (
-    <button
+    <Button
       {...otherProps}
-      className={twMerge(
-        `no-print absolute right-0 top-0 cursor-pointer p-2 font-sans text-base font-bold leading-none text-gray-700 hover:text-gray-500 dark:text-gray-300 dark:hover:text-gray-300 ${className}`,
-      )}
+      className={twMerge(`no-print absolute right-0 top-0`, className)}
+      size="icon"
+      variant="ghost"
     >
-      <X />
-    </button>
+      <X size={16} />
+    </Button>
   );
 };
 

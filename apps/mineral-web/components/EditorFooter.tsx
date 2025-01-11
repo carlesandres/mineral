@@ -6,6 +6,7 @@ import { Note } from 'types/Note';
 import { motion } from 'motion/react';
 import ColorSelector from './ColorSelector';
 import { ChevronUp } from 'lucide-react';
+import { Button } from 'components/ui/button';
 
 interface Props extends Note {
   onToggle: () => void;
@@ -27,12 +28,14 @@ const EditorFooter = (props: Props) => {
   const editorVisible = panels?.editor ?? false;
 
   const expandButton = showFooter ? null : (
-    <button
-      className="no-print chart absolute bottom-0 right-0 cursor-pointer p-2 text-gray-800 hover:text-blue-500 dark:text-gray-200 dark:hover:text-blue-300"
+    <Button
+      size="icon"
+      variant="ghost"
+      className="no-print chart absolute bottom-0 right-0"
       onClick={onToggle}
     >
-      <ChevronUp />
-    </button>
+      <ChevronUp size={16} />
+    </Button>
   );
 
   return (
