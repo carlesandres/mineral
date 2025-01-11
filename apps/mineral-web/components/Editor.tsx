@@ -9,10 +9,10 @@ import React, {
 import { useState } from 'react';
 import useSettingsStore from 'hooks/useSettingsStore';
 import PanelLabel from 'components/PanelLabel';
-import { HiOutlinePencil } from 'react-icons/hi';
 import type { Note } from 'types/Note';
 import CloseButton from './CloseButton';
 import { updateNote } from 'hooks/useNotesStore';
+import { Pen } from 'lucide-react';
 
 interface Props extends Note {
   onScrollEditor: UIEventHandler<HTMLTextAreaElement>;
@@ -70,7 +70,7 @@ const Editor = React.forwardRef(
         className="editorarea panel-padding no-print relative h-full w-full min-w-0 flex-[2] font-mono"
       >
         <PanelLabel>
-          <HiOutlinePencil />
+          <Pen size={16} />
         </PanelLabel>
         <style jsx>{`
           textarea {

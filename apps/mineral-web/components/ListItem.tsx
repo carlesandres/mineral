@@ -1,11 +1,11 @@
 import FloatingActions from 'components/FloatingActions';
-import { HiReply, HiOutlineTrash } from 'react-icons/hi';
 import { Note } from 'types/Note';
 import ListItemDate from 'components/ListItemDate';
 import ColorBall from 'components/ColorBall';
 import Link from 'next/link';
 import { binNote, unbinNote } from 'hooks/useNotesStore';
 import { toast } from 'sonner';
+import { Trash, Undo2 } from 'lucide-react';
 
 interface Props {
   note: Note;
@@ -13,7 +13,7 @@ interface Props {
 
 const ListItem = (props: Props) => {
   const { note } = props;
-  const { id: noteId, deletedAt, title } = note;
+  const { id: noteId, deletedAt, title, text } = note;
 
   const untitledClass = title ? '' : 'text-gray-400 dark:text-gray-500';
 
@@ -29,7 +29,9 @@ const ListItem = (props: Props) => {
 
   // TO-DO: Fix action on undelete
 
-  const ActionIcon = deletedAt ? HiReply : HiOutlineTrash;
+  const ActionIcon = deletedAt ? Undo2 : Trash;
+
+  const renderedTitle = title || text.slice(0, 20) || '(no content)';
 
   return (
     <Link
@@ -41,7 +43,7 @@ const ListItem = (props: Props) => {
         <div
           className={`title mr-4 w-full truncate whitespace-nowrap text-left font-mono ${untitledClass}`}
         >
-          {title || '(untitled)'}
+          {renderedTitle}
         </div>
         <ListItemDate date={note.updatedAt} />
       </div>

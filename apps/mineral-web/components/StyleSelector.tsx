@@ -1,6 +1,6 @@
 import { HTMLAttributes } from 'react';
 import { Button } from './ui/button';
-import { HiOutlineSwatch } from 'react-icons/hi2';
+import { SwatchBook } from 'lucide-react';
 // import { getNoteById } from 'hooks/useNotesStore';
 
 export interface StyleSelectorProps extends HTMLAttributes<HTMLButtonElement> {
@@ -28,7 +28,7 @@ const StyleSelector = (props: StyleSelectorProps) => {
 
   return (
     <Button className="w-24" onClick={() => {}} {...restProps}>
-      <HiOutlineSwatch className="text-base" />
+      <SwatchBook className="text-base" />
       <span className="bg-transparent text-xs">{themeName}</span>
     </Button>
   );

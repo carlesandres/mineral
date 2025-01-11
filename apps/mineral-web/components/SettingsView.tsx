@@ -4,9 +4,9 @@ import useSettingsStore, { setSetting } from 'hooks/useSettingsStore';
 import HorzRadioGroup from 'components/HorzRadioGroup';
 import SettingsCheckbox from 'components/SettingsCheckbox';
 import Label from 'components/Label';
-import { HiOutlineCog } from 'react-icons/hi';
 import Checkbox from './Checkbox';
 import { useTheme } from 'next-themes';
+import { Cog } from 'lucide-react';
 
 const lineHeights = new Map([
   ['Small', '1.5'],
@@ -36,7 +36,7 @@ const SettingsPage = () => {
   return (
     <div className="m-16 mx-auto w-full px-8 sm:px-16 md:max-w-3xl">
       <h2 className="mb-8 flex items-center gap-2 text-xl font-bold">
-        <HiOutlineCog />
+        <Cog />
         <span>Settings</span>
       </h2>
       <Label className="mt-16">General</Label>
