@@ -81,7 +81,7 @@ const Viewer = React.forwardRef((props: Props, ref: Ref<HTMLDivElement>) => {
         <Eye size={16} />
       </PanelLabel>
       <div
-        className={`viewer scrollable is-markdown prose h-full w-full prose-code:before:content-none prose-code:after:content-none prose-pre:bg-[var(--viewer-code-bg-color)]`}
+        className={`viewer scrollable is-markdown prose h-full w-full dark:prose-invert prose-code:before:content-none prose-code:after:content-none`}
         ref={ref}
         {...onScrollObj}
         onDoubleClick={props.onDoubleClick}

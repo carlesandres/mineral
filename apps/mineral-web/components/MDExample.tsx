@@ -42,7 +42,7 @@ const MDExample = (props: MDExampleProps) => {
   return (
     <>
       <Description {...restProps} />
-      <div className="flex gap-4 border-b border-b-[var(--border-soft-color)] py-4 text-left">
+      <div className="flex gap-4 border-b py-4 text-left">
         <div className="raw flex-1 whitespace-pre-wrap font-mono">{text}</div>
         <div
           className="markdown viewerarea prose flex-1 p-2 dark:prose-invert"

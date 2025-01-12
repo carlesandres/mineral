@@ -24,6 +24,10 @@ div [cmdk-root] [cmdk-item] svg {
   @apply h-4 w-4;
 }
 
+.focus-bg {
+  @apply focus-within:bg-gray-100 focus-within:dark:bg-gray-800 focus-within:outline-none;
+}
+
 /* Old stuff */
 table.shortcuts td:first-child {
   padding: 5px 10px 5px 0;

@@ -45,7 +45,7 @@ const EditorToolbar = (props: EditorToolbarProps) => {
   // whether the note menu is available or not
   return (
     <div
-      className={`editor-toolbar no-print flex items-center justify-between border-b border-[var(--border-soft-color)] bg-[var(--solid-bg-color)] print:border-none`}
+      className={`editor-toolbar no-print flex items-center justify-between border-b print:border-none`}
     >
       <input
         type="text"
