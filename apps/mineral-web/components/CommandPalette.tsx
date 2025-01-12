@@ -9,9 +9,11 @@ import {
   CommandList,
   CommandShortcut,
 } from '@/components/ui/command';
+import { useToggleNoteWidth } from '@/hooks/use-toggle-note-width';
 import { useGetNoteid } from 'hooks/use-get-note-id';
 import { useRoutingHelpers } from 'hooks/use-routing-helpers';
 import useDeleteNote from 'hooks/useDeleteNote';
+import { Expand, Moon, PlusCircle, Trash } from 'lucide-react';
 import { useTheme } from 'next-themes';
 
 import { useCallback, useEffect, useState } from 'react';
@@ -23,17 +25,15 @@ export default function CommandPalette() {
   const { theme, setTheme } = useTheme();
   const noteId = useGetNoteid();
   const binNote = useDeleteNote(noteId, null);
-
-  console.log('noteId', noteId);
+  const toggleNoteWidth = useToggleNoteWidth(noteId);
 
   const handleToggleTheme = useCallback(() => {
     setTheme(theme === 'dark' ? 'light' : 'dark');
-    setOpen(false);
   }, [theme, setTheme]);
 
-  const handleAndClose = (cb: () => void) => {
+  const handleAndClose = (cb: (() => void) | undefined) => {
     return () => {
-      cb();
+      cb && cb();
       setOpen(false);
     };
   };
@@ -86,20 +86,29 @@ export default function CommandPalette() {
       <CommandInput placeholder="Type a command or search..." />
       <CommandList>
         <CommandEmpty>No results found.</CommandEmpty>
+        {noteId && (
+          <CommandGroup heading="Note actions">
+            <CommandItem onSelect={handleAndClose(binNote)}>
+              <Trash />
+              <span>Delete note</span>
+            </CommandItem>
+            <CommandItem onSelect={handleAndClose(toggleNoteWidth)}>
+              <Expand />
+              <span>Toggle Width</span>
+            </CommandItem>
+          </CommandGroup>
+        )}
         <CommandGroup heading="Actions">
           <CommandItem onSelect={handleAndClose(goToNewFile)}>
+            <PlusCircle />
             <span>New note</span>
             <CommandShortcut>^N</CommandShortcut>
           </CommandItem>
           <CommandItem onSelect={handleToggleTheme}>
+            <Moon />
             <span>Toggle Theme (light/dark)</span>
             <CommandShortcut>^T</CommandShortcut>
           </CommandItem>
-          {noteId && (
-            <CommandItem onSelect={handleAndClose(binNote)}>
-              <span>Delete note</span>
-            </CommandItem>
-          )}
         </CommandGroup>
         <CommandGroup heading="Pages">
           <CommandItem onSelect={handleAndClose(goToList)}>

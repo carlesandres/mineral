@@ -67,7 +67,7 @@ const Editor = React.forwardRef(
     return (
       <div
         id="editorarea"
-        className="editorarea panel-padding no-print relative h-full w-full min-w-0 flex-[2] font-mono"
+        className="editorarea no-print relative h-full w-full min-w-0 flex-[2] font-mono"
       >
         <PanelLabel>
           <Pen size={16} />
@@ -82,7 +82,7 @@ const Editor = React.forwardRef(
           }
         `}</style>
         <textarea
-          className={`editor-content scrollable no-print h-full w-full resize-none rounded-none border-none bg-[color:var(--editor-bg-color)] p-[var(--editor-padding)] text-[color:var(--editor-text-color)] outline-none`}
+          className={`editor-content panel-padding focus-bg scrollable no-print h-full w-full resize-none rounded-none border-none bg-transparent`}
           ref={ref}
           onDoubleClick={props.onDoubleClick}
           onChange={onChange}
