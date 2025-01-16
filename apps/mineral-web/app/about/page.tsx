@@ -12,7 +12,7 @@ const AboutPage = () => {
       <h1 className="py-16 text-2xl">About mnral</h1>
       <div className="flex flex-col gap-4">
         <p>
-          mnral is built by{' '}
+          mnral is a project by{' '}
           <Link
             href="https://carlesandres.com"
             className="text-yellow-500 underline"
@@ -20,7 +20,7 @@ const AboutPage = () => {
             Carles Andrés
           </Link>
         </p>
-        <p>{`Reach out me. I'd love to hear your feedback!`}</p>
+        <p>{`Reach out to me. I'd love to hear your feedback.`}</p>
       </div>
     </div>
   );
