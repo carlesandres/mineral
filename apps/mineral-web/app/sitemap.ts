@@ -1,6 +1,8 @@
 import { MetadataRoute } from 'next';
 
 const baseUrl = 'https://mnral.com';
+export const dynamic = 'force-static';
+export const revalidate = false;
 
 export default function sitemap(): MetadataRoute.Sitemap {
   return [

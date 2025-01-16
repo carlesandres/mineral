@@ -28,7 +28,7 @@ importers:
         version: 2.1.1
       electron-settings:
         specifier: 4.0.4
-        version: 4.0.4(electron@33.2.1)
+        version: 4.0.4(electron@34.0.0)
       electron-squirrel-startup:
         specifier: ^1.0.1
         version: 1.0.1
@@ -37,8 +37,8 @@ importers:
         version: 1.2.8
     devDependencies:
       electron:
-        specifier: 33.2.1
-        version: 33.2.1
+        specifier: 34.0.0
+        version: 34.0.0
       electron-builder:
         specifier: ^25.1.8
         version: 25.1.8(electron-builder-squirrel-windows@25.1.8)
@@ -3078,8 +3078,8 @@ packages:
   electron-to-chromium@1.5.76:
     resolution: {integrity: sha512-CjVQyG7n7Sr+eBXE86HIulnL5N8xZY1sgmOPGuq/F0Rr0FJq63lg0kEtOIDfZBk44FnDLf6FUJ+dsJcuiUDdDQ==}
 
-  electron@33.2.1:
-    resolution: {integrity: sha512-SG/nmSsK9Qg1p6wAW+ZfqU+AV8cmXMTIklUL18NnOKfZLlum4ZsDoVdmmmlL39ZmeCaq27dr7CgslRPahfoVJg==}
+  electron@34.0.0:
+    resolution: {integrity: sha512-fpaPb0lifoUJ6UJa4Lk8/0B2Ku/xDZWdc1Gkj67jbygTCrvSon0qquju6Ltx1Kz23GRqqlIHXiy9EvrjpY7/Wg==}
     engines: {node: '>= 12.20.55'}
     hasBin: true
 
@@ -9813,9 +9813,9 @@ snapshots:
 
   electron-serve@2.1.1: {}
 
-  electron-settings@4.0.4(electron@33.2.1):
+  electron-settings@4.0.4(electron@34.0.0):
     dependencies:
-      electron: 33.2.1
+      electron: 34.0.0
       lodash: 4.17.21
       mkdirp: 1.0.4
       write-file-atomic: 3.0.3
@@ -9828,7 +9828,7 @@ snapshots:
 
   electron-to-chromium@1.5.76: {}
 
-  electron@33.2.1:
+  electron@34.0.0:
     dependencies:
       '@electron/get': 2.0.3
       '@types/node': 20.17.11
