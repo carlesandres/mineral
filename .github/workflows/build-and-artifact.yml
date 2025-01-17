@@ -41,10 +41,15 @@ jobs:
       - name: Run app build 
         run: pnpm build-app
 
+      - name: Debug - Show current directory
+        run: |
+          pwd
+          ls -la
+
       - name: Upload artifact
         uses: actions/upload-artifact@v3
         with:
           name: mineral-app-dist
-          path: apps/mineral-app/out
+          path: ${{ github.workspace }}/apps/mineral-app/out
           retention-days: 7
 
