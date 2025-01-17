@@ -38,8 +38,8 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
-      - name: Run turbo dist
-        run: pnpm turbo run dist
+      - name: Run app build 
+        run: pnpm build-app
 
       - name: Upload artifact
         uses: actions/upload-artifact@v3
