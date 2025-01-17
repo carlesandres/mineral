@@ -28,7 +28,7 @@
       "cache": false,
       "persistent": true
     },
-    "mineral-app#dist": {
+    "mineral-app#build": {
       "dependsOn": [
         "mineral-web#build-static"
       ]
