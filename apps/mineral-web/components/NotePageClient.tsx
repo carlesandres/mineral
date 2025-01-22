@@ -86,7 +86,7 @@ const NotePageClient = () => {
   }
 
   return (
-    <div className="relative flex h-screen">
+    <div className="relative flex h-screen print:h-auto">
       <NoteContainer note={note} />
     </div>
   );

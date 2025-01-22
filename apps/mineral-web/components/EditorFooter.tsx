@@ -47,7 +47,7 @@ const EditorFooter = (props: Props) => {
         transition={{ duration: 0.15 }}
       >
         <div
-          className={`editor-footer monospace no-print relative flex items-center justify-between overflow-hidden border-t px-2 py-1.5 pr-12 text-sm text-gray-500 transition-all dark:text-gray-800`}
+          className={`editor-footer monospace relative flex items-center justify-between overflow-hidden border-t px-2 py-1.5 pr-12 text-sm text-gray-500 transition-all dark:text-gray-800 print:hidden`}
         >
           <div className="flex items-center justify-start gap-2">
             <ColorSelector noteId={noteId} selectedColor={color} />

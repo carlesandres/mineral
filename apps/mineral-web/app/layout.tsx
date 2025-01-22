@@ -37,15 +37,15 @@ async function MyApp({ children }: { children: React.ReactNode }) {
         <link rel="manifest" href="/site.webmanifest" />
         <meta name="theme-color" content="#4a4a4a" />
       </head>
-      <body className="overflow-hidden">
+      <body className="overflow-hidden print:overflow-auto">
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
           enableSystem
           disableTransitionOnChange
         >
-          <SidebarProvider className="h-screen">
-            <div className="relative">
+          <SidebarProvider className="print:none h-screen">
+            <div className="relative print:hidden">
               <AppSidebar />
               <SidebarTrigger className="absolute -right-8 top-1.5 z-50" />
             </div>

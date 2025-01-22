@@ -112,7 +112,7 @@ const Panes = (props: Props) => {
   const reallyShowToc = toc && viewer;
 
   return (
-    <div className="editor-wrap align-stretch flex flex-1 flex-col divide-y overflow-hidden sm:flex-row sm:divide-x sm:divide-y-0 print:divide-none">
+    <div className="editor-wrap align-stretch flex flex-1 flex-col divide-y overflow-hidden sm:flex-row sm:divide-x sm:divide-y-0 print:divide-none print:overflow-auto">
       <TOC
         onClose={closeTOC}
         show={reallyShowToc}
