@@ -21,6 +21,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from 'components/ui/sidebar';
+import SidebarLink from './SidebarLink';
 
 // Menu items.
 const items = [
@@ -88,14 +89,12 @@ export function AppSidebar() {
           <SidebarGroupContent>
             <SidebarMenu>
               {items.map((item) => (
-                <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton asChild>
-                    <Link href={item.url}>
-                      <item.icon />
-                      <span>{item.title}</span>
-                    </Link>
-                  </SidebarMenuButton>
-                </SidebarMenuItem>
+                <SidebarLink
+                  key={item.title}
+                  title={item.title}
+                  url={item.url}
+                  icon={<item.icon />}
+                />
               ))}
             </SidebarMenu>
           </SidebarGroupContent>
