@@ -3,7 +3,6 @@ import { useState, useEffect } from 'react';
 import { getShownFiles } from 'utils/fileUtils';
 import { sortBy } from 'lodash';
 import { Note } from 'types/Note';
-import Label from 'components/Label';
 import Link from 'next/link';
 import { Button } from './ui/button';
 
@@ -63,10 +62,6 @@ const ListElements = (props: ListElementProps) => {
 
   return (
     <div className="list-content mb-32 pt-2">
-      <div className="mb-3 flex w-full justify-between px-1.5">
-        <Label>Title</Label>
-        <Label>Last updated</Label>
-      </div>
       <div className="file-list flex flex-1 flex-shrink-0 flex-col gap-2 text-sm">
         {listItems}
       </div>

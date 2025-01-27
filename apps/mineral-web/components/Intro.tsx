@@ -6,7 +6,7 @@ import { ArrowDown } from 'lucide-react';
 
 const IntroPage = () => {
   return (
-    <div className="pt-8 text-gray-600 sm:my-32 dark:text-gray-300">
+    <div className="pt-8 text-gray-600 sm:my-32 dark:text-gray-200">
       <HeroSection />
       <div className="container mx-auto text-center" id="features">
         <p className="mb-8 inline-flex items-center justify-center gap-2 text-sm">

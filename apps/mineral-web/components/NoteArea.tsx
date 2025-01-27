@@ -59,7 +59,7 @@ const NoteArea = (props: Props) => {
     >
       <div
         ref={editorarea}
-        className={`notearea relative mx-auto flex w-full flex-col overflow-hidden rounded border-gray-400 transition-[width] duration-300 dark:border-gray-500 print:border-none ${wideClass} ${style}`}
+        className={`notearea relative mx-auto flex w-full flex-col overflow-hidden rounded border-gray-400 transition-[width] duration-300 dark:border-gray-500 print:break-inside-auto print:overflow-visible print:border-none ${wideClass} ${style}`}
         style={customStyle}
       >
         <EditorToolbar

@@ -6,10 +6,7 @@ export interface PanelLabelProps {
 
 const PanelLabel = (props: PanelLabelProps) => {
   return (
-    <div
-      className="no-print absolute top-1 left-1 p-1
-      font-sans text-base text-gray-400 dark:text-gray-500"
-    >
+    <div className="absolute left-1 top-1 p-1 font-sans text-base text-gray-400 dark:text-gray-500 print:hidden">
       {props.children}
     </div>
   );

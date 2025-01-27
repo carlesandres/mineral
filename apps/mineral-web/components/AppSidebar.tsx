@@ -21,6 +21,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from 'components/ui/sidebar';
+import SidebarLink from './SidebarLink';
 
 // Menu items.
 const items = [
@@ -67,7 +68,7 @@ export function AppSidebar() {
           <SidebarMenuItem>
             <SidebarMenuButton size="lg" asChild>
               <Link href="/intro">
-                <div className="bg-sidebar-primary flex aspect-square size-8 items-center justify-center rounded-lg text-gray-500">
+                <div className="flex aspect-square size-8 items-center justify-center rounded-lg text-gray-500">
                   <Gem className="size-4" />
                 </div>
                 <div className="flex flex-col leading-none">
@@ -88,14 +89,12 @@ export function AppSidebar() {
           <SidebarGroupContent>
             <SidebarMenu>
               {items.map((item) => (
-                <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton asChild>
-                    <Link href={item.url}>
-                      <item.icon />
-                      <span>{item.title}</span>
-                    </Link>
-                  </SidebarMenuButton>
-                </SidebarMenuItem>
+                <SidebarLink
+                  key={item.title}
+                  title={item.title}
+                  url={item.url}
+                  icon={<item.icon />}
+                />
               ))}
             </SidebarMenu>
           </SidebarGroupContent>

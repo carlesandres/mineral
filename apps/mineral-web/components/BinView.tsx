@@ -3,7 +3,6 @@ import ListItem from 'components/ListItem';
 import { Note } from 'types/Note';
 import { getShownFiles } from 'utils/fileUtils';
 import { sortBy } from 'lodash';
-import Label from 'components/Label';
 
 interface BiewViewProps {
   notes: Note[];
@@ -47,17 +46,9 @@ const BinView = (props: BiewViewProps) => {
   }
 
   return (
-    <>
-      {!isEmpty && (
-        <div className="mb-2 flex w-full justify-between px-2">
-          <Label>Title</Label>
-          <Label>Deleted</Label>
-        </div>
-      )}
-      <div className="file-list mb-32 flex flex-1 flex-shrink-0 flex-col gap-2 pb-4 text-sm">
-        {content}
-      </div>
-    </>
+    <div className="file-list mb-32 flex flex-1 flex-shrink-0 flex-col gap-2 pb-4 text-sm">
+      {content}
+    </div>
   );
 };
 

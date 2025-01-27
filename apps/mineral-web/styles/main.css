@@ -1,7 +1,3 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
 /* @import url('themes.css'); */
 /* @import url('variables.css'); */
 /* @import url('editor.css'); */
@@ -22,10 +18,6 @@ body {
 /* Icons in Commands in modals are too big in shadcn */
 div [cmdk-root] [cmdk-item] svg {
   @apply h-4 w-4;
-}
-
-.focus-bg {
-  @apply focus-within:bg-gray-100 focus-within:dark:bg-gray-800 focus-within:outline-none;
 }
 
 /* Old stuff */
