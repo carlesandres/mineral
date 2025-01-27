@@ -44,8 +44,8 @@ async function MyApp({ children }: { children: React.ReactNode }) {
           enableSystem
           disableTransitionOnChange
         >
-          <SidebarProvider className="print:none h-screen">
-            <div className="relative print:hidden">
+          <SidebarProvider className="h-screen print:hidden">
+            <div className="relative">
               <AppSidebar />
               <SidebarTrigger className="absolute -right-8 top-1.5 z-50" />
             </div>

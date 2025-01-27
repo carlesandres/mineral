@@ -68,7 +68,7 @@ export function AppSidebar() {
           <SidebarMenuItem>
             <SidebarMenuButton size="lg" asChild>
               <Link href="/intro">
-                <div className="bg-sidebar-primary flex aspect-square size-8 items-center justify-center rounded-lg text-gray-500">
+                <div className="flex aspect-square size-8 items-center justify-center rounded-lg text-gray-500">
                   <Gem className="size-4" />
                 </div>
                 <div className="flex flex-col leading-none">
