@@ -1,4 +1,9 @@
-import NewNotePageClient from "components/NewNotePageClient";
+import NewNotePageClient from 'components/NewNotePageClient';
+
+export const metadata = {
+  title: 'New Note',
+  description: 'Create a new note',
+};
 
 const NewNotePage = () => {
   return <NewNotePageClient />;
