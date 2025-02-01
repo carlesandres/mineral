@@ -1,10 +1,10 @@
 import React, { useCallback, MouseEvent, UIEvent } from 'react';
-import TOC from 'components/TOC';
 import Viewer from 'components/Viewer';
 import Editor from 'components/Editor';
-import { useEffect, useRef } from 'react';
+import { useRef } from 'react';
 import { PanelsPartial, Panels, Note } from 'types/Note';
 import { updateNote } from 'hooks/useNotesStore';
+import NewToc from './NewToc';
 
 // TODO: Adding the same listener to both panels, makes the onScroll
 // method to be triggered on both on any scroll action
@@ -113,7 +113,7 @@ const Panes = (props: Props) => {
 
   return (
     <div className="editor-wrap align-stretch flex flex-1 flex-col divide-y overflow-hidden sm:flex-row sm:divide-x sm:divide-y-0 print:divide-none print:overflow-auto">
-      <TOC
+      <NewToc
         onClose={closeTOC}
         show={reallyShowToc}
         text={text}

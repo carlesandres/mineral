@@ -1,12 +1,9 @@
-import React, { Ref, MouseEvent, useState, useEffect } from 'react';
-import { marked } from 'marked';
-import hilite from 'utils/custom-hilite';
-import { HLJSApi } from 'highlight.js';
+import React, { Ref, MouseEvent, useEffect } from 'react';
 import PanelLabel from 'components/PanelLabel';
-import useSettingsStore from 'hooks/useSettingsStore';
-import DOMPurify from 'dompurify';
+// import useSettingsStore from 'hooks/useSettingsStore';
 import CloseButton from './CloseButton';
 import { Eye } from 'lucide-react';
+import { useRemark } from 'react-remark';
 
 interface Props {
   text: string;
@@ -19,50 +16,32 @@ interface Props {
 
 const Viewer = React.forwardRef((props: Props, ref: Ref<HTMLDivElement>) => {
   const { show, isEditorOpen, onClose, text } = props;
-  const [mdContent, setMdcontent] = useState('');
   // TO-DO: Find out how to deal with dompurify types
-  const [highlight, setHighlight] = useState<HLJSApi | null>(null);
-  const { gfm } = useSettingsStore();
-  const [markdown, setMarkdown] = useState('');
+  // const { gfm } = useSettingsStore();
+  const [mdContent, setMarkdownSource] = useRemark();
 
   useEffect(() => {
-    const parseMD = async () => {
-      const markdown = await marked.parse(text);
-      setMarkdown(markdown);
-    };
-
-    parseMD();
-  }, [text]);
-
-  useEffect(() => {
-    const initPurify = async () => {
-      // TO-DO: This and hihjlight.js should be preloaded on other pages
-      // so as to speed up loading the first note
-      const hljs = await import('highlight.js');
-      setHighlight(hljs.default);
-    };
-
-    const options = {
-      breaks: true,
-      highlight: hilite,
-      gfm,
-    };
-    marked.use(options);
-    initPurify();
-  }, [gfm]);
-
-  useEffect(() => {
-    if (props.show) {
-      const viewerContent = DOMPurify.sanitize(markdown);
-      setMdcontent(viewerContent);
+    if (show) {
+      setMarkdownSource(text);
     }
-  }, [props.text, props.show, markdown]);
+  }, [text, setMarkdownSource, show]);
 
-  useEffect(() => {
-    if (highlight && show) {
-      highlight.highlightAll();
-    }
-  }, [highlight, show, mdContent]);
+  // useEffect(() => {
+  //   const initPurify = async () => {
+  //     // TO-DO: This and hihjlight.js should be preloaded on other pages
+  //     // so as to speed up loading the first note
+  //     const hljs = await import('highlight.js');
+  //     setHighlight(hljs.default);
+  //   };
+  //
+  //   const options = {
+  //     breaks: true,
+  //     highlight: hilite,
+  //     gfm,
+  //   };
+  //   marked.use(options);
+  //   initPurify();
+  // }, [gfm]);
 
   if (!props.show) {
     return null;
@@ -85,8 +64,9 @@ const Viewer = React.forwardRef((props: Props, ref: Ref<HTMLDivElement>) => {
         ref={ref}
         {...onScrollObj}
         onDoubleClick={props.onDoubleClick}
-        dangerouslySetInnerHTML={{ __html: mdContent }}
-      />
+      >
+        {mdContent}
+      </div>
       {isEditorOpen && (
         <CloseButton
           onClick={onClose}
