@@ -5,7 +5,7 @@ export interface ModalProps {
   isOpen: boolean;
   onOpenChange?: (open: boolean) => void;
   children: ReactNode;
-  title?: string;
+  title: string;
   className?: string;
 }
 
@@ -15,11 +15,9 @@ const Modal = (props: ModalProps) => {
   return (
     <Dialog open={isOpen} onOpenChange={props.onOpenChange}>
       <DialogContent>
-        {title && (
-          <DialogHeader>
-            <DialogTitle>{title}</DialogTitle>
-          </DialogHeader>
-        )}
+        <DialogHeader>
+          <DialogTitle>{title}</DialogTitle>
+        </DialogHeader>
         {children}
       </DialogContent>
     </Dialog>

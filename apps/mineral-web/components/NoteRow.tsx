@@ -1,6 +1,6 @@
 import FloatingActions from 'components/FloatingActions';
 import { Note } from 'types/Note';
-import ListItemDate from 'components/ListItemDate';
+import NoteRowDate from 'components/NoteRowDate';
 import ColorBall from 'components/ColorBall';
 import Link from 'next/link';
 import { binNote, unbinNote } from 'hooks/useNotesStore';
@@ -11,7 +11,7 @@ interface Props {
   note: Note;
 }
 
-const ListItem = (props: Props) => {
+const NoteRow = (props: Props) => {
   const { note } = props;
   const { id: noteId, deletedAt, title, text } = note;
 
@@ -45,7 +45,7 @@ const ListItem = (props: Props) => {
         >
           {renderedTitle}
         </div>
-        <ListItemDate date={note.updatedAt} />
+        <NoteRowDate date={note.updatedAt} />
       </div>
       <FloatingActions>
         <ActionIcon
@@ -57,4 +57,4 @@ const ListItem = (props: Props) => {
   );
 };
 
-export default ListItem;
+export default NoteRow;

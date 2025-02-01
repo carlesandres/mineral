@@ -15,7 +15,7 @@ const BinMenu = () => {
   const [showConfirm, setShowConfirm] = useState(false);
   const handleEmptyBin = () => {
     emptyBin();
-    toast('Bin emptied');
+    toast.success('Bin emptied');
     setShowConfirm(false);
   };
 

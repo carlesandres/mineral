@@ -1,10 +1,17 @@
 import React, { useCallback, useState } from 'react';
 import ColorBall from 'components/ColorBall';
 import colors from 'components/colors';
-import { Dialog, DialogTrigger, DialogContent } from './ui/dialog';
+import {
+  Dialog,
+  DialogTrigger,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from './ui/dialog';
 import { updateNote } from 'hooks/useNotesStore';
 import type { Note } from 'types/Note';
 import { Button } from './ui/button';
+import { title } from 'process';
 
 interface ColorSelectorProps {
   selectedColor?: string;
@@ -42,9 +49,12 @@ const ColorSelector = (props: ColorSelectorProps) => {
         </Button>
       </DialogTrigger>
       <DialogContent>
+        <DialogHeader>
+          <DialogTitle>Select a color for your note</DialogTitle>
+        </DialogHeader>
         <div className="p-4">
           <p className="px-4 py-2">
-            A color can help you find your note faster in the list.
+            A color label can help you find your note faster in the list.
           </p>
           <div className="flex w-full flex-wrap justify-start gap-4 overflow-hidden sm:p-4">
             {colorballs}
