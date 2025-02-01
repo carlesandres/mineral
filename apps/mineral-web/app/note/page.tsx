@@ -3,7 +3,7 @@ import { Suspense } from 'react';
 
 const NotePage = () => {
   return (
-    <Suspense fallback={<div>Loading...</div>}>
+    <Suspense>
       <NotePageClient />
     </Suspense>
   );

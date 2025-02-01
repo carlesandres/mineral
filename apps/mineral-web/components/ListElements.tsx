@@ -1,4 +1,4 @@
-import ListItem from 'components/ListItem';
+import NoteRow from 'components/NoteRow';
 import { useState, useEffect } from 'react';
 import { getShownFiles } from 'utils/fileUtils';
 import { sortBy } from 'lodash';
@@ -57,7 +57,7 @@ const ListElements = (props: ListElementProps) => {
   const elsToRenderSorted = sortBy(elsToRender, 'updatedAt').reverse();
 
   const listItems = elsToRenderSorted.map((note) => {
-    return <ListItem key={note.id} note={note} />;
+    return <NoteRow key={note.id} note={note} />;
   });
 
   return (

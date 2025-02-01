@@ -1,7 +1,6 @@
 import { useRef, KeyboardEvent, MouseEventHandler } from 'react';
-const buttonBaseClass = `button !text-white focus-visible:ring-4
-text-sm focus-visible:ring-opacity-50
-w-24 disabled:opacity-50 transition`;
+import { Button } from './ui/button';
+const buttonBaseClass = `min-w-[96px]`;
 
 interface ConfirmButtonsProps {
   onConfirm: MouseEventHandler<HTMLButtonElement>;
@@ -32,27 +31,25 @@ const ConfirmButtons = (props: ConfirmButtonsProps) => {
 
   return (
     <div
-      className="row mt-4 space-x-4 bg-gray-500 p-4 text-center
-      dark:bg-gray-900
-      "
+      className="row mt-4 space-x-4 p-4 text-center"
       onKeyDown={handleKeydown}
     >
-      <button
+      <Button
         disabled={disabled}
         ref={confirmRef}
         className={`${buttonBaseClass} !bg-green-600 hover:!bg-green-700`}
         onClick={props.onConfirm}
       >
         <span>{confirmLabel}</span>
-      </button>
-      <button
+      </Button>
+      <Button
         disabled={disabled}
         ref={cancelRef}
         className={`${buttonBaseClass} !bg-red-600 hover:!bg-red-700`}
         onClick={props.onCancel}
       >
         <span>{cancelLabel}</span>
-      </button>
+      </Button>
     </div>
   );
 };

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import ListItem from 'components/ListItem';
+import NoteRow from 'components/NoteRow';
 import { Note } from 'types/Note';
 import { getShownFiles } from 'utils/fileUtils';
 import { sortBy } from 'lodash';
@@ -42,7 +42,7 @@ const BinView = (props: BiewViewProps) => {
     );
   } else {
     // TO-DO: MIssing disabled prop on ListItem
-    content = shownNotes.map((note) => <ListItem key={note.id} note={note} />);
+    content = shownNotes.map((note) => <NoteRow key={note.id} note={note} />);
   }
 
   return (

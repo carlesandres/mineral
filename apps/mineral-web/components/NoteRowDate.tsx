@@ -1,11 +1,11 @@
 import { useCallback, useEffect, useState } from 'react';
 import { formatDistance } from 'date-fns';
 
-export interface ListItemDateProps {
+export interface NoteRowDateProps {
   date: number | null;
 }
 
-const ListItemDate = (props: ListItemDateProps) => {
+const NoteRowDate = (props: NoteRowDateProps) => {
   const { date } = props;
   const [formattedDate, setFormattedDate] = useState('');
 
@@ -43,4 +43,4 @@ const ListItemDate = (props: ListItemDateProps) => {
   );
 };
 
-export default ListItemDate;
+export default NoteRowDate;
