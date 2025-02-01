@@ -13,14 +13,24 @@ interface ConfirmDialogProps {
 }
 
 const ConfirmDialog = (props: ConfirmDialogProps) => {
+  const {
+    title,
+    onCancel,
+    onConfirm,
+    show,
+    children,
+    confirmLabel = 'Yes',
+    cancelLabel = 'No',
+  } = props;
   return (
-    <Modal
-      onOpenChange={props.onCancel}
-      title={props.title}
-      isOpen={props.show}
-    >
-      <div className="p-4">{props.children}</div>
-      <ConfirmButtons {...props} />
+    <Modal onOpenChange={onCancel} title={title} isOpen={show}>
+      {children}
+      <ConfirmButtons
+        onCancel={onCancel}
+        onConfirm={onConfirm}
+        confirmLabel={confirmLabel}
+        cancelLabel={cancelLabel}
+      />
     </Modal>
   );
 };

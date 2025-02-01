@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 import { produce } from 'immer';
 import { Note } from 'types/Note';
-import { getFullList, saveFile } from '../utils/fileUtils';
+import { getFullList, saveFile, wipeOutDeleted } from '../utils/fileUtils';
 
 interface StoreState {
   initialized: boolean;
@@ -64,7 +64,27 @@ export const deleteNote = (noteId: string) =>
     return newState;
   });
 
+export const emptyBin = () => {
+  useNotesStore.setState((state) => {
+    const newState = produce(state, (draftState) => {
+      const notes = Object.values(draftState.notes);
+      wipeOutDeleted(notes);
+      notes.forEach((note) => {
+        if (note.deletedAt) {
+          delete draftState.notes[note.id];
+        }
+      });
+    });
+    return newState;
+  });
+};
+
 export const getNotes = () => Object.values(useNotesStore.getState().notes);
+
+export const getDeletedNotes = () =>
+  Object.values(useNotesStore.getState().notes).filter(
+    (note) => note.deletedAt,
+  );
 
 export const getNoteById = (noteId: string) =>
   useNotesStore.getState().notes[noteId];

@@ -12,17 +12,14 @@ export interface ModalProps {
 const Modal = (props: ModalProps) => {
   const { isOpen, children, title } = props;
 
-  const renderedTitle = title ? (
-    <DialogHeader>
-      <DialogTitle>{title}</DialogTitle>
-    </DialogHeader>
-  ) : null;
-
-  // TO-DO: It should not be necessary to set bg-white here.
   return (
     <Dialog open={isOpen} onOpenChange={props.onOpenChange}>
-      <DialogContent className="bg-white">
-        {renderedTitle}
+      <DialogContent>
+        {title && (
+          <DialogHeader>
+            <DialogTitle>{title}</DialogTitle>
+          </DialogHeader>
+        )}
         {children}
       </DialogContent>
     </Dialog>

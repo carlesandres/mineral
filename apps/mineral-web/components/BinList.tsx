@@ -1,14 +1,15 @@
 'use client';
 
 import BinView from 'components/BinView';
-import EmptyBin from 'components/EmptyBin';
+import EmptyBinView from 'components/EmptyBinView';
 import ListHeader from 'components/filelist/ListHeader';
 import React, { ChangeEvent, useCallback, useState } from 'react';
-import useNotesStore, { getNotes } from 'hooks/useNotesStore';
+import useNotesStore, { getDeletedNotes } from 'hooks/useNotesStore';
+import BinMenu from './bin-menu';
 
 const BinList = () => {
   const { initialized } = useNotesStore((state) => state);
-  const notes = getNotes();
+  const notes = getDeletedNotes();
   const [searchTerm, setSearchterm] = useState('');
 
   const onSearch = useCallback((event: ChangeEvent<HTMLInputElement>) => {
@@ -23,7 +24,7 @@ const BinList = () => {
   }
 
   if (!notes?.length) {
-    return <EmptyBin />;
+    return <EmptyBinView />;
   }
 
   return (
@@ -36,6 +37,9 @@ const BinList = () => {
             onClear={onClear}
             placeHolder="Search Bin"
           />
+          <div className="absolute right-0 top-0">
+            <BinMenu />
+          </div>
         </div>
         <BinView key="bin" searchTerm={searchTerm} notes={notes} />
       </div>

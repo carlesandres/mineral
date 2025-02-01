@@ -1,8 +1,7 @@
 import React from 'react';
-import Link from 'next/link';
 import GoToDashboardButton from './GoToDashboardButton';
 
-const EmptyBin = () => (
+const EmptyBinView = () => (
   <div className="empty-list mt-16 w-full text-center text-base sm:mt-32">
     <p className="mb-4">Your bin is empty.</p>
     <p className="my-2 flex justify-center">
@@ -11,4 +10,4 @@ const EmptyBin = () => (
   </div>
 );
 
-export default EmptyBin;
+export default EmptyBinView;

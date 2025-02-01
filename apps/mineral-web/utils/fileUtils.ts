@@ -23,7 +23,7 @@ const noteSchema = z.object({
     editor: z.boolean(),
     toc: z.boolean(),
   }),
-  showFooter: z.boolean()
+  showFooter: z.boolean(),
 });
 
 function isNote(data: unknown): data is Note {
@@ -189,12 +189,13 @@ const stringifyFiles = (files: Note[]) => {
   };
 };
 
-const wipeOutFile = (fileId: Note['id']) => localforage.removeItem(fileId);
+const wipeOutNote = (noteId: Note['id']) => localforage.removeItem(noteId);
 
-export const wipeOutDeleted = (files: Note[]) => {
+export const wipeOutDeleted = (notes: Note[]) => {
   try {
-    const filePromises = files.map((file) => wipeOutFile(file.id));
-    const wholePromise = Promise.all(filePromises);
+    const notesInBin = notes.filter((note) => note.deletedAt);
+    const notePromises = notesInBin.map((note) => wipeOutNote(note.id));
+    const wholePromise = Promise.all(notePromises);
     return wholePromise;
   } catch (error) {
     Promise.reject(error);
