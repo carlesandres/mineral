@@ -15,6 +15,7 @@ import { useRoutingHelpers } from 'hooks/use-routing-helpers';
 import useDeleteNote from 'hooks/useDeleteNote';
 import { Expand, Moon, PlusCircle, Trash } from 'lucide-react';
 import { useTheme } from 'next-themes';
+import { usePathname } from 'next/navigation';
 
 import { useCallback, useEffect, useState } from 'react';
 
@@ -26,6 +27,9 @@ export default function CommandPalette() {
   const noteId = useGetNoteid();
   const binNote = useDeleteNote(noteId, null);
   const toggleNoteWidth = useToggleNoteWidth(noteId);
+  const pathname = usePathname();
+
+  const isBin = pathname === '/bin';
 
   const handleToggleTheme = useCallback(() => {
     setTheme(theme === 'dark' ? 'light' : 'dark');
@@ -95,6 +99,14 @@ export default function CommandPalette() {
             <CommandItem onSelect={handleAndClose(toggleNoteWidth)}>
               <Expand />
               <span>Toggle Width</span>
+            </CommandItem>
+          </CommandGroup>
+        )}
+        {isBin && (
+          <CommandGroup heading="Note actions">
+            <CommandItem onSelect={handleAndClose(binNote)}>
+              <Trash />
+              <span>Empty bin</span>
             </CommandItem>
           </CommandGroup>
         )}

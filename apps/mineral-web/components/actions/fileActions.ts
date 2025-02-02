@@ -19,33 +19,6 @@ export const dismissConfirmationModal = () => ({
 export const showColorPicker = () => ({ type: SHOW_COLOR_PICKER });
 export const hideColorPicker = () => ({ type: HIDE_COLOR_PICKER });
 
-export const doSaveCurrentFile = () => {
-  const saving = (dispatch, getState) => {
-    // TODO: This 'thunk' involves a break in
-    // the fileArea and fileList separation of concerns
-    // That-s why a new 'storage' reducer needs
-    // to be created to handle storage operations
-    const file = getState().currentFile.file;
-
-    dispatch({ type: SAVE_CURRENT_FILE });
-
-    if (typeof file.text === 'undefined') {
-      log.log('Problem saving file');
-    }
-
-    saveFile(file).then((savedFile) => {
-      setTimeout(() => {
-        dispatch({
-          type: CURRENT_FILE_SAVED,
-          file: savedFile,
-        });
-      }, 1000);
-    });
-  };
-
-  return _.throttle(saving, 3000);
-};
-
 // TO-DO: Re-enable auto-save
 // const throttledSaveFile = _.throttle(doSaveCurrentFile, 3000);
 

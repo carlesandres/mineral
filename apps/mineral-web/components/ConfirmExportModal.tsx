@@ -1,8 +1,11 @@
-import { useCallback, useState, ChangeEvent } from 'react';
+import { useCallback, useState, ChangeEvent, useEffect } from 'react';
 import ConfirmDialog from 'components/ConfirmDialog';
 import type { Note } from 'types/Note';
-import TextInput from 'components/TextInput';
 import { toast } from 'sonner';
+import { Input } from './ui/input';
+import { downloadFile } from '@/utils/fileUtils';
+import { Checkbox } from './ui/checkbox';
+import { Label } from './ui/label';
 
 interface Props {
   show: boolean;
@@ -10,23 +13,36 @@ interface Props {
   note: Note;
 }
 
-const inputStyle = `border-b bg-transparent flex-1
-p-2 hover:border-gray-500 cursor-pointer text-base
-dark:text-gray-300 print:border-none print:text-black`;
-
+// const inputStyle = `border-b bg-transparent flex-1
+// p-2 hover:border-gray-500 cursor-pointer text-base
+// dark:text-gray-300 print:border-none print:text-black`;
+//
 const ConfirmExportModal = (props: Props) => {
   const { note, show, onClose } = props;
-  const [fileName, setFileName] = useState(`${note.title}.txt`);
+  const proposedFilename = `${note.title || 'mineral-note'}`;
+  const [fileName, setFileName] = useState('');
+  const [saveAsMd, setSaveAsMd] = useState(false);
+
+  useEffect(() => {
+    setFileName(proposedFilename);
+  }, [proposedFilename]);
 
   const changeFileName = useCallback(
     (event: ChangeEvent<HTMLInputElement>) => setFileName(event.target.value),
     [],
   );
+
+  const handleSaveAsMd = (checked: boolean) => {
+    setSaveAsMd(checked);
+  };
+
   const exportCurrentFile = useCallback(() => {
-    // exportOneFile(note, fileName);
+    const extension = saveAsMd ? 'md' : 'txt';
+    const fullFileName = `${fileName}.${extension}`;
+    downloadFile(fullFileName, note.text);
     toast.error('Export still not available');
     onClose();
-  }, [onClose]);
+  }, [onClose, note, fileName, saveAsMd]);
 
   return (
     <ConfirmDialog
@@ -37,15 +53,25 @@ const ConfirmExportModal = (props: Props) => {
       confirmLabel="Proceed"
       cancelLabel="Cancel"
     >
-      <div className="flex items-center space-x-2 pt-4">
-        <label htmlFor="">File name:</label>
-        <TextInput
-          autoFocus
-          className={inputStyle}
-          placeholder="(default: mineral-backup)"
-          onChange={changeFileName}
-          value={fileName}
-        />
+      <div className="space-y-8 pt-4">
+        <div className="grid gap-2">
+          <Label htmlFor="file-name">File name:</Label>
+          <Input
+            id="file-name"
+            autoFocus
+            placeholder="(default: mineral-backup)"
+            onChange={changeFileName}
+            value={fileName}
+          />
+        </div>
+        <div className="flex gap-2">
+          <Checkbox
+            id="save-as-md"
+            checked={saveAsMd}
+            onCheckedChange={handleSaveAsMd}
+          />
+          <Label htmlFor="save-as-md">Save as .md</Label>
+        </div>
       </div>
     </ConfirmDialog>
   );

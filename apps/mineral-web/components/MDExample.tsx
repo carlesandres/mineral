@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import { marked } from 'marked';
 import { ChevronDown, ChevronUp } from 'lucide-react';
+import { useRemark } from 'react-remark';
 
 const Description = ({ description = '', collapsed = false }) => {
   const [isCollapsed, setCollapsed] = useState(collapsed);
@@ -28,26 +28,20 @@ interface MDExampleProps {
 
 const MDExample = (props: MDExampleProps) => {
   const { text, ...restProps } = props;
-  const [markdown, setMarkdown] = useState('');
+  const [markdown, setMarkdown] = useRemark();
 
   useEffect(() => {
-    const parseMD = async () => {
-      const markdown = await marked.parse(text);
-      setMarkdown(markdown);
-    };
-
-    parseMD();
-  }, [text]);
+    setMarkdown(text);
+  }, [text, setMarkdown]);
 
   return (
     <>
       <Description {...restProps} />
       <div className="flex gap-4 border-b py-4 text-left">
         <div className="raw flex-1 whitespace-pre-wrap font-mono">{text}</div>
-        <div
-          className="markdown viewerarea prose flex-1 p-2 dark:prose-invert"
-          dangerouslySetInnerHTML={{ __html: markdown }}
-        />
+        <div className="markdown viewerarea prose flex-1 p-2 dark:prose-invert">
+          {markdown}
+        </div>
       </div>
     </>
   );

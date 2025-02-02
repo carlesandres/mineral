@@ -1,10 +1,10 @@
 import { ChangeEvent, useCallback, useState } from 'react';
 import ConfirmDialog from 'components/ConfirmDialog';
-import TextInput from 'components/TextInput';
-import Checkbox from 'components/Checkbox';
+import { Checkbox } from './ui/checkbox';
 import useUIZStore from 'hooks/useUIZStore';
 import useNotesStore from 'hooks/useNotesStore';
 import { toast } from 'sonner';
+import { Input } from './ui/input';
 
 const inputStyle = `border-b bg-transparent flex-1
 p-2 hover:border-gray-500 form-control cursor-pointer text-base
@@ -50,7 +50,7 @@ const BackupModal = () => {
       <div className="">
         <div className="flex items-center space-x-2 pt-4">
           <label htmlFor="">File name:</label>
-          <TextInput
+          <Input
             autoFocus
             className={inputStyle}
             placeholder="(default: mineral-backup)"
@@ -58,11 +58,10 @@ const BackupModal = () => {
             value={fileName}
           />
         </div>
-        <Checkbox
-          label="Add date to file name"
-          checked={addDateToFilename}
-          onChange={toggleAddDate}
-        />
+        <label className="cursor-pointer" htmlFor="save-as-md">
+          Save as .md
+        </label>
+        <Checkbox checked={addDateToFilename} onChange={toggleAddDate} />
       </div>
     </ConfirmDialog>
   );
