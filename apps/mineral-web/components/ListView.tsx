@@ -12,7 +12,6 @@ import ListMenu from 'components/ListMenu';
 import ListElements from 'components/ListElements';
 import EmptyList from 'components/EmptyList';
 import DragAndDrop from 'components/DragAndDrop';
-// import useCreateFile from 'hooks/useCreateFile';
 import { useRouter, useSearchParams } from 'next/navigation';
 import useNotesStore, { getNotes } from 'hooks/useNotesStore';
 import { toast } from 'sonner';

@@ -12,6 +12,10 @@ export const extractHeadings: Plugin = function () {
   return function (tree: Node, file: any) {
     const headings: Heading[] = [];
 
+    if (!tree) {
+      return;
+    }
+
     visit(tree, 'heading', (node: any) => {
       const text = node.children
         .filter((child: any) => child.type === 'text')

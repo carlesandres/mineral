@@ -1,30 +1,21 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-interface DynamicHeadingProps {
-  level?: number; // Accept level as a number
-  id: string;
-  children: React.ReactNode; // Define children as a valid React node
+interface HeadingProps {
+  level: number;
+  children: React.ReactNode;
 }
 
-// Type guard to check if level is a valid heading level (1 to 6)
-const isValidHeadingLevel = (level: number): level is 1 | 2 | 3 | 4 | 5 | 6 => {
-  return level >= 1 && level <= 6;
+const Heading: React.FC<HeadingProps> = ({ level, children }) => {
+  switch (level) {
+    case 1:
+      return <h1>{children}</h1>;
+    case 2:
+      return <h2>{children}</h2>;
+    case 3:
+      return <h3>{children}</h3>;
+    default:
+      return <h4>{children}</h4>; // Fallback to h1 if an unexpected level is provided
+  }
 };
 
-const DynamicHeading: React.FC<DynamicHeadingProps> = ({
-  level = 1,
-  id,
-  children,
-}) => {
-  // Validate level using the type guard
-  const validLevel = isValidHeadingLevel(level) ? level : 1; // Default to 1 if invalid
-  const Tag = `h${validLevel}`;
-
-  return (
-    <Component as={Tag} id={id}>
-      {children}
-    </Component>
-  );
-};
-
-export default DynamicHeading;
+export default Heading;

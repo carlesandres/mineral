@@ -1,4 +1,4 @@
-import { MouseEvent } from 'react';
+import { MouseEvent, useEffect, useState } from 'react';
 import { remark } from 'remark';
 import { extractHeadings, Heading } from '@/utils/extract-headings';
 import { Logs } from 'lucide-react';
@@ -15,15 +15,17 @@ interface TOCProps {
 
 const NewToc = (props: TOCProps) => {
   const { text: content = '', onClose, onDoubleClick, show } = props;
+  const [headings, setHeadings] = useState<Heading[]>([]);
 
-  // Process the content and extract headings
-  const processor = remark().use(extractHeadings);
-  const file = processor.processSync(content);
-  const headings: Heading[] = (file.data as any).headings || [];
+  useEffect(() => {
+    // Process the content and extract headings
+    const processor = remark().use(extractHeadings);
+    const file = processor.processSync(content);
+    const headings: Heading[] = (file.data as any).headings || [];
+    setHeadings(headings);
+  }, [content]);
 
   if (!show) return null;
-
-  console.log('headings', headings);
 
   return (
     <div
@@ -36,11 +38,7 @@ const NewToc = (props: TOCProps) => {
       </PanelLabel>
       <div className="toc-content flex flex-col px-8 pt-8">
         {headings.map((heading) => (
-          <DynamicHeading
-            key={heading.id}
-            level={heading.depth}
-            id={heading.id}
-          >
+          <DynamicHeading key={heading.id} level={heading.depth}>
             <a
               key={heading.id}
               href={`#${heading.id}`}

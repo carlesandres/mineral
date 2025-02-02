@@ -5,6 +5,7 @@ import { toast } from 'sonner';
 import { Input } from './ui/input';
 import { downloadFile } from '@/utils/fileUtils';
 import { Checkbox } from './ui/checkbox';
+import { Label } from './ui/label';
 
 interface Props {
   show: boolean;
@@ -52,21 +53,24 @@ const ConfirmExportModal = (props: Props) => {
       confirmLabel="Proceed"
       cancelLabel="Cancel"
     >
-      <div className="space-x-2 pt-4">
-        <div>
-          <label htmlFor="">File name:</label>
+      <div className="space-y-8 pt-4">
+        <div className="grid gap-2">
+          <Label htmlFor="file-name">File name:</Label>
           <Input
+            id="file-name"
             autoFocus
             placeholder="(default: mineral-backup)"
             onChange={changeFileName}
             value={fileName}
           />
         </div>
-        <div>
-          <label className="cursor-pointer" htmlFor="save-as-md">
-            Save as .md
-          </label>
-          <Checkbox checked={saveAsMd} onCheckedChange={handleSaveAsMd} />
+        <div className="flex gap-2">
+          <Checkbox
+            id="save-as-md"
+            checked={saveAsMd}
+            onCheckedChange={handleSaveAsMd}
+          />
+          <Label htmlFor="save-as-md">Save as .md</Label>
         </div>
       </div>
     </ConfirmDialog>
