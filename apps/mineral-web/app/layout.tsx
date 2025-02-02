@@ -44,10 +44,10 @@ async function MyApp({ children }: { children: React.ReactNode }) {
           enableSystem
           disableTransitionOnChange
         >
-          <SidebarProvider className="h-screen print:hidden">
+          <SidebarProvider className="h-screen print:h-auto">
             <div className="relative">
               <AppSidebar />
-              <SidebarTrigger className="absolute -right-8 top-1.5 z-50" />
+              <SidebarTrigger className="absolute -right-8 top-1.5 z-50 print:hidden" />
             </div>
             <main
               className={`page-content min-h-screen w-full overflow-y-auto`}
