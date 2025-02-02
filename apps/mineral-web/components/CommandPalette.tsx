@@ -10,6 +10,7 @@ import {
   CommandShortcut,
 } from '@/components/ui/command';
 import { useToggleNoteWidth } from '@/hooks/use-toggle-note-width';
+import { CommandSeparator } from 'cmdk';
 import { useGetNoteid } from 'hooks/use-get-note-id';
 import { useRoutingHelpers } from 'hooks/use-routing-helpers';
 import useDeleteNote from 'hooks/useDeleteNote';
@@ -18,6 +19,7 @@ import { useTheme } from 'next-themes';
 import { usePathname } from 'next/navigation';
 
 import { useCallback, useEffect, useState } from 'react';
+import BinNoteModal from './BinNoteModal';
 
 export default function CommandPalette() {
   const [open, setOpen] = useState(false);
@@ -28,6 +30,7 @@ export default function CommandPalette() {
   const binNote = useDeleteNote(noteId, null);
   const toggleNoteWidth = useToggleNoteWidth(noteId);
   const pathname = usePathname();
+  const [showEmptyBinModal, setShowEmptyBinModal] = useState(false);
 
   const isBin = pathname === '/bin';
 
@@ -91,24 +94,34 @@ export default function CommandPalette() {
       <CommandList>
         <CommandEmpty>No results found.</CommandEmpty>
         {noteId && (
-          <CommandGroup heading="Note actions">
-            <CommandItem onSelect={handleAndClose(binNote)}>
-              <Trash />
-              <span>Delete note</span>
-            </CommandItem>
-            <CommandItem onSelect={handleAndClose(toggleNoteWidth)}>
-              <Expand />
-              <span>Toggle Width</span>
-            </CommandItem>
-          </CommandGroup>
+          <>
+            <CommandGroup heading="Note actions">
+              <CommandItem onSelect={handleAndClose(binNote)}>
+                <Trash />
+                <span>Delete note</span>
+              </CommandItem>
+              <CommandItem onSelect={handleAndClose(toggleNoteWidth)}>
+                <Expand />
+                <span>Toggle Width</span>
+              </CommandItem>
+            </CommandGroup>
+            <CommandSeparator />
+          </>
         )}
         {isBin && (
-          <CommandGroup heading="Note actions">
-            <CommandItem onSelect={handleAndClose(binNote)}>
-              <Trash />
-              <span>Empty bin</span>
-            </CommandItem>
-          </CommandGroup>
+          <>
+            <CommandGroup heading="Bin actions">
+              <CommandItem onSelect={() => setShowEmptyBinModal(true)}>
+                <Trash />
+                <span>Empty bin</span>
+              </CommandItem>
+            </CommandGroup>
+            <CommandSeparator />
+            <BinNoteModal
+              show={showEmptyBinModal}
+              setShow={setShowEmptyBinModal}
+            />
+          </>
         )}
         <CommandGroup heading="Actions">
           <CommandItem onSelect={handleAndClose(goToNewFile)}>

@@ -40,7 +40,7 @@ const ConfirmExportModal = (props: Props) => {
     const extension = saveAsMd ? 'md' : 'txt';
     const fullFileName = `${fileName}.${extension}`;
     downloadFile(fullFileName, note.text);
-    toast.error('Export still not available');
+    toast.success('Exported note should be downloaded shortly.');
     onClose();
   }, [onClose, note, fileName, saveAsMd]);
 
