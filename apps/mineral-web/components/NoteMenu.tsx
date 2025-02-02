@@ -115,7 +115,7 @@ const NoteMenu = (props: Props) => {
     <>
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <Button variant="ghost" size="icon" className="no-print">
+          <Button variant="ghost" size="icon" className="print:hidden">
             <MoreVertical className="h-4 w-4" />
             <span className="sr-only">Open menu</span>
           </Button>
