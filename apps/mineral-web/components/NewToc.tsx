@@ -29,7 +29,7 @@ const NewToc = (props: TOCProps) => {
 
   return (
     <div
-      className="toc no-print relative h-full w-full min-w-0 flex-1 bg-[var(--viewer-bg-color)]"
+      className="toc relative h-full w-full min-w-0 flex-1 bg-[var(--viewer-bg-color)] print:hidden"
       onDoubleClick={onDoubleClick}
     >
       <CloseButton onClick={onClose} />
