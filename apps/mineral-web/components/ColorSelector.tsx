@@ -11,7 +11,6 @@ import {
 import { updateNote } from 'hooks/useNotesStore';
 import type { Note } from 'types/Note';
 import { Button } from './ui/button';
-import { title } from 'process';
 
 interface ColorSelectorProps {
   selectedColor?: string;
@@ -44,7 +43,7 @@ const ColorSelector = (props: ColorSelectorProps) => {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button variant="ghost" size="icon">
+        <Button variant="ghost" size="icon" className="h-8 w-8">
           <ColorBall color={selectedColor} small />
         </Button>
       </DialogTrigger>
