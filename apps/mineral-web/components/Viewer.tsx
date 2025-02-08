@@ -4,6 +4,7 @@ import PanelLabel from 'components/PanelLabel';
 import CloseButton from './CloseButton';
 import { Eye } from 'lucide-react';
 import { useRemark } from 'react-remark';
+import rehypeSlug from 'rehype-slug';
 
 interface Props {
   text: string;
@@ -18,7 +19,9 @@ const Viewer = React.forwardRef((props: Props, ref: Ref<HTMLDivElement>) => {
   const { show, isEditorOpen, onClose, text } = props;
   // TO-DO: Find out how to deal with dompurify types
   // const { gfm } = useSettingsStore();
-  const [mdContent, setMarkdownSource] = useRemark();
+  const [mdContent, setMarkdownSource] = useRemark({
+    rehypePlugins: [rehypeSlug],
+  });
 
   useEffect(() => {
     if (show) {
