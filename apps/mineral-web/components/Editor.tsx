@@ -8,11 +8,9 @@ import React, {
 } from 'react';
 import { useState } from 'react';
 import useSettingsStore from 'hooks/useSettingsStore';
-import PanelLabel from 'components/PanelLabel';
 import type { Note } from 'types/Note';
 import CloseButton from './CloseButton';
 import { updateNote } from 'hooks/useNotesStore';
-import { Pen } from 'lucide-react';
 
 interface Props extends Note {
   onScrollEditor: UIEventHandler<HTMLTextAreaElement>;
@@ -26,7 +24,6 @@ const Editor = React.forwardRef(
     const { lineHeightRem } = useSettingsStore();
     const [text, setText] = useState('');
     const showEditor = panels?.editor;
-    const isViewerOpen = panels?.viewer;
 
     useEffect(() => {
       setText(props.text || '');
@@ -69,9 +66,6 @@ const Editor = React.forwardRef(
         id="editorarea"
         className="editorarea no-print relative h-full w-full min-w-0 flex-[2] font-mono"
       >
-        <PanelLabel>
-          <Pen size={16} />
-        </PanelLabel>
         <style jsx>{`
           textarea {
             line-height: ${lineHeightRem}em;
@@ -89,12 +83,10 @@ const Editor = React.forwardRef(
           onScroll={onScrollEditor}
           value={text}
         />
-        {isViewerOpen && (
-          <CloseButton
-            onClick={onClose}
-            className="mr-1 text-gray-400 dark:text-gray-500"
-          />
-        )}
+        <CloseButton
+          onClick={onClose}
+          className="mr-1 text-gray-400 dark:text-gray-500"
+        />
       </div>
     );
   },
