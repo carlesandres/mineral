@@ -1,9 +1,9 @@
 import React, { Ref, MouseEvent } from 'react';
-// import useSettingsStore from 'hooks/useSettingsStore';
 import CloseButton from './CloseButton';
 import Markdown from 'react-markdown';
 import rehypeSlug from 'rehype-slug';
 import remarkGfm from 'remark-gfm';
+import useSettingsStore from '@/hooks/useSettingsStore';
 
 interface Props {
   text: string;
@@ -16,9 +16,9 @@ interface Props {
 
 const Viewer = React.forwardRef((props: Props, ref: Ref<HTMLDivElement>) => {
   const { show, onClose, text } = props;
+  const { gfm } = useSettingsStore();
 
-  // TO-DO: Find out how to deal with dompurify types
-  // const { gfm } = useSettingsStore();
+  const remarkPlugins = gfm ? [remarkGfm] : [];
 
   if (!show) {
     return null;
@@ -39,7 +39,7 @@ const Viewer = React.forwardRef((props: Props, ref: Ref<HTMLDivElement>) => {
         {...onScrollObj}
         onDoubleClick={props.onDoubleClick}
       >
-        <Markdown rehypePlugins={[rehypeSlug]} remarkPlugins={[remarkGfm]}>
+        <Markdown rehypePlugins={[rehypeSlug]} remarkPlugins={remarkPlugins}>
           {text}
         </Markdown>
       </div>
