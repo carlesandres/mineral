@@ -5,10 +5,8 @@
   "license": "UNLICENSED",
   "scripts": {
     "test:unit": "jest --no-cache --config jest.unit.config.json",
-    "test:functional": "start-server-and-test build-and-start http://localhost:3005 jest-e2e-ci",
     "test": "yarn test:unit",
-    "jest-e2e-ci": "jest --config jest.e2e.config.json -i --colors",
-    "jest-e2e-dev-watch": "HEADLESS=false jest --config jest.e2e-dev.config.json -i --watch",
+    "e2e": "playwright test",
     "build": "next build",
     "build-static": "BUILD_STATIC=true next build",
     "start": "next start",
@@ -96,6 +94,7 @@
     "zustand": "^4.3.3"
   },
   "devDependencies": {
+    "@playwright/test": "^1.50.1",
     "@tailwindcss/forms": "^0.5.10",
     "@tailwindcss/typography": "0.5.16",
     "@testing-library/react": "16.2.0",

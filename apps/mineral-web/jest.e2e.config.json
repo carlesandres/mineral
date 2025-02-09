@@ -1,6 +1,0 @@
-{
-  "preset": "jest-puppeteer",
-  "testMatch": ["**/__tests_e2e__/**/*.[jt]s?(x)"],
-  "testPathIgnorePatterns": ["/node_modules/", "/utils/"],
-  "setupFilesAfterEnv": ["./setupJestPuppeteer.js"]
-}
