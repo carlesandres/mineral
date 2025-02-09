@@ -10,9 +10,15 @@ import { AppSidebar } from 'components/AppSidebar';
 import { SidebarProvider, SidebarTrigger } from 'components/ui/sidebar';
 
 export const metadata = {
-  title: 'Mineral',
+  title: {
+    template: '%s - Mineral',
+    default: 'Mineral',
+  },
   openGraph: {
-    title: 'Mineral',
+    title: {
+      template: '%s - Mineral',
+      default: 'Mineral',
+    },
     description:
       'A minimalistic editor for your quick notes. Markdown support. Fully private notes.',
   },
