@@ -2,17 +2,14 @@ import FeatureCard from 'components/FeatureCard';
 import FeatureSectionTitle from 'components/FeatureSectionTitle';
 import HeroSection from 'components/HeroSection';
 import FeatureSection from './FeatureSection';
-import { ArrowDown } from 'lucide-react';
 
 const IntroPage = () => {
   return (
-    <div className="pt-8 text-gray-600 sm:my-32 dark:text-gray-200">
+    <div className="pt-8 text-gray-600 dark:text-gray-200 sm:my-32">
       <HeroSection />
-      <div className="container mx-auto text-center" id="features">
+      <div className="container mx-auto mt-16 text-center" id="features">
         <p className="mb-8 inline-flex items-center justify-center gap-2 text-sm">
-          <ArrowDown className="animate-bounce" />
-          <span>Or check out the features</span>
-          <ArrowDown className="animate-bounce" />
+          <span>Or check out the list of features:</span>
         </p>
         <FeatureSectionTitle>Writing</FeatureSectionTitle>
         <FeatureSection>
