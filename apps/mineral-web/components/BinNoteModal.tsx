@@ -15,6 +15,7 @@ const BinNoteModal = (props: BinNoteModalProps) => {
     toast.success('Bin emptied');
     setShow(false);
   };
+
   return (
     <ConfirmDialog
       show={show}

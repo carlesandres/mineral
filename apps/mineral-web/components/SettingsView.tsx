@@ -39,10 +39,12 @@ const SettingsPage = () => {
         <span>Settings</span>
       </h2>
       <Label className="mt-16">General</Label>
+      {/*
       <SettingsCheckbox
         name="emptyBinConfirm"
         label="Ask for confirmation before emptying the bin"
       />
+      */}
       <Checkbox
         label="Dark Mode"
         checked={isDark}
@@ -50,10 +52,6 @@ const SettingsPage = () => {
       />
 
       <Label className="mt-16">Editor</Label>
-      <SettingsCheckbox
-        name="dimBlurredEditor"
-        label="Dim editor text when not in focus"
-      />
       <SettingsCheckbox
         name="footerHiddenByDefault"
         label="Hide editor footer in new notes"
@@ -67,10 +65,6 @@ const SettingsPage = () => {
       />
       */}
       <Label className="mt-16">Markdown</Label>
-      <SettingsCheckbox
-        name="startWithPreview"
-        label="Show Markdown panel on new notes"
-      />
       <SettingsCheckbox name="gfm" label="Use GFM (Github Flavored Markdown)" />
       {/* <BatchFileTools */}
       {/*   delete={this.props.deleteAllEmptyFiles} */}

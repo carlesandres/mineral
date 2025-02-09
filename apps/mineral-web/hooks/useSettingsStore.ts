@@ -8,9 +8,7 @@ const saveSettings = (settings: SettingsStoreState) =>
   localforage.setItem(SETTINGS_KEY, settings);
 
 export interface SettingsStoreState {
-  dimBlurredEditor: boolean;
   emptyBinConfirm: boolean;
-  startWithPreview: boolean;
   // TO-DO: This lineHeight should be more restrictive (maybe a number)
   lineHeightRem: string;
   gfm: true;
@@ -18,9 +16,7 @@ export interface SettingsStoreState {
 }
 
 export const hardCodedDefaults: SettingsStoreState = {
-  dimBlurredEditor: false,
   emptyBinConfirm: true,
-  startWithPreview: false,
   lineHeightRem: '1.75',
   gfm: true,
   footerHiddenByDefault: false,

@@ -1,6 +1,5 @@
 'use client';
 
-import { useMemo } from 'react';
 import { useRouter } from 'next/navigation';
 import { fileUrl } from 'utils/paths';
 import { useEffect } from 'react';
@@ -11,16 +10,11 @@ import useNotesStore, { setNote } from 'hooks/useNotesStore';
 const NewNotePageClient = () => {
   const router = useRouter();
   const { initialized } = useNotesStore();
-  const { startWithPreview, footerHiddenByDefault } = useSettingsStore();
-
-  const panels = useMemo(() => {
-    return startWithPreview
-      ? { viewer: true, editor: true, toc: false }
-      : { viewer: false, editor: true, toc: false };
-  }, [startWithPreview]);
+  const { footerHiddenByDefault } = useSettingsStore();
 
   useEffect(() => {
     const create = () => {
+      const panels = { viewer: false, editor: true, toc: false };
       const note = newFile({ panels, showFooter: !footerHiddenByDefault });
       setNote(note);
       router.replace(fileUrl(note.id));
@@ -29,7 +23,7 @@ const NewNotePageClient = () => {
     if (initialized) {
       create();
     }
-  }, [router, initialized, panels, footerHiddenByDefault]);
+  }, [router, initialized, footerHiddenByDefault]);
 
   return null;
 };
