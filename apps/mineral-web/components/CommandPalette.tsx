@@ -88,6 +88,7 @@ export default function CommandPalette() {
     goToSettings,
     handleToggleTheme,
     goToLast,
+    setOpen,
   ]);
 
   return (
