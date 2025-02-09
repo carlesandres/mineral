@@ -1,3 +1,5 @@
+'use client';
+
 import { useCallback } from 'react';
 import Checkbox from 'components/Checkbox';
 import useSettingsStore, {

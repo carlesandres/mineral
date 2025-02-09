@@ -34,6 +34,9 @@
       ]
     },
     "mineral-web#build-static": {
+      "dependsOn": [
+        "mineral-web#build"
+      ],
       "outputs": [
         "dist/**",
         ".next/**"

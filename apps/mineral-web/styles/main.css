@@ -1,10 +1,4 @@
-/* @import url('themes.css'); */
-/* @import url('variables.css'); */
-/* @import url('editor.css'); */
-/* @import url('slides.css'); */
 @import url('toc.css');
-/* @import url('print.css'); */
-/* @import url('scrollbar.css'); */
 
 body {
   overscroll-behavior-y: none;

@@ -22,6 +22,7 @@ import {
   SidebarMenuItem,
 } from 'components/ui/sidebar';
 import SidebarLink from './SidebarLink';
+import CmdKButton from './CmdKButton';
 
 // Menu items.
 const items = [
@@ -116,6 +117,9 @@ export function AppSidebar() {
               ))}
             </SidebarMenu>
           </SidebarGroupContent>
+        </SidebarGroup>
+        <SidebarGroup>
+          <CmdKButton />
         </SidebarGroup>
       </SidebarContent>
       <SidebarFooter />

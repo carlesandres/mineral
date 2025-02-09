@@ -1,11 +1,9 @@
 'use client';
 
-import useSettingsStore, { setSetting } from 'hooks/useSettingsStore';
 import SettingsCheckbox from 'components/SettingsCheckbox';
 import Label from 'components/Label';
-import Checkbox from './Checkbox';
-import { useTheme } from 'next-themes';
 import { Cog } from 'lucide-react';
+import ThemeSetting from './theme-setting';
 
 // const lineHeights = new Map([
 //   ['Small', '1.5'],
@@ -16,21 +14,8 @@ import { Cog } from 'lucide-react';
 // ]);
 //
 const SettingsPage = () => {
-  const settings = useSettingsStore();
-  const { theme, setTheme } = useTheme();
-
-  const isDark = theme === 'dark';
-
-  // const _findDuplicates = () => {
-  // TO-DO: Need to check if the fileList is initialized first
-  // this.props.findDuplicates(this.props.fileList.files);
-  // };
-
-  // const keyActionMap = { l: goToList };
-  // this.props.addShortcuts(keyActionMap, settingsShortcuts);
-
-  const onChangeLinespacing = (value: any) =>
-    setSetting('lineHeightRem', value);
+  // const onChangeLinespacing = (value: any) =>
+  //   setSetting('lineHeightRem', value);
 
   return (
     <div className="m-16 mx-auto w-full px-8 sm:px-16 md:max-w-3xl">
@@ -39,21 +24,9 @@ const SettingsPage = () => {
         <span>Settings</span>
       </h2>
       <Label className="mt-16">General</Label>
-      <SettingsCheckbox
-        name="emptyBinConfirm"
-        label="Ask for confirmation before emptying the bin"
-      />
-      <Checkbox
-        label="Dark Mode"
-        checked={isDark}
-        onCheckedChange={(checked) => setTheme(checked ? 'dark' : 'light')}
-      />
+      <ThemeSetting />
 
       <Label className="mt-16">Editor</Label>
-      <SettingsCheckbox
-        name="dimBlurredEditor"
-        label="Dim editor text when not in focus"
-      />
       <SettingsCheckbox
         name="footerHiddenByDefault"
         label="Hide editor footer in new notes"
@@ -67,15 +40,7 @@ const SettingsPage = () => {
       />
       */}
       <Label className="mt-16">Markdown</Label>
-      <SettingsCheckbox
-        name="startWithPreview"
-        label="Show Markdown panel on new notes"
-      />
       <SettingsCheckbox name="gfm" label="Use GFM (Github Flavored Markdown)" />
-      {/* <BatchFileTools */}
-      {/*   delete={this.props.deleteAllEmptyFiles} */}
-      {/* /> */}
-      {/* <button onClick={this.findDuplicates}>Dup</button> */}
     </div>
   );
 };

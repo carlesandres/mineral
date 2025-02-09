@@ -1,9 +1,9 @@
 import React, { Ref, MouseEvent } from 'react';
-// import useSettingsStore from 'hooks/useSettingsStore';
 import CloseButton from './CloseButton';
 import Markdown from 'react-markdown';
 import rehypeSlug from 'rehype-slug';
 import remarkGfm from 'remark-gfm';
+import useSettingsStore from '@/hooks/useSettingsStore';
 
 interface Props {
   text: string;
@@ -16,9 +16,9 @@ interface Props {
 
 const Viewer = React.forwardRef((props: Props, ref: Ref<HTMLDivElement>) => {
   const { show, onClose, text } = props;
+  const { gfm } = useSettingsStore();
 
-  // TO-DO: Find out how to deal with dompurify types
-  // const { gfm } = useSettingsStore();
+  const remarkPlugins = gfm ? [remarkGfm] : [];
 
   if (!show) {
     return null;
@@ -31,15 +31,15 @@ const Viewer = React.forwardRef((props: Props, ref: Ref<HTMLDivElement>) => {
   // TO-DO: Padding should be based on CSS variable
   return (
     <div
-      className={`viewerarea panel-padding relative w-full min-w-0 flex-[2] overflow-x-hidden`}
+      className={`viewerarea panel-padding relative w-full min-w-0 flex-[2] overflow-x-hidden !pb-12`}
     >
       <div
-        className={`viewer scrollable prose h-full w-full dark:prose-invert prose-code:before:content-none prose-code:after:content-none print:text-gray-950 print:prose-headings:text-gray-950 print:prose-a:text-gray-950`}
+        className={`viewer prose w-full max-w-none dark:prose-invert prose-code:before:content-none prose-code:after:content-none print:text-gray-950 print:prose-headings:text-gray-950 print:prose-a:text-gray-950`}
         ref={ref}
         {...onScrollObj}
         onDoubleClick={props.onDoubleClick}
       >
-        <Markdown rehypePlugins={[rehypeSlug]} remarkPlugins={[remarkGfm]}>
+        <Markdown rehypePlugins={[rehypeSlug]} remarkPlugins={remarkPlugins}>
           {text}
         </Markdown>
       </div>

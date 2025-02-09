@@ -1,6 +1,6 @@
 import { appName } from 'components/constants';
 import LandingCTA from 'components/LandingCTA';
-import DowloadAppCTA from './DownloadAppCTA';
+// import DowloadAppCTA from './DownloadAppCTA';
 
 const HeroSection = () => {
   return (
@@ -8,7 +8,7 @@ const HeroSection = () => {
       <h1 className="!mb-0 inline-block font-mono !text-4xl font-bold lowercase !text-yellow-500 sm:!text-8xl">
         {appName}
       </h1>
-      <h2 className="pb-16 font-mono !text-lg font-bold text-gray-600 sm:pb-32 dark:text-gray-300">
+      <h2 className="pb-8 font-mono !text-lg font-bold text-gray-600 dark:text-gray-300 sm:pb-32">
         A minimalistic editor for your quick notes
       </h2>
       <LandingCTA />

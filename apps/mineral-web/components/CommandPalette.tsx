@@ -20,9 +20,11 @@ import { usePathname } from 'next/navigation';
 
 import { useCallback, useEffect, useState } from 'react';
 import BinNoteModal from './BinNoteModal';
+import useUIZStore from '@/hooks/useUIZStore';
 
 export default function CommandPalette() {
-  const [open, setOpen] = useState(false);
+  const { cmdPaletteVisible: open, setCmdPaletteVisible: setOpen } =
+    useUIZStore();
   const { goToNewFile, goToList, goToBin, goToSettings, goToLast } =
     useRoutingHelpers();
   const { theme, setTheme } = useTheme();
@@ -86,6 +88,7 @@ export default function CommandPalette() {
     goToSettings,
     handleToggleTheme,
     goToLast,
+    setOpen,
   ]);
 
   return (
