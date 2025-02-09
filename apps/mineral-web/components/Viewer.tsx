@@ -3,7 +3,8 @@ import PanelLabel from 'components/PanelLabel';
 // import useSettingsStore from 'hooks/useSettingsStore';
 import CloseButton from './CloseButton';
 import { Eye } from 'lucide-react';
-import RenderMD from './RenderMD';
+import Markdown from 'react-markdown';
+import rehypeSlug from 'rehype-slug';
 
 interface Props {
   text: string;
@@ -16,6 +17,7 @@ interface Props {
 
 const Viewer = React.forwardRef((props: Props, ref: Ref<HTMLDivElement>) => {
   const { show, isEditorOpen, onClose, text } = props;
+
   // TO-DO: Find out how to deal with dompurify types
   // const { gfm } = useSettingsStore();
 
@@ -41,7 +43,7 @@ const Viewer = React.forwardRef((props: Props, ref: Ref<HTMLDivElement>) => {
         {...onScrollObj}
         onDoubleClick={props.onDoubleClick}
       >
-        <RenderMD markdown={text} />
+        <Markdown rehypePlugins={[rehypeSlug]}>{text}</Markdown>
       </div>
       {isEditorOpen && (
         <CloseButton
