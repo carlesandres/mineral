@@ -44,6 +44,13 @@ async function createWindow() {
     .then(console.log("Zoom Levels Have been Set between 100% and 500%"))
     .catch((err) => console.log(err));
 
+  // Event listener for window focus
+  mainWindow.webContents.on("focus", () => {
+    if (mainWindow.isMinimized()) {
+      mainWindow.restore();
+    }
+  });
+
   mainWindow.webContents.on("zoom-changed", (_event, zoomDirection) => {
     console.log(zoomDirection);
     var currentZoom = mainWindow.webContents.getZoomFactor();
@@ -75,10 +82,6 @@ if (!gotTheLock) {
   app.on(
     "second-instance",
     (event, commandLine, workingDirectory, additionalData) => {
-      // Print out data received from the second instance.
-      console.log("--------------------------------------------------- ");
-      console.log(additionalData);
-
       // Someone tried to run a second instance, we should focus our window.
       if (myWindow) {
         if (myWindow.isMinimized()) myWindow.restore();

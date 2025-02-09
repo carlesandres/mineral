@@ -1,9 +1,9 @@
-import React, { Ref, MouseEvent, useEffect } from 'react';
+import React, { Ref, MouseEvent } from 'react';
 import PanelLabel from 'components/PanelLabel';
 // import useSettingsStore from 'hooks/useSettingsStore';
 import CloseButton from './CloseButton';
 import { Eye } from 'lucide-react';
-import { useRemark } from 'react-remark';
+import RenderMD from './RenderMD';
 
 interface Props {
   text: string;
@@ -18,32 +18,8 @@ const Viewer = React.forwardRef((props: Props, ref: Ref<HTMLDivElement>) => {
   const { show, isEditorOpen, onClose, text } = props;
   // TO-DO: Find out how to deal with dompurify types
   // const { gfm } = useSettingsStore();
-  const [mdContent, setMarkdownSource] = useRemark();
 
-  useEffect(() => {
-    if (show) {
-      setMarkdownSource(text);
-    }
-  }, [text, setMarkdownSource, show]);
-
-  // useEffect(() => {
-  //   const initPurify = async () => {
-  //     // TO-DO: This and hihjlight.js should be preloaded on other pages
-  //     // so as to speed up loading the first note
-  //     const hljs = await import('highlight.js');
-  //     setHighlight(hljs.default);
-  //   };
-  //
-  //   const options = {
-  //     breaks: true,
-  //     highlight: hilite,
-  //     gfm,
-  //   };
-  //   marked.use(options);
-  //   initPurify();
-  // }, [gfm]);
-
-  if (!props.show) {
+  if (!show) {
     return null;
   }
 
@@ -60,12 +36,12 @@ const Viewer = React.forwardRef((props: Props, ref: Ref<HTMLDivElement>) => {
         <Eye size={16} />
       </PanelLabel>
       <div
-        className={`viewer scrollable is-markdown prose h-full w-full dark:prose-invert prose-code:before:content-none prose-code:after:content-none`}
+        className={`viewer scrollable prose h-full w-full dark:prose-invert prose-code:before:content-none prose-code:after:content-none print:text-gray-950 print:prose-headings:text-gray-950 print:prose-a:text-gray-950`}
         ref={ref}
         {...onScrollObj}
         onDoubleClick={props.onDoubleClick}
       >
-        {mdContent}
+        <RenderMD markdown={text} />
       </div>
       {isEditorOpen && (
         <CloseButton

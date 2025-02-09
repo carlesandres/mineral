@@ -13,7 +13,7 @@ const CloseButton = (props: CloseButtonProps) => {
   return (
     <Button
       {...otherProps}
-      className={twMerge(`no-print absolute right-0 top-0`, className)}
+      className={twMerge(`no-print absolute right-1 top-1 h-6 w-6`, className)}
       size="icon"
       variant="ghost"
     >

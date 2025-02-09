@@ -1,4 +1,4 @@
-/** @type {import('tailwindcss').Config} */
+/** type {import('tailwindcss').Config} */
 module.exports = {
   darkMode: ['class'],
   content: [
@@ -17,6 +17,17 @@ module.exports = {
       },
     },
     extend: {
+      typography: {
+        DEFAULT: {
+          css: {
+            '@media print': {
+              '--tw-prose-body': 'inherit',
+              '--tw-prose-headings': 'inherit',
+              '--tw-prose-links': 'inherit',
+            },
+          },
+        },
+      },
       fontFamily: {
         sans: ['var(--font-geist-mono)'],
         mono: ['var(--font-geist-mono)'],
