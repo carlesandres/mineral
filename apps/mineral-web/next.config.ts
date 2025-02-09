@@ -1,4 +1,7 @@
 import { NextConfig } from 'next';
+import VCToolbar from '@vercel/toolbar/plugins/next';
+
+const withVercelToolbar = VCToolbar();
 
 const nextConfig: NextConfig = {
   eslint: {
@@ -10,4 +13,4 @@ if (process.env.BUILD_STATIC === 'true') {
   nextConfig.output = 'export';
 }
 
-export default nextConfig;
+export default withVercelToolbar(nextConfig);
