@@ -2,6 +2,7 @@ import { useCallback } from 'react';
 import { binNote, unbinNote } from 'hooks/useNotesStore';
 import { useRoutingHelpers } from 'hooks/use-routing-helpers';
 import { toast } from 'sonner';
+import NoteDeletedMsg from '@/components/NoteDeletedMsg';
 
 type NoteDeletedAt = number | undefined | null;
 
@@ -9,20 +10,17 @@ const useDeleteNote = (noteId: string | null, deletedAt: NoteDeletedAt) => {
   const { goToList, goToNote } = useRoutingHelpers();
 
   const deleteFn = useCallback(() => {
-    const message = deletedAt ? 'Note unbinned' : 'Note sent to bin';
     if (!noteId) {
       return;
     }
+
     if (deletedAt) {
       unbinNote(noteId);
-    } else {
-      binNote(noteId);
-    }
-
-    toast.success(message);
-    if (deletedAt) {
+      toast.success('Note unbinned');
       goToNote(noteId);
     } else {
+      binNote(noteId);
+      toast.success(<NoteDeletedMsg noteId={noteId} />);
       goToList();
     }
   }, [deletedAt, noteId, goToList, goToNote]);
