@@ -3,6 +3,7 @@ import React, { Ref, MouseEvent } from 'react';
 import CloseButton from './CloseButton';
 import Markdown from 'react-markdown';
 import rehypeSlug from 'rehype-slug';
+import remarkGfm from 'remark-gfm';
 
 interface Props {
   text: string;
@@ -38,7 +39,9 @@ const Viewer = React.forwardRef((props: Props, ref: Ref<HTMLDivElement>) => {
         {...onScrollObj}
         onDoubleClick={props.onDoubleClick}
       >
-        <Markdown rehypePlugins={[rehypeSlug]}>{text}</Markdown>
+        <Markdown rehypePlugins={[rehypeSlug]} remarkPlugins={[remarkGfm]}>
+          {text}
+        </Markdown>
       </div>
       <CloseButton
         onClick={onClose}
