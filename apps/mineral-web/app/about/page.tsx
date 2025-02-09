@@ -2,8 +2,12 @@ import Link from 'next/link';
 
 export const metadata = {
   title: 'About',
-  description:
-    'mnral is built by Carles Andrés. I would love to hear your feedback!',
+  description: 'Mineral is a project by Carles Andrés. Request your features.',
+  openGraph: {
+    title: 'About',
+    description:
+      'Mineral is a project by Carles Andrés. Request your features.',
+  },
 };
 
 const AboutPage = () => {

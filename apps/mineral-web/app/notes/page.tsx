@@ -3,8 +3,11 @@ import { Suspense } from 'react';
 
 export const metadata = {
   title: 'Notes',
-  description:
-    'A list with all your notes. Search by title or title + content.',
+  description: 'A list with all your notes. Search by title or content.',
+  openGraph: {
+    title: 'Notes',
+    description: 'A list with all your notes. Search by title or content.',
+  },
 };
 
 const NotesPage = () => {
