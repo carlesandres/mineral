@@ -1,9 +1,7 @@
 import { MouseEvent, useEffect, useState } from 'react';
 import { remark } from 'remark';
 import { extractHeadings, Heading } from '@/utils/extract-headings';
-import { Logs } from 'lucide-react';
 import CloseButton from './CloseButton';
-import PanelLabel from './PanelLabel';
 import DynamicHeading from './dynamic-heading';
 
 interface TOCProps {
@@ -13,7 +11,7 @@ interface TOCProps {
   onDoubleClick: (event: MouseEvent<HTMLDivElement>) => void;
 }
 
-const NewToc = (props: TOCProps) => {
+const TOC = (props: TOCProps) => {
   const { text: content = '', onClose, onDoubleClick, show } = props;
   const [headings, setHeadings] = useState<Heading[]>([]);
 
@@ -33,9 +31,6 @@ const NewToc = (props: TOCProps) => {
       onDoubleClick={onDoubleClick}
     >
       <CloseButton onClick={onClose} />
-      <PanelLabel>
-        <Logs />
-      </PanelLabel>
       <div className="toc-content flex flex-col px-8 pt-8">
         {headings.map((heading) => (
           <DynamicHeading key={heading.id} level={heading.depth}>
@@ -53,4 +48,4 @@ const NewToc = (props: TOCProps) => {
   );
 };
 
-export default NewToc;
+export default TOC;

@@ -1,9 +1,9 @@
 import React, { Ref, MouseEvent } from 'react';
-import PanelLabel from 'components/PanelLabel';
 // import useSettingsStore from 'hooks/useSettingsStore';
 import CloseButton from './CloseButton';
-import { Eye } from 'lucide-react';
-import RenderMD from './RenderMD';
+import Markdown from 'react-markdown';
+import rehypeSlug from 'rehype-slug';
+import remarkGfm from 'remark-gfm';
 
 interface Props {
   text: string;
@@ -15,7 +15,8 @@ interface Props {
 }
 
 const Viewer = React.forwardRef((props: Props, ref: Ref<HTMLDivElement>) => {
-  const { show, isEditorOpen, onClose, text } = props;
+  const { show, onClose, text } = props;
+
   // TO-DO: Find out how to deal with dompurify types
   // const { gfm } = useSettingsStore();
 
@@ -32,23 +33,20 @@ const Viewer = React.forwardRef((props: Props, ref: Ref<HTMLDivElement>) => {
     <div
       className={`viewerarea panel-padding relative w-full min-w-0 flex-[2] overflow-x-hidden`}
     >
-      <PanelLabel>
-        <Eye size={16} />
-      </PanelLabel>
       <div
         className={`viewer scrollable prose h-full w-full dark:prose-invert prose-code:before:content-none prose-code:after:content-none print:text-gray-950 print:prose-headings:text-gray-950 print:prose-a:text-gray-950`}
         ref={ref}
         {...onScrollObj}
         onDoubleClick={props.onDoubleClick}
       >
-        <RenderMD markdown={text} />
+        <Markdown rehypePlugins={[rehypeSlug]} remarkPlugins={[remarkGfm]}>
+          {text}
+        </Markdown>
       </div>
-      {isEditorOpen && (
-        <CloseButton
-          onClick={onClose}
-          className="mr-1 text-gray-400 dark:text-gray-500"
-        />
-      )}
+      <CloseButton
+        onClick={onClose}
+        className="mr-1 text-gray-400 dark:text-gray-500"
+      />
     </div>
   );
 });
