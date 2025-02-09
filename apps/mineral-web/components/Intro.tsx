@@ -5,12 +5,13 @@ import FeatureSection from './FeatureSection';
 
 const IntroPage = () => {
   return (
-    <div className="pt-8 text-gray-600 dark:text-gray-200 sm:my-32">
+    <div className="py-8 text-gray-600 dark:text-gray-200 sm:my-32">
       <HeroSection />
-      <div className="container mx-auto mt-16 text-center" id="features">
-        <p className="mb-8 inline-flex items-center justify-center gap-2 text-sm">
-          <span>Or check out the list of features:</span>
-        </p>
+      <div
+        className="container mx-auto mt-8 text-center sm:mt-16"
+        id="features"
+      >
+        <h2 className="py-4 text-2xl sm:py-8">Feature list</h2>
         <FeatureSectionTitle>Writing</FeatureSectionTitle>
         <FeatureSection>
           <FeatureCard title="Focus">

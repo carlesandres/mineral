@@ -9,9 +9,7 @@ const FeatureCard = (props: FeatureCardProps) => {
 
   return (
     <div
-      className={`mx-auto flex w-72 flex-col rounded-lg bg-white
-p-6
-shadow-lg dark:bg-gray-800 ${className}`}
+      className={`mx-auto flex w-72 flex-col rounded-lg bg-gray-100 p-6 shadow-lg dark:bg-gray-800 ${className}`}
       {...restProps}
     >
       <h2 className="mb-4 text-xl font-semibold text-yellow-500">{title}</h2>

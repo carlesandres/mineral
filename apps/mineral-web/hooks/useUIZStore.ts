@@ -18,6 +18,8 @@ interface StoreState {
   hideFileImport: () => void;
   mainMenuCollapsed: boolean;
   setMainMenuCollapsed: React.Dispatch<React.SetStateAction<boolean>>;
+  cmdPaletteVisible: boolean;
+  setCmdPaletteVisible: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const useUIZStore = create<StoreState>((set) => ({
@@ -33,6 +35,9 @@ const useUIZStore = create<StoreState>((set) => ({
   mainMenuCollapsed: true,
   setMainMenuCollapsed: (collapsed: boolean) =>
     set(() => ({ mainMenuCollapsed: collapsed })),
+  cmdPaletteVisible: false,
+  setCmdPaletteVisible: (visible: boolean) =>
+    set(() => ({ cmdPaletteVisible: visible })),
 }));
 
 export default useUIZStore;
