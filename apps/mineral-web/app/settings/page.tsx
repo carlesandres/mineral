@@ -1,11 +1,18 @@
+import { openGraph } from '@/utils/shared-metadata';
 import SettingsView from 'components/SettingsView';
+import { Metadata } from 'next';
 
-export const metadata = {
-  title: 'Settings',
-  description: 'Customize your Mineral experience',
+const title = 'Settings';
+
+export const metadata: Metadata = {
+  title,
+  alternates: {
+    canonical: `/settings`,
+  },
   openGraph: {
-    title: 'Settings',
-    description: 'Customize your Mineral experience',
+    ...openGraph,
+    url: '/settings',
+    title,
   },
 };
 
