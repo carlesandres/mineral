@@ -10,6 +10,7 @@ import { AppSidebar } from 'components/AppSidebar';
 import { SidebarProvider, SidebarTrigger } from 'components/ui/sidebar';
 import { VercelToolbar } from '@vercel/toolbar/next';
 import { fullCommonMetadata } from '@/utils/shared-metadata';
+import { Analytics } from '@vercel/analytics/next';
 
 const shouldInjectToolbar = process.env.NODE_ENV === 'development';
 
@@ -52,10 +53,9 @@ async function MyApp({ children }: { children: React.ReactNode }) {
               <Suspense>
                 <CommandPalette />
               </Suspense>
-              <ClientLayout>
-                {children}
-                {shouldInjectToolbar && <VercelToolbar />}
-              </ClientLayout>
+              <ClientLayout>{children}</ClientLayout>
+              {shouldInjectToolbar && <VercelToolbar />}
+              <Analytics />
               <Toaster
                 position="top-center"
                 toastOptions={{
