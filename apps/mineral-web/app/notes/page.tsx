@@ -1,12 +1,22 @@
+import { openGraph } from '@/utils/shared-metadata';
 import ListView from 'components/ListView';
+import { Metadata } from 'next';
 import { Suspense } from 'react';
 
-export const metadata = {
-  title: 'Notes',
-  description: 'A list with all your notes. Search by title or content.',
+const title = 'Notes';
+const description = 'A list with all your notes. Search by title or content.';
+
+export const metadata: Metadata = {
+  title,
+  description,
+  alternates: {
+    canonical: `/notes`,
+  },
   openGraph: {
-    title: 'Notes',
-    description: 'A list with all your notes. Search by title or content.',
+    ...openGraph,
+    url: '/notes',
+    description,
+    title,
   },
 };
 

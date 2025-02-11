@@ -1,8 +1,24 @@
+import { openGraph } from '@/utils/shared-metadata';
 import FeatureSectionTitle from 'components/FeatureSectionTitle';
+import { Metadata } from 'next';
+
+const title = 'Tricks';
+
+export const metadata: Metadata = {
+  title,
+  alternates: {
+    canonical: `/tricks`,
+  },
+  openGraph: {
+    ...openGraph,
+    url: '/tricks',
+    title,
+  },
+};
 
 const FeaturesPage = () => {
   return (
-    <div className="tricks mx-auto pt-8 text-gray-600 sm:my-8 dark:text-gray-300">
+    <div className="tricks mx-auto pt-8 text-gray-600 dark:text-gray-300 sm:my-8">
       <div className="container mx-auto max-w-2xl space-y-4 text-center">
         <h2 className="mb-16 flex items-center justify-center gap-2 text-4xl font-bold">
           <span>Tricks</span>

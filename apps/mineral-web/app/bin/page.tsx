@@ -1,8 +1,19 @@
+import { openGraph } from '@/utils/shared-metadata';
 import BinList from 'components/BinList';
+import { Metadata } from 'next';
 
-export const metadata = {
-  title: 'Bin',
-  description: 'Your discarded notes',
+const title = 'Bin';
+
+export const metadata: Metadata = {
+  title,
+  alternates: {
+    canonical: `/bin`,
+  },
+  openGraph: {
+    ...openGraph,
+    url: '/bin',
+    title,
+  },
 };
 
 const BinPage = () => {

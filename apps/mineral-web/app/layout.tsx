@@ -9,24 +9,11 @@ import { ThemeProvider } from '@/components/theme-provider';
 import { AppSidebar } from 'components/AppSidebar';
 import { SidebarProvider, SidebarTrigger } from 'components/ui/sidebar';
 import { VercelToolbar } from '@vercel/toolbar/next';
+import { fullCommonMetadata } from '@/utils/shared-metadata';
 
 const shouldInjectToolbar = process.env.NODE_ENV === 'development';
-const siteName = 'Mineral';
 
-export const metadata = {
-  title: {
-    template: `%s - ${siteName}`,
-    default: siteName,
-  },
-  openGraph: {
-    title: {
-      template: `%s - ${siteName}`,
-      default: siteName,
-    },
-    description:
-      'A minimalistic editor for your quick notes. Markdown support. Fully private notes.',
-  },
-};
+export const metadata = fullCommonMetadata;
 
 async function MyApp({ children }: { children: React.ReactNode }) {
   return (

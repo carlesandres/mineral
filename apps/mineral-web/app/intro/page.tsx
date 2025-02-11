@@ -1,12 +1,18 @@
+import { openGraph } from '@/utils/shared-metadata';
+import { Metadata } from 'next';
+
 export { default } from 'components/Intro';
 
-export const metadata = {
-  title: 'Features',
-  description:
-    'A minimalistic editor for your quick notes. Markdown support. Fully private notes.',
+const title = 'Features';
+
+export const metadata: Metadata = {
+  title,
+  alternates: {
+    canonical: `/intro`,
+  },
   openGraph: {
-    title: 'Features',
-    description:
-      'A minimalistic editor for your quick notes. Markdown support. Fully private notes.',
+    ...openGraph,
+    url: '/',
+    title,
   },
 };

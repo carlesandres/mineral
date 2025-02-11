@@ -1,12 +1,21 @@
+import { openGraph } from '@/utils/shared-metadata';
+import { Metadata } from 'next';
 import Link from 'next/link';
 
-export const metadata = {
-  title: 'About',
-  description: 'Mineral is a project by Carles Andrés. Request your features.',
+const title = 'About';
+const description = 'Mineral is a project by Carles Andrés.';
+
+export const metadata: Metadata = {
+  title,
+  description,
+  alternates: {
+    canonical: `/about`,
+  },
   openGraph: {
-    title: 'About',
-    description:
-      'Mineral is a project by Carles Andrés. Request your features.',
+    ...openGraph,
+    url: '/about',
+    title,
+    description,
   },
 };
 
