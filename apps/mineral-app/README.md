@@ -1,15 +1,15 @@
 # Installation
 
-yarn
+> **Notice**: [You must use npm!]
 
-# To run in dev mode
+```bash
+npm install
 
-yarn start
+npm start # local dev
 
+npm run make  # create artifacts
 
-# To compile the app
+npm run publish  # create artifacts and upload to S3
+```
 
-yarn dist
-
-The app "artifacts" will appear in the `/out` folder.
 

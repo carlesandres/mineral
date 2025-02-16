@@ -3,12 +3,16 @@
   "productName": "Mineral App",
   "version": "0.0.0",
   "description": "Offline Markdown Notebook",
-  "main": "main.js",
+  "main": "index.js",
   "type": "module",
   "scripts": {
-    "start": "electron .",
-    "build-test": "electron-builder --dir",
-    "build": "electron-builder",
+    "start": "electron-forge start",
+    "package": "electron-forge package",
+    "create-source": "echo 'Cleaning...' && rm -rf source && cp -r ../mineral-web/out source",
+    "clean-artifacts": "echo 'Removing old artifacts...' && rm -rf out && mkdir out",
+    "premake": "pnpm run clean-artifacts && pnpm run create-source",
+    "make": "electron-forge make",
+    "publish": "electron-forge publish",
     "lint": "echo \"No linting configured\""
   },
   "keywords": [],
@@ -17,33 +21,28 @@
     "email": "carles@16protons.com"
   },
   "license": "UNLICENSED",
-  "config": {
-    "forge": {
-      "packagerConfig": {},
-      "makers": [
-        {
-          "name": "@electron-forge/maker-zip",
-          "platforms": [
-            "darwin"
-          ]
-        }
-      ]
-    }
-  },
   "dependencies": {
+    "@electron-forge/plugin-auto-unpack-natives": "^7.6.1",
+    "@electron-forge/plugin-fuses": "^7.6.1",
     "electron-serve": "^2.1.1",
-    "electron-settings": "4.0.4",
+    "electron-settings": "^4.0.4",
     "electron-squirrel-startup": "^1.0.1",
     "minimist": "^1.2.8"
   },
   "devDependencies": {
-    "electron": "34.0.0",
-    "electron-builder": "^25.1.8"
+    "@electron-forge/cli": "^7.6.1",
+    "@electron-forge/maker-deb": "^7.6.1",
+    "@electron-forge/maker-dmg": "^7.6.1",
+    "@electron-forge/maker-rpm": "^7.6.1",
+    "@electron-forge/maker-squirrel": "^7.6.1",
+    "@electron-forge/maker-zip": "^7.6.1",
+    "@electron-forge/publisher-s3": "^7.6.1",
+    "electron": "34.2.0"
   },
   "build": {
     "productName": "Mineral",
     "appId": "com.mnral.app",
-    "copyright": "Copyright © year - Carles Andrés",
+    "copyright": "Copyright © 2025 - Carles Andrés",
     "mac": {
       "category": "productivity"
     },
