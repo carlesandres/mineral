@@ -32,6 +32,8 @@ async function createWindow() {
 
   loadURL(mainWindow);
 
+  // mainWindow.webContents.openDevTools();
+
   // let win = BrowserWindow.getAllWindows()[0];
 
   // If reduced below Minimum value
