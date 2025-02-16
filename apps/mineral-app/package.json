@@ -8,7 +8,9 @@
   "scripts": {
     "start": "electron-forge start",
     "package": "electron-forge package",
-    "premake": "echo 'Cleaning...' && rm -rf source && cp -r ../mineral-web/out source",
+    "create-source": "echo 'Cleaning...' && rm -rf source && cp -r ../mineral-web/out source",
+    "clean-artifacts": "echo 'Removing old artifacts...' && rm -rf out && mkdir out",
+    "premake": "pnpm run clean-artifacts && pnpm run create-source",
     "make": "electron-forge make",
     "publish": "electron-forge publish",
     "lint": "echo \"No linting configured\""

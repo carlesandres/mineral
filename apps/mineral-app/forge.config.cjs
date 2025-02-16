@@ -47,12 +47,9 @@ module.exports = {
       name: "@electron-forge/publisher-s3",
       platforms: ["darwin"],
       config: {
-        bucket: "mineral-app-downloads",
-        folder: "downloads",
+        bucket: "mineral-downloads",
         region: "us-east-1",
         public: true,
-        accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-        secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
       },
     },
   ],
