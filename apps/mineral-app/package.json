@@ -21,20 +21,28 @@
     "email": "carles@16protons.com"
   },
   "license": "UNLICENSED",
-  "dependencies": {},
+  "dependencies": {
+    "@electron-forge/plugin-auto-unpack-natives": "^7.6.1",
+    "@electron-forge/plugin-fuses": "^7.6.1",
+    "electron-serve": "^2.1.1",
+    "electron-settings": "^4.0.4",
+    "electron-squirrel-startup": "^1.0.1",
+    "minimist": "^1.2.8"
+  },
   "devDependencies": {
     "@electron-forge/cli": "^7.6.1",
     "@electron-forge/maker-deb": "^7.6.1",
+    "@electron-forge/maker-dmg": "^7.6.1",
     "@electron-forge/maker-rpm": "^7.6.1",
     "@electron-forge/maker-squirrel": "^7.6.1",
     "@electron-forge/maker-zip": "^7.6.1",
     "@electron-forge/publisher-s3": "^7.6.1",
-    "electron": "34.0.0"
+    "electron": "34.2.0"
   },
   "build": {
     "productName": "Mineral",
     "appId": "com.mnral.app",
-    "copyright": "Copyright © year - Carles Andrés",
+    "copyright": "Copyright © 2025 - Carles Andrés",
     "mac": {
       "category": "productivity"
     },
@@ -48,13 +56,5 @@
       "name": "Markdown File",
       "role": "Editor"
     }
-  ],
-  "peerDependencies": {
-    "minimist": "^1.2.8",
-    "electron-squirrel-startup": "^1.0.1",
-    "@electron-forge/plugin-fuses": "^7.6.1",
-    "@electron-forge/plugin-auto-unpack-natives": "^7.6.1",
-    "electron-serve": "^2.1.1",
-    "electron-settings": "^4.0.4"
-  }
+  ]
 }

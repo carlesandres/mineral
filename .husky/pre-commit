@@ -1,1 +1,1 @@
-pnpm lint
+cd apps/mineral-web && pnpm lint && cd ../..

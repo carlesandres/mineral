@@ -13,7 +13,8 @@
     "build-and-start": "npm-run-all build start",
     "dev": "next dev --turbopack -p 3007",
     "lint": "tsc --noEmit && next lint --fix .",
-    "prettify": "npx prettier --write --loglevel silent ."
+    "prettify": "npx prettier --write --loglevel silent .",
+    "prepare": "husky"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",
@@ -122,6 +123,14 @@
     "stylelint-config-prettier": "^9.0.5",
     "stylelint-config-standard": "37.0.0",
     "stylelint-config-tailwindcss": "^1.0.0",
-    "tailwindcss": "3.4.17"
+    "tailwindcss": "3.4.17",
+    "husky": "9.1.7",
+    "prettier": "^3.4.2",
+    "turbo": "^2.3.3",
+    "typescript": "^5.7.3"
+  },
+  "packageManager": "pnpm@8.15.6",
+  "engines": {
+    "node": ">=18"
   }
 }
