@@ -13,7 +13,8 @@ module.exports = {
       platforms: ["darwin"],
       config: {
         name: "Mineral",
-        icon: "icon.icns",
+        icon: "./icon.icns",
+        format: "ULFO",
       },
     },
   ],
