@@ -5,6 +5,7 @@ module.exports = {
   packagerConfig: {
     name: "Mineral",
     asar: true,
+    icon: "./assets/icon.icns",
   },
   rebuildConfig: {},
   makers: [
@@ -13,8 +14,14 @@ module.exports = {
       platforms: ["darwin"],
       config: {
         name: "Mineral",
-        icon: "./icon.icns",
+        icon: "./assets/icon.icns",
         format: "ULFO",
+        background: "./assets/background.png",
+      },
+      additionalDMGOptions: {
+        "hide-extension": true,
+        filesystem: "HFS+",
+        "window-position": { x: 100, y: 100 },
       },
     },
   ],
