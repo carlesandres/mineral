@@ -19,7 +19,7 @@ importers:
         version: 2.1.1
       electron-settings:
         specifier: ^4.0.4
-        version: 4.0.4(electron@35.0.0)
+        version: 4.0.4(electron@35.0.2)
       electron-squirrel-startup:
         specifier: ^1.0.1
         version: 1.0.1
@@ -49,8 +49,8 @@ importers:
         specifier: ^7.7.0
         version: 7.7.0
       electron:
-        specifier: 35.0.0
-        version: 35.0.0
+        specifier: 35.0.2
+        version: 35.0.2
 
 packages:
 
@@ -930,8 +930,8 @@ packages:
     resolution: {integrity: sha512-bO3y10YikuUwUuDUQRM4KfwNkKhnpVO7IPdbsrejwN9/AABJzzTQ4GeHwyzNSrVO+tEH3/Np255a3sVZpZDjvg==}
     engines: {node: '>=8.0.0'}
 
-  electron@35.0.0:
-    resolution: {integrity: sha512-mwNQNktYLPnUWZVR8iNkfWCBjmM5e2/CmB1rhACwE9ASDbVU7CYPgp/jLUB3bj/LyQsfSuubD82OUite6SN8Uw==}
+  electron@35.0.2:
+    resolution: {integrity: sha512-jo8S4GfBpVIBDGitUrv+Vo/I/ZEEs6IvWprG2KJlxayYIKpufulbQaxDt78cC/79FwFo8MA0JOIwx/b9r5NRag==}
     engines: {node: '>= 12.20.55'}
     hasBin: true
 
@@ -3639,9 +3639,9 @@ snapshots:
 
   electron-serve@2.1.1: {}
 
-  electron-settings@4.0.4(electron@35.0.0):
+  electron-settings@4.0.4(electron@35.0.2):
     dependencies:
-      electron: 35.0.0
+      electron: 35.0.2
       lodash: 4.17.21
       mkdirp: 1.0.4
       write-file-atomic: 3.0.3
@@ -3665,7 +3665,7 @@ snapshots:
       - supports-color
     optional: true
 
-  electron@35.0.0:
+  electron@35.0.2:
     dependencies:
       '@electron/get': 2.0.3
       '@types/node': 22.13.10
