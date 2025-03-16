@@ -1,6 +1,8 @@
 import { appName } from 'components/constants';
 import LandingCTA from 'components/LandingCTA';
-// import DowloadAppCTA from './DownloadAppCTA';
+import DowloadAppCTA from './DownloadAppCTA';
+
+const isStandaloneApp = process.env.BUILD_STATIC;
 
 const HeroSection = () => {
   return (
@@ -12,7 +14,7 @@ const HeroSection = () => {
         A minimalistic editor for your quick notes
       </h2>
       <LandingCTA />
-      {/* <DowloadAppCTA className="mx-auto my-8 flex" /> */}
+      {!isStandaloneApp && <DowloadAppCTA className="mx-auto my-8 flex" />}
     </div>
   );
 };
