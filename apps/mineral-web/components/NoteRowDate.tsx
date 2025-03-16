@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
-import { formatDistance } from 'date-fns';
+import { format, isToday } from 'date-fns';
 
 export interface NoteRowDateProps {
   date: number | null;
@@ -13,9 +13,13 @@ const NoteRowDate = (props: NoteRowDateProps) => {
     if (!date) {
       return;
     }
-    const dateUpdated = formatDistance(new Date(date), new Date(), {
-      addSuffix: true,
-    });
+    // Format like gmail inbox date
+    const dateObj = new Date(date);
+
+    const dateUpdated = isToday(dateObj)
+      ? format(dateObj, 'h:mm a')
+      : format(dateObj, 'MMM d');
+
     setFormattedDate(dateUpdated);
   }, [date]);
 
@@ -38,7 +42,7 @@ const NoteRowDate = (props: NoteRowDateProps) => {
     <div
       className={`hidden shrink-0 text-xs text-gray-400 transition duration-200 group-hover:opacity-0 dark:text-gray-400 sm:block`}
     >
-      Edited {formattedDate}
+      {formattedDate}
     </div>
   );
 };

@@ -21,14 +21,16 @@ import { usePathname } from 'next/navigation';
 import { useCallback, useEffect, useState } from 'react';
 import BinNoteModal from './BinNoteModal';
 import useUIZStore from '@/hooks/useUIZStore';
+import { usePreviousNote } from '@/hooks/use-previous-note';
 
 export default function CommandPalette() {
   const { cmdPaletteVisible: open, setCmdPaletteVisible: setOpen } =
     useUIZStore();
-  const { goToNewFile, goToList, goToBin, goToSettings, goToLast } =
+  const { goToNewFile, goToList, goToBin, goToSettings, goToLast, goToNote } =
     useRoutingHelpers();
   const { theme, setTheme } = useTheme();
   const noteId = useGetNoteid();
+  const previousNote = usePreviousNote();
   const binNote = useDeleteNote(noteId, null);
   const toggleNoteWidth = useToggleNoteWidth(noteId);
   const pathname = usePathname();
@@ -46,6 +48,14 @@ export default function CommandPalette() {
       setOpen(false);
     };
   };
+
+  const handleGoToLast = useCallback(() => {
+    if (noteId && previousNote) {
+      goToNote(previousNote.id);
+      return;
+    }
+    goToLast();
+  }, [noteId, previousNote, goToLast, goToNote]);
 
   useEffect(() => {
     const down = (e: KeyboardEvent) => {
@@ -71,7 +81,7 @@ export default function CommandPalette() {
       }
       if (e.key === 'l' && e.ctrlKey) {
         e.preventDefault();
-        goToLast();
+        handleGoToLast();
         return;
       }
       if (e.key === 'k' && (e.metaKey || e.ctrlKey)) {
@@ -87,7 +97,7 @@ export default function CommandPalette() {
     goToBin,
     goToSettings,
     handleToggleTheme,
-    goToLast,
+    handleGoToLast,
     setOpen,
   ]);
 
