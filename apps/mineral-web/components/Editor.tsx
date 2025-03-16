@@ -83,10 +83,7 @@ const Editor = React.forwardRef(
           onScroll={onScrollEditor}
           value={text}
         />
-        <CloseButton
-          onClick={onClose}
-          className="mr-1 text-gray-400 dark:text-gray-500"
-        />
+        <CloseButton onClick={onClose} className="mr-1" />
       </div>
     );
   },

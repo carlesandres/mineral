@@ -2,7 +2,6 @@ import { useRef, useCallback } from 'react';
 import Panes from 'components/Panes';
 import EditorToolbar from 'components/EditorToolbar';
 import EditorFooter from 'components/EditorFooter';
-import HelpModal from 'components/HelpModal';
 import { Note } from 'types/Note';
 import NoteMenu from './NoteMenu';
 import { updateNote } from 'hooks/useNotesStore';
@@ -18,7 +17,6 @@ interface Props {
 const NoteArea = (props: Props) => {
   const editorarea = useRef<HTMLDivElement | null>(null);
   const { note } = props;
-  const noteId = note?.id;
   const editorRef = useRef<HTMLTextAreaElement | null>(null);
 
   const toggleFooter = useCallback(() => {
