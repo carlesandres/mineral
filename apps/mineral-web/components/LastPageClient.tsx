@@ -1,7 +1,6 @@
 'use client';
 
 import React, { useState } from 'react';
-import { getShownFiles } from 'utils/fileUtils';
 import { useEffect } from 'react';
 import { sortBy } from 'lodash';
 import { useRouter } from 'next/navigation';
@@ -15,8 +14,7 @@ const LastPageClient = () => {
 
   useEffect(() => {
     if (initialized) {
-      const activeNotes = getShownFiles(notes, 'INBOX', '');
-      const sortedNotes = sortBy(activeNotes, 'updatedAt').reverse();
+      const sortedNotes = sortBy(notes, 'updatedAt').reverse();
       if (!notes.length) {
         setError('There are no notes in your list at the moment');
         return;
