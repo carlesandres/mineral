@@ -31,7 +31,7 @@ const NoteRow = (props: Props) => {
 
   const ActionIcon = deletedAt ? Undo2 : Trash;
 
-  const renderedTitle = title || text.slice(0, 40) || '(no content)';
+  const renderedTitle = title || text.slice(0, 150) || '(no content)';
 
   return (
     <Link

@@ -84,9 +84,11 @@ const Panes = (props: Props) => {
 
   const handleViewerDoubleClick = (event: MouseEvent<HTMLDivElement>) => {
     if (event.shiftKey) {
+      console.log('--------------------------------------------------- ');
       event.preventDefault();
       event.stopPropagation();
       switchToWriteOnly();
+      return;
     }
 
     if (event.metaKey) {
