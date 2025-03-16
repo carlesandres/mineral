@@ -7,7 +7,7 @@ const GoToDashboardButton = () => {
     <Button asChild size="lg">
       <Link href="/notes">
         <Clipboard className="text-xl" />
-        <span>Go to your dashboard</span>
+        <span>Open dashboard</span>
       </Link>
     </Button>
   );
