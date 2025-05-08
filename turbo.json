@@ -28,13 +28,15 @@
       "cache": false,
       "persistent": true
     },
-    "mineral-web#build-static": {
-      "dependsOn": [
-        "mineral-web#build"
-      ],
+    "build-static": {
       "outputs": [
         "dist/**",
         ".next/**"
+      ]
+    },
+    "make": {
+      "dependsOn": [
+        "build-static"
       ]
     }
   }

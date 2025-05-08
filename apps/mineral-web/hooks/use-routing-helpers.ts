@@ -33,6 +33,11 @@ export const useRoutingHelpers = () => {
     router.push(notePath);
   };
 
+  const goToSlides = (noteId: string) => {
+    const slidesPath = `/slides?id=${noteId}`;
+    router.push(slidesPath);
+  };
+
   return {
     goToList,
     goToNewFile,
@@ -41,5 +46,6 @@ export const useRoutingHelpers = () => {
     goBack,
     goToNote,
     goToLast,
+    goToSlides,
   };
 };
