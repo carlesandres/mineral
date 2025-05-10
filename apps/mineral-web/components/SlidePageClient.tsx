@@ -55,22 +55,20 @@ const SlidePageClient = () => {
 
   return (
     <div className="relative flex h-screen print:h-auto">
-      <div
-        className={`prose h-full w-full max-w-none overflow-y-auto p-20 dark:prose-invert prose-code:before:content-none prose-code:after:content-none print:text-gray-950 print:prose-headings:text-gray-950 print:prose-a:text-gray-950`}
-      >
-        <Deck>
-          {slideContents.map((content, index) => (
-            <Slide key={index}>
+      <Deck>
+        {slideContents.map((content, index) => (
+          <Slide key={index} className="overflow-y-auto p-20 pb-0">
+            <div className="prose w-full max-w-none overflow-y-scroll dark:prose-invert prose-code:before:content-none prose-code:after:content-none print:text-gray-950 print:prose-headings:text-gray-950 print:prose-a:text-gray-950">
               <Markdown
                 rehypePlugins={[rehypeSlug]}
                 remarkPlugins={remarkPlugins}
               >
                 {content}
               </Markdown>
-            </Slide>
-          ))}
-        </Deck>
-      </div>
+            </div>
+          </Slide>
+        ))}
+      </Deck>
     </div>
   );
 };
