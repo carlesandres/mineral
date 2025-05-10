@@ -11,7 +11,6 @@ import { SidebarProvider, SidebarTrigger } from 'components/ui/sidebar';
 import { VercelToolbar } from '@vercel/toolbar/next';
 import { fullCommonMetadata } from '@/utils/shared-metadata';
 import { Analytics } from '@vercel/analytics/next';
-import { NavigationEvents } from '@/components/NavigationEvents';
 
 const shouldInjectToolbar = process.env.NODE_ENV === 'development';
 
@@ -44,9 +43,6 @@ async function MyApp({ children }: { children: React.ReactNode }) {
           disableTransitionOnChange
         >
           <SidebarProvider className="h-screen print:h-auto">
-            <Suspense>
-              <NavigationEvents />
-            </Suspense>
             <div className="relative">
               <AppSidebar />
               <SidebarTrigger className="absolute -right-8 top-1.5 z-50 print:hidden" />
