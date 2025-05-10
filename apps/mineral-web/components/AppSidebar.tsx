@@ -69,8 +69,8 @@ export function AppSidebar() {
           <SidebarMenuItem>
             <SidebarMenuButton size="lg" asChild>
               <Link href="/intro">
-                <div className="flex aspect-square size-8 items-center justify-center rounded-lg text-gray-500">
-                  <Gem className="size-4" />
+                <div className="mr-1 flex aspect-square items-center justify-center rounded-lg text-gray-500">
+                  <Gem className="size-4 rotate-12 text-yellow-300" />
                 </div>
                 <div className="flex flex-col leading-none">
                   <span className="text-xl font-semibold text-yellow-500">

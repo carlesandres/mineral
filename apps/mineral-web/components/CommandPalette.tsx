@@ -14,7 +14,7 @@ import { CommandSeparator } from 'cmdk';
 import { useGetNoteid } from 'hooks/use-get-note-id';
 import { useRoutingHelpers } from 'hooks/use-routing-helpers';
 import useDeleteNote from 'hooks/useDeleteNote';
-import { Expand, Moon, PlusCircle, Trash } from 'lucide-react';
+import { Expand, Moon, PlusCircle, Presentation, Trash } from 'lucide-react';
 import { useTheme } from 'next-themes';
 import { usePathname } from 'next/navigation';
 
@@ -23,11 +23,20 @@ import BinNoteModal from './BinNoteModal';
 import useUIZStore from '@/hooks/useUIZStore';
 import { usePreviousNote } from '@/hooks/use-previous-note';
 
+const isDev = process.env.NODE_ENV === 'development';
+
 export default function CommandPalette() {
   const { cmdPaletteVisible: open, setCmdPaletteVisible: setOpen } =
     useUIZStore();
-  const { goToNewFile, goToList, goToBin, goToSettings, goToLast, goToNote } =
-    useRoutingHelpers();
+  const {
+    goToNewFile,
+    goToList,
+    goToBin,
+    goToSettings,
+    goToLast,
+    goToNote,
+    goToSlides,
+  } = useRoutingHelpers();
   const { theme, setTheme } = useTheme();
   const noteId = useGetNoteid();
   const previousNote = usePreviousNote();
@@ -48,6 +57,13 @@ export default function CommandPalette() {
       setOpen(false);
     };
   };
+
+  const handleGoToSlides = useCallback(() => {
+    if (noteId) {
+      goToSlides(noteId);
+      return;
+    }
+  }, [noteId, goToSlides]);
 
   const handleGoToLast = useCallback(() => {
     if (noteId && previousNote) {
@@ -117,6 +133,12 @@ export default function CommandPalette() {
                 <Expand />
                 <span>Toggle Width</span>
               </CommandItem>
+              {isDev && (
+                <CommandItem onSelect={handleAndClose(handleGoToSlides)}>
+                  <Presentation />
+                  <span>Show slides</span>
+                </CommandItem>
+              )}
             </CommandGroup>
             <CommandSeparator />
           </>
@@ -150,18 +172,18 @@ export default function CommandPalette() {
         </CommandGroup>
         <CommandGroup heading="Pages">
           <CommandItem onSelect={handleAndClose(goToList)}>
-            <span>Go to Dashboard</span>
+            <span>Dashboard</span>
             <CommandShortcut>^D</CommandShortcut>
           </CommandItem>
           <CommandItem onSelect={handleAndClose(goToBin)}>
-            <span>Go to Bin</span>
+            <span>Bin</span>
           </CommandItem>
           <CommandItem onSelect={handleAndClose(goToSettings)}>
-            <span>Go to Settings</span>
+            <span>Settings</span>
             <CommandShortcut>^S</CommandShortcut>
           </CommandItem>
           <CommandItem onSelect={handleAndClose(goToLast)}>
-            <span>Go to most recent note</span>
+            <span>Most recent note</span>
             <CommandShortcut>^L</CommandShortcut>
           </CommandItem>
         </CommandGroup>

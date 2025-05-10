@@ -8,7 +8,7 @@ import { useSearchParams } from 'next/navigation';
 import { Note } from 'types/Note';
 import { notFound } from 'next/navigation';
 import useNotesStore, { getNotes } from 'hooks/useNotesStore';
-import { useSidebar } from './ui/sidebar';
+// import { useSidebar } from './ui/sidebar';
 
 const NotePageClient = () => {
   const { initialized } = useNotesStore((state) => state);
@@ -16,19 +16,19 @@ const NotePageClient = () => {
   const [fileOpenSomewhereElse, setFileopensomewhereelse] = useState(false);
   const searchParams = useSearchParams();
   const noteId = searchParams?.get('id');
-  const { setOpen } = useSidebar();
-  const [sidebarStateInit, setSidebarStateInit] = useState(false);
-
-  useEffect(() => {
-    setSidebarStateInit(false);
-  }, [noteId]);
-
-  useEffect(() => {
-    if (!sidebarStateInit) {
-      setOpen(false);
-      setSidebarStateInit(true);
-    }
-  }, [sidebarStateInit, setOpen]);
+  // const { setOpen } = useSidebar();
+  // const [sidebarStateInit, setSidebarStateInit] = useState(false);
+  //
+  // useEffect(() => {
+  //   setSidebarStateInit(false);
+  // }, [noteId]);
+  //
+  // useEffect(() => {
+  //   if (!sidebarStateInit) {
+  //     setOpen(false);
+  //     setSidebarStateInit(true);
+  //   }
+  // }, [sidebarStateInit, setOpen]);
 
   if (!noteId) {
     notFound();
