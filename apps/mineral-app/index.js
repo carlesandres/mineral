@@ -2,7 +2,7 @@ import { app, BrowserWindow, shell } from "electron";
 import windowStateKeeper from "./windowStateKeeper.js";
 import serve from "electron-serve";
 
-const loadURL = serve({ directory: "source" });
+const loadURL = serve({ directory: "./source" });
 let myWindow = null;
 
 async function createWindow() {
