@@ -92,13 +92,14 @@ const SlidePageClient = () => {
                 key={index}
                 className="overflow-rounded-lg mb-20 h-full bg-red-500"
               >
-                <Markdown
-                  className="prose w-full max-w-none dark:prose-invert prose-code:before:content-none prose-code:after:content-none print:text-gray-950 print:prose-headings:text-gray-950 print:prose-a:text-gray-950"
-                  rehypePlugins={[rehypeSlug]}
-                  remarkPlugins={remarkPlugins}
-                >
-                  {content}
-                </Markdown>
+                <div className="prose dark:prose-invert prose-code:before:content-none prose-code:after:content-none print:prose-headings:text-gray-950 print:prose-a:text-gray-950 w-full max-w-none print:text-gray-950">
+                  <Markdown
+                    rehypePlugins={[rehypeSlug]}
+                    remarkPlugins={remarkPlugins}
+                  >
+                    {content}
+                  </Markdown>
+                </div>
               </CarouselItem>
             ))}
           </CarouselContent>
