@@ -102,70 +102,71 @@ export default function CommandPalette() {
   ]);
 
   return (
-    <CommandDialog open={open} onOpenChange={setOpen}>
-      <CommandInput placeholder="Type a command or search..." />
-      <CommandList>
-        <CommandEmpty>No results found.</CommandEmpty>
-        {noteId && (
-          <>
-            <CommandGroup heading="Note actions">
-              <CommandItem onSelect={handleAndClose(binNote)}>
-                <Trash />
-                <span>Delete note</span>
-              </CommandItem>
-              <CommandItem onSelect={handleAndClose(toggleNoteWidth)}>
-                <Expand />
-                <span>Toggle Width</span>
-              </CommandItem>
-            </CommandGroup>
-            <CommandSeparator />
-          </>
-        )}
-        {isBin && (
-          <>
-            <CommandGroup heading="Bin actions">
-              <CommandItem onSelect={() => setShowEmptyBinModal(true)}>
-                <Trash />
-                <span>Empty bin</span>
-              </CommandItem>
-            </CommandGroup>
-            <CommandSeparator />
-            <BinNoteModal
-              show={showEmptyBinModal}
-              setShow={setShowEmptyBinModal}
-            />
-          </>
-        )}
-        <CommandGroup heading="Actions">
-          <CommandItem onSelect={handleAndClose(goToNewFile)}>
-            <PlusCircle />
-            <span>New note</span>
-            <CommandShortcut>^N</CommandShortcut>
-          </CommandItem>
-          <CommandItem onSelect={handleToggleTheme}>
-            <Moon />
-            <span>Toggle Theme (light/dark)</span>
-            <CommandShortcut>^T</CommandShortcut>
-          </CommandItem>
-        </CommandGroup>
-        <CommandGroup heading="Pages">
-          <CommandItem onSelect={handleAndClose(goToList)}>
-            <span>Go to Dashboard</span>
-            <CommandShortcut>^D</CommandShortcut>
-          </CommandItem>
-          <CommandItem onSelect={handleAndClose(goToBin)}>
-            <span>Go to Bin</span>
-          </CommandItem>
-          <CommandItem onSelect={handleAndClose(goToSettings)}>
-            <span>Go to Settings</span>
-            <CommandShortcut>^S</CommandShortcut>
-          </CommandItem>
-          <CommandItem onSelect={handleAndClose(goToLast)}>
-            <span>Go to most recent note</span>
-            <CommandShortcut>^L</CommandShortcut>
-          </CommandItem>
-        </CommandGroup>
-      </CommandList>
-    </CommandDialog>
+    <>
+      <CommandDialog open={open} onOpenChange={setOpen}>
+        <CommandInput placeholder="Type a command or search..." />
+        <CommandList>
+          <CommandEmpty>No results found.</CommandEmpty>
+          {noteId && (
+            <>
+              <CommandGroup heading="Note actions">
+                <CommandItem onSelect={handleAndClose(binNote)}>
+                  <Trash />
+                  <span>Delete note</span>
+                </CommandItem>
+                <CommandItem onSelect={handleAndClose(toggleNoteWidth)}>
+                  <Expand />
+                  <span>Toggle Width</span>
+                </CommandItem>
+              </CommandGroup>
+              <CommandSeparator />
+            </>
+          )}
+          {isBin && (
+            <>
+              <CommandGroup heading="Bin actions">
+                <CommandItem onSelect={() => setShowEmptyBinModal(true)}>
+                  <Trash />
+                  <span>Empty bin</span>
+                </CommandItem>
+              </CommandGroup>
+              <CommandSeparator />
+            </>
+          )}
+          <CommandGroup heading="Actions">
+            <CommandItem onSelect={handleAndClose(goToNewFile)}>
+              <PlusCircle />
+              <span>New note</span>
+              <CommandShortcut>^N</CommandShortcut>
+            </CommandItem>
+            <CommandItem onSelect={handleToggleTheme}>
+              <Moon />
+              <span>Toggle Theme (light/dark)</span>
+              <CommandShortcut>^T</CommandShortcut>
+            </CommandItem>
+          </CommandGroup>
+          <CommandGroup heading="Pages">
+            <CommandItem onSelect={handleAndClose(goToList)}>
+              <span>Go to Dashboard</span>
+              <CommandShortcut>^D</CommandShortcut>
+            </CommandItem>
+            <CommandItem onSelect={handleAndClose(goToBin)}>
+              <span>Go to Bin</span>
+            </CommandItem>
+            <CommandItem onSelect={handleAndClose(goToSettings)}>
+              <span>Go to Settings</span>
+              <CommandShortcut>^S</CommandShortcut>
+            </CommandItem>
+            <CommandItem onSelect={handleAndClose(goToLast)}>
+              <span>Go to most recent note</span>
+              <CommandShortcut>^L</CommandShortcut>
+            </CommandItem>
+          </CommandGroup>
+        </CommandList>
+      </CommandDialog>
+      {isBin && (
+        <BinNoteModal show={showEmptyBinModal} setShow={setShowEmptyBinModal} />
+      )}
+    </>
   );
 }
