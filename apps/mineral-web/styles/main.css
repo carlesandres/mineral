@@ -1,4 +1,4 @@
-@import url('toc.css');
+/* @import "./toc.css"; */
 
 body {
   overscroll-behavior-y: none;
@@ -20,18 +20,11 @@ table.shortcuts td:first-child {
 }
 
 @media (max-height: 600px) {
+
   .editor-footer,
   .footer-icon {
     display: none;
   }
-}
-
-.tricks kbd {
-  @apply bg-gray-200 font-semibold dark:bg-gray-700;
-}
-
-.tricks .example {
-  @apply rounded bg-yellow-200 p-4 dark:bg-yellow-800;
 }
 
 .panel-padding {
