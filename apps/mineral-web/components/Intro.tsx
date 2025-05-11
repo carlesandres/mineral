@@ -11,7 +11,6 @@ const IntroPage = () => {
         className="container mx-auto mt-8 text-center sm:mt-16"
         id="features"
       >
-        <h2 className="py-4 text-2xl sm:py-8">Feature list</h2>
         <FeatureSectionTitle>Writing</FeatureSectionTitle>
         <FeatureSection>
           <FeatureCard title="Focus">
