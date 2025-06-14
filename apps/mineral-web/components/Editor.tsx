@@ -11,6 +11,7 @@ import useSettingsStore from 'hooks/useSettingsStore';
 import type { Note } from 'types/Note';
 import CloseButton from './CloseButton';
 import { updateNote } from 'hooks/useNotesStore';
+import { Eye } from 'lucide-react';
 
 interface Props extends Note {
   onScrollEditor: UIEventHandler<HTMLTextAreaElement>;
@@ -60,6 +61,9 @@ const Editor = React.forwardRef(
     // at a parent component
     // TO-DO: Add a class to dim the editor when it's blurred
     // const dimOnBlurClass = dimBlurredEditor ? 'dimmedOnBlur' : '';
+    //
+    const isTwoPanels = panels?.viewer && panels?.editor;
+    const closeButtonIcon = isTwoPanels ? undefined : <Eye />;
 
     return (
       <div
@@ -83,7 +87,9 @@ const Editor = React.forwardRef(
           onScroll={onScrollEditor}
           value={text}
         />
-        <CloseButton onClick={onClose} className="mr-1" />
+        <CloseButton onClick={onClose} className="mr-1">
+          {closeButtonIcon}
+        </CloseButton>
       </div>
     );
   },

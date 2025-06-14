@@ -5,22 +5,23 @@ import { cn } from '@/lib/utils';
 
 interface CloseButtonProps extends HTMLAttributes<HTMLButtonElement> {
   className?: string;
+  children?: React.ReactNode;
 }
 
 const CloseButton = (props: CloseButtonProps) => {
-  const { className = '', ...otherProps } = props;
+  const { className = '', children, ...otherProps } = props;
 
   return (
     <Button
       {...otherProps}
       className={cn(
-        `no-print absolute right-1 top-1 h-6 w-6 text-secondary-foreground`,
+        `no-print absolute top-1 right-1 h-6 w-6 cursor-pointer`,
         className,
       )}
       size="icon"
       variant="ghost"
     >
-      <X size={16} />
+      {children || <X size={16} />}
     </Button>
   );
 };
