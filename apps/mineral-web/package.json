@@ -4,8 +4,7 @@
   "homepage": "https://www.mnral.com",
   "license": "UNLICENSED",
   "scripts": {
-    "test:unit": "jest --no-cache --config jest.unit.config.json",
-    "test": "yarn test:unit",
+    "test": "jest --no-cache --config jest.unit.config.json",
     "e2e": "playwright test",
     "build": "next build",
     "build-static": "BUILD_STATIC=true next build",
@@ -127,9 +126,5 @@
     "turbo": "^2.5.3",
     "tw-animate-css": "^1.3.4",
     "typescript": "^5.8.3"
-  },
-  "packageManager": "pnpm@10.10.0",
-  "engines": {
-    "node": ">=18"
   }
 }
