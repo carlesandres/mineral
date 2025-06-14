@@ -3,14 +3,13 @@
   "productName": "Mineral App",
   "version": "0.1.0",
   "description": "Offline Markdown Notebook",
-  "main": "index.js",
-  "type": "module",
+  "main": "index.cjs",
   "scripts": {
     "start": "electron-forge start",
     "package": "electron-forge package",
     "create-source": "echo 'Cleaning...' && rm -rf source && cp -r ../mineral-web/out source",
     "clean-artifacts": "echo 'Removing old artifacts...' && rm -rf out && mkdir out",
-    "premake": "pnpm run clean-artifacts && pnpm run create-source",
+    "premake": "npm run clean-artifacts && npm run create-source",
     "make": "electron-forge make",
     "publish": "electron-forge publish",
     "lint": "echo \"No linting configured\""
@@ -56,13 +55,5 @@
       "name": "Markdown File",
       "role": "Editor"
     }
-  ],
-  "pnpm": {
-    "onlyBuiltDependencies": [
-      "electron",
-      "electron-winstaller",
-      "fs-xattr",
-      "macos-alias"
-    ]
-  }
+  ]
 }

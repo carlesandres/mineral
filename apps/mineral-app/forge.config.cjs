@@ -1,13 +1,22 @@
 const { FusesPlugin } = require("@electron-forge/plugin-fuses");
 const { FuseV1Options, FuseVersion } = require("@electron/fuses");
+const path = require("path");
 
 module.exports = {
   packagerConfig: {
     name: "Mineral",
     asar: true,
     icon: "./assets/icon.icns",
+    extraResource: [path.resolve(__dirname, "../../node_modules/electron-serve")],
+    ignore: [
+      /node_modules\/(?!electron-serve|electron-settings)/,
+    ],
+    nodeIntegration: true,
+    contextIsolation: false,
   },
-  rebuildConfig: {},
+  rebuildConfig: {
+    onlyModules: ["electron-serve", "electron-settings"],
+  },
   makers: [
     {
       name: "@electron-forge/maker-dmg",
