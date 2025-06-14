@@ -5,19 +5,26 @@ import FeatureSection from './FeatureSection';
 
 const IntroPage = () => {
   return (
-    <div className="py-8 text-gray-600 dark:text-gray-200 sm:my-32">
+    <div className="py-8 text-gray-600 sm:my-32 dark:text-gray-200">
       <HeroSection />
       <div
         className="container mx-auto mt-8 text-center sm:mt-16"
         id="features"
       >
+        <FeatureSectionTitle>Privacy</FeatureSectionTitle>
+        <FeatureSection>
+          <FeatureCard title="Local storage">
+            <p>{`Your notes stay on your computer.`}</p>
+            <p>{`You can copy or export them if you need to share them.`}</p>
+          </FeatureCard>
+          <FeatureCard title="No tracking">
+            {`We don't spy on you. That's why we don't need a cookie banner.`}
+          </FeatureCard>
+        </FeatureSection>
         <FeatureSectionTitle>Writing</FeatureSectionTitle>
         <FeatureSection>
           <FeatureCard title="Focus">
             {`We've designed a minimalistic UI to help you focus on your writing.`}
-          </FeatureCard>
-          <FeatureCard title="Local storage">
-            {`Your notes stay on your computer and you choose when to share them.`}{' '}
           </FeatureCard>
           <FeatureCard title="Auto-saving">
             {`Your changes are automatically saved so that you don't have to remember doing it. `}{' '}
