@@ -12,7 +12,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     ...openGraph,
-    url: '/',
+    url: '/intro',
     title,
   },
 };
