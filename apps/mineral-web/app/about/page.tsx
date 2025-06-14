@@ -22,18 +22,19 @@ export const metadata: Metadata = {
 const AboutPage = () => {
   return (
     <div className="container mx-auto pb-4 text-center">
-      <h1 className="py-16 text-2xl">About mnral</h1>
-      <div className="flex flex-col gap-4">
+      <h1 className="sr-only py-16 text-2xl">About mnral</h1>
+      <div className="mt-12 flex flex-col gap-4 sm:mt-20">
         <p>
-          mnral is a project by{' '}
+          <strong>mnral</strong> is a project by{' '}
           <Link
             href="https://carlesandres.com"
             className="text-yellow-500 underline"
           >
-            Carles Andrés
+            Carles Andres
           </Link>
         </p>
-        <p>{`Reach out to me. I'd love to hear your feedback.`}</p>
+        <p>{`Reach out to me.`}</p>
+        <p>{`I'd love to hear from you!`}</p>
       </div>
     </div>
   );

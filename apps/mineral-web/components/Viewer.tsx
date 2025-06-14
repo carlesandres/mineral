@@ -4,6 +4,7 @@ import Markdown from 'react-markdown';
 import rehypeSlug from 'rehype-slug';
 import remarkGfm from 'remark-gfm';
 import useSettingsStore from '@/hooks/useSettingsStore';
+import { Pencil } from 'lucide-react';
 
 interface Props {
   text: string;
@@ -28,11 +29,13 @@ const Viewer = React.forwardRef((props: Props, ref: Ref<HTMLDivElement>) => {
     ? { onScroll: props.onScrollViewer }
     : null;
 
+  const closeButtonIcon = props.isEditorOpen ? undefined : <Pencil />;
+
   // TO-DO: Padding should be based on CSS variable
   return (
     <div className={`viewerarea relative w-full min-w-0 flex-[2]`}>
       <div
-        className={`viewer panel-padding prose h-full w-full max-w-none overflow-y-auto pb-12 dark:prose-invert prose-code:before:content-none prose-code:after:content-none print:text-gray-950 print:prose-headings:text-gray-950 print:prose-a:text-gray-950`}
+        className={`viewer panel-padding prose dark:prose-invert prose-code:before:content-none prose-code:after:content-none print:prose-headings:text-gray-950 print:prose-a:text-gray-950 h-full w-full max-w-none overflow-y-auto pb-12 print:text-gray-950`}
         ref={ref}
         {...onScrollObj}
         onDoubleClick={props.onDoubleClick}
@@ -41,7 +44,9 @@ const Viewer = React.forwardRef((props: Props, ref: Ref<HTMLDivElement>) => {
           {text}
         </Markdown>
       </div>
-      <CloseButton onClick={onClose} className="mr-1" />
+      <CloseButton onClick={onClose} className="mr-1">
+        {closeButtonIcon}
+      </CloseButton>
     </div>
   );
 });

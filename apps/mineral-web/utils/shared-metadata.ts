@@ -23,7 +23,7 @@ export const openGraph = {
   description,
   images: [
     {
-      url: `${baseUrl}/og-image.png`,
+      url: `${productionUrl}/opengraph-image`,
       width: 1200,
       height: 630,
       alt: siteName,

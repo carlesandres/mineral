@@ -1,8 +1,22 @@
-import { app, BrowserWindow, shell } from "electron";
-import windowStateKeeper from "./windowStateKeeper.js";
-import serve from "electron-serve";
+const { app, BrowserWindow, shell } = require("electron");
+const windowStateKeeper = require("./windowStateKeeper.cjs");
+const path = require("path");
+const { fileURLToPath } = require("url");
+const serve = require("electron-serve");
 
-const loadURL = serve({ directory: "./source" });
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+// In development, use the monorepo node_modules, in production use the bundled one
+const servePath = process.env.NODE_ENV === "development" 
+  ? path.resolve(__dirname, "../../node_modules/electron-serve")
+  : path.resolve(process.resourcesPath, "electron-serve");
+
+const loadURL = serve({ 
+  directory: path.join(__dirname, "source"),
+  scheme: "app"
+});
+
 let myWindow = null;
 
 async function createWindow() {
@@ -15,6 +29,9 @@ async function createWindow() {
     height: mainWindowStateKeeper.height,
     webPreferences: {
       enableRemoteModule: true,
+      nodeIntegration: true,
+      contextIsolation: false,
+      webSecurity: true
     },
   });
 

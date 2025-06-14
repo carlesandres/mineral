@@ -6,7 +6,7 @@ const FeatureSection = (props: FeatureSectionProps) => {
   const { children } = props;
 
   return (
-    <section className="mx-auto inline-grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+    <section className="mx-auto flex justify-center gap-4 sm:flex-row">
       {children}
     </section>
   );
