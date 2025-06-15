@@ -45,11 +45,9 @@ const NoteMenu = (props: Props) => {
     if (!note) {
       return;
     }
-    const { viewer, editor } = note.panels;
-    let nextPanels: PanelsPartial;
-    if (viewer && editor) {
-      nextPanels = { viewer: true, editor: false };
-    } else if (viewer) {
+    const isSideBySide = note.panels.viewer && note.panels.editor;
+    let nextPanels: PanelsPartial = {};
+    if (isSideBySide) {
       nextPanels = { viewer: false, editor: true };
     } else {
       nextPanels = { viewer: true, editor: true };
