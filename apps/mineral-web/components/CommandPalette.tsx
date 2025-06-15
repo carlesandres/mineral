@@ -182,10 +182,6 @@ export default function CommandPalette() {
             <span>Settings</span>
             <CommandShortcut>^S</CommandShortcut>
           </CommandItem>
-          <CommandItem onSelect={handleAndClose(goToLast)}>
-            <span>Most recent note</span>
-            <CommandShortcut>^L</CommandShortcut>
-          </CommandItem>
         </CommandGroup>
       </CommandList>
     </CommandDialog>
