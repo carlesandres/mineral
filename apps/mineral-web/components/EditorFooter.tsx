@@ -25,6 +25,7 @@ const EditorFooter = (props: Props) => {
   const expandButton = showFooter ? null : (
     <Button
       size="icon"
+      variant="ghost"
       className="no-print chart absolute right-0 bottom-0"
       onClick={onToggle}
     >

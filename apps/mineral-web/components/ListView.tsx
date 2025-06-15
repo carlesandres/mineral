@@ -69,7 +69,7 @@ const ListView = () => {
       <DragAndDrop handleDrop={handleDrop} className="mx-auto w-full">
         <div className="list-view mx-auto flex w-full max-w-3xl flex-col p-4 sm:py-16">
           <div
-            className={`relative mb-6 flex items-center justify-end sm:mb-12`}
+            className={`relative mb-6 ml-8 flex items-center justify-end sm:mb-12 sm:ml-0`}
           >
             <ListHeader
               ref={header}

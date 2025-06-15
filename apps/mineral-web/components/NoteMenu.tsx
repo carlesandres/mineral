@@ -6,13 +6,14 @@ import useDeleteNote from 'hooks/useDeleteNote';
 import { getNotes, updateNote } from 'hooks/useNotesStore';
 import {
   MoreVertical,
-  Maximize2,
   Copy,
   Trash,
   ListOrdered,
   Printer,
   Download,
   Columns3,
+  Expand,
+  Shrink,
 } from 'lucide-react';
 import {
   DropdownMenu,
@@ -102,9 +103,10 @@ const NoteMenu = (props: Props) => {
   //   });
   // }, [noteId, dispatchList]);
 
-  const fullWidthText = wide ? 'Compress' : 'Expand';
+  const fullWidthText = wide ? 'Easy read' : 'Wide view';
   const toggleTocText = tocVisible ? 'Hide' : 'Show';
   const changeLayoutText = isSideBySide ? 'Single column' : 'Side by side';
+  const ExpandIcon = wide ? Shrink : Expand;
 
   if (!note) {
     return null;
@@ -125,7 +127,7 @@ const NoteMenu = (props: Props) => {
             <span>{changeLayoutText}</span>
           </DropdownMenuItem>
           <DropdownMenuItem onClick={toggleFullWidth}>
-            <Maximize2 className="mr-2 h-4 w-4" />
+            <ExpandIcon className="mr-2" />
             <span>{fullWidthText}</span>
           </DropdownMenuItem>
           <DropdownMenuItem onClick={openConfirmExportModal}>
