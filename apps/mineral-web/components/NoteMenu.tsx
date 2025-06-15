@@ -11,7 +11,7 @@ import {
   ListOrdered,
   Printer,
   Download,
-  Columns3,
+  Columns2,
 } from 'lucide-react';
 import {
   DropdownMenu,
@@ -121,7 +121,7 @@ const NoteMenu = (props: Props) => {
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">
           <DropdownMenuItem onClick={toggleSideBySide}>
-            <Columns3 className="mr-2 h-4 w-4" />
+            <Columns2 className="mr-2 h-4 w-4" />
             <span>{changeLayoutText}</span>
           </DropdownMenuItem>
           <DropdownMenuItem onClick={toggleFullWidth}>
