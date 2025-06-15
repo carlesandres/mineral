@@ -12,8 +12,6 @@ import {
   Printer,
   Download,
   Columns3,
-  Expand,
-  Shrink,
 } from 'lucide-react';
 import {
   DropdownMenu,
@@ -23,6 +21,7 @@ import {
 } from './ui/dropdown-menu';
 import { toast } from 'sonner';
 import { copyToClipboard } from 'utils/copy-to-clipboard';
+import { getWideButton } from '@/utils/actions';
 
 interface Props {
   noteId: string;
@@ -103,10 +102,9 @@ const NoteMenu = (props: Props) => {
   //   });
   // }, [noteId, dispatchList]);
 
-  const fullWidthText = wide ? 'Easy read' : 'Wide view';
   const toggleTocText = tocVisible ? 'Hide' : 'Show';
   const changeLayoutText = isSideBySide ? 'Single column' : 'Side by side';
-  const ExpandIcon = wide ? Shrink : Expand;
+  const { icon: ExpandIcon, text: fullWidthText } = getWideButton(wide);
 
   if (!note) {
     return null;
