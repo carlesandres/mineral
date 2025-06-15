@@ -164,7 +164,7 @@ export default function CommandPalette() {
             <span>New note</span>
             <CommandShortcut>^N</CommandShortcut>
           </CommandItem>
-          <CommandItem onSelect={handleToggleTheme}>
+          <CommandItem onSelect={handleAndClose(handleToggleTheme)}>
             <Moon />
             <span>Toggle Theme (light/dark)</span>
             <CommandShortcut>^T</CommandShortcut>
