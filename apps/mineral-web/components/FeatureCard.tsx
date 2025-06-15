@@ -13,7 +13,7 @@ const FeatureCard = (props: FeatureCardProps) => {
       {...restProps}
     >
       <h2 className="mb-4 text-xl font-semibold text-yellow-500">{title}</h2>
-      {children}
+      <div className="space-y-4">{children}</div>
     </div>
   );
 };

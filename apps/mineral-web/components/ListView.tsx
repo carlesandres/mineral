@@ -67,17 +67,17 @@ const ListView = () => {
   return (
     <>
       <DragAndDrop handleDrop={handleDrop} className="mx-auto w-full">
-        <div className="list-view mx-auto flex w-full max-w-3xl flex-col px-4 pb-16 pt-4 sm:py-16">
-          <div className={`relative mb-12 flex items-center justify-end gap-4`}>
+        <div className="list-view mx-auto flex w-full max-w-3xl flex-col p-4 sm:py-16">
+          <div
+            className={`relative mb-6 flex items-center justify-end sm:mb-12`}
+          >
             <ListHeader
               ref={header}
               searchTerm={searchTerm}
               onChange={onSearch}
               onClear={onClear}
             />
-            <div className="absolute right-0 top-0">
-              <ListMenu />
-            </div>
+            <ListMenu />
           </div>
           <div className="relative">
             <ListElements notes={notes} searchTerm={searchTerm} />

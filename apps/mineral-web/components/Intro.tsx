@@ -15,10 +15,11 @@ const IntroPage = () => {
         <FeatureSection>
           <FeatureCard title="Local storage">
             <p>{`Your notes stay on your computer.`}</p>
-            <p>{`You can copy or export them if you need to share them.`}</p>
+            <p>{`Copy or export them when you are ready to share them.`}</p>
           </FeatureCard>
           <FeatureCard title="No tracking">
-            {`We don't spy on you. That's why we don't need a cookie banner.`}
+            <p>{`mineral doesn't spy on you`}</p>
+            <p>{`That's why it doesn't need a cookie banner.`}</p>
           </FeatureCard>
         </FeatureSection>
         <FeatureSectionTitle>Writing</FeatureSectionTitle>
@@ -41,7 +42,7 @@ const IntroPage = () => {
         <FeatureSectionTitle>Productivity</FeatureSectionTitle>
         <FeatureSection>
           <FeatureCard title="Keyboard shortcuts">
-            {`Use Command + K to open a menu with all available shortcuts`}
+            <p>{`Perform any action with keyboard shortcut.`}</p>
           </FeatureCard>
           <FeatureCard title="Full search">
             {`Search your notes by title or content`}
@@ -52,7 +53,7 @@ const IntroPage = () => {
           </FeatureCard>
               */}
           <FeatureCard title="Color labels">
-            {`Assing different colors to different notes to find them more easily`}
+            {`Assing a color to any note and find it more easily`}
           </FeatureCard>
         </FeatureSection>
         <FeatureSectionTitle>Customisation</FeatureSectionTitle>
@@ -82,20 +83,20 @@ const IntroPage = () => {
           </FeatureCard>
         </FeatureSection>
       </div>
-      <div className="container mx-auto max-w-lg text-center">
-        <FeatureSectionTitle>And more...</FeatureSectionTitle>
-        <ul className="flex flex-col gap-2">
-          <li>Create a new note with a link</li>
-          <li>Visit most recent note from a link</li>
-          {/*
-          <li>Note statistics in the footer</li>
-          <li>Full backup of all notes</li>
-          <li>Export note as text file</li>
-          */}
-        </ul>
-      </div>
     </div>
   );
 };
 
 export default IntroPage;
+//
+// <div className="container mx-auto max-w-lg text-center">
+//   <FeatureSectionTitle>And more...</FeatureSectionTitle>
+//   <ul className="flex flex-col gap-2">
+//     <li>Create a new note with a link</li>
+//     {/*
+//     <li>Note statistics in the footer</li>
+//     <li>Full backup of all notes</li>
+//     <li>Export note as text file</li>
+//     */}
+//   </ul>
+// </div>

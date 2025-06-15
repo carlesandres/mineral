@@ -164,7 +164,7 @@ export default function CommandPalette() {
             <span>New note</span>
             <CommandShortcut>^N</CommandShortcut>
           </CommandItem>
-          <CommandItem onSelect={handleToggleTheme}>
+          <CommandItem onSelect={handleAndClose(handleToggleTheme)}>
             <Moon />
             <span>Toggle Theme (light/dark)</span>
             <CommandShortcut>^T</CommandShortcut>
@@ -181,10 +181,6 @@ export default function CommandPalette() {
           <CommandItem onSelect={handleAndClose(goToSettings)}>
             <span>Settings</span>
             <CommandShortcut>^S</CommandShortcut>
-          </CommandItem>
-          <CommandItem onSelect={handleAndClose(goToLast)}>
-            <span>Most recent note</span>
-            <CommandShortcut>^L</CommandShortcut>
           </CommandItem>
         </CommandGroup>
       </CommandList>

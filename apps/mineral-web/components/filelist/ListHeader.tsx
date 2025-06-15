@@ -1,6 +1,7 @@
 import React, { RefObject } from 'react';
-import Icon from 'components/Icon';
 import { Input } from 'components/ui/input';
+import { Button } from '../ui/button';
+import { X } from 'lucide-react';
 
 interface ListHeaderProps {
   onChange: (event: any) => any;
@@ -33,12 +34,14 @@ const ListHeader = React.forwardRef(
             value={searchTerm}
             onChange={onChange}
           />
-          <div
+          <Button
             onClick={onClear}
-            className={`absolute right-1 top-2 flex h-6 w-6 cursor-pointer items-center justify-center rounded-full hover:text-blue-500 ${clearButtonClass}`}
+            size="icon"
+            variant="ghost"
+            className={`absolute top-0 right-0 flex cursor-pointer ${clearButtonClass}`}
           >
-            <Icon width={12} height={12} viewBox={'0 2 24 24'} icon={'close'} />
-          </div>
+            <X />
+          </Button>
         </div>
       </div>
     );

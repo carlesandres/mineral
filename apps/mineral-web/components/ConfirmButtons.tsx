@@ -31,7 +31,7 @@ const ConfirmButtons = (props: ConfirmButtonsProps) => {
 
   return (
     <div
-      className="row mt-4 space-x-4 p-4 text-center"
+      className="row mt-4 space-x-4 pt-4 text-center"
       onKeyDown={handleKeydown}
     >
       <Button
