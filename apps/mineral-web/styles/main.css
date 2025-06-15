@@ -1,4 +1,4 @@
-/* @import "./toc.css"; */
+@import "./toc.css";
 
 body {
   overscroll-behavior-y: none;
