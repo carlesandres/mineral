@@ -22,6 +22,8 @@ import { useCallback, useEffect, useState } from 'react';
 import BinNoteModal from './BinNoteModal';
 import useUIZStore from '@/hooks/useUIZStore';
 import { usePreviousNote } from '@/hooks/use-previous-note';
+import { getWideButton } from '@/utils/actions';
+import { getNoteById } from '@/hooks/useNotesStore';
 
 const isDev = process.env.NODE_ENV === 'development';
 
@@ -117,6 +119,9 @@ export default function CommandPalette() {
     setOpen,
   ]);
 
+  const note = noteId ? getNoteById(noteId) : null;
+  const { icon: ExpandIcon, text: fullWidthText } = getWideButton(note?.wide);
+
   return (
     <CommandDialog open={open} onOpenChange={setOpen}>
       <CommandInput placeholder="Type a command or search..." />
@@ -130,8 +135,8 @@ export default function CommandPalette() {
                 <span>Delete note</span>
               </CommandItem>
               <CommandItem onSelect={handleAndClose(toggleNoteWidth)}>
-                <Expand />
-                <span>Toggle Width</span>
+                <ExpandIcon />
+                <span>{fullWidthText}</span>
               </CommandItem>
               {isDev && (
                 <CommandItem onSelect={handleAndClose(handleGoToSlides)}>
@@ -172,7 +177,7 @@ export default function CommandPalette() {
         </CommandGroup>
         <CommandGroup heading="Pages">
           <CommandItem onSelect={handleAndClose(goToList)}>
-            <span>Dashboard</span>
+            <span>Notes</span>
             <CommandShortcut>^D</CommandShortcut>
           </CommandItem>
           <CommandItem onSelect={handleAndClose(goToBin)}>

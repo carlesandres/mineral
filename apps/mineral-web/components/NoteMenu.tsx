@@ -6,13 +6,12 @@ import useDeleteNote from 'hooks/useDeleteNote';
 import { getNotes, updateNote } from 'hooks/useNotesStore';
 import {
   MoreVertical,
-  Maximize2,
   Copy,
   Trash,
   ListOrdered,
   Printer,
   Download,
-  Columns3,
+  Columns2,
 } from 'lucide-react';
 import {
   DropdownMenu,
@@ -22,6 +21,7 @@ import {
 } from './ui/dropdown-menu';
 import { toast } from 'sonner';
 import { copyToClipboard } from 'utils/copy-to-clipboard';
+import { getWideButton } from '@/utils/actions';
 
 interface Props {
   noteId: string;
@@ -102,9 +102,9 @@ const NoteMenu = (props: Props) => {
   //   });
   // }, [noteId, dispatchList]);
 
-  const fullWidthText = wide ? 'Compress' : 'Expand';
   const toggleTocText = tocVisible ? 'Hide' : 'Show';
   const changeLayoutText = isSideBySide ? 'Single column' : 'Side by side';
+  const { icon: ExpandIcon, text: fullWidthText } = getWideButton(wide);
 
   if (!note) {
     return null;
@@ -121,11 +121,11 @@ const NoteMenu = (props: Props) => {
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">
           <DropdownMenuItem onClick={toggleSideBySide}>
-            <Columns3 className="mr-2 h-4 w-4" />
+            <Columns2 className="mr-2 h-4 w-4" />
             <span>{changeLayoutText}</span>
           </DropdownMenuItem>
           <DropdownMenuItem onClick={toggleFullWidth}>
-            <Maximize2 className="mr-2 h-4 w-4" />
+            <ExpandIcon className="mr-2" />
             <span>{fullWidthText}</span>
           </DropdownMenuItem>
           <DropdownMenuItem onClick={openConfirmExportModal}>
