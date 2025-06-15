@@ -17,7 +17,7 @@ const NoteDeletedMsg = (props: NoteDeletedMsgProps) => {
   }, [noteId, goToNote]);
 
   return (
-    <div>
+    <div className="flex h-full flex-col items-center justify-center gap-4 text-center">
       <p>Note deleted successfully!</p>
       <Button variant="outline" onClick={handleUndo}>
         Click here to undo

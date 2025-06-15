@@ -40,12 +40,12 @@ const NoteMenu = (props: Props) => {
 
   const openConfirmExportModal = () => setShowConfirmExportModal(true);
   const closeConfirmExportModal = () => setShowConfirmExportModal(false);
+  const isSideBySide = note?.panels.viewer && note.panels.editor;
 
-  const rotatePanels = useCallback(() => {
+  const toggleSideBySide = useCallback(() => {
     if (!note) {
       return;
     }
-    const isSideBySide = note.panels.viewer && note.panels.editor;
     let nextPanels: PanelsPartial = {};
     if (isSideBySide) {
       nextPanels = { viewer: false, editor: true };
@@ -55,7 +55,7 @@ const NoteMenu = (props: Props) => {
 
     const panels = { ...note.panels, ...nextPanels };
     updateNote(note.id, { panels });
-  }, [note]);
+  }, [note, isSideBySide]);
 
   const updatePanels = useCallback(
     (panels: Partial<Panels>) => {
@@ -104,6 +104,7 @@ const NoteMenu = (props: Props) => {
 
   const fullWidthText = wide ? 'Compress' : 'Expand';
   const toggleTocText = tocVisible ? 'Hide' : 'Show';
+  const changeLayoutText = isSideBySide ? 'Single column' : 'Side by side';
 
   if (!note) {
     return null;
@@ -119,9 +120,9 @@ const NoteMenu = (props: Props) => {
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">
-          <DropdownMenuItem onClick={rotatePanels}>
+          <DropdownMenuItem onClick={toggleSideBySide}>
             <Columns3 className="mr-2 h-4 w-4" />
-            <span>Change layout</span>
+            <span>{changeLayoutText}</span>
           </DropdownMenuItem>
           <DropdownMenuItem onClick={toggleFullWidth}>
             <Maximize2 className="mr-2 h-4 w-4" />
