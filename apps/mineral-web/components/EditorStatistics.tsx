@@ -3,16 +3,11 @@ import { formatDate } from 'utils/formatDate';
 
 export interface EditorStatisticsProps {
   text: string;
-  show: boolean;
   createdAt: number;
 }
 
 const EditorStatistics = (props: EditorStatisticsProps) => {
-  const { text, show, createdAt } = props;
-
-  if (!show) {
-    return null;
-  }
+  const { text, createdAt } = props;
 
   const usefulText = text.trim();
 
@@ -27,7 +22,9 @@ const EditorStatistics = (props: EditorStatisticsProps) => {
       <div className="w-[12ch] text-pink-700 dark:text-pink-400">
         {numWords} words
       </div>
-      <div className="text-gray-500">Created: {creationDate}</div>
+      <div className="hidden text-gray-500 sm:block">
+        Created: {creationDate}
+      </div>
     </div>
   );
 };

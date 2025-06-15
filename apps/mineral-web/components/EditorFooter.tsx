@@ -18,20 +18,14 @@ const EditorFooter = (props: Props) => {
     onToggle,
     id: noteId,
     createdAt,
-    panels,
     text,
-    // style = '',
     color = '#111111',
   } = props;
-
-  // const viewerVisible = panels?.viewer ?? false;
-  const editorVisible = panels?.editor ?? false;
 
   const expandButton = showFooter ? null : (
     <Button
       size="icon"
-      variant="ghost"
-      className="no-print chart absolute bottom-0 right-0"
+      className="no-print chart absolute right-0 bottom-0"
       onClick={onToggle}
     >
       <ChevronUp size={16} />
@@ -51,11 +45,7 @@ const EditorFooter = (props: Props) => {
         >
           <div className="flex items-center justify-start gap-2 text-sm text-gray-500">
             <ColorSelector noteId={noteId} selectedColor={color} />
-            <EditorStatistics
-              show={editorVisible}
-              text={text}
-              createdAt={createdAt}
-            />
+            <EditorStatistics text={text} createdAt={createdAt} />
           </div>
           {/*
           <StyleSelector
