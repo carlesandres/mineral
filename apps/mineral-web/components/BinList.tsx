@@ -29,17 +29,15 @@ const BinList = () => {
 
   return (
     <>
-      <div className="list-view mx-auto flex w-full max-w-3xl flex-col px-4 pb-16 pt-4 sm:py-16">
-        <div className="relative mb-12 flex items-center gap-4">
+      <div className="list-view mx-auto flex w-full max-w-3xl flex-col px-4 pt-4 pb-16 sm:py-16">
+        <div className="relative mb-12 flex items-center">
           <ListHeader
             searchTerm={searchTerm}
             onChange={onSearch}
             onClear={onClear}
             placeHolder="Search Bin"
           />
-          <div className="absolute right-0 top-0">
-            <BinMenu />
-          </div>
+          <BinMenu />
         </div>
         <BinView key="bin" searchTerm={searchTerm} notes={notes} />
       </div>

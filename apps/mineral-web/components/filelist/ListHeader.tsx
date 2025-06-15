@@ -1,5 +1,4 @@
 import React, { RefObject } from 'react';
-import Icon from 'components/Icon';
 import { Input } from 'components/ui/input';
 import { Button } from '../ui/button';
 import { X } from 'lucide-react';
