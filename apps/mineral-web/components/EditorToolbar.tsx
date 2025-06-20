@@ -45,7 +45,7 @@ const EditorToolbar = (props: EditorToolbarProps) => {
   // whether the note menu is available or not
   return (
     <div
-      className={`editor-toolbar no-print flex items-center justify-between border-b print:border-none`}
+      className={`editor-toolbar flex items-center justify-between border-b print:hidden print:border-none`}
     >
       <input
         type="text"
@@ -55,7 +55,7 @@ const EditorToolbar = (props: EditorToolbarProps) => {
         placeholder="(untitled)"
         onChange={onChange}
         onKeyDown={handleKeyDown}
-        className={`title focus-bg mx-6 flex-1 overflow-hidden text-ellipsis whitespace-nowrap border-none bg-transparent px-4 py-2 shadow-none ring-0 sm:!text-base ${wideClass}`}
+        className={`title focus-bg mx-6 flex-1 overflow-hidden border-none bg-transparent px-4 py-2 text-ellipsis whitespace-nowrap shadow-none ring-0 sm:!text-base ${wideClass}`}
       />
     </div>
   );

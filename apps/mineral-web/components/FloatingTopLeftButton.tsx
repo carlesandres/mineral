@@ -8,8 +8,7 @@ const FloatingTopLeftButton = (props: Props, ref: Ref<HTMLButtonElement>) => {
   return (
     <RoundBigButton
       ref={ref}
-      className={`no-print fixed top-2 left-2
-          z-20 ${className}`}
+      className={`fixed top-2 left-2 z-20 print:hidden ${className}`}
       {...restProps}
     >
       {children}

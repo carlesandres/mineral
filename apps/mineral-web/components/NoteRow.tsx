@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { binNote, unbinNote } from 'hooks/useNotesStore';
 import { toast } from 'sonner';
 import { Trash, Undo2 } from 'lucide-react';
+import { ActionButton } from './action-button';
 
 interface Props {
   note: Note;
@@ -41,17 +42,16 @@ const NoteRow = (props: Props) => {
       <div className="relative flex w-full items-center justify-start">
         <ColorBall color={note.color} small className="mr-2" />
         <div
-          className={`title mr-4 w-full truncate whitespace-nowrap text-left font-mono ${untitledClass}`}
+          className={`title mr-4 w-full truncate text-left font-mono whitespace-nowrap ${untitledClass}`}
         >
           {renderedTitle}
         </div>
         <NoteRowDate date={note.updatedAt} />
       </div>
       <FloatingActions>
-        <ActionIcon
-          className="h-6 w-6 cursor-pointer rounded-full bg-gray-50 p-1.5 text-gray-800 transition hover:bg-gray-800 hover:text-gray-200 dark:bg-gray-300 dark:text-gray-700 dark:hover:bg-gray-100 dark:hover:text-gray-800"
-          onClick={handleBinNote}
-        />
+        <ActionButton onClick={handleBinNote}>
+          <ActionIcon className="size-3.5" />
+        </ActionButton>
       </FloatingActions>
     </Link>
   );

@@ -26,7 +26,7 @@ const EditorFooter = (props: Props) => {
     <Button
       size="icon"
       variant="ghost"
-      className="no-print chart absolute right-0 bottom-0"
+      className="chart absolute right-0 bottom-0 print:hidden"
       onClick={onToggle}
     >
       <ChevronUp size={16} />

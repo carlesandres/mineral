@@ -68,7 +68,7 @@ const Editor = React.forwardRef(
     return (
       <div
         id="editorarea"
-        className="editorarea no-print relative h-full w-full min-w-0 flex-[2] font-mono"
+        className="editorarea relative h-full w-full min-w-0 flex-[2] font-mono print:hidden"
       >
         <style jsx>{`
           textarea {
@@ -80,7 +80,7 @@ const Editor = React.forwardRef(
           }
         `}</style>
         <textarea
-          className={`editor-content panel-padding focus-bg scrollable no-print h-full w-full resize-none rounded-none border-none bg-transparent`}
+          className={`editor-content panel-padding focus-bg scrollable h-full w-full resize-none rounded-none border-none bg-transparent print:hidden`}
           ref={ref}
           onDoubleClick={props.onDoubleClick}
           onChange={onChange}

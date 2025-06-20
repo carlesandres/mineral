@@ -15,7 +15,7 @@ const CloseButton = (props: CloseButtonProps) => {
     <Button
       {...otherProps}
       className={cn(
-        `no-print absolute top-1 right-1 h-6 w-6 cursor-pointer`,
+        `absolute top-1 right-1 h-6 w-6 cursor-pointer print:hidden`,
         className,
       )}
       size="icon"
