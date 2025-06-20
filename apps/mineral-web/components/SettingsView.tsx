@@ -4,15 +4,8 @@ import SettingsCheckbox from 'components/SettingsCheckbox';
 import Label from 'components/Label';
 import { Cog } from 'lucide-react';
 import ThemeSetting from './theme-setting';
+import { LineHeightSlider } from './LineHeightSlider';
 
-// const lineHeights = new Map([
-//   ['Small', '1.5'],
-//   ['Medium', '1.6'],
-//   ['Normal', '1.75'],
-//   ['Large', '2'],
-//   ['Very large', '2.5'],
-// ]);
-//
 const SettingsPage = () => {
   // const onChangeLinespacing = (value: any) =>
   //   setSetting('lineHeightRem', value);
@@ -20,13 +13,12 @@ const SettingsPage = () => {
   return (
     <div className="m-16 mx-auto w-full px-8 sm:px-16 md:max-w-3xl">
       <h2 className="mb-8 flex items-center gap-2 text-xl font-bold">
-        <Cog />
-        <span>Settings</span>
+        Settings
       </h2>
-      <Label className="mt-16">General</Label>
+      <Label className="mt-8">General</Label>
       <ThemeSetting />
 
-      <Label className="mt-16">Editor</Label>
+      <Label className="mt-8">Editor</Label>
       <SettingsCheckbox
         name="footerHiddenByDefault"
         label="Hide editor footer in new notes"
@@ -39,8 +31,9 @@ const SettingsPage = () => {
         label="Editor line space:"
       />
       */}
-      <Label className="mt-16">Markdown</Label>
+      <Label className="mt-8">Viewer</Label>
       <SettingsCheckbox name="gfm" label="Use GFM (Github Flavored Markdown)" />
+      <LineHeightSlider />
     </div>
   );
 };

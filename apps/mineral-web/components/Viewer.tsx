@@ -6,6 +6,7 @@ import remarkGfm from 'remark-gfm';
 import useSettingsStore from '@/hooks/useSettingsStore';
 import { Pencil } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { lineHeightToTwMap } from './LineHeightSlider';
 
 interface Props {
   text: string;
@@ -18,7 +19,8 @@ interface Props {
 
 const Viewer = React.forwardRef((props: Props, ref: Ref<HTMLDivElement>) => {
   const { show, onClose, text } = props;
-  const { gfm } = useSettingsStore();
+  const { gfm, lineHeightRem } = useSettingsStore();
+  const lineHeightClass = lineHeightToTwMap[lineHeightRem] || 'leading-normal';
 
   const remarkPlugins = gfm ? [remarkGfm] : [];
 
@@ -43,6 +45,7 @@ const Viewer = React.forwardRef((props: Props, ref: Ref<HTMLDivElement>) => {
           {
             'text-gray-400 dark:text-gray-400': isEmpty,
           },
+          lineHeightClass,
         )}
         ref={ref}
         {...onScrollObj}
