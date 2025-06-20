@@ -12,8 +12,7 @@
     "build-and-start": "npm-run-all build start",
     "dev": "next dev --turbopack -p 3007",
     "lint": "tsc --noEmit && next lint --fix .",
-    "prettify": "npx prettier --write --loglevel silent .",
-    "prepare": "husky"
+    "prettify": "npx prettier --write --loglevel silent ."
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.806.0",

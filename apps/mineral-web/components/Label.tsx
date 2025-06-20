@@ -10,7 +10,7 @@ const Label = (props: LabelProps) => {
 
   return (
     <h2
-      className={`text-sm font-semibold uppercase text-gray-400 dark:text-gray-400  ${className}`}
+      className={`text-sm font-semibold text-gray-600 uppercase dark:text-gray-400 ${className}`}
     >
       {props.children}
     </h2>

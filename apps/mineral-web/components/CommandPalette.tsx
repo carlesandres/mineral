@@ -14,7 +14,7 @@ import { CommandSeparator } from 'cmdk';
 import { useGetNoteid } from 'hooks/use-get-note-id';
 import { useRoutingHelpers } from 'hooks/use-routing-helpers';
 import useDeleteNote from 'hooks/useDeleteNote';
-import { Expand, Moon, PlusCircle, Presentation, Trash } from 'lucide-react';
+import { Moon, PlusCircle, Presentation, Trash } from 'lucide-react';
 import { useTheme } from 'next-themes';
 import { usePathname } from 'next/navigation';
 

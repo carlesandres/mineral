@@ -10,14 +10,14 @@ const saveSettings = (settings: SettingsStoreState) =>
 export interface SettingsStoreState {
   emptyBinConfirm: boolean;
   // TO-DO: This lineHeight should be more restrictive (maybe a number)
-  lineHeightRem: string;
+  lineHeightRem: number;
   gfm: true;
   footerHiddenByDefault: boolean;
 }
 
 export const hardCodedDefaults: SettingsStoreState = {
   emptyBinConfirm: true,
-  lineHeightRem: '1.75',
+  lineHeightRem: 1.75,
   gfm: true,
   footerHiddenByDefault: false,
 };
