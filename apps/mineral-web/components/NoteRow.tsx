@@ -3,9 +3,9 @@ import { Note } from 'types/Note';
 import NoteRowDate from 'components/NoteRowDate';
 import ColorBall from 'components/ColorBall';
 import Link from 'next/link';
-import { binNote, unbinNote } from 'hooks/useNotesStore';
+import { binNote, deleteNote, unbinNote } from 'hooks/useNotesStore';
 import { toast } from 'sonner';
-import { Trash, Undo2 } from 'lucide-react';
+import { Trash, Undo2, X } from 'lucide-react';
 import { ActionButton } from './action-button';
 
 interface Props {
@@ -18,19 +18,21 @@ const NoteRow = (props: Props) => {
 
   const untitledClass = title ? '' : 'text-gray-400 dark:text-gray-500';
 
+  const handleUnbinNote = () => {
+    unbinNote(noteId);
+    toast.success('Note unbinned');
+    return;
+  };
+
   const handleBinNote = () => {
-    if (deletedAt) {
-      unbinNote(noteId);
-      toast.success('Note unbinned');
-      return;
-    }
     binNote(noteId);
     toast.success('Note sent to bin');
   };
 
-  // TO-DO: Fix action on undelete
-
-  const ActionIcon = deletedAt ? Undo2 : Trash;
+  const handleDeleteNote = () => {
+    deleteNote(noteId);
+    toast.success('Note deleted permanently');
+  };
 
   const renderedTitle = title || text.slice(0, 150) || '(no content)';
 
@@ -49,9 +51,20 @@ const NoteRow = (props: Props) => {
         <NoteRowDate date={note.updatedAt} />
       </div>
       <FloatingActions>
-        <ActionButton onClick={handleBinNote}>
-          <ActionIcon className="size-3.5" />
-        </ActionButton>
+        {deletedAt ? (
+          <>
+            <ActionButton onClick={handleUnbinNote}>
+              <Undo2 className="size-3.5" />
+            </ActionButton>
+            <ActionButton onClick={handleDeleteNote}>
+              <X className="size-3.5" />
+            </ActionButton>
+          </>
+        ) : (
+          <ActionButton onClick={handleBinNote}>
+            <Trash className="size-3.5" />
+          </ActionButton>
+        )}
       </FloatingActions>
     </Link>
   );

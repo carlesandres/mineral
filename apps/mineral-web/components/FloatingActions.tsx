@@ -9,8 +9,7 @@ const FloatingActions = (props: Props) => {
 
   return (
     <div
-      className="absolute top-0 right-2
-      bottom-0 hidden items-center text-xl group-hover:flex"
+      className="absolute top-0 right-2 bottom-0 hidden items-center gap-1.5 text-xl group-hover:flex"
       onClick={stopProp}
     >
       {props.children}
