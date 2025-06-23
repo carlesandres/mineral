@@ -1,0 +1,54 @@
+import { appName } from 'components/constants';
+export const viewStyles = ['plain', 'wind', 'fire', 'earth'];
+
+export const NOTINITALISED = 'NOTINITALISED';
+export const CONFIG_INITIALISED = 'CONFIG_INITIALISED';
+export const CONFIG_INITIALISING = 'CONFIG_INITIALISING';
+
+export const READ_FILE = 'READ_FILE';
+export const FILE_READ = 'FILE_READ';
+export const FILE_NOT_FOUND = 'FILE_NOT_FOUND';
+export const FILE_DELETED = 'FILE_DELETED';
+export const FILE_RESTORED = 'FILE_RESTORED';
+
+export const CREATING_FILE = 'CREATING_FILE';
+export const IMPORT_FILE_SELECT = 'IMPORT_FILE_SELECT';
+export const FILE_IMPORTED = 'FILE_IMPORTED';
+
+export const CURRENT_FILE_DELETED = 'CURRENT_FILE_DELETED';
+export const DELETE_CURRENT_FILE = 'DELETE_CURRENT_FILE';
+export const SAVE_CURRENT_FILE = 'SAVE_CURRENT_FILE';
+export const CURRENT_FILE_SAVED = 'CURRENT_FILE_SAVED';
+export const CONFIRM_EXPORT_CURRENT_FILE = 'CONFIRM_EXPORT_CURRENT_FILE';
+export const CURRENT_FILE_EXPORTED = 'CURRENT_FILE_EXPORTED';
+export const NEXT_STYLE = 'NEXT_STYLE';
+export const SHOW_NOTIFICATION = 'SHOW_NOTIFICATION';
+export const HIDE_NOTIFICATION = 'HIDE_NOTIFICATION';
+export const CONFIRM_DELETE_CURRENT_FILE = 'CONFIRM_DELETE_CURRENT_FILE';
+export const CHANGE_SETTING = 'CHANGE_SETTING';
+
+export const EXPORT_CURRENT_FILE = 'EXPORT_CURRENT_FILE';
+
+export const OPEN_LAST_FILE = 'OPEN_LAST_FILE';
+export const DELETE_FILE = 'DELETE_FILE';
+export const UNDELETE_FILE = 'UNDELETE_FILE';
+export const EXPORT_ALL_FILES = 'EXPORT_ALL_FILES';
+export const DISMISS_CONFIRMATION_MODAL = 'DISMISS_CONFIRMATION_MODAL';
+export const CONFIRM_EMPTY_BIN = 'CONFIRM_EMPTY_BIN';
+export const WIPE_OUT_ALL_DELETED = 'WIPE_OUT_ALL_DELETED';
+export const FILE_EXPORT_FAILED = 'FILE_EXPORT_FAILED';
+
+export const FIND_DUPLICATES = 'FIND_DUPLICATES';
+export const DUPLICATE_FOUND = 'DUPLICATE_FOUND';
+
+export const SHOW_COLOR_PICKER = 'SHOW_COLOR_PICKER';
+export const HIDE_COLOR_PICKER = 'HIDE_COLOR_PICKER';
+export const DEFAULT_FONT_SIZE = 16;
+
+export const mainTitle = `${appName} - Markdown Editor`;
+
+export const DEFAULT_FILE_PANELS = {
+  editor: true,
+  viewer: true,
+  toc: true,
+};
