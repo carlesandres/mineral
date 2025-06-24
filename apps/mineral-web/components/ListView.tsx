@@ -23,7 +23,6 @@ const ListView = () => {
   const router = useRouter();
   const initialSearchTerm = useSearchParams()?.get('search');
   const [searchTerm, setSearchterm] = useState('');
-  // const pathname = usePathname();
 
   useEffect(() => {
     if (initialSearchTerm) {

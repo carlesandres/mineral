@@ -210,29 +210,19 @@ export const filterByType = (files: Note[], type: BoxType) => {
   return files.filter((file) => file.deletedAt);
 };
 
-const escapeRegExp = (re: string) =>
-  re.replace(/[.*+\-?^${}()|[\]\\]/g, '\\$&'); // $& means the whole matched string
-
 export const filteredFiles = (files: Note[], searchTerm = '') => {
   const trimmedSearchTerm = searchTerm.trim();
   if (!trimmedSearchTerm) {
     return files;
   }
 
-  const matches = trimmedSearchTerm.match('#?(.*)');
-  if (!matches) {
-    return [];
-  }
-  const realSearchTerm = escapeRegExp(matches[1]);
-  const searchContents = trimmedSearchTerm.startsWith('#');
-
-  const regexp = new RegExp(realSearchTerm, 'gi');
-  const filterTitle = (f: Note) =>
-    f.title && f.title.toLowerCase().match(regexp);
+  const regexp = new RegExp(searchTerm, 'gi');
+  // const filterTitle = (f: Note) =>
+  //   f.title && f.title.toLowerCase().match(regexp);
   const filterAll = (f: Note) =>
     f.title.toLowerCase().match(regexp) || f.text.match(regexp);
-  const filter = searchContents ? filterAll : filterTitle;
-  return files.filter(filter);
+  // const filter = searchContents ? filterAll : filterTitle;
+  return files.filter(filterAll);
 };
 
 // TODO: This is so similar to filteredFiles that
