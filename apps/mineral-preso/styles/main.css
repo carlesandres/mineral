@@ -1,0 +1,32 @@
+@import "./toc.css";
+
+body {
+  overscroll-behavior-y: none;
+  @apply font-mono;
+}
+
+.focus-bg {
+  @apply focus-within:bg-gray-100 focus-within:dark:bg-gray-800 focus-within:outline-none;
+}
+
+/* Icons in Commands in modals are too big in shadcn */
+div [cmdk-root] [cmdk-item] svg {
+  @apply h-4 w-4;
+}
+
+/* Old stuff */
+table.shortcuts td:first-child {
+  padding: 5px 10px 5px 0;
+}
+
+@media (max-height: 600px) {
+
+  .editor-footer,
+  .footer-icon {
+    display: none;
+  }
+}
+
+.panel-padding {
+  @apply p-4;
+}
