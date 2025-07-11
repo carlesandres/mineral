@@ -7,6 +7,7 @@ import { motion } from 'motion/react';
 import ColorSelector from './ColorSelector';
 import { ChevronUp } from 'lucide-react';
 import { Button } from 'components/ui/button';
+import { defaultNoteColour } from './constants';
 
 interface Props extends Note {
   onToggle: () => void;
@@ -19,7 +20,7 @@ const EditorFooter = (props: Props) => {
     id: noteId,
     createdAt,
     text,
-    color = '#111111',
+    color = defaultNoteColour,
   } = props;
 
   const expandButton = showFooter ? null : (

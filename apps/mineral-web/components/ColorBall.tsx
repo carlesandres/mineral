@@ -1,4 +1,5 @@
 import { cn } from '@/lib/utils';
+import { defaultNoteColour } from './constants';
 
 export interface ColorBallProps {
   color?: string;
@@ -8,7 +9,7 @@ export interface ColorBallProps {
 }
 
 const ColorBall = (props: ColorBallProps) => {
-  const { color = '#111111', selected, small, className = '' } = props;
+  const { color = defaultNoteColour, selected, small, className = '' } = props;
 
   return (
     <div
