@@ -11,19 +11,17 @@ const IntroPage = () => {
         className="container mx-auto mt-8 text-center sm:mt-16"
         id="features"
       >
-        <FeatureSectionTitle>Privacy</FeatureSectionTitle>
-        <FeatureSection>
+        <FeatureSection title="Privacy">
           <FeatureCard title="Local storage">
             <p>{`Your notes stay on your computer.`}</p>
             <p>{`Copy or export them when you are ready to share them.`}</p>
           </FeatureCard>
           <FeatureCard title="No tracking">
-            <p>{`mineral doesn't spy on you`}</p>
+            <p>{`Mineral doesn't spy on you.`}</p>
             <p>{`That's why it doesn't need a cookie banner.`}</p>
           </FeatureCard>
         </FeatureSection>
-        <FeatureSectionTitle>Writing</FeatureSectionTitle>
-        <FeatureSection>
+        <FeatureSection title="Writing">
           <FeatureCard title="Focus">
             {`We've designed a minimalistic UI to help you focus on your writing.`}
           </FeatureCard>
@@ -39,8 +37,7 @@ const IntroPage = () => {
             {`Send any note to the Bin folder and decide to recover it later or delete it forever.`}
           </FeatureCard>
         </FeatureSection>
-        <FeatureSectionTitle>Productivity</FeatureSectionTitle>
-        <FeatureSection>
+        <FeatureSection title="Productivity">
           <FeatureCard title="Keyboard shortcuts">
             <p>{`Perform any action with keyboard shortcut.`}</p>
           </FeatureCard>
@@ -56,8 +53,7 @@ const IntroPage = () => {
             {`Assing a color to any note and find it more easily`}
           </FeatureCard>
         </FeatureSection>
-        <FeatureSectionTitle>Customisation</FeatureSectionTitle>
-        <FeatureSection>
+        <FeatureSection title="Customisation">
           <FeatureCard title="Dark mode">
             {`Choose between light and dark mode to suit your preferences.`}
           </FeatureCard>
@@ -65,8 +61,7 @@ const IntroPage = () => {
             {`Choose from 5 different line-spacing options`}
           </FeatureCard>
         </FeatureSection>
-        <FeatureSectionTitle>Markdown</FeatureSectionTitle>
-        <FeatureSection>
+        <FeatureSection title="Markdown">
           <FeatureCard title="Preview panel">
             {`A separate preview panel you can toggle separately from the editor.`}
           </FeatureCard>
