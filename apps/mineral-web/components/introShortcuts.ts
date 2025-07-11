@@ -1,4 +1,10 @@
-const introShortcuts = [
+interface Shortcut {
+  sequence: string[];
+  description: string;
+  requiresActivation: boolean;
+}
+
+const introShortcuts: Shortcut[] = [
   {
     sequence: ['ESC'],
     description: 'Leave shortcut mode',

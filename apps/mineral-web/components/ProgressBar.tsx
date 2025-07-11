@@ -1,9 +1,16 @@
+interface ProgressBarProps {
+  progressPercent: number;
+  currentSlideNum: number;
+  slideCount: number;
+  itemName?: string;
+}
+
 const ProgressBar = ({
   progressPercent,
   currentSlideNum,
   slideCount,
   itemName = 'Slide',
-}) => (
+}: ProgressBarProps) => (
   <div className="slide-navigation relative m-2 flex h-8 w-40 items-center overflow-hidden rounded bg-gray-300">
     <style jsx>{`
       .slide-visual-progress {

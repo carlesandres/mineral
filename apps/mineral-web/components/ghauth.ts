@@ -1,4 +1,4 @@
-const auth = () => {
+const auth = (): void => {
   const hostname = 'https://github.com/login/oauth/authorize';
   const clientId = 'fa535b6a0804d984928c';
   const redirect_uri = encodeURIComponent('https://localhost:9002/signedin');
@@ -7,7 +7,7 @@ const auth = () => {
 
   const completeUrl = `${hostname}?client_id=${clientId}&redirect_uri=${redirect_uri}&scope=${scope}&state=${state}`;
 
-  window.location = completeUrl;
+  window.location.href = completeUrl;
 };
 
 export default auth;
