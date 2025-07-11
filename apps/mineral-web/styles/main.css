@@ -6,7 +6,7 @@ body {
 }
 
 .focus-bg {
-  @apply focus-within:bg-gray-100 focus-within:dark:bg-gray-800 focus-within:outline-none;
+  @apply focus-within:bg-muted focus-within:outline-none;
 }
 
 /* Icons in Commands in modals are too big in shadcn */

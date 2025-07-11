@@ -5,7 +5,7 @@ import FeatureSection from './FeatureSection';
 
 const IntroPage = () => {
   return (
-    <div className="py-8 text-gray-600 sm:my-32 dark:text-gray-200">
+    <div className="py-8 sm:my-32">
       <HeroSection />
       <div
         className="container mx-auto mt-8 text-center sm:mt-16"

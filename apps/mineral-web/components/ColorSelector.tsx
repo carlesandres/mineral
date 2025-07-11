@@ -51,13 +51,9 @@ const ColorSelector = (props: ColorSelectorProps) => {
         <DialogHeader>
           <DialogTitle>Select a color for your note</DialogTitle>
         </DialogHeader>
-        <div className="p-4">
-          <p className="px-4 py-2">
-            A color label can help you find your note faster in your dashboard.
-          </p>
-          <div className="flex w-full flex-wrap justify-start gap-4 overflow-hidden sm:p-4">
-            {colorballs}
-          </div>
+        <p className="">A color label can help you find your notes faster.</p>
+        <div className="flex w-full flex-wrap justify-start gap-4 overflow-hidden">
+          {colorballs}
         </div>
       </DialogContent>
     </Dialog>

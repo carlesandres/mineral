@@ -43,7 +43,7 @@ const Viewer = React.forwardRef((props: Props, ref: Ref<HTMLDivElement>) => {
         className={cn(
           `viewer panel-padding prose dark:prose-invert prose-code:before:content-none prose-code:after:content-none print:prose-headings:text-gray-950 print:prose-a:text-gray-950 h-full w-full max-w-none overflow-y-auto pb-12 print:text-gray-950`,
           {
-            'text-center text-gray-400 dark:text-gray-400': isEmpty,
+            'text-muted-foreground text-center': isEmpty,
           },
           lineHeightClass,
         )}

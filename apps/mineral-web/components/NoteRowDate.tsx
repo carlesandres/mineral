@@ -40,7 +40,7 @@ const NoteRowDate = (props: NoteRowDateProps) => {
 
   return (
     <div
-      className={`hidden shrink-0 text-xs text-gray-400 transition duration-200 group-hover:opacity-0 dark:text-gray-400 sm:block`}
+      className={`text-muted-foreground hidden shrink-0 text-xs transition duration-200 group-hover:opacity-0 sm:block`}
     >
       {formattedDate}
     </div>
