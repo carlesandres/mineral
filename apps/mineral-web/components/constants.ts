@@ -8,3 +8,5 @@ export const markdownTutorial = `
  `;
 
 export const defaultAppTitle = `${appName} - Notes editor`;
+
+export const defaultNoteColour = '#111111';

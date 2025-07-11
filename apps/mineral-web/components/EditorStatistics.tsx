@@ -22,9 +22,7 @@ const EditorStatistics = (props: EditorStatisticsProps) => {
       <div className="w-[12ch] text-pink-700 dark:text-pink-400">
         {numWords} words
       </div>
-      <div className="hidden text-gray-500 sm:block">
-        Created: {creationDate}
-      </div>
+      <div className="hidden sm:block">Created: {creationDate}</div>
     </div>
   );
 };

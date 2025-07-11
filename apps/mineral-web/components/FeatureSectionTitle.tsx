@@ -8,7 +8,7 @@ const FeatureSectionTitle = (props: FeatureSectionTitleProps) => {
 
   return (
     <h2
-      className={`mb-4 mt-8 text-lg font-semibold uppercase text-gray-400 sm:mb-8 sm:mt-16 ${className}`}
+      className={`mt-8 mb-4 text-lg font-semibold uppercase sm:mt-16 sm:mb-8 ${className}`}
       {...restProps}
     >
       {children}

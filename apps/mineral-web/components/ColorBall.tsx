@@ -1,3 +1,6 @@
+import { cn } from '@/lib/utils';
+import { defaultNoteColour } from './constants';
+
 export interface ColorBallProps {
   color?: string;
   selected?: boolean;
@@ -6,15 +9,18 @@ export interface ColorBallProps {
 }
 
 const ColorBall = (props: ColorBallProps) => {
-  const { color = '#111111', selected, small, className = '' } = props;
-  const sanitizedColor = color.replace('#', '');
-  const selectedClass = selected ? 'ring ring-gray-500' : '';
-
-  const sizeClass = small ? 'h-4 w-4' : 'h-8 w-8';
+  const { color = defaultNoteColour, selected, small, className = '' } = props;
 
   return (
     <div
-      className={`shrink-0 rounded-full transition hover:opacity-80 color-${sanitizedColor} ${selectedClass} ${sizeClass} ${className}`}
+      className={cn(
+        `size-8 shrink-0 cursor-pointer rounded-full transition hover:opacity-80`,
+        {
+          'ring-1 ring-offset-1': selected,
+          'size-4': small,
+        },
+        className,
+      )}
       style={{ backgroundColor: color }}
     />
   );

@@ -7,6 +7,7 @@ import { motion } from 'motion/react';
 import ColorSelector from './ColorSelector';
 import { ChevronUp } from 'lucide-react';
 import { Button } from 'components/ui/button';
+import { defaultNoteColour } from './constants';
 
 interface Props extends Note {
   onToggle: () => void;
@@ -19,7 +20,7 @@ const EditorFooter = (props: Props) => {
     id: noteId,
     createdAt,
     text,
-    color = '#111111',
+    color = defaultNoteColour,
   } = props;
 
   const expandButton = showFooter ? null : (
@@ -42,9 +43,9 @@ const EditorFooter = (props: Props) => {
         transition={{ duration: 0.15 }}
       >
         <div
-          className={`editor-footer monospace relative flex items-center justify-between overflow-hidden border-t px-2 py-1.5 pr-12 transition-all dark:text-gray-800 print:hidden`}
+          className={`editor-footer monospace text-muted-foreground relative flex items-center justify-between overflow-hidden border-t px-2 py-1.5 pr-12 transition-all print:hidden`}
         >
-          <div className="flex items-center justify-start gap-2 text-sm text-gray-500">
+          <div className="flex items-center justify-start gap-2 text-sm">
             <ColorSelector noteId={noteId} selectedColor={color} />
             <EditorStatistics text={text} createdAt={createdAt} />
           </div>
